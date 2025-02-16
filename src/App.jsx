@@ -5,6 +5,8 @@ import MainLayout from "./layouts/MainLayout";
 import Home from "./Pages/Home";
 import { Helmet, HelmetProvider } from "react-helmet-async"; // Добавлено для SEO
 import './Style/Media.css';
+import AboutUs from "./Pages/AboutUs";
+import Rahbariyat from "./Pages/Rahbariyat";
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
             </Route> */}
             <Route element={<MainLayout />}>
               <Route index element={<Home />} />
+              <Route path="/aboutus" element={<AboutUs/>} />
+              <Route path="/staff" element={<Rahbariyat/>} />
+
             </Route>
           </Route>
         </Routes>
