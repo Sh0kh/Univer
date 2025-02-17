@@ -7,12 +7,17 @@ import { Helmet, HelmetProvider } from "react-helmet-async"; // Добавлен
 import './Style/Media.css';
 import AboutUs from "./Pages/AboutUs";
 import Rahbariyat from "./Pages/Rahbariyat";
+import Partners from "./Pages/Partners";
+import International from "./Pages/International";
+import Documents from "./Pages/Documents";
+import InspectDocument from "./Pages/InspectDocument";
+import OpenInfo from "./Pages/OpenInfo";
 
 function App() {
   return (
     <HelmetProvider>
       <Router>
-       
+
 
         <Routes>
           {/* hehe */}
@@ -28,9 +33,14 @@ function App() {
             </Route> */}
             <Route element={<MainLayout />}>
               <Route index element={<Home />} />
-              <Route path="/aboutus" element={<AboutUs/>} />
-              <Route path="/staff" element={<Rahbariyat/>} />
+              <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/staff" element={<Rahbariyat />} />
 
+              <Route path='/partners' element={<Partners />} />
+              <Route path='/International' element={<International />} />
+              <Route path="/documents" element={<Documents />} />
+              <Route path="/inspectDocument" element={<InspectDocument />} />
+              <Route path="/openInfo" element={<OpenInfo />} />
             </Route>
           </Route>
         </Routes>
