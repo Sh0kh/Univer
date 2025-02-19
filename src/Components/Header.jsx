@@ -4,12 +4,12 @@ import glass from '../img/glass.png';
 import eye from '../img/eye.png';
 import sound from '../img/sound.png';
 import logo from '../img/logo.png';
-import call from '../img/call.png';
-import email from '../img/email.png';
-import location from '../img/locotion.png';
+
 import burger from '../img/More.png';
+import BigModal from './others/BigModal';
 
 export default function Header() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef(null);
 
@@ -17,20 +17,32 @@ export default function Header() {
         e.stopPropagation(); // Prevent event propagation to avoid closing modal immediately
         setShowModal(!showModal);
     };
+    const [showModal1, setShowModal1] = useState(false);
+    const modalRef1 = useRef(null);
 
-    // Close modal if clicked outside
+
+    
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (modalRef.current && !modalRef.current.contains(e.target)) {
                 setShowModal(false);
             }
+            
         };
+        
 
+       
+        //   if (isModalOpen) {
+        //     document.body.style.overflow = "hidden";
+        // } else {
+        //     document.body.style.overflow = "auto";
+        // }
+          
         document.addEventListener('click', handleClickOutside);
         return () => {
             document.removeEventListener('click', handleClickOutside);
         };
-    }, []);
+    }, [showModal1]);
 
     return (
         <header className="bg-white shadow-md z-50">
@@ -104,7 +116,8 @@ export default function Header() {
             </div>
             <nav className="w-full bg-[#002266] text-white py-3 px-4 rounded p-[16px]">
                 <div className="Container flex items-center gap-[44px]">
-                    <img src={burger} alt="Menu" />
+                    <img src={burger} onClick={() => setIsModalOpen(true)}  alt="Menu" />
+                    {isModalOpen && <BigModal go={() => setIsModalOpen(false)} />}
                     <div className="menu_wr relative">
                         <a href="#" onClick={handleMenuClick} className="hover:underline">
                             Umumiy ma’lumot
@@ -170,6 +183,7 @@ export default function Header() {
                     <a href="#" className="hover:underline">Bog‘lanish</a>
                 </div>
             </nav>
+
         </header>
     );
 }
