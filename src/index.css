@@ -399,7 +399,158 @@ gap: 20px;
     width: 100% !important;
   }
 }
+.wer{
+  font-family: var(--font-family);
+font-weight: 600;
+font-size: 14px;
+line-height: 143%;
+text-align: center;
+margin-bottom: 20px;
+color: #0a0d12;
+}
 
+.social_card{
+  border: 1px solid #e9eaeb;
+border-radius: 8px;
+max-width: 410px;
+width: 100%;
+height: 124px;
+background: #fafafa;
+transition: 0.5s;
+margin: 0 auto;
+cursor: pointer;
+padding-bottom: 10px;
+}
+.aniq_div{
+  border: 1px solid #b2ddff;
+border-radius: 16px;
+padding-left: 10px;
+width: 268px;
+height: 24px;background: #eff8ff;
+}
+.work_card h4{
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 16px;
+line-height: 150%;
+color: #535862;
+}
+.aniq{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 143%;
+text-align: center;
+color: #175cd3;
+
+margin-top: -20px;
+text-align: center
+}
+
+.aniq1{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 143%;
+text-align: center;
+color:  #3538cd;
+
+margin-top: -20px;
+text-align: center
+}
+.aniq_div1{
+  border: 1px solid #b2ddff;
+border-radius: 16px;
+padding-left: 10px;
+width: 268px;
+height: 24px;background: #eff8ff;
+}
+
+.aniq2{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 143%;
+text-align: center;
+color:  #b93815;
+
+margin-top: -20px;
+text-align: center
+}
+.aniq_div2{
+  border: 1px solid #b2ddff;
+border-radius: 16px;
+padding-left: 10px;
+width: 268px;
+height: 24px;background: #fef6ee;
+}
+
+.aniq3{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 143%;
+text-align: center;
+color: #067647;
+
+margin-top: -20px;
+text-align: center
+}
+.aniq_div3{
+  border: 1px solid #b2ddff;
+border-radius: 16px;
+padding-left: 10px;
+width: 268px;
+height: 24px;background:#ecfdf3;
+}
+.aniq4{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 143%;
+text-align: center;
+color: #b54708;
+
+margin-top: -20px;
+text-align: center
+}
+.aniq_div4{
+  border: 1px solid #b2ddff;
+border-radius: 16px;
+padding-left: 10px;
+width: 268px;
+height: 24px;background: #fffaeb;
+}
+.res{
+  border-radius: 100px;
+width: 52px;
+height: 52px;
+background: #026;
+transition: 0.5s;
+}
+.res svg{
+  margin: 16px auto;
+}
+.res:hover{
+  margin-top: -20px;
+}
+/* aniq */
+.work_card div,.work_big{
+  flex-wrap: wrap;
+}
+.money_social{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+.social_card svg{
+  margin: 20px auto;
+}
+.social_card:hover{
+  margin-top: -20px;
+}
 @media(max-width:1120px) {
   .cabinet_face h1 br{
     display: none;
@@ -420,5 +571,26 @@ margin-bottom: 20px;
   }
   .cabinet_face h1{
     font-size: 11px;
+  }
+}
+@media(max-width:700px) {
+  .res{
+    display: none;
+  }
+}
+@media(max-width:1020px) {
+  .fr4{
+    display: none;
+  }
+}
+@media(max-width:800px) {
+  .calendar_wr{
+    flex-direction: column;
+  }
+}
+@media(max-width:370px) {
+  .react-calendar{
+    max-width: 270px;
+    width: 100%;
   }
 }

@@ -2,6 +2,7 @@ import fr from '../../img/image (3).png'
 import fr2 from '../../img/image (4).png'
 import fr3 from '../../img/image (5).png'
 
+import fr4 from '../../img/Group 55.png'
 
 export default function StaffCards() {
   const staff = [
@@ -62,6 +63,8 @@ export default function StaffCards() {
               </svg><span className="font-medium">Email:</span> {person.email}</p>
             </div>
           </div>
+
+          <img className='fr4' src={fr4} alt="" />
         </div>
       ))}
     </div>

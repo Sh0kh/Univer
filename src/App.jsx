@@ -15,6 +15,8 @@ import OpenInfo from "./Pages/OpenInfo";
 import Center from "./Pages/Center";
 import Rekvizits from "./Pages/Rekvizits";
 import CabinetPage from "./Pages/CabinetPage";
+import Money from "./Pages/Money";
+import WorkPage from "./Pages/WorkPage";
 
 function App() {
   return (
@@ -34,6 +36,7 @@ function App() {
               }
             >
             </Route> */}
+            
             <Route element={<MainLayout />}>
               <Route index element={<Home />} />
               <Route path="/aboutus" element={<AboutUs />} />
@@ -47,8 +50,9 @@ function App() {
               <Route path="/center" element={<Center/>} />
               <Route path="/rekvizits" element={<Rekvizits/>} />
               <Route path="/cabinet" element={<CabinetPage/>} />
-
-              
+              <Route path="/money" element={<Money/>} />
+              <Route path="/work" element={<WorkPage/>} />
+            
             </Route>
           </Route>
         </Routes>
