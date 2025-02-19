@@ -270,3 +270,30 @@ gap: 30px;
         margin-bottom: 20px;
     }
 }
+
+@media (max-width: 800px) {
+    .center_wr span{
+font-size: 10px;
+    }
+}
+
+@media (max-width: 540px) {
+    .center_wr span{
+        font-size: 11px;
+    }
+}
+
+
+@media (max-width: 850px) {
+    .rek_card h1,.rek_card h2{
+    font-size: 10px;
+    width: 200px;
+    }
+}
+
+@media (max-width: 450px) {
+    .rek_card{
+        gap: 0;
+        
+    }
+}

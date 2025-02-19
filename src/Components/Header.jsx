@@ -119,6 +119,15 @@ export default function Header() {
                                 <NavLink to="/openInfo" className="text-blue-500 hover:underline block mb-[10px]">
                                     Ochiq ma’lumotlar
                                 </NavLink>
+                                <NavLink to="/center" className="text-blue-500 hover:underline block mb-[10px]">
+                                Bo‘lim va markazlar
+                                </NavLink>
+                                <NavLink to="/rekvizits" className="text-blue-500 hover:underline block mb-[10px]">
+                                Rekvizitlar
+                                </NavLink>
+                                <NavLink to="/cabinet" className="text-blue-500 hover:underline block mb-[10px]">
+                                Direktor virtual qabulxonasi
+                                </NavLink>
 
                             </div>
                         )}

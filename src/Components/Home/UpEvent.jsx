@@ -1,4 +1,4 @@
-const UpcomingEvents = () => {
+export default function UpEvent() {
     const events = [
       { date: "10", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" },
       { date: "11", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" },
@@ -32,5 +32,4 @@ const UpcomingEvents = () => {
     );
   };
   
-  export default UpcomingEvents;
   

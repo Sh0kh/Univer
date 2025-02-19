@@ -12,6 +12,9 @@ import International from "./Pages/International";
 import Documents from "./Pages/Documents";
 import InspectDocument from "./Pages/InspectDocument";
 import OpenInfo from "./Pages/OpenInfo";
+import Center from "./Pages/Center";
+import Rekvizits from "./Pages/Rekvizits";
+import CabinetPage from "./Pages/CabinetPage";
 
 function App() {
   return (
@@ -41,6 +44,11 @@ function App() {
               <Route path="/documents" element={<Documents />} />
               <Route path="/inspectDocument" element={<InspectDocument />} />
               <Route path="/openInfo" element={<OpenInfo />} />
+              <Route path="/center" element={<Center/>} />
+              <Route path="/rekvizits" element={<Rekvizits/>} />
+              <Route path="/cabinet" element={<CabinetPage/>} />
+
+              
             </Route>
           </Route>
         </Routes>
