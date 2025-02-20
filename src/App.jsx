@@ -15,6 +15,7 @@ import OpenInfo from "./Pages/OpenInfo";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import AdminLayout from "./layouts/AdminLayout";
 import NotFound from "./Pages/NotFound";
+import Login from "./Pages/Login";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </HelmetProvider>
