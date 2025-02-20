@@ -67,9 +67,9 @@ const data = [
             <div className="absolute left-0 top-150 w-1/4 border-t-2 border-[#1f235b] -z-10"></div>
           </div>
   
-          <div className="inter_wr grid grid-cols-2  gap-[40px] ">
+          <div className="inter_wr grid grid-cols-2   gap-[40px] ">
             {data.map((item) => (
-              <div key={item.id} className="inter_card w-[auto] ">
+              <div key={item.id} className=" inter_card hover:shadow-lg hover:shadow-xl w-[auto] ">
                 <div className="img_c w-[52px] h-[52px] bg-[#1f235b] p-[14px]">{item.icon}</div>
                 <h4>{item.title}</h4>
               </div>

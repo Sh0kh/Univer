@@ -4,7 +4,7 @@ import StaffCards from "../Components/Rahbariyat/StaffCards";
 export default function Rahbariyat() {
     return (
         <div>
-            <MiniHeader title="Hamkorlarimiz" minititle="Hamkorlarimiz" />
+            <MiniHeader title="Raxbariyat" minititle="Raxbariyat" />
             <StaffCards />
         </div>
     )

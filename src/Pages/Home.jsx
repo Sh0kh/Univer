@@ -3,9 +3,10 @@
 import Hero from "../Components/Home/Hero";
 import InstituteStats from "../Components/Home/InsState";
 import Inter from "../Components/Home/Inter";
+import UpEvent from "../Components/Home/UpEvent";
+
 import Links from "../Components/Home/Links";
 import News from "../Components/Home/News";
-// import { UpcomingEvents } from "../Components/Home/UpEvent";
 
 
 export default function Home() {
@@ -15,11 +16,11 @@ export default function Home() {
 
 
   return (
-    <main className="">
+    <main className="home">
       {/* <Header /> */}
      <Hero/>
      <News/>
-     {/* <UpcomingEvents/> */}
+      <UpEvent/>
      <InstituteStats/>
      <Inter/>
      <Links/>
