@@ -1,53 +1,64 @@
-import counter from '../../img/Counter.png'
+import axios from "axios";
+import counter from "../../img/Counter.png";
+import { useEffect, useState } from "react";
+
 export default function InstituteStats() {
+  const [data, setData] = useState({});
+
+  const getState = async () => {
+    try {
+      const response = await axios.get(`/universit-statistic`);
+      setData(response?.data?.data[0] || {});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getState();
+  }, []);
+
+
+
   return (
-    <section className="relative bg-[#1f235b] text-white  py-16">
+    <section className="relative bg-[#1f235b] text-white py-16">
       <div className="Container">
-      <div className="absolute inset-0 bg-cover bg-center opacity-30" style={{ backgroundImage: `url(${counter})` }}></div>
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-30"
+          style={{ backgroundImage: `url(${counter})` }}
+        ></div>
 
-      <div className="relative z-10 text-center">
-        <h2 className="text-2xl font-bold">Institut faoliyati bo‘yicha raqamli statistika</h2>
-        <p className="text-gray-300">Bugungi kunga qadar faoliyatimizga oid raqamlar bilan tanishishingiz mumkin</p>
+        <div className="relative z-10 text-center">
+          <h2 className="text-2xl font-bold">
+            Institut faoliyati bo‘yicha raqamli statistika
+          </h2>
+          <p className="text-gray-300">
+            Bugungi kunga qadar faoliyatimizga oid raqamlar bilan tanishishingiz
+            mumkin
+          </p>
 
-        <div className="state_wr grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
-          
-            <div  className="p-6 rounded-lg text-center">
-              <div className="mx1 w-[93px] h-[93px]  text-4xl bg-white bg-opacity-10">
-                <svg   width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M36 32.4011C38.9118 33.8638 41.4082 36.2112 43.2305 39.1465C43.5913 39.7278 43.7717 40.0185 43.8341 40.421C43.9609 41.2388 43.4016 42.2444 42.6399 42.568C42.265 42.7273 41.8433 42.7273 41 42.7273M32 23.7918C34.9634 22.3191 37 19.261 37 15.7273C37 12.1936 34.9634 9.13552 32 7.66281M28 15.7273C28 20.6979 23.9705 24.7273 19 24.7273C14.0294 24.7273 9.99998 20.6979 9.99998 15.7273C9.99998 10.7567 14.0294 6.72729 19 6.72729C23.9705 6.72729 28 10.7567 28 15.7273ZM5.11844 38.604C8.30705 33.8164 13.3387 30.7273 19 30.7273C24.6612 30.7273 29.6929 33.8164 32.8815 38.604C33.5801 39.6528 33.9293 40.1772 33.8891 40.8471C33.8578 41.3687 33.5159 42.0073 33.0991 42.3225C32.5638 42.7273 31.8276 42.7273 30.3553 42.7273H7.64469C6.17232 42.7273 5.43613 42.7273 4.90086 42.3225C4.48408 42.0073 4.14216 41.3687 4.11085 40.8471C4.07064 40.1772 4.4199 39.6528 5.11844 38.604Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>    
-           </div>
-              <h4 className=" text-lg font-semibold mt-2">Talabalar soni</h4>
-              <p className="cl_qw text-2xl font -bold">5 877</p>
+          <div className="state_wr grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+            <div className="p-6 rounded-lg text-center">
+              <h4 className="text-lg font-semibold mt-2">Talabalar soni</h4>
+              <p className="cl_qw text-2xl font-bold">{data.students_count || 0}</p>
             </div>
-            <div  className=" p-6 rounded-lg text-center">
-              <div className="mx1 w-[93px] h-[93px]  text-4xl bg-white bg-opacity-10">
-              <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M34 29.7274V23.7163C34 23.3573 34 23.1778 33.9453 23.0194C33.897 22.8793 33.8181 22.7516 33.7144 22.6457C33.5971 22.526 33.4366 22.4457 33.1155 22.2852L24 17.7274M8 19.7274V33.3407C8 34.0845 8 34.4564 8.11604 34.782C8.21862 35.0699 8.3858 35.3304 8.60476 35.5436C8.85243 35.7848 9.19054 35.9398 9.8667 36.2497L22.6667 42.1163C23.1572 42.3411 23.4024 42.4535 23.6579 42.4979C23.8843 42.5372 24.1157 42.5372 24.3421 42.4979C24.5976 42.4535 24.8428 42.3411 25.3333 42.1163L38.1333 36.2497C38.8095 35.9398 39.1476 35.7848 39.3952 35.5436C39.6142 35.3304 39.7814 35.0699 39.884 34.782C40 34.4564 40 34.0845 40 33.3407V19.7274M4 17.7274L23.2845 8.0852C23.5468 7.95401 23.678 7.88842 23.8156 7.86261C23.9375 7.83974 24.0625 7.83974 24.1844 7.86261C24.322 7.88842 24.4532 7.95401 24.7155 8.0852L44 17.7274L24.7155 27.3697C24.4532 27.5008 24.322 27.5664 24.1844 27.5922C24.0625 27.6151 23.9375 27.6151 23.8156 27.5922C23.678 27.5664 23.5468 27.5008 23.2845 27.3697L4 17.7274Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                                 </svg>
-              </div>
-              <h4 className="text-lg font-semibold mt-2">Professor o‘qituvchilar</h4>
-              <p className="cl_qw text-2xl font -bold">120</p>
+            <div className="p-6 rounded-lg text-center">
+              <h4 className="text-lg font-semibold mt-2">
+                Professor o‘qituvchilar
+              </h4>
+              <p className="cl_qw text-2xl font-bold">{data.professors_count || 0}</p>
             </div>
-            <div  className=" p-6 rounded-lg text-center">
-              <div className="mx1 w-[93px] h-[93px]  text-4xl bg-white bg-opacity-10"><svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M24 42.7273L23.7999 42.4271C22.4106 40.3432 21.716 39.3012 20.7982 38.5469C19.9857 37.8791 19.0495 37.3781 18.0432 37.0725C16.9065 36.7273 15.6542 36.7273 13.1496 36.7273H10.4C8.15979 36.7273 7.03968 36.7273 6.18404 36.2913C5.43139 35.9078 4.81947 35.2959 4.43597 34.5433C4 33.6876 4 32.5675 4 30.3273V13.1273C4 10.8871 4 9.76698 4.43597 8.91133C4.81947 8.15868 5.43139 7.54676 6.18404 7.16327C7.03968 6.72729 8.15979 6.72729 10.4 6.72729H11.2C15.6804 6.72729 17.9206 6.72729 19.6319 7.59924C21.1372 8.36623 22.3611 9.59007 23.1281 11.0954C24 12.8067 24 15.0469 24 19.5273M24 42.7273V19.5273M24 42.7273L24.2001 42.4271C25.5894 40.3432 26.284 39.3012 27.2018 38.5469C28.0143 37.8791 28.9505 37.3781 29.9568 37.0725C31.0935 36.7273 32.3458 36.7273 34.8504 36.7273H37.6C39.8402 36.7273 40.9603 36.7273 41.816 36.2913C42.5686 35.9078 43.1805 35.2959 43.564 34.5433C44 33.6876 44 32.5675 44 30.3273V13.1273C44 10.8871 44 9.76698 43.564 8.91133C43.1805 8.15868 42.5686 7.54676 41.816 7.16327C40.9603 6.72729 39.8402 6.72729 37.6 6.72729H36.8C32.3196 6.72729 30.0794 6.72729 28.3681 7.59924C26.8628 8.36623 25.6389 9.59007 24.8719 11.0954C24 12.8067 24 15.0469 24 19.5273" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-</svg></div>
+            <div className="p-6 rounded-lg text-center">
               <h4 className="text-lg font-semibold mt-2">Fakultetlar soni</h4>
-              <p className="cl_qw text-2xl font -bold">16</p>
+              <p className="cl_qw text-2xl font-bold">{data.faculties_count || 0}</p>
             </div>
-            <div  className="p-6 rounded-lg text-center">
-              <div className="mx1 w-[93px] h-[93px]  text-4xl bg-white bg-opacity-10"><svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M10 20.7274V32.7497C10 33.4676 10 33.8266 10.1093 34.1435C10.206 34.4237 10.3637 34.679 10.5712 34.8908C10.8057 35.1303 11.1268 35.2908 11.7689 35.6119L22.5689 41.0119C23.0936 41.2742 23.356 41.4054 23.6312 41.4571C23.8749 41.5028 24.1251 41.5028 24.3688 41.4571C24.644 41.4054 24.9064 41.2742 25.4311 41.0119L36.2311 35.6119C36.8732 35.2908 37.1943 35.1303 37.4288 34.8908C37.6363 34.679 37.794 34.4237 37.8907 34.1435C38 33.8266 38 33.4676 38 32.7497V20.7274M4 17.7274L23.2845 8.0852C23.5468 7.95401 23.678 7.88842 23.8156 7.86261C23.9375 7.83974 24.0625 7.83974 24.1844 7.86261C24.322 7.88842 24.4532 7.95401 24.7155 8.0852L44 17.7274L24.7155 27.3697C24.4532 27.5008 24.322 27.5664 24.1844 27.5922C24.0625 27.6151 23.9375 27.6151 23.8156 27.5922C23.678 27.5664 23.5468 27.5008 23.2845 27.3697L4 17.7274Z" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-</svg></div>
+            <div className="p-6 rounded-lg text-center">
               <h4 className="text-lg font-semibold mt-2">Ta’lim yo‘nalishlari</h4>
-              <p className="cl_qw text-2xl font -bold">21</p>
+              <p className="cl_qw text-2xl font-bold">{data.education_programs_count || 0}</p>
             </div>
-        
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );
-};
-
+}

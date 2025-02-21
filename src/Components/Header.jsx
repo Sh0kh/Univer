@@ -8,6 +8,7 @@ import logo from '../img/logo.png';
 import burger from '../img/More.png';
 import BigModal from './others/BigModal';
 import VisionModal from './others/VisionModal';
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +20,11 @@ export default function Header() {
         e.stopPropagation();
         setShowModal(!showModal);
     };
-    const [showModal1, setShowModal1] = useState(false);
+    const { t } = useTranslation();
+
+    const changeLanguage = (lang) => {
+      i18n.changeLanguage(lang);
+    };
     const modalRef1 = useRef(null);
 
 
@@ -65,9 +70,9 @@ export default function Header() {
                         ><img src={eye} alt="Visibility" /></button>
                         <button><img src={sound} alt="Sound" /></button>
                         <select className="border rounded px-2 py-1 text-sm">
-                            <option value="1">Uz</option>
-                            <option value="2">Ru</option>
-                            <option value="3">En</option>
+                            <option onClick={() => changeLanguage("uz")} value="1">Uz</option>
+                            <option onClick={() => changeLanguage("ru")} value="2">Ru</option>
+                            <option onClick={() => changeLanguage("en")} value="3">En</option>
                         </select>
                     </div>
                 </div>

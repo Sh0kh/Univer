@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from "react";
 import calendar from '../../img/calendar.png'
 import eye from '../../img/eye1.png'
-import img from '../../img/image.png'
-import img1 from '../../img/image (1).png'
-import img2 from '../../img/image (2).png'
 import axios from "axios";
-import i18next from "i18next";
 import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
 
@@ -62,11 +58,12 @@ const News = () => {
           <div className="grid md:grid-cols-3 gap-6">
             {data?.map((news) => (
               <div key={news.id} className="bg-white rounded-lg overflow-hidden flex flex-col">
-                {/* <img
-              src={news.image}
-              alt={news.title}
-              className="news_img w-full h-244 object-cover rounded-lg"
-            /> */}
+                 <img
+            src={news.image[0]?.url} 
+            alt=""
+            className="news_img w-full h-244 object-cover rounded-lg"
+          />
+          
                 <div className="p-4 flex flex-col flex-grow   ">
                   <div className="text-gray-500 text-sm flex items-center space-x-3">
                     <img src={calendar} alt="date" />
@@ -77,7 +74,6 @@ const News = () => {
                   <h3 className="font-semibold text-lg mt-2 mb-4 text-gray-900 flex-grow">
                     {news.title[i18n.language] || news.title["uz"]}
                   </h3>
-                  {/* <p className="text-gray-700 text-sm mb-4">{news.description}</p> */}
                   <a href="#" className="text-black  inline-block font-medium hover:underline">
                     Batafsil →
                   </a>
