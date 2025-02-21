@@ -57,7 +57,7 @@ export default function Header() {
         <header className="bg-white shadow-md relative z-50 ">
             <div className="Container">
                 <div className="flex justify-between items-center py-3 border-b">
-                    <ul className="flex space-x-4 text-sm text-gray-600">
+                    <ul className="Grow_q flex space-x-4 text-sm text-gray-600">
                         <li>Hemis</li>
                         <li>Qabul kunlari</li>
                         <li>Murojaatlar</li>
@@ -77,6 +77,7 @@ export default function Header() {
                     </div>
                 </div>
                 <div className="flex justify-between items-center py-4">
+                    <NavLink to="/">
                     <div className="flex items-center space-x-4">
                         <img src={logo} alt="Logo" className="mr-[20px]" />
                         <div>
@@ -84,6 +85,8 @@ export default function Header() {
                             <p className="h-p text-sm text-gray-600">rasmiy veb sayti</p>
                         </div>
                     </div>
+                    </NavLink>
+                   
                     <div className="h-service flex space-x-6">
                         <div className="flex items-center space-x-2">
                             <div className='res'>

@@ -29,7 +29,7 @@ const VisionModal = forwardRef(({ isOpen }, ref) => {
     return (
         <div
             ref={ref}
-            className={`absolute top-[65px] right-[170px] rounded-[8px] border border-[#E9EAEB] w-[300px] bg-white p-[20px] shadow-md ${isOpen ? "block" : "hidden"}`}
+            className={`visonModal absolute top-[65px] right-[170px] rounded-[8px] border border-[#E9EAEB] w-[300px] bg-white p-[20px] shadow-md ${isOpen ? "block" : "hidden"}`}
         >
             <h2 className="text-[16px] text-black font-bold">Tashqi ko‘rinish</h2>
             <div className="flex items-center gap-3 mt-3">

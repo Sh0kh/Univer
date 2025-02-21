@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export default function BigModal({ go }) {
   return (
-    <div className="big_modal">
+    <div className="big_modal w-full">
       <div className="Container">
         {/* Modalni yopish tugmasi */}
         <svg

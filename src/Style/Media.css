@@ -50,8 +50,11 @@ gap: 10px;
     .h-h1,.h-p{
         display: none;
     }
-
+.visonModal{
+    right: 10px;
 }
+}
+
 
 @media(max-width:500px){
     .h-service div img{
@@ -60,11 +63,10 @@ gap: 10px;
     .h-service p{
         font-size: 10px;
     }
-    header ul li{
-        margin: 0 0 0 5px;
-        font-size: 7px;
-        
-    }
+    .Grow_q{
+
+        flex-wrap: wrap;
+    justify-content: start;   }
   
     
 }
@@ -72,6 +74,9 @@ gap: 10px;
 @media (max-width: 426px) {
     header nav .menu_wr,header nav a  {
         display: none;
+    }
+    .big_modal a{
+        display: block;
     }
     header nav .Container{
         justify-content: start;
