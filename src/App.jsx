@@ -65,18 +65,18 @@ function App() {
             
             <Route element={<MainLayout />}>
               <Route index element={<Home />} />
-              <Route path="/aboutus" element={<AboutUs />} />
-              <Route path="/staff" element={<Rahbariyat />} />
-              <Route path="/partners" element={<Partners />} />
-              <Route path="/International" element={<International />} />
-              <Route path="/documents" element={<Documents />} />
-              <Route path="/inspectDocument" element={<InspectDocument />} />
-              <Route path="/openInfo" element={<OpenInfo />} />
-              <Route path="/center" element={<Center/>} />
-              <Route path="/rekvizits" element={<Rekvizits/>} />
-              <Route path="/cabinet" element={<CabinetPage/>} />
-              <Route path="/money" element={<Money/>} />
-              <Route path="/work" element={<WorkPage/>} />
+              <Route path="/biz-haqimizda" element={<AboutUs />} />
+              <Route path="/rahbariyat" element={<Rahbariyat />} />
+              <Route path="/hamkorlarimiz" element={<Partners />} />
+              <Route path="/xalqaro-aloqalar" element={<International />} />
+              <Route path="/hujjatlar" element={<Documents />} />
+              <Route path="/murojaatlar" element={<InspectDocument />} />
+              <Route path="/ochiq-ma'lumotlar" element={<OpenInfo />} />
+              <Route path="/bo'lim-markazlar" element={<Center/>} />
+              <Route path="/rekvizitlar" element={<Rekvizits/>} />
+              <Route path="/virtual-kabinet" element={<CabinetPage/>} />
+              <Route path="/korrupsiyaga-kurash" element={<Money/>} />
+              <Route path="/bosh-ish-orni" element={<WorkPage/>} />
             
             </Route>
           </Route>

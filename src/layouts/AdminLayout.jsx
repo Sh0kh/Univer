@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../AdminComponents/Sidebar";
 import { useState } from "react";
-import { ComplexNavbar } from "../AdminComponents/Navbar";
+// import { ComplexNavbar } from "../AdminComponents/Navbar";
 
 export default function AdminLayout(){
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -25,7 +25,7 @@ export default function AdminLayout(){
         {/* Main content area */}
         <div className={`${isCollapsed ? 'w-[calc(100% - 80px)]' : 'w-[calc(100%-316px)]'} flex flex-1 flex-col`}>
           {/* Navbar */}
-          <ComplexNavbar />
+          {/* <ComplexNavbar /> */}
   
           {/* Scrollable Content */}
           <div className={` flex-1 overflow-y-auto p-4`}>

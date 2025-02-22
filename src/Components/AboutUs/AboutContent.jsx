@@ -1,5 +1,6 @@
 import content from '../../img/Content.png'
 import AboutView from './AboutView'
+
 export default function AboutContent(){
     return(
         <section className="aboutContent pt-[20px] pb-[20px]">
