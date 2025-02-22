@@ -12,7 +12,7 @@ export default function AdminLayout(){
     navigate("/login");
   };
     return(
-        <div className="flex h-screen overflow-hidden bg-gray-100">
+        <div className="flex h-screen overflow-hidden bg-gray-200">
         {/* Sidebar */}
         <div
           className={`transition-width duration-300 ${
