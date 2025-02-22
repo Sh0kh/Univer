@@ -15,7 +15,7 @@ import { IoLogoReact } from "react-icons/io5";
 
 const menuItems = [
   { name: "Asosiy", path: "/admin", icon: <FaHome className="text-lg" /> },
-  {
+  {          
     name: "Kategoriyalar",
     subItems: [
       { name: "Barcha Kategoriyalar", path: "/admin/categories" },
