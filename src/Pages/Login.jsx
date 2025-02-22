@@ -2,65 +2,86 @@ import React, { useState } from "react";
 import { Button, Input } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 import axios from "../utils/axios";
-import Swal from "sweetalert2";
 import { sweetAlert } from "../utils/sweetalert";
+import bgImage from "../img/Footer.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const Login = async () => {
+  const handleLogin = async () => {
     try {
       const loginData = {
-        phone: login,
-        password: password,
+        login,
+        password,
       };
-
-      localStorage.setItem("token", "token----------message-----------!!!!!");
-      navigate("/admin");
-
-      // const response = await axios.post(`/admin/login`, loginData);
-      // localStorage.setItem("token", response.data.tokens.refresh_token || "token-______fwwewewe");
+      console.log(loginData);
+      // localStorage.setItem("token", "token----------message-----------!!!!!");
       // navigate("/admin");
-      // sweetAlert("Muvaffaqiyatli", "success")
+
+      const response = await axios.post(`/login`, loginData);
+      console.log(response);
+      if (response.status === 200) {
+        let token = response.data?.data?.token;
+        localStorage.setItem("token", token);
+        navigate("/admin");
+        sweetAlert("Muvaffaqiyatli", "success")
+      }
     } catch (error) {
-      let errorText = error.data?.message || 'error login';
-      sweetAlert(errorText, "error")
+      let errorText = error.data?.message || "Error login";
+      sweetAlert(errorText, "error");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#A79684]">
-      <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg text-center">
-        <h2 className="text-2xl font-semibold text-center mb-6">Login</h2>
-
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgImage})` }}
+    >
+      <div className="w-full max-w-md p-6 bg-white bg-opacity-90 rounded-lg shadow-lg text-center">
+        <h2 className="text-2xl font-semibold text-center mb-6">Kirish</h2>
         <div className="space-y-4">
           <Input
-            label="Email"
+            label="Login"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
-            color="gray" // Changed to gray for a neutral look
+            color="gray"
             type="text"
             required
-            className="border-black" // Black border color
+            className="border-black"
           />
-          <Input
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            color="gray" // Changed to gray for a neutral look
-            type="password"
-            required
-            className="border-black" // Black border color
-          />
+          <div className="relative">
+            <Input
+              label="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              color="gray"
+              type={showPassword ? "text" : "password"}
+              required
+              className="border-black pr-10"
+            />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-3 flex items-center"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? (
+                <FaEyeSlash className="w-5 h-5 text-gray-600" />
+              ) : (
+                <FaEye className="w-5 h-5 text-gray-600" />
+              )}
+            </button>
+          </div>
           <Button
             fullWidth
-            color="gray" // Changed to gray for a neutral button
-            onClick={Login}
-            className="bg-black text-white hover:bg-gray-800"
+            color="gray"
+            onClick={handleLogin}
+            className="bg-black text-white hover:bg-gray-800 capitalize text-lg"
           >
-            Login
+            Jo'natish
           </Button>
         </div>
       </div>
