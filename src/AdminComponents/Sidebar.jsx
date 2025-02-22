@@ -1,13 +1,4 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-  List,
-  ListItem,
-  ListItemPrefix,
-} from "@material-tailwind/react";
 import {
   FaHome,
   FaUsers,
@@ -16,8 +7,10 @@ import {
   FaChevronDown,
   FaChevronRight,
 } from "react-icons/fa";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { TbCategoryPlus } from "react-icons/tb";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { Link, useLocation } from "react-router-dom";
 import { IoLogoReact } from "react-icons/io5";
 
 const menuItems = [
@@ -25,21 +18,53 @@ const menuItems = [
   {
     name: "Kategoriyalar",
     subItems: [
+      { name: "Barcha Kategoriyalar", path: "/admin/categories" },
+      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
+    ],
+    path: "/admin/categories",
+    icon: <TbCategoryPlus className="text-lg" />,
+  },
+  {
+    name: "Yangiliklar",
+    path: "/admin/news",
+    icon: <FaCity className="text-lg" />,
+  },
+  {
+    name: "Marosimlar",
+    subItems: [
       { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
       { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
     ],
-    icon: <TbCategoryPlus className="text-lg" />,
-  },
-  { name: "Yangiliklar", path: "/admin/news", icon: <FaCity className="text-lg" /> },
-  {
-    name: "Marosimlar",
     path: "/admin/events",
     icon: <FaUsers className="text-lg" />,
   },
   {
     name: "Universitet statistikasi",
+    subItems: [
+      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
+      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
+    ],
     path: "/admin/university-stats",
     icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
+    name: "Virtual Xizmatlar",
+    subItems: [
+      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
+      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
+    ],
+    path: "/admin/virtual-services",
+    icon: <FaUsers className="text-lg" />,
+  },
+  {
+    name: "Biz haqimizda",
+    path: "/admin/aboutus",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
+    name: "Hamkorlarimiz",
+    path: "/admin/partners",
+    icon: <FaCity className="text-lg" />,
   },
 ];
 
@@ -52,48 +77,99 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
   };
 
   return (
-    <div className={`h-screen bg-lb text-white transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"} p-4 shadow-lg flex flex-col justify-between fixed z-50`}>
+    <div
+      className={`h-screen bg-lb text-white transition-all duration-300 ${
+        isCollapsed ? "w-20" : "w-64"
+      } p-4 shadow-lg flex flex-col justify-between fixed z-50`}
+    >
       <div>
-        <h2 className={`text-xl font-semibold text-center mb-8 ${isCollapsed ? "hidden" : "block"}`}>IT LIVE</h2>
-        <div className={`text-xl font-semibold text-center flex items-center justify-center mb-8 ${isCollapsed ? "block" : "hidden"}`}>
+        <h2
+          className={`text-xl font-semibold text-center mb-8 ${
+            isCollapsed ? "hidden" : ""
+          }`}
+        >
+          IT LIVE
+        </h2>
+        <div
+          className={`text-xl font-semibold text-center flex items-center justify-center mb-8 ${
+            isCollapsed ? "" : "hidden"
+          }`}
+        >
           <IoLogoReact className="animate-spin" />
         </div>
-        <List className="space-y-2">
-          {menuItems.map((item, index) => (
+        <ul className="space-y-2">
+          {menuItems.map((item, index) =>
             item.subItems ? (
-              <Accordion key={index} open={openAccordion === index} icon={
-                <FaChevronDown className={`text-sm transition-transform text-white ${openAccordion === index ? "rotate-180" : ""}`} />
-              }>
-                <ListItem className="p-0" selected={openAccordion === index}>
-                  <AccordionHeader onClick={() => toggleAccordion(index)} className="border-b-0 p-3 flex items-center gap-4 cursor-pointer">
-                    <ListItemPrefix>{item.icon}</ListItemPrefix>
-                    {!isCollapsed && <span className="text-sm">{item.name}</span>}
-                  </AccordionHeader>
-                </ListItem>
-                <AccordionBody className="py-1">
-                  <List className="p-0">
+              <li key={index}>
+                <button
+                  onClick={() => toggleAccordion(index)}
+                  className="flex items-center justify-between w-full p-2 hover:bg-blue-700 rounded-md"
+                >
+                  <div className="flex items-center gap-4">
+                    {item.icon}
+                    {!isCollapsed && (
+                      <span className="text-sm">{item.name}</span>
+                    )}
+                  </div>
+                  {!isCollapsed && (
+                    <FaChevronDown
+                      className={`text-sm transition-transform ${
+                        openAccordion === index ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </button>
+                {openAccordion === index && (
+                  <ul className="pl-6 mt-2 space-y-1">
                     {item.subItems.map((subItem, subIndex) => (
-                      <Link key={subIndex} to={subItem.path} className={`flex items-center gap-4 p-2 pl-8 hover:bg-blue-900 cursor-pointer ${location.pathname === subItem.path ? "bg-blue-700" : ""}`}>
-                        <FaChevronRight className="text-xs" />
-                        {!isCollapsed && <span className="text-sm">{subItem.name}</span>}
+                      <Link
+                        key={subIndex}
+                        to={subItem.path}
+                        className={`flex items-center gap-2 p-2 text-sm rounded-md hover:bg-blue-700 ${
+                          location.pathname === subItem.path
+                            ? "!bg-blue-600"
+                            : ""
+                        }`}
+                      >
+                        <FaChevronRight />
+                        {subItem.name}
                       </Link>
                     ))}
-                  </List>
-                </AccordionBody>
-              </Accordion>
+                  </ul>
+                )}
+              </li>
             ) : (
-              <Link key={index} to={item.path} className={`flex items-center gap-4 p-2 hover:bg-blue-900 cursor-pointer ${location.pathname === item.path ? "bg-blue-700" : ""}`}>
+              <Link
+                key={index}
+                to={item.path}
+                className={`flex items-center gap-4 p-2 rounded-md hover:bg-blue-700 ${
+                  location.pathname === item.path ? "bg-blue-600" : ""
+                }`}
+              >
                 {item.icon}
                 {!isCollapsed && <span className="text-sm">{item.name}</span>}
               </Link>
             )
-          ))}
-          <li onClick={handleLogOut} className="flex items-center hover:bg-blue-900 gap-4 p-2 cursor-pointer">
+          )}
+          <li
+            onClick={handleLogOut}
+            className="flex items-center hover:bg-blue-700 gap-4 p-2 cursor-pointer rounded-md"
+          >
             <RiLogoutBoxLine className="text-xl" />
             {!isCollapsed && <span className="text-sm">Chiqish</span>}
           </li>
-        </List>
+        </ul>
       </div>
+      <button
+        onClick={() => setIsCollapsed(!isCollapsed)}
+        className="flex items-center justify-center p-2 mt-6 bg-blue-500 hover:bg-blue-700 rounded-md focus:outline-none"
+      >
+        {isCollapsed ? (
+          <MdChevronRight className="text-2xl" />
+        ) : (
+          <MdChevronLeft className="text-2xl" />
+        )}
+      </button>
     </div>
   );
 }
