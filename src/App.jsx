@@ -23,6 +23,14 @@ import CabinetPage from "./Pages/CabinetPage";
 import Money from "./Pages/Money";
 import WorkPage from "./Pages/WorkPage";
 
+import AdminHomePage from "./AdminPages/AdminHomePage";
+import AdminAboutUs from "./AdminPages/AboutUs";
+import Categories from "./AdminPages/Categories";
+import AdminPartners from "./AdminPages/Partners";
+import Events from "./AdminPages/Events";
+import Statistika from "./AdminPages/Statistika";
+import AdminNotFound from "./AdminPages/NotFound";
+
 function App() {
   return (
     <HelmetProvider>
@@ -38,7 +46,22 @@ function App() {
                   <AdminLayout />
                 </ProtectedRoute>
               }
-            ></Route>
+            >
+              <Route index element={<AdminHomePage />} />
+              <Route path="aboutus" element={<AdminAboutUs />} />
+              <Route path="categories" element={<Categories />} />
+              <Route path="partners" element={<AdminPartners />} />
+              <Route path="events" element={<Events/>} />
+              <Route path="statistics" element={<Statistika />} />
+              <Route path="admin/*" element={<AdminNotFound />} />
+              {/* <Route path="/inspectDocument" element={<InspectDocument />} />
+              <Route path="/openInfo" element={<OpenInfo />} />
+              <Route path="/center" element={<Center/>} />
+              <Route path="/rekvizits" element={<Rekvizits/>} />
+              <Route path="/cabinet" element={<CabinetPage/>} />
+              <Route path="/money" element={<Money/>} />
+              <Route path="/work" element={<WorkPage/>} /> */}
+            </Route>
             
             <Route element={<MainLayout />}>
               <Route index element={<Home />} />
