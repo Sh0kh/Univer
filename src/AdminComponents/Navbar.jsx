@@ -26,6 +26,7 @@ import {
   Bars2Icon,
 } from "@heroicons/react/24/solid";
  
+
 // profile menu component
 const profileMenuItems = [
   {
