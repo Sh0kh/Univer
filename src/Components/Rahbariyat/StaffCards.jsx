@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import axios from "axios";
 import ReactLoading from "react-loading"; 
 import fr4 from "../../img/Group 55.png";
-import img_def from '../../img/person.jpg'
+// import img_def from '../../img/person.jpg'
 export default function StaffCards() {
   const { i18n } = useTranslation();
 
@@ -15,7 +15,6 @@ export default function StaffCards() {
       const response = await axios.get(`/managements`);
       setData(response?.data?.data || []);
     } catch (error) {
-      console.error("Ma'lumotni olishda xatolik:", error);
     } finally {
       setLoading(false); 
     }
@@ -37,11 +36,13 @@ export default function StaffCards() {
             key={index}
             className="staff_wr flex items-center bg-white shadow-md rounded-xl p-6 space-x-6 border border-gray-200 mb-[20px]"
           >
-            <img
-              src={person?.image?.url || img_def}
-              alt={person?.name}
-              className="w-[176px] h-[214px] object-cover"
-            />
+    <img
+  src={person?.image?.length > 0 && person.image[0].url ? person.image[0].url : img_def}
+  alt={person?.name || "Default Image"}
+  className="w-[176px] h-[214px] object-cover"
+/>
+
+
             <div>
               <h2 className="text-xl font-semibold text-gray-900 mb-[10px]">
                 {person?.name}
