@@ -5,7 +5,7 @@ import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { AddCategory } from "../AdminComponents/categories/add-category";
 import { UpdateCategory } from "../AdminComponents/categories/update-category";
-import { DialogDefault } from "../AdminComponents/categories/simple-dialog";
+import { DeleteCategory } from "../AdminComponents/categories/delete-category";
 
 export default function Categories() {
   const [data, setData] = useState([]);
@@ -13,7 +13,6 @@ export default function Categories() {
   const [perPage, setPerPage] = useState(10);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("uz");
-
 
   const fetchData = async () => {
     try {
@@ -26,16 +25,16 @@ export default function Categories() {
     }
   };
 
-
   useEffect(() => {
     fetchData();
   }, []);
 
   const columns = [
     {
-      name: "ID",
-      selector: (row) => row.id,
-      sortable: true,
+      name: "Tr",
+      selector: (row, index) => (index + 1),
+      // selector: (row) => row.id,
+      width: "170px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
@@ -58,9 +57,10 @@ export default function Categories() {
       cell: (row) => (
         <div className="flex space-x-2">
           <UpdateCategory categoryData={row} onCategoryUpdated={fetchData} />
-          <DialogDefault/>
+          <DeleteCategory categoryId={row.id} onCategoryDeleted={fetchData}/>
         </div>
       ),
+      width: "170px",
     },
   ];
 
@@ -87,7 +87,6 @@ export default function Categories() {
         </div>
         <div>
           <AddCategory onCategoryAdded={fetchData} />
-          <UpdateCategory />
         </div>
       </div>
       <CustomDataTable

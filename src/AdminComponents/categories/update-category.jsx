@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from "react";
+import { FaPencilAlt } from "react-icons/fa";
 import {
-  Drawer,
+  Dialog,
   Button,
   Typography,
   IconButton,
   Input,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
 } from "@material-tailwind/react";
 import { $api } from "../../utils";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { sweetAlert } from "../../utils/sweetalert";
+
 
 export function UpdateCategory({ categoryData, onCategoryUpdated }) {
   const [open, setOpen] = useState(false);
-  const [category, setCategory] = useState({ uz: categoryData?.title?.uz, ru: categoryData?.title?.ru, en: "", kk: "" });
+  const [category, setCategory] = useState({ uz: "", ru: "", en: "", kk: "" });
+  const [errors, setErrors] = useState({
+    uz: false,
+    ru: false,
+    en: false,
+    kk: false,
+  });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (categoryData) {
@@ -18,60 +32,99 @@ export function UpdateCategory({ categoryData, onCategoryUpdated }) {
     }
   }, [categoryData]);
 
-  const openDrawer = () => setOpen(true);
-  const closeDrawer = () => {
-    setOpen(false);
-    setCategory({ uz: "", ru: "", en: "", kk: "" });
+  const handleOpen = () => setOpen(!open);
+
+  const validateInputs = () => {
+    let newErrors = { uz: false, ru: false, en: false, kk: false };
+    let isValid = true;
+
+    Object.keys(category).forEach((lang) => {
+      if (!category[lang].trim()) {
+        newErrors[lang] = true;
+        isValid = false;
+      }
+    });
+
+    setErrors(newErrors);
+    return isValid;
   };
 
   const handleUpdateCategory = async () => {
+    if (!validateInputs()) return;
+
+    setLoading(true);
     try {
       await $api.put(`/category/${categoryData.id}`, { title: category });
       onCategoryUpdated();
-      closeDrawer();
+      handleOpen();
+      sweetAlert("Kategoriya yangilandi", "success");
     } catch (error) {
+      setOpen(false);
       console.error("Kategoriya yangilashda xatolik:", error);
+      sweetAlert(`Kategoriya yangilanmadi:, ${error}`, "error");
     }
+    setLoading(false);
   };
 
   return (
     <>
-      <Button onClick={openDrawer} className="bg-yellow-500 text-white">Edit</Button>
-      <Drawer suppressContentEditableWarning open={open} onClose={closeDrawer}>
-        <div className="flex items-center justify-between px-4 pb-2">
-          <Typography variant="h5" color="blue-gray">
+      <IconButton onClick={handleOpen} variant="text">
+        <FaPencilAlt className="h-4 w-4" />
+      </IconButton>
+
+      <Dialog open={open} handler={handleOpen} size="sm" className="p-4">
+        <DialogHeader className="relative">
+          <Typography variant="h4" color="blue-gray">
             Kategoriya Tahrirlash
           </Typography>
-          <IconButton variant="text" color="blue-gray" onClick={closeDrawer}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="h-5 w-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+          <IconButton
+            size="sm"
+            variant="text"
+            className="!absolute right-3.5 top-3.5"
+            onClick={handleOpen}
+          >
+            <XMarkIcon className="h-4 w-4 stroke-2" />
           </IconButton>
-        </div>
-        <form className="flex flex-col gap-6 p-4" onSubmit={(e) => { e.preventDefault(); handleUpdateCategory(); }}>
+        </DialogHeader>
+
+        <DialogBody className="space-y-4 pb-6">
           {["uz", "ru", "en", "kk"].map((lang) => (
-            <Input
-              key={lang}
-              label={`Sarlavha (${lang.toUpperCase()})`}
-              value={category[lang]}
-              onChange={(e) => setCategory({ ...category, [lang]: e.target.value })}
-              required
-            />
+            <div key={lang}>
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-2 text-left font-medium"
+              >
+                Sarlavha ({lang.toUpperCase()})
+              </Typography>
+              <Input
+                value={category[lang]}
+                onChange={(e) =>
+                  setCategory({ ...category, [lang]: e.target.value })
+                }
+                required
+                placeholder={`Kategoriya nomi (${lang.toUpperCase()})`}
+                error={errors[lang]}
+              />
+              {errors[lang] && (
+                <Typography variant="small" color="red" className="mt-1">
+                  Ushbu maydon to‘ldirilishi shart!
+                </Typography>
+              )}
+            </div>
           ))}
-          <Button type="submit" className="bg-blue-500 text-white">Yangilash</Button>
-        </form>
-      </Drawer>
+        </DialogBody>
+
+        <DialogFooter>
+          <Button
+            onClick={handleUpdateCategory}
+            loading={loading}
+            className="bg-blue-500 text-white"
+          >
+            Yangilash
+          </Button>
+        </DialogFooter>
+      </Dialog>
     </>
   );
 }
