@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
+import { useParams } from "react-router-dom";
 import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
-import { AddCategory } from "../AdminComponents/categories/add-category";
-import { UpdateCategory } from "../AdminComponents/categories/update-category";
-import { DeleteCategory } from "../AdminComponents/categories/delete-category";
-import { FaRightToBracket } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { AddCategoryDetail } from "../AdminComponents/category-detail/add-category-detail";
+import { UpdateCategoryDetail } from "../AdminComponents/category-detail/update-category-detail";
+import { DeleteCategoryDetail } from "../AdminComponents/category-detail/delete-category-detail";
 
-export default function Categories() {
-  const [data, setData] = useState([]);
+export default function CategoryDetail() {
+  const { categoryId } = useParams();
+  const [details, setDetails] = useState([]);
+  const [categoryTitle, setCategoryTitle] = useState("");
+  const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
-  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("uz");
 
   const fetchData = async () => {
     try {
-      const response = await $api.get("/category");
-      setData(response.data.data);
+      const { data } = await $api.get(`/category/${categoryId}`);
+      setCategoryTitle(data?.data?.title || {});
+      setDetails(data?.data?.details || []);
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
     } finally {
@@ -29,14 +30,13 @@ export default function Categories() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [categoryId]);
 
   const columns = [
     {
       name: "Tr",
-      selector: (row, index) => (index + 1),
-      // selector: (row) => row.id,
-      width: "170px",
+      selector: (row, index) => index + 1,
+      width: "80px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
@@ -44,24 +44,21 @@ export default function Categories() {
       sortable: true,
     },
     {
-      name: `Categoriya detallari`,
-      selector: (row) => {
-        return <Link to={`detail/${row.id}`} className=" w-32 p-2 flex justify-center bg-blue-700 opacity-70 cursor-pointer text-white">
-          <FaRightToBracket className=" text-xl text-center"/>
-        </Link>;
-      },
-    },
-    {
       name: "Slug",
       selector: (row) => row.slug,
+      sortable: true,
+    },
+    {
+      name: "Qo‘shilgan Sana",
+      selector: (row) => new Date(row.created_at).toLocaleDateString(),
       sortable: true,
     },
     {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-          <UpdateCategory categoryData={row} onCategoryUpdated={fetchData} />
-          <DeleteCategory categoryId={row.id} onCategoryDeleted={fetchData}/>
+          <UpdateCategoryDetail categoryData={row} onCategoryUpdated={fetchData} />
+          <DeleteCategoryDetail categoryId={row.id} onCategoryDeleted={fetchData} />
         </div>
       ),
       width: "170px",
@@ -74,8 +71,10 @@ export default function Categories() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Kategoriyalar</h2>
-      <div className=" flex  justify-between items-center ">
+      <h2 className="text-xl font-bold mb-4">
+        {categoryTitle[activeTab]} - Kategoriya Tafsilotlari
+      </h2>
+      <div className="mb-4 flex justify-between items-center">
         <div className="mb-4 flex space-x-2">
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
@@ -90,11 +89,11 @@ export default function Categories() {
           ))}
         </div>
         <div>
-          <AddCategory onCategoryAdded={fetchData} />
+          <AddCategoryDetail onCategoryDetailAdded={fetchData} />
         </div>
       </div>
       <CustomDataTable
-        data={data}
+        data={details}
         columns={columns}
         page={page}
         setPage={setPage}

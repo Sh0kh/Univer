@@ -12,7 +12,7 @@ import { $api } from "../../utils";
 import { TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sweetAlert } from "../../utils/sweetalert";
 
-export function DeleteCategory({ categoryId, onCategoryDeleted }) {
+export function DeleteCategoryDetail({ categoryId, onCategoryDeleted }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ export function DeleteCategory({ categoryId, onCategoryDeleted }) {
   const handleDeleteCategory = async () => {
     setLoading(true);
     try {
-      await $api.delete(`/category/${categoryId}`);
+      await $api.delete(`/category-detal/${categoryId}`);
       onCategoryDeleted();
       sweetAlert("Muvaffaqiyatli o'chirildi", "success");
       setOpen(false);
@@ -44,7 +44,7 @@ export function DeleteCategory({ categoryId, onCategoryDeleted }) {
       <Dialog open={open} handler={handleOpen} size="xs" className="p-4">
         <DialogHeader className="relative">
           <Typography variant="h5" color="red">
-            Kategoriya o‘chirish
+            Kategoriya detail o‘chirish
           </Typography>
           <IconButton
             size="sm"
