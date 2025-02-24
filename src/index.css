@@ -69,7 +69,62 @@ html {
   opacity: 1;
   pointer-events: all;
 }
+.veb{
+  fill: #1f235b;
+  font-style: italic;
+}
+.finance_b{
+  border-bottom: 1px solid #e9eaeb;
+padding: 12px 24px;
+max-width: 1280px;
+width: 100%;
+height: 60px;
+background: #fafafa;
+}
 
+.pdp{
+  border-left: 1px solid #e9eaeb;
+padding: 16px 24px;
+width: 165px;
+height: 56px;
+min-height: 52px;
+max-height: 56px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+
+}
+.finance_w{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 24px;
+}
+.finance_w p{ 
+  font-family: var(--font-family);
+font-weight: 400;
+font-size: 14px;
+line-height: 143%;
+color: #535862;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.pdp span{
+  font-family: var(--font-family);
+font-weight: 500;
+font-size: 14px;
+line-height: 143%;
+color: #000;
+}
+.finance_b p{
+  font-family: var(--font-family);
+font-weight: 600;
+font-size: 14px;
+line-height: 143%;
+color: #717680;
+}
 .Modal2Content {
   width: 50%;
   background-color: #fff;
