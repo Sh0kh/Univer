@@ -4,15 +4,14 @@ import eye from '../../img/eye1.png'
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
-
-
+import img_def from '../../img/default_image.jpg'
 
 
 
 
 
 const News = () => {
-  const { i18n } = useTranslation(); // Получаем текущий язык
+  const { i18n } = useTranslation(); 
   const [loading, setLoading] = useState(true)
 
 
@@ -55,14 +54,14 @@ const News = () => {
         </div >
       ) : (
         data?.length && true > 0 ? (
-          <div className="grid md:grid-cols-3 gap-6">
+          <div  className="grid md:grid-cols-3 gap-6">
             {data?.map((news) => (
-              <div key={news.id} className="bg-white rounded-lg overflow-hidden flex flex-col">
-                 <img
-            src={news.image[0]?.url} 
-            alt=""
-            className="news_img w-full h-244 object-cover rounded-lg"
-          />
+              <div  key={news.id} className="bg-white rounded-lg overflow-hidden flex flex-col">
+               <img
+  src={news.image[0]?.url || img_def} 
+  alt=""
+  className="news_img w-full h-244 object-cover rounded-lg"
+/>
           
                 <div className="p-4 flex flex-col flex-grow   ">
                   <div className="text-gray-500 text-sm flex items-center space-x-3">

@@ -20,10 +20,11 @@ export default function Header() {
         e.stopPropagation();
         setShowModal(!showModal);
     };
-    const { t } = useTranslation();
+    const { i18n } = useTranslation();
 
     const changeLanguage = (lang) => {
-      i18n.changeLanguage(lang);
+        i18n.changeLanguage(lang);
+        console.log(lang)
     };
     const modalRef1 = useRef(null);
 
@@ -69,24 +70,29 @@ export default function Header() {
                             onClick={(e) => { e.stopPropagation(); setVisionModal(prev => !prev); }}
                         ><img src={eye} alt="Visibility" /></button>
                         <button><img src={sound} alt="Sound" /></button>
-                        <select className="border rounded px-2 py-1 text-sm">
-                            <option onClick={() => changeLanguage("uz")} value="1">Uz</option>
-                            <option onClick={() => changeLanguage("ru")} value="2">Ru</option>
-                            <option onClick={() => changeLanguage("en")} value="3">En</option>
+                        <select
+                                    value={i18n.language} // Устанавливаем текущее значение языка
+
+                            onChange={(e) => changeLanguage(e.target.value)}
+                            className="border rounded px-2 py-1 text-sm">
+                            <option
+                                value="uz">Uz</option>
+                            <option value="ru">Ru</option>
+                            <option value="en">En</option>
                         </select>
                     </div>
                 </div>
                 <div className="flex justify-between items-center py-4">
                     <NavLink to="/">
-                    <div className="flex items-center space-x-4">
-                        <img src={logo} alt="Logo" className="mr-[20px]" />
-                        <div>
-                            <h1 className="h-h1 text-lg font-bold text-[#1f235b]">Toshkent kimyo-texnologiya instituti <br /> Yangiyer filiali</h1>
-                            <p className="h-p text-sm text-gray-600">rasmiy veb sayti</p>
+                        <div className="flex items-center space-x-4">
+                            <img src={logo} alt="Logo" className="mr-[20px]" />
+                            <div>
+                                <h1 className="h-h1 text-lg font-bold text-[#1f235b]">Toshkent kimyo-texnologiya instituti <br /> Yangiyer filiali</h1>
+                                <p className="h-p text-sm text-gray-600">rasmiy veb sayti</p>
+                            </div>
                         </div>
-                    </div>
                     </NavLink>
-                   
+
                     <div className="h-service flex space-x-6">
                         <div className="flex items-center space-x-2">
                             <div className='res'>
@@ -141,40 +147,40 @@ export default function Header() {
                                 ref={modalRef}
                                 className="absolute top-8 w-[300px] left-0 z-50 bg-white p-4 shadow-lg rounded-lg"
                             >
-                                <NavLink to="/aboutus" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/biz-haqimizda" className="text-blue-500 hover:underline block mb-[10px]">
                                     Biz haqimizda
                                 </NavLink>
-                                <NavLink to="/staff" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/rahbariyat" className="text-blue-500 hover:underline block mb-[10px]">
                                     Raxbariyat
                                 </NavLink>
-                                <NavLink to="/partners" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/hamkorlarimiz" className="text-blue-500 hover:underline block mb-[10px]">
                                     Hamkorlarimiz
                                 </NavLink>
-                                <NavLink to="/International" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/xalqaro-aloqalar" className="text-blue-500 hover:underline block mb-[10px]">
                                     Xalqaro aloqalar
                                 </NavLink>
-                                <NavLink to="/documents" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/hujjatlar" className="text-blue-500 hover:underline block mb-[10px]">
                                     Me’yoriy hujjatlar
                                 </NavLink>
-                                <NavLink to="/inspectDocument" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/murojaatlar" className="text-blue-500 hover:underline block mb-[10px]">
                                     Murojaatlarni ko‘rib chiqish tartibi
                                 </NavLink>
-                                <NavLink to="/openInfo" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/ochiq-ma'lumotlar" className="text-blue-500 hover:underline block mb-[10px]">
                                     Ochiq ma’lumotlar
                                 </NavLink>
-                                <NavLink to="/center" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/bo'lim-markazlar" className="text-blue-500 hover:underline block mb-[10px]">
                                     Bo‘lim va markazlar
                                 </NavLink>
-                                <NavLink to="/rekvizits" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/rekvizitlar" className="text-blue-500 hover:underline block mb-[10px]">
                                     Rekvizitlar
                                 </NavLink>
-                                <NavLink to="/cabinet" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/virtual-kabinet" className="text-blue-500 hover:underline block mb-[10px]">
                                     Direktor virtual qabulxonasi
                                 </NavLink>
-                                <NavLink to="/money" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/korrupsiyaga-kurash" className="text-blue-500 hover:underline block mb-[10px]">
                                     Korrupsiyaga qarshi kurashish
                                 </NavLink>
-                                <NavLink to="/work" className="text-blue-500 hover:underline block mb-[10px]">
+                                <NavLink to="/bosh-ish-orni" className="text-blue-500 hover:underline block mb-[10px]">
                                     Bo‘sh ish o‘rinlari
                                 </NavLink>
 

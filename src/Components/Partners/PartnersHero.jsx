@@ -1,40 +1,64 @@
-import Foto from '../../img/Ut.png'
-import Foto1 from '../../img/image 2 (1).png'
-import Foto2 from '../../img/w1.png'
-import Foto3 from '../../img/image 3 (1).png'
-import Foto4 from '../../img/image 4.png'
-import Foto5 from '../../img/image 5.png'
-import Foto6 from '../../img/image 7.png'
-import Foto7 from '../../img/image 8.png'
-
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import ReactLoading from 'react-loading';
+import img_def from '../../img/default_image.jpg';
 
 export default function PartnersHero() {
-    const images = [
-        { src: Foto1, alt: 'Foto 1' },
-        { src: Foto2, alt: 'Foto 2' },
-        { src: Foto3, alt: 'Foto 3' },
-        { src: Foto4, alt: 'Foto 4' },
-        { src: Foto5, alt: 'Foto 5' },
-        { src: Foto, alt: 'Foto 6' },
-        { src: Foto6, alt: 'Foto 7' },
-        { src: Foto7, alt: 'Foto 8' },
-    ]
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    const getNews = async () => {
+        try {
+            const response = await axios.get(`/our-partner`);
+            setData(response?.data?.data || []);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getNews();
+    }, []);
 
     return (
-        <section className='mt-8 mb-8'>
+        <section className="mt-8 mb-8">
             <div className="Container">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-                    {images.map((image, index) => (
-                        <div
-                            key={index}
-                            className="bg-[#FDFDFD] hover:shadow-lg cursor-pointer duration-500 border py-5 flex items-center justify-center border-[#F5F5F5] rounded-lg"
-                        >
-                            <img src={image.src} alt={image.alt} />
+
+                {loading ? (
+                    <div className="flex items-center justify-center w-full h-[400px]">
+                        <ReactLoading type="spinningBubbles" color="#000" height={100} width={100} />
+                    </div>
+                ) : (
+                    data?.length && true > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+                            {data.map((item, index) => (
+                                <div
+                                    key={index}
+                                    className=" bg-[#FDFDFD]  hover:shadow-lg cursor-pointer duration-500 border  flex items-center justify-center border-[#F5F5F5] rounded-lg"
+                                >
+                                    <a
+                                        href={item?.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img src={item?.image?.url || img_def} alt={`Partner ${index + 1}`} className="max-w-[300px] max-h-[122px] h-full w-full h-auto object-contain" />
+                                    </a>
+
+                                </div>
+                            ))}
                         </div>
+
+                    ) : (
+                        <div className="flex items-center justify-center">
+                            <h1>
+                                Empty data
+                            </h1>
+                        </div>
+
                     ))}
-                </div>
             </div>
         </section>
-    )
+    );
 }
