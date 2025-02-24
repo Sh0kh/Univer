@@ -32,6 +32,7 @@ import Statistika from "./AdminPages/Statistika";
 import AdminNotFound from "./AdminPages/NotFound";
 import CategoryDetail from "./AdminPages/CategoryDetail";
 import AdminNewsCreate from "./AdminPages/AdminNewsCreate";
+import AboutUsCreate from "./AdminPages/AboutUsCreate";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
 
               <Route path="/admin/news" element={<AdminNews />} />
               <Route path="/admin/news/create" element={<AdminNewsCreate />} />
+              <Route path='/admin/aboutUs/create' element={<AboutUsCreate />} />
               {/* <Route path="/inspectDocument" element={<InspectDocument />} />
               <Route path="/openInfo" element={<OpenInfo />} />
               <Route path="/center" element={<Center/>} />

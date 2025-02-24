@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import {
-  Dialog,
   Button,
-  Typography,
-  IconButton,
-  Input,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
+
 } from "@material-tailwind/react";
+import DeleteNews from '../AdminComponents/news/delete-news'
 import Loader from "../lib/loader";
 import { $api } from "../utils";
 import CustomDataTable from '../lib/custom-data-table';
@@ -77,9 +72,10 @@ export default function News() {
     {
       name: "Action",
       cell: (row) => (
+
         <div className="flex space-x-2">
-          {/* <UpdateCategory categoryData={row} onCategoryUpdated={fetchData} />
-          <DeleteCategory categoryId={row.id} onCategoryDeleted={fetchData} /> */}
+          {/* <UpdateCategory categoryData={row} onCategoryUpdated={fetchData} /> */}
+          <DeleteNews Id={row.id} onCategoryDeleted={fetchData} />
         </div>
       ),
       width: "170px",
