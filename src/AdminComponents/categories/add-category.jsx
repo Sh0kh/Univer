@@ -97,7 +97,6 @@ export function AddCategory({ onCategoryAdded }) {
             </div>
           ))}
         </DialogBody>
-
         <DialogFooter>
           <Button onClick={handleAddCategory} loading={loading} className="bg-blue-500 text-white">
             Saqlash

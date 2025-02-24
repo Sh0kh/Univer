@@ -11,7 +11,7 @@ import img_def from '../../img/default_image.jpg'
 
 
 const News = () => {
-  const { i18n } = useTranslation(); 
+  const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true)
 
 
@@ -54,15 +54,15 @@ const News = () => {
         </div >
       ) : (
         data?.length && true > 0 ? (
-          <div  className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {data?.map((news) => (
-              <div  key={news.id} className="bg-white rounded-lg overflow-hidden flex flex-col">
-               <img
-  src={news.image[0]?.url || img_def} 
-  alt=""
-  className="news_img w-full h-244 object-cover rounded-lg"
-/>
-          
+              <div key={news.id} className="bg-white rounded-lg overflow-hidden flex flex-col">
+                <img
+                  src={news.image[0]?.url || img_def}
+                  alt=""
+                  className="news_img w-full h-244 object-cover rounded-lg"
+                />
+
                 <div className="p-4 flex flex-col flex-grow   ">
                   <div className="text-gray-500 text-sm flex items-center space-x-3">
                     <img src={calendar} alt="date" />
@@ -70,10 +70,14 @@ const News = () => {
                     <img src={eye} alt="views" />
                     <span>{news?.view}</span>
                   </div>
-                  <h3 className="font-semibold text-lg mt-2 mb-4 text-gray-900 flex-grow">
+                  <h3 className="font-semibold text-lg mt-2 mb-4 text-gray-900 flex-grow line-clamp-2">
                     {news.title[i18n.language] || news.title["uz"]}
                   </h3>
-                  <a href="#" className="text-black  inline-block font-medium hover:underline">
+                  <h3 className="overflow-hidden text-gray-500  text-[16px] font-normal line-clamp-2"
+                  >
+                    {news.description[i18n.language] || news.description["uz"]}
+                  </h3>
+                  <a href="#" className="text-black  mt-[16px] inline-block font-medium hover:underline">
                     Batafsil →
                   </a>
                 </div>
