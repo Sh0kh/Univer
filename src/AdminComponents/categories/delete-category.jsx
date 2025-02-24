@@ -58,7 +58,7 @@ export function DeleteCategory({ categoryId, onCategoryDeleted }) {
 
         <DialogBody className="space-y-4 pb-6">
           <Typography variant="paragraph" color="blue-gray">
-            Rostan ham ushbu kategoriyani o‘chirmoqchimisiz? Bu amal qaytarib
+            Rostan ham ushbu malumotni o‘chirmoqchimisiz? Bu amal qaytarib
             bo‘lmaydi.
           </Typography>
         </DialogBody>
