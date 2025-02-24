@@ -15,44 +15,28 @@ import { IoLogoReact } from "react-icons/io5";
 
 const menuItems = [
   { name: "Asosiy", path: "/admin", icon: <FaHome className="text-lg" /> },
-  {
+  {          
     name: "Kategoriyalar",
-    subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-    ],
     path: "/admin/categories",
+    icon: <TbCategoryPlus className="text-lg" />,
+  },
+  {          
+    name: "Rekvisitlar",
+    path: "/admin/recvizits",
     icon: <TbCategoryPlus className="text-lg" />,
   },
   {
     name: "Yangiliklar",
-    subItems: [
-      { name: "Barcha yangiliklar", path: "/admin/news" },
-      { name: "Yangilik yaratish", path: "/admin/news/create" },
-    ],
     path: "/admin/news",
     icon: <FaCity className="text-lg" />,
   },
   {
-    name: "Biz haqimizda",
-    path: "/admin/aboutus",
-    icon: <FaCommentAlt className="text-lg" />,
-  },
-  {
     name: "Marosimlar",
-    subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-    ],
     path: "/admin/events",
     icon: <FaUsers className="text-lg" />,
   },
   {
     name: "Universitet statistikasi",
-    subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-    ],
     path: "/admin/university-stats",
     icon: <FaCommentAlt className="text-lg" />,
   },
@@ -65,7 +49,11 @@ const menuItems = [
     path: "/admin/virtual-services",
     icon: <FaUsers className="text-lg" />,
   },
-
+  {
+    name: "Biz haqimizda",
+    path: "/admin/aboutus",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
   {
     name: "Hamkorlarimiz",
     path: "/admin/partners",
@@ -83,19 +71,22 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
 
   return (
     <div
-      className={`h-screen bg-lb text-white transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"
-        } p-4 shadow-lg flex flex-col justify-between fixed z-50`}
+      className={`h-screen bg-lb text-white transition-all duration-300 ${
+        isCollapsed ? "w-20" : "w-64"
+      } p-4 shadow-lg flex flex-col justify-between fixed z-50`}
     >
       <div>
         <h2
-          className={`text-xl font-semibold text-center mb-8 ${isCollapsed ? "hidden" : ""
-            }`}
+          className={`text-xl font-semibold text-center mb-8 ${
+            isCollapsed ? "hidden" : ""
+          }`}
         >
           IT LIVE
         </h2>
         <div
-          className={`text-xl font-semibold text-center flex items-center justify-center mb-8 ${isCollapsed ? "" : "hidden"
-            }`}
+          className={`text-xl font-semibold text-center flex items-center justify-center mb-8 ${
+            isCollapsed ? "" : "hidden"
+          }`}
         >
           <IoLogoReact className="animate-spin" />
         </div>
@@ -115,8 +106,9 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
                   </div>
                   {!isCollapsed && (
                     <FaChevronDown
-                      className={`text-sm transition-transform ${openAccordion === index ? "rotate-180" : ""
-                        }`}
+                      className={`text-sm transition-transform ${
+                        openAccordion === index ? "rotate-180" : ""
+                      }`}
                     />
                   )}
                 </button>
@@ -126,10 +118,11 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
                       <Link
                         key={subIndex}
                         to={subItem.path}
-                        className={`flex items-center gap-2 p-2 text-sm rounded-md hover:bg-blue-700 ${location.pathname === subItem.path
-                          ? "!bg-blue-600"
-                          : ""
-                          }`}
+                        className={`flex items-center gap-2 p-2 text-sm rounded-md hover:bg-blue-700 ${
+                          location.pathname === subItem.path
+                            ? "!bg-blue-600"
+                            : ""
+                        }`}
                       >
                         <FaChevronRight />
                         {subItem.name}
@@ -142,8 +135,9 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
               <Link
                 key={index}
                 to={item.path}
-                className={`flex items-center gap-4 p-2 rounded-md hover:bg-blue-700 ${location.pathname === item.path ? "bg-blue-600" : ""
-                  }`}
+                className={`flex items-center gap-4 p-2 rounded-md hover:bg-blue-700 ${
+                  location.pathname === item.path ? "bg-blue-600" : ""
+                }`}
               >
                 {item.icon}
                 {!isCollapsed && <span className="text-sm">{item.name}</span>}

@@ -11,7 +11,7 @@ export default function FooterMain() {
                 <p className="mb-[20px] mt-[10px] h-p text-sm text-gray-600">rasmiy veb sayti</p>
                 <img src={logo} alt="" />
             </div>
-            <div className="footermain_content flex items-start justify-between gap-[100px]">
+            <div className="footermain_content flex items-center justify-between gap-[100px]">
                 <ul>
                     <NavLink to="">
                         <li className="font-[var(--font-family)] font-semibold text-[18px] leading-[156%] text-white">
