@@ -32,7 +32,7 @@ export default function CustomDataTable({ data, columns, page, setPage, perPage,
         pagination
         paginationPerPage={perPage}
         paginationRowsPerPageOptions={[10, 15, 20]} // Per page opsiyalari
-        paginationTotalRows={data.length > 0 ? data.length : 1} // Pagination uchun umumiy satrlar
+        paginationTotalRows={data?.length > 0 ? data?.length : 1} // Pagination uchun umumiy satrlar
         onChangePage={handlePageChange} // Page o'zgarishini ushlash
         onChangeRowsPerPage={handlePerPageChange} // Per page o'zgarishini ushlash
         highlightOnHover // Hover qilinganda satrni belgilash

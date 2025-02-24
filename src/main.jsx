@@ -7,8 +7,8 @@ import './i18n/i18n.js'; // Подключаем i18n
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {/* wtf */}
     <ThemeProvider>
+    {/* wtf */}
       <App />
     </ThemeProvider>
   </StrictMode>

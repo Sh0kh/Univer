@@ -10,29 +10,29 @@ const Login = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async () => {
+    setLoading(true);
+    setError("");
     try {
-      const loginData = {
-        login,
-        password,
-      };
-      console.log(loginData);
-      // localStorage.setItem("token", "token----------message-----------!!!!!");
-      // navigate("/admin");
-
+      const loginData = { login, password };
       const response = await axios.post(`/login`, loginData);
-      console.log(response);
+      
       if (response.status === 200) {
         let token = response.data?.data?.token;
         localStorage.setItem("token", token);
         navigate("/admin");
-        sweetAlert("Muvaffaqiyatli", "success")
+        sweetAlert("Muvaffaqiyatli", "success");
       }
     } catch (error) {
-      let errorText = error.data?.message || "Error login";
+      let errorText = error.response?.data?.message || "Xatolik yuz berdi";
+      setError(errorText);
       sweetAlert(errorText, "error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -75,13 +75,15 @@ const Login = () => {
               )}
             </button>
           </div>
+          {error && <p className="text-red-600 text-sm">{error}</p>}
           <Button
             fullWidth
             color="gray"
             onClick={handleLogin}
             className="bg-black text-white hover:bg-gray-800 capitalize text-lg"
+            disabled={loading}
           >
-            Jo'natish
+            {loading ? "Yuklanmoqda..." : "Jo'natish"}
           </Button>
         </div>
       </div>

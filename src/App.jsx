@@ -30,6 +30,7 @@ import AdminPartners from "./AdminPages/Partners";
 import Events from "./AdminPages/Events";
 import Statistika from "./AdminPages/Statistika";
 import AdminNotFound from "./AdminPages/NotFound";
+import CategoryDetail from "./AdminPages/CategoryDetail";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
               <Route index element={<AdminHomePage />} />
               <Route path="aboutus" element={<AdminAboutUs />} />
               <Route path="categories" element={<Categories />} />
+              <Route path="categories/detail/:categoryId" element={<CategoryDetail />} />
               <Route path="partners" element={<AdminPartners />} />
               <Route path="events" element={<Events/>} />
               <Route path="statistics" element={<Statistika />} />
