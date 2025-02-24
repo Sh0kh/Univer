@@ -29,12 +29,13 @@ export default function Categories() {
 
   useEffect(() => {
     fetchData();
-  }, [window.location.href]);
+  }, []);
 
   const columns = [
     {
       name: "Tr",
       selector: (row, index) => (index + 1),
+      // selector: (row) => row.id,
       width: "170px",
     },
     {
