@@ -3,12 +3,14 @@ import Header from "../Components/Header";
 import Footer from "../Components/Footer";
 
 
-export default function MainLayout(){
-    return(
+export default function MainLayout() {
+    return (
         <div>
-            <Header/>
-            <Outlet/>
-           <Footer/>
+            <Header />
+            <div className="pt-[245px]">
+                <Outlet />
+            </div>
+            <Footer />
         </div>
     )
 }

@@ -8,7 +8,7 @@ import {
     Checkbox
 } from "@material-tailwind/react";
 import UzAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/uz-aboutUs-create";
-import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-AboutUs-create";
+import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-aboutUs-create";
 import KKAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/kk-aboutUS-create";
 import { $api } from "../utils";
 import { sweetAlert } from "../utils/sweetalert";
@@ -22,7 +22,6 @@ export default function AboutUsCreate() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
     const [data, setData] = useState([])
-
     const FechCategory = async () => {
         try {
             const response = await $api.get("/category");
@@ -31,7 +30,6 @@ export default function AboutUsCreate() {
             console.error("Xatolik yuz berdi:", error);
         }
     };
-
     useEffect(() => {
         FechCategory();
     }, []);

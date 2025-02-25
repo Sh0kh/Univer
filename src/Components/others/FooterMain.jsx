@@ -62,7 +62,7 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="/documents">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
-                            Me’yoriy nhujjatlar
+                            Me’yoriy hujjatlar
                         </li>
                     </NavLink>
                     <NavLink to="/">
@@ -89,7 +89,7 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="">
                         <li className="qWE className='font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]'">
-                            +998 95 123 00 00
+                            +998 (95) 511 58 56
                         </li>
                     </NavLink>
                     <NavLink to="">
@@ -104,7 +104,8 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="">
                         <li className="flex items-center justify-between font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
-                            Sirdaryo viloyati, Yangiyer shahri, Mustaqillik ko’chasi 12A
+                            Sirdaryo viloyati, Yangiyer shahar,
+                            Tinchlik ko'chasi, 1-uy
                         </li>
                     </NavLink>
                 </ul>

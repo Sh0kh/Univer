@@ -16,7 +16,7 @@ export default function Home() {
 
 
   return (
-    <main className="home">
+    <main className="home ">
       {/* <Header /> */}
      <Hero/>
      <News/>

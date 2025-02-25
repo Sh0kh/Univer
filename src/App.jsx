@@ -36,6 +36,9 @@ import AboutUsCreate from "./AdminPages/AboutUsCreate";
 import Recvisits from "./AdminPages/Recvisits";
 import Management from "./AdminPages/Management";
 import OpenData from "./AdminPages/OpenData";
+import Symbols from "./Pages/Symbols";
+import Finance from "./Pages/Finance";
+
 
 function App() {
   return (
@@ -84,6 +87,10 @@ function App() {
               <Route path="/virtual-kabinet" element={<CabinetPage />} />
               <Route path="/korrupsiyaga-kurash" element={<Money />} />
               <Route path="/bosh-ish-orni" element={<WorkPage />} />
+              <Route path="/ramzlar" element={<Symbols/>} />
+              <Route path="/hisobot" element={<Finance/>} />
+
+
 
             </Route>
           </Route>

@@ -20,6 +20,8 @@ const VisionModal = forwardRef(({ isOpen }, ref) => {
 
     const ThemeDark = () => {
         document.documentElement.classList.add("theme-dark");
+        document.documentElement.classList.remove( "theme-gray");
+
     };
 
     const ThemeGray = () => {
