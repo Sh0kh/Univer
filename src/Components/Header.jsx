@@ -285,7 +285,7 @@ export default function Header() {
                         <a href="#" className="hover:underline uppercase">Talabalarga</a>
                     </div>
                     <a href="#" className="hover:underline uppercase">Axborot xizmati</a>
-                    <a href="#" className="hover:underline uppercase">Bog'lanish</a>
+                    <NavLink to="/contact"  className="hover:underline uppercase">Bog'lanish</NavLink>
                 </div>
             </nav>
             <VisionModal isOpen={visionModal} ref={modalRef1} />

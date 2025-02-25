@@ -38,6 +38,8 @@ import Management from "./AdminPages/Management";
 import OpenData from "./AdminPages/OpenData";
 import Symbols from "./Pages/Symbols";
 import Finance from "./Pages/Finance";
+import Conatact from "./Pages/Contact";
+import StyleStudy from "./Pages/StyleStudy";
 
 
 function App() {
@@ -89,8 +91,8 @@ function App() {
               <Route path="/bosh-ish-orni" element={<WorkPage />} />
               <Route path="/ramzlar" element={<Symbols/>} />
               <Route path="/hisobot" element={<Finance/>} />
-
-
+              <Route path="/contact" element={<Conatact/>} />
+              <Route path="/oquv-uslubi" element={<StyleStudy/>} />
 
             </Route>
           </Route>

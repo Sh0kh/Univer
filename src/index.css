@@ -98,6 +98,20 @@ html {
 
 }
 
+.study_h1{
+  font-family: var(--font-family);
+font-weight: 600;
+font-size: 30px;
+line-height: 127%;
+color: #181d27;
+margin: 20px 0;
+}
+.file_sent{
+  margin: 0 auto;
+}
+.info{
+  margin-bottom: -40px;
+}
 .finance_w {
   display: flex;
   align-items: center;
