@@ -22,6 +22,7 @@ export default function AboutUsCreate() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
     const FechCategory = async () => {
         try {
             const response = await $api.get("/category");
@@ -61,6 +62,8 @@ export default function AboutUsCreate() {
             setSelectedCategory(null);
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -109,6 +112,8 @@ export default function AboutUsCreate() {
                     ) : null}
                 </div>
                 <Button
+                    disabled={loading}
+                    loading={loading}
                     onClick={CreateAboutUs}
                     className="bg-green-500 text-white text-center mt-[10px] w-full">
                     Yaratish

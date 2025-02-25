@@ -73,7 +73,6 @@ export default function AdminAboutUs() {
           <h1 className='opacity-[0.5]'>
             Malumot Yo'q
           </h1>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi autem eos rem delectus deserunt earum iure id dolores neque aliquid sequi natus vitae cumque et quasi vero recusandae accusantium veritatis velit temporibus nam optio ipsa, voluptatibus cupiditate! Quos, eum quia?
         </div>
       )}
 
