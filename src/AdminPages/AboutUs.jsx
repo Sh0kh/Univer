@@ -5,7 +5,6 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { $api } from '../utils';
 import Loader from '../lib/loader';
-import AboutUsDelete from '../AdminComponents/aboutUS/aboutUs-delete';
 
 export default function AdminAboutUs() {
   const [activeTab, setActiveTab] = useState("uz");
@@ -18,7 +17,7 @@ export default function AdminAboutUs() {
       setData(response.data.data);
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
-    } finally {
+    }finally{
       setLoading(false)
     }
   };
@@ -52,32 +51,23 @@ export default function AdminAboutUs() {
           </NavLink>
         </div>
       </div>
-      {data?.length > 0 && data ? (
-        data?.map((i, index) => (
-          <div key={index} className="bg-white p-5 rounded-lg mt-5 shadow">
-            <div className="flex items-center justify-end">
-              <div className="flex items-center gap-2">
-                <NavLink to={`/admin/aboutUs/edit/${i?.id}`}>
-                  <IconButton className="bg-blue-500 text-white" variant="text">
-                    <FaPencilAlt className="h-4 w-4" />
-                  </IconButton>
-                </NavLink>
-                <AboutUsDelete Id={i?.id} refresh={fetchData} />
-              </div>
+      {data?.map((i, index) => (
+        <div key={index} className="bg-white p-5 rounded-lg mt-5 shadow">
+          <div className="flex items-center justify-end">
+            <div className="flex items-center gap-2">
+              <IconButton className="bg-blue-500 text-white" variant="text">
+                <FaPencilAlt className="h-4 w-4" />
+              </IconButton>
+              <IconButton className="bg-red-500 text-white" variant="text">
+                <TrashIcon className="h-4 w-4" />
+              </IconButton>
             </div>
-            <h1 className="font-bold text-xl">{i?.title[activeTab]}</h1>
-            {/* Рендеринг HTML-контента */}
-            <div className="mt-2" dangerouslySetInnerHTML={{ __html: i?.text[activeTab] }} />
           </div>
-        ))
-      ) : (
-        <div className='h-[500px] flex items-center justify-center'>
-          <h1 className='opacity-[0.5]'>
-            Malumot Yo'q
-          </h1>
+          <h1 className="font-bold text-xl">{i?.title[activeTab]}</h1>
+          {/* Рендеринг HTML-контента */}
+          <div className="mt-2" dangerouslySetInnerHTML={{ __html: i?.text[activeTab] }} />
         </div>
-      )}
-
+      ))}
     </div>
   );
 }

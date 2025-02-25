@@ -1,20 +1,5 @@
 import foto from '../../img/direktor.png'
-import { useRef } from "react";
-
 export default function CabinetHero(){
-      const fileInputRef = useRef(null);
-    
-        const handleClick = () => {
-          fileInputRef.current.click();
-        };
-      
-        const handleFileChange = (event) => {
-          const file = event.target.files[0];
-          if (file) {
-            console.log("Yuklangan fayl:", file.name);
-          }
-        };
-        
 
     return(
         <section className="cabinetHero mt-[30px] p-[20px]">
@@ -28,9 +13,14 @@ export default function CabinetHero(){
 
                 <div className="cb-or relative pb-4 flex items-center justify-start gap-[30px] pt-[20px]  mb-6 mt-[20px]">
             <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#3538cd]">
-            Murojaat yuborish
+               Interaktiv xizmatlar
             </h4>
-         
+            <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#717680]">
+            Murojaatni tekshirish
+            </h4>  
+            <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#717680]">
+            Ommaviy oferta
+            </h4>
             <div className="absolute left-0 top-150 w-full border-t border-[#f5f5f5] -z-10"></div>
             <div className="absolute left-0 top-150 w-[113px] border-t-2 border-[#3538cd] -z-10"></div>
           </div>
@@ -142,36 +132,19 @@ export default function CabinetHero(){
                 </div>
           
                     <input   className="w-full max-w-[1280px] h-[154px] border border-[#f5f5f5] rounded-lg p-[12px_14px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white" type="text" placeholder='Kiriting'/>
-                    <div className="cabinet_file mt-[40px]" onClick={handleClick}>
-      <input
-        type="file"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-        accept=".doc,.pdf,.xls"
-        onChange={handleFileChange}
-      />
-      <div className="file_svg">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M6.66699 13.3333L10.0003 10M10.0003 10L13.3337 13.3333M10.0003 10V17.5M16.667 13.9524C17.6849 13.1117 18.3337 11.8399 18.3337 10.4167C18.3337 7.88536 16.2816 5.83333 13.7503 5.83333C13.5682 5.83333 13.3979 5.73833 13.3054 5.58145C12.2187 3.73736 10.2124 2.5 7.91699 2.5C4.46521 2.5 1.66699 5.29822 1.66699 8.75C1.66699 10.4718 2.3632 12.0309 3.48945 13.1613"
-            stroke="#535862"
-            strokeWidth="1.66667"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-      <h1 className="file_h1">
-        <span>Kerakli faylni bu yerga</span> bosish orqali yuklang <br />
-        .DOC, .PDF, .XLS (max. 5 MB)
-      </h1>
-    </div>
+                    <div className="cabinet_file mt-[40px]">
+                        <div className="file_svg">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M6.66699 13.3333L10.0003 10M10.0003 10L13.3337 13.3333M10.0003 10V17.5M16.667 13.9524C17.6849 13.1117 18.3337 11.8399 18.3337 10.4167C18.3337 7.88536 16.2816 5.83333 13.7503 5.83333C13.5682 5.83333 13.3979 5.73833 13.3054 5.58145C12.2187 3.73736 10.2124 2.5 7.91699 2.5C4.46521 2.5 1.66699 5.29822 1.66699 8.75C1.66699 10.4718 2.3632 12.0309 3.48945 13.1613" stroke="#535862" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+                        </div>
+                        <h1 className='file_h1'>
+                            <span>Kerakli faylni bu yerga</span>
+                            bosish orqali yuklang <br />
+                            .DOC, .PDF, .XLS (max. 5 MB)
+                        </h1>
+                       
+                    </div>
                     <button className='file_sent'>Yuborish</button>
             </div>
             </div>

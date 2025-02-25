@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
-import { AddCategoryDetail } from "../AdminComponents/category-detail/add-category-detail";
+import { AddOpenData } from "../AdminComponents/open-data/add-open-data";
+import { UpdateOpenData } from "../AdminComponents/open-data/update-open-data";
+import { DeleteOpenData } from "../AdminComponents/open-data/delete-open-data";
 
 export default function OpenData() {
   const [loading, setLoading] = useState(true);
@@ -55,8 +57,8 @@ export default function OpenData() {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-          {/* <UpdateCategoryDetail categoryData={row} onCategoryUpdated={fetchData} />
-          <DeleteCategoryDetail categoryId={row.id} onCategoryDeleted={fetchData} /> */}
+          <UpdateOpenData onUpdated={fetchData} rowData={row} />
+          <DeleteOpenData onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
       width: "170px",
@@ -83,7 +85,7 @@ export default function OpenData() {
           ))}
         </div>
         <div>
-          <AddCategoryDetail onCategoryDetailAdded={fetchData} />
+          <AddOpenData onAdded={fetchData} />
         </div>
       </div>
       <CustomDataTable

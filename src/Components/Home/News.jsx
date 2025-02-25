@@ -70,7 +70,7 @@ const News = () => {
                     <img src={eye} alt="views" />
                     <span>{news?.view}</span>
                   </div>
-                  <h3 className="font-semibold text-lg   text-gray-900 flex-grow line-clamp-2 mt-[17px] mb-[16px]">
+                  <h3 className="font-semibold text-lg mt-2 mb-4 text-gray-900 flex-grow line-clamp-2">
                     {news.title[i18n.language] || news.title["uz"]}
                   </h3>
                   <h3 className="overflow-hidden text-gray-500  text-[16px] font-normal line-clamp-2"

@@ -70,82 +70,6 @@ html {
   pointer-events: all;
 }
 
-.veb {
-  fill: #1f235b;
-  font-style: italic;
-}
-
-.finance_b {
-  border-bottom: 1px solid #e9eaeb;
-  padding: 12px 24px;
-  max-width: 1280px;
-  width: 100%;
-  height: 60px;
-  background: #fafafa;
-}
-
-.pdp {
-  border-left: 1px solid #e9eaeb;
-  padding: 16px 24px;
-  width: 165px;
-  height: 56px;
-  min-height: 52px;
-  max-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-
-}
-
-.study_h1{
-  font-family: var(--font-family);
-font-weight: 600;
-font-size: 30px;
-line-height: 127%;
-color: #181d27;
-margin: 20px 0;
-}
-.file_sent{
-  margin: 0 auto;
-}
-.info{
-  margin-bottom: -40px;
-}
-.finance_w {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-left: 24px;
-}
-
-.finance_w p {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 143%;
-  color: #535862;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.pdp span {
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 143%;
-  color: #000;
-}
-
-.finance_b p {
-  font-family: var(--font-family);
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 143%;
-  color: #717680;
-}
-
 .Modal2Content {
   width: 50%;
   background-color: #fff;
@@ -665,18 +589,6 @@ input[type="number"]::-webkit-inner-spin-button {
   transition: 0.5s;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
 .big_modal {
   background-image: url(../src/img/Footer.png);
   background-position: center;
@@ -691,17 +603,9 @@ input[type="number"]::-webkit-inner-spin-button {
   position: fixed;
   right: 0;
   bottom: 0;
-  top: 246px;
+  top: -10px;
   z-index: 100000;
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
-
-.big_modal.show {
-  transform: translateX(0);
-  opacity: 1;
-}
-
 
 .big_li {
   font-family: var(--font-family);

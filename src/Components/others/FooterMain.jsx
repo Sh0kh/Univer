@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import logo from '../../img/Ratings badge.svg';
+import logo from '../../img/Ratings badge.png';
 
 export default function FooterMain() {
     return (
@@ -8,7 +8,7 @@ export default function FooterMain() {
                 <h1 className="text-lg font-bold text-[#ffff]">
                     Toshkent kimyo-texnologiya instituti <br /> Yangiyer filiali
                 </h1>
-                <p className="mb-[20px] mt-[10px] h-p text-sm text-white italic">rasmiy veb sayti</p>
+                <p className="mb-[20px] mt-[10px] h-p text-sm text-gray-600">rasmiy veb sayti</p>
                 <img src={logo} alt="" />
             </div>
             <div className="footermain_content flex items-start justify-between gap-[100px]">
@@ -62,7 +62,7 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="/documents">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
-                            Me’yoriy hujjatlar
+                            Me’yoriy nhujjatlar
                         </li>
                     </NavLink>
                     <NavLink to="/">
@@ -89,7 +89,7 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="">
                         <li className="qWE className='font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]'">
-                            +998 (95) 511 58 56
+                            +998 95 123 00 00
                         </li>
                     </NavLink>
                     <NavLink to="">
@@ -104,8 +104,7 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="">
                         <li className="flex items-center justify-between font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
-                            Sirdaryo viloyati, Yangiyer shahar,
-                            Tinchlik ko'chasi, 1-uy
+                            Sirdaryo viloyati, Yangiyer shahri, Mustaqillik ko’chasi 12A
                         </li>
                     </NavLink>
                 </ul>

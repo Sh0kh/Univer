@@ -1,53 +1,20 @@
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
-import foto from '../../img/Footer.png'
 
-export default function BigModal({ isOpen, onClose, IsScroll }) {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    if (isOpen) {
-      setVisible(true);
-      window.addEventListener("scroll", handleScroll);
-    } else {
-      setVisible(false);
-      window.removeEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isOpen]);
-
-  const handleClose = () => {
-    onClose(); // Закрываем модалку
-    window.scrollTo({ top: 0, behavior: "smooth" }); // Прокручиваем наверх плавно
-  };
-
-  const handleScroll = () => {
-    onClose(); // Закрываем модалку при прокрутке
-  };
-
+export default function BigModal({ go }) {
   return (
-    <div
-      className={`big_modal fixed left-0 right-0 bottom-0 ${IsScroll ? "" : "!top-[184px]"
-        } z-[100000]  bg-cover bg-center bg-no-repeat`}
-      style={{
-        backgroundImage: `url(${foto})`,
-        transform: visible ? "translateX(0)" : "translateX(-100%)",
-        transition: "transform 0.5s ease-in-out",
-      }}
-    >
-      <div className="Container p-8">
-        {/* Кнопка закрытия */}
+    <div className="big_modal w-full">
+      <div className="Container">
+        {/* Modalni yopish tugmasi */}
         <svg
-          onClick={onClose}
+          onClick={() => {
+            console.log("Modal yopildi"); // Konsolda tekshirish uchun
+            go(); // `go` funksiyasini chaqiramiz
+          }}
           width="32"
           height="32"
           viewBox="0 0 32 32"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="cursor-pointer"
         >
           <path
             d="M24 8L8 24M8 8L24 24"
@@ -58,31 +25,72 @@ export default function BigModal({ isOpen, onClose, IsScroll }) {
           />
         </svg>
 
-        {/* Контент модального окна */}
         <div className="modal_wr flex items-center justify-between gap-[100px]">
           <ul>
             <li className="font-[var(--font-family)] font-semibold mb-[20px] text-[18px] leading-[156%] text-white">
               UMUMIY MA’LUMOT
             </li>
-            {[
-              { to: "/biz-haqimizda", text: "Biz haqimizda" },
-              { to: "/rahbariyat", text: "Rahbariyat" },
-              { to: "/bo'lim-markazlar", text: "Bo’lim va markazlar" },
-              { to: "/rekvizitlar", text: "Rekvizitlar" },
-              { to: "/ochiq-ma'lumotlar", text: "Ochiq ma’lumotlar" },
-              { to: "/korrupsiyaga-kurash", text: "Korrupsiyaga qarshi kurashish" },
-              // { to: "/inspectDocument", text: "Murojaatlarni ko‘rib chiqish tartibi" },
-              { to: "/hujjatlar", text: "Me’yoriy hujjatlar" },
-              { to: "/bosh-ish-orni", text: "Bo‘sh ish o‘rinlari" },
-              { to: "/xalqaro-aloqalar", text: "Xalqaro aloqalar" },
-              { to: "/hamkorlarimiz", text: "Hamkorlarimiz" },
-            ].map((link, index) => (
-              <NavLink onClick={handleClose} key={index} to={link.to}>
-                <li className="font-semibold text-[16px] text-[#a4a7ae] hover:text-white transition-colors">
-                  {link.text}
-                </li>
-              </NavLink>
-            ))}
+            <NavLink to="/aboutus">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Biz haqimizda
+              </li>
+            </NavLink>
+            <NavLink to="/staff">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Rahbariyat
+              </li>
+            </NavLink>
+          
+            <NavLink to="/center">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Bo’lim va markazlar
+              </li>
+            </NavLink>
+            <NavLink to="/rekvisits">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Rekvizitlar
+              </li>
+            </NavLink>
+            <NavLink to="/cabinet">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Direktor virtual qabulxonasi
+              </li>
+            </NavLink>
+            <NavLink to="/openInfo">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Ochiq ma’lumotlar
+              </li>
+            </NavLink>
+            <NavLink to="/money">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Korrupsiyaga qarshi kurashish
+              </li>
+            </NavLink>
+            <NavLink to="/inspectDocument">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Murojaatlarni ko‘rib chiqish tartibi
+              </li>
+            </NavLink>
+            <NavLink to="/documents">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Me’yoriy hujjatlar
+              </li>
+            </NavLink>
+            <NavLink to="/work">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Bo‘sh ish o‘rinlari
+              </li>
+            </NavLink>
+            <NavLink to="/International">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Xalqaro aloqalar
+              </li>
+            </NavLink>
+            <NavLink to="/partners">
+              <li className="font-semibold text-[16px] text-[#a4a7ae]">
+                Hamkorlarimiz
+              </li>
+            </NavLink>
           </ul>
         </div>
       </div>

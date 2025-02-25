@@ -8,7 +8,7 @@ import {
     Checkbox
 } from "@material-tailwind/react";
 import UzAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/uz-aboutUs-create";
-import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-aboutUs-create";
+import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-AboutUs-create";
 import KKAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/kk-aboutUS-create";
 import { $api } from "../utils";
 import { sweetAlert } from "../utils/sweetalert";
@@ -22,7 +22,7 @@ export default function AboutUsCreate() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
     const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
+
     const FechCategory = async () => {
         try {
             const response = await $api.get("/category");
@@ -31,12 +31,12 @@ export default function AboutUsCreate() {
             console.error("Xatolik yuz berdi:", error);
         }
     };
+
     useEffect(() => {
         FechCategory();
     }, []);
 
     const CreateAboutUs = async () => {
-        setLoading(true)
         const payload = {
             title: {
                 uz: uzinfo.title,
@@ -63,8 +63,6 @@ export default function AboutUsCreate() {
             setSelectedCategory(null);
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
-        } finally {
-            setLoading(false)
         }
     };
 
@@ -113,10 +111,8 @@ export default function AboutUsCreate() {
                     ) : null}
                 </div>
                 <Button
-                    disabled={loading}
-                    loading={loading}
                     onClick={CreateAboutUs}
-                    className="bg-green-500 text-white flex items-center justify-center mt-[10px] w-full">
+                    className="bg-green-500 text-white text-center mt-[10px] w-full">
                     Yaratish
                 </Button>
             </div>
