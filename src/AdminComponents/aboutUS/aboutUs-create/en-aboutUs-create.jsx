@@ -42,7 +42,19 @@ export default function EnAboutUsCreate({ value, onChange }) {
                         imageUpload: true,
                         imageUploadMethod: "base64",
                         heightMin: 300,
-                        heightMax: 300
+                        heightMax: 300,
+                        events: {
+                            "image.beforeUpload": function (images) {
+                                if (images.length) {
+                                    const reader = new FileReader();
+                                    reader.onload = (e) => {
+                                        this.image.insert(e.target.result, null, null, this.image.get());
+                                    };
+                                    reader.readAsDataURL(images[0]);
+                                }
+                                return false; // Остановить стандартную загрузку
+                            }
+                        }
                     }}
                 />
             </div>
