@@ -33,7 +33,7 @@ export default function EnAboutUsCreate({ value, onChange }) {
                     model={value?.description || ""}
                     onModelChange={handleFroalaChange}
                     config={{
-                        placeholderText: "Начни писать...",
+                        placeholderText: "....",
                         toolbarButtons: [
                             "bold", "italic", "underline", "formatOL", "formatUL", "insertImage"
                         ],

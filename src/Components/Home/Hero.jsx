@@ -2,6 +2,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
+import foto from '../../img/DSC07759.png'
+import foto2 from '../../img/IMG_0188.png'
 
 export default function Hero() {
     return (
@@ -11,13 +13,12 @@ export default function Hero() {
             autoplay={{ delay: 5000, disableOnInteraction: false }}
             className="w-full h-[700px] bg-cover bg-center"
         >
-            <SwiperSlide className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage:"linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(https://static.review.uz/crop/3/1/1400__100_315208962.jpg?v=1593637066)" }}>
+            <SwiperSlide className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage: "linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(https://static.review.uz/crop/3/1/1400__100_315208962.jpg?v=1593637066)" }}>
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
                     <div className="container mx-auto px-6 md:px-12 lg:px-20">
                         <div className="max-w-2xl text-white">
                             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-                                Toshkent kimyo-texnologiya institutining rasmiy veb sayti ishga tushdi
-                            </h1>
+                                Toshkent kimyo-texnologiya instituti Yangiyer filialining veb saytiga hush kelibsiz                            </h1>
                             <p className="mt-4 text-lg">
                                 Rasmiy veb sayt kunlik yangilik va e’lonlar hamda qo’shimcha funksiyalardan iborat bo‘lib, barcha axborotlarni olish imkoniyati beradi
                             </p>
@@ -31,13 +32,12 @@ export default function Hero() {
                     </div>
                 </div>
             </SwiperSlide>
-            <SwiperSlide className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage:"linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(https://static.review.uz/crop/3/1/1400__100_315208962.jpg?v=1593637066)" }}>
+            <SwiperSlide className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${foto})` }}>
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
                     <div className="container mx-auto px-6 md:px-12 lg:px-20">
                         <div className="max-w-2xl text-white">
                             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-                                Toshkent kimyo-texnologiya institutining rasmiy veb sayti ishga tushdi
-                            </h1>
+                                Toshkent kimyo-texnologiya instituti Yangiyer filialining veb saytiga hush kelibsiz                            </h1>
                             <p className="mt-4 text-lg">
                                 Rasmiy veb sayt kunlik yangilik va e’lonlar hamda qo’shimcha funksiyalardan iborat bo‘lib, barcha axborotlarni olish imkoniyati beradi
                             </p>
@@ -51,13 +51,12 @@ export default function Hero() {
                     </div>
                 </div>
             </SwiperSlide>
-            <SwiperSlide className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage:"linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(https://static.review.uz/crop/3/1/1400__100_315208962.jpg?v=1593637066)" }}>
+            <SwiperSlide className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${foto2})` }}>
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
                     <div className="container mx-auto px-6 md:px-12 lg:px-20">
                         <div className="max-w-2xl text-white">
                             <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-                                Toshkent kimyo-texnologiya institutining rasmiy veb sayti ishga tushdi
-                            </h1>
+                                Toshkent kimyo-texnologiya instituti Yangiyer filialining veb saytiga hush kelibsiz                            </h1>
                             <p className="mt-4 text-lg">
                                 Rasmiy veb sayt kunlik yangilik va e’lonlar hamda qo’shimcha funksiyalardan iborat bo‘lib, barcha axborotlarni olish imkoniyati beradi
                             </p>

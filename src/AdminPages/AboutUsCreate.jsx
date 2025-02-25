@@ -22,7 +22,6 @@ export default function AboutUsCreate() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
     const [data, setData] = useState([])
-
     const FechCategory = async () => {
         try {
             const response = await $api.get("/category");
@@ -31,7 +30,6 @@ export default function AboutUsCreate() {
             console.error("Xatolik yuz berdi:", error);
         }
     };
-
     useEffect(() => {
         FechCategory();
     }, []);
