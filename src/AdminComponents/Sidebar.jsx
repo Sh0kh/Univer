@@ -35,6 +35,11 @@ const menuItems = [
     icon: <FaCity className="text-lg" />,
   },
   {
+    name: "Murojaatlarni ko‘rib chiqish tartibi",
+    path: "/admin/review",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
     name: "Biz haqimizda",
     path: "/admin/aboutus",
     icon: <FaCommentAlt className="text-lg" />,

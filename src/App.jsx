@@ -41,6 +41,7 @@ import Finance from "./Pages/Finance";
 import Conatact from "./Pages/Contact";
 import StyleStudy from "./Pages/StyleStudy";
 import AboutUsEdit from "./AdminPages/AboutUsEdit";
+import Review from "./AdminPages/Review";
 
 
 function App() {
@@ -76,6 +77,8 @@ function App() {
               <Route path="/admin/news/create" element={<AdminNewsCreate />} />
               <Route path='/admin/aboutUs/create' element={<AboutUsCreate />} />
               <Route path="/admin/aboutUs/edit/:ID" element={<AboutUsEdit />} />
+
+              <Route path='/admin/review' element={<Review />} />
             </Route>
 
             <Route element={<MainLayout />}>

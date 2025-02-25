@@ -5,12 +5,12 @@ import {
     Select,
     Option,
 } from "@material-tailwind/react";
-import UzAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/uz-aboutUs-create";
-import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-aboutUs-create";
-import KKAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/kk-aboutUS-create";
+import UzAboutUsCreate from "../AdminComponents/text-editor/uz";
+import EnAboutUsCreate from "../AdminComponents/text-editor/en";
+import KKAboutUsCreate from "../AdminComponents/text-editor/kk";
 import { $api } from "../utils";
 import { sweetAlert } from "../utils/sweetalert";
-import RuAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/ru-aboutUs-create";
+import RuAboutUsCreate from "../AdminComponents/text-editor/ru";
 import Loader from "../lib/loader";
 
 export default function AboutUsEdit() {
@@ -109,11 +109,7 @@ export default function AboutUsEdit() {
                     ))}
                 </div>
                 <div>
-                    <NavLink className={`block`} to={'/admin/aboutUs'}>
-                        <Button className="bg-green-500 text-white">
-                            Malumot ko'rish
-                        </Button>
-                    </NavLink>
+           
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">

@@ -7,12 +7,13 @@ import {
     Input,
     Checkbox
 } from "@material-tailwind/react";
-import UzAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/uz-aboutUs-create";
-import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-aboutUs-create";
-import KKAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/kk-aboutUS-create";
+import UzAboutUsCreate from "../AdminComponents/text-editor/uz";
+import EnAboutUsCreate from "../AdminComponents/text-editor/en";
+import KKAboutUsCreate from "../AdminComponents/text-editor/kk";
+import RuAboutUsCreate from "../AdminComponents/text-editor/ru";
 import { $api } from "../utils";
 import { sweetAlert } from "../utils/sweetalert";
-import RuAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/ru-aboutUs-create";
+
 
 export default function AboutUsCreate() {
     const [uzinfo, setUzInfo] = useState({ title: "", description: "" });

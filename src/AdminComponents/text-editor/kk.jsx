@@ -4,7 +4,7 @@ import "froala-editor/css/froala_editor.pkgd.min.css";
 import "froala-editor/css/froala_style.min.css";
 import "froala-editor/js/plugins/image.min.js";
 
-export default function UzAboutUsCreate({ value, onChange }) {
+export default function KKEditor({ value, onChange }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         onChange((prev) => ({ ...prev, [name]: value }));

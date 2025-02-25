@@ -3,9 +3,8 @@ import FroalaEditor from "react-froala-wysiwyg";
 import "froala-editor/css/froala_editor.pkgd.min.css";
 import "froala-editor/css/froala_style.min.css";
 import "froala-editor/js/plugins/image.min.js";
-import { useState } from "react";
 
-export default function EnAboutUsCreate({ value, onChange }) {
+export default function UzEditor({ value, onChange }) {
     const handleChange = (e) => {
         const { name, value } = e.target;
         onChange((prev) => ({ ...prev, [name]: value }));
