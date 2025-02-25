@@ -230,43 +230,43 @@ export default function Header() {
                                 ref={modalRef}
                                 className="absolute top-[45px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto h-[500px]"
                             >
-                                <NavLink to="/biz-haqimizda" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/biz-haqimizda" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Biz haqimizda
                                 </NavLink>
-                                <NavLink to="/rahbariyat" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/rahbariyat" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Raxbariyat
                                 </NavLink>
-                                <NavLink to="/hamkorlarimiz" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/hamkorlarimiz" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Hamkorlarimiz
                                 </NavLink>
-                                <NavLink to="/xalqaro-aloqalar" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/xalqaro-aloqalar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Xalqaro aloqalar
                                 </NavLink>
-                                <NavLink to="/hujjatlar" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/hujjatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Me'yoriy hujjatlar
                                 </NavLink>
-                                <NavLink to="/murojaatlar" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/murojaatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Murojaatlarni ko'rib chiqish tartibi
                                 </NavLink>
-                                <NavLink to="/ochiq-ma'lumotlar" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/ochiq-ma'lumotlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Ochiq ma'lumotlar
                                 </NavLink>
-                                <NavLink to="/bo'lim-markazlar" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/bo'lim-markazlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Bo'lim va markazlar
                                 </NavLink>
-                                <NavLink to="/rekvizitlar" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/rekvizitlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Rekvizitlar
                                 </NavLink>
-                                <NavLink to="/virtual-kabinet" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/virtual-kabinet" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Direktor virtual qabulxonasi
                                 </NavLink>
-                                <NavLink to="/korrupsiyaga-kurash" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/korrupsiyaga-kurash" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Korrupsiyaga qarshi kurashish
                                 </NavLink>
-                                <NavLink to="/bosh-ish-orni" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/bosh-ish-orni" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Bo'sh ish o'rinlari
                                 </NavLink>
-                                <NavLink to="/hisobot" className="text-white py-[14px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
+                                <NavLink to="/hisobot" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block mb-[10px]">
                                     Moliyaviy hisobot
                                 </NavLink>
                             </div>

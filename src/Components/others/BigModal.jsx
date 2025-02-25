@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
+import foto from '../../img/Footer.png'
 
 export default function BigModal({ isOpen, onClose, IsScroll }) {
   const [visible, setVisible] = useState(false);
@@ -32,7 +33,7 @@ export default function BigModal({ isOpen, onClose, IsScroll }) {
       className={`big_modal fixed left-0 right-0 bottom-0 ${IsScroll ? "" : "!top-[184px]"
         } z-[100000]  bg-cover bg-center bg-no-repeat`}
       style={{
-        backgroundImage: "url(../src/img/Footer.png)",
+        backgroundImage: `url(${foto})`,
         transform: visible ? "translateX(0)" : "translateX(-100%)",
         transition: "transform 0.5s ease-in-out",
       }}
