@@ -5,7 +5,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { $api } from '../utils';
 import Loader from '../lib/loader';
-import AboutUsDelete from '../AdminComponents/aboutUS/aboutUs-delete';
+import ReviewDelete from '../AdminComponents/review/review-delete';
 
 export default function Review() {
     const [activeTab, setActiveTab] = useState("uz");
@@ -47,7 +47,7 @@ export default function Review() {
                     ))}
                 </div>
                 <div>
-                    <NavLink className="block" to="/admin/aboutUs/create">
+                    <NavLink className="block" to="/admin/review/create">
                         <Button className="bg-green-500 text-white">Malumot qo'shish</Button>
                     </NavLink>
                 </div>
@@ -57,17 +57,17 @@ export default function Review() {
                     <div key={index} className="bg-white p-5 rounded-lg mt-5 shadow">
                         <div className="flex items-center justify-end">
                             <div className="flex items-center gap-2">
-                                <NavLink to={`/admin/aboutUs/edit/${i?.id}`}>
+                                <NavLink to={`/admin/review/edit/${i?.id}`}>
                                     <IconButton className="bg-blue-500 text-white" variant="text">
                                         <FaPencilAlt className="h-4 w-4" />
                                     </IconButton>
                                 </NavLink>
-                                <AboutUsDelete Id={i?.id} refresh={fetchData} />
+                                <ReviewDelete Id={i?.id} refresh={fetchData} />
                             </div>
                         </div>
-                        <h1 className="font-bold text-xl">{i?.title?.activeTab}</h1>
+                        <h1 className="font-bold text-xl">{i?.title?.[activeTab]}</h1>
                         {/* Рендеринг HTML-контента */}
-                        <div className="mt-2" dangerouslySetInnerHTML={{ __html: i?.text?.activeTab }} />
+                        <div className="mt-2" dangerouslySetInnerHTML={{ __html: i?.description?.[activeTab] }} />
                     </div>
                 ))
             ) : (

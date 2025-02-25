@@ -43,6 +43,8 @@ import StyleStudy from "./Pages/StyleStudy";
 import AboutUsEdit from "./AdminPages/AboutUsEdit";
 import Review from "./AdminPages/Review";
 import AgainstCorruption from "./AdminPages/AgainstCorruption";
+import ReviewCreate from "./AdminPages/ReviewCreate";
+import ReviewEdit from "./AdminPages/ReviewEdit";
 
 
 function App() {
@@ -81,6 +83,9 @@ function App() {
               <Route path="/admin/aboutUs/edit/:ID" element={<AboutUsEdit />} />
 
               <Route path='/admin/review' element={<Review />} />
+              <Route path='/admin/review/create' element={<ReviewCreate />} />
+              <Route path="/admin/review/edit/:ID" element={<ReviewEdit />} />
+
             </Route>
 
             <Route element={<MainLayout />}>
