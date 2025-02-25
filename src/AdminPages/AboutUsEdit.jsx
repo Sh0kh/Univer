@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import {
     Button,
     Select,
     Option,
-    Input,
-    Checkbox
 } from "@material-tailwind/react";
 import UzAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/uz-aboutUs-create";
 import EnAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/en-aboutUs-create";
@@ -13,8 +11,10 @@ import KKAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/kk-aboutU
 import { $api } from "../utils";
 import { sweetAlert } from "../utils/sweetalert";
 import RuAboutUsCreate from "../AdminComponents/aboutUS/aboutUs-create/ru-aboutUs-create";
+import Loader from "../lib/loader";
 
-export default function AboutUsCreate() {
+export default function AboutUsEdit() {
+
     const [uzinfo, setUzInfo] = useState({ title: "", description: "" });
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
@@ -23,6 +23,9 @@ export default function AboutUsCreate() {
     const [activeTab, setActiveTab] = useState("uz");
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
+    const [loading2, setLoading2] = useState(true)
+    const { ID } = useParams()
+
     const FechCategory = async () => {
         try {
             const response = await $api.get("/category");
@@ -31,11 +34,31 @@ export default function AboutUsCreate() {
             console.error("Xatolik yuz berdi:", error);
         }
     };
+
+
+
+    const FechAboutUsId = async () => {
+        try {
+            const response = await $api.get(`/about-me/${ID}`)
+            setUzInfo({ title: response?.data?.data?.title?.uz, description: response?.data?.data?.text?.uz })
+            setRuInfo({ title: response?.data?.data?.title?.ru, description: response?.data?.data?.text?.ru })
+            setEnInfo({ title: response?.data?.data?.title?.en, description: response?.data?.data?.text?.en })
+            setKKInfo({ title: response?.data?.data?.title?.kk, description: response?.data?.data?.text?.kk })
+            setSelectedCategory(response?.data?.data?.category?.category_id)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading2(false)
+        }
+    }
+
     useEffect(() => {
+
         FechCategory();
+        FechAboutUsId()
     }, []);
 
-    const CreateAboutUs = async () => {
+    const EditAboutUs = async () => {
         setLoading(true)
         const payload = {
             title: {
@@ -54,13 +77,8 @@ export default function AboutUsCreate() {
         };
 
         try {
-            await $api.post("/about-me", payload);
+            await $api.put(`/about-me/${ID}`, payload);
             sweetAlert("Muvaffaqiyatli qo'shildi", "success");
-            setUzInfo({ title: "", description: "" });
-            setRuInfo({ title: "", description: "" });
-            setEnInfo({ title: "", description: "" });
-            setKKInfo({ title: "", description: "" });
-            setSelectedCategory(null);
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
         } finally {
@@ -69,9 +87,14 @@ export default function AboutUsCreate() {
     };
 
 
+
+    if (loading2) {
+        return <Loader />;
+    }
+
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Biz haqimizda</h2>
+            <h2 className="text-xl font-bold mb-4">Biz haqimizda o`zgartirish</h2>
             <div className=" flex  justify-between items-center ">
                 <div className="mb-4 flex space-x-2">
                     {["uz", "ru", "en", "kk"].map((lang) => (
@@ -94,7 +117,9 @@ export default function AboutUsCreate() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
+                <Select
+                    value={selectedCategory}
+                    label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
                     {data.map((item) => (
                         <Option key={item.id} value={item.id}>
                             {item.title[activeTab]}
@@ -115,9 +140,9 @@ export default function AboutUsCreate() {
                 <Button
                     disabled={loading}
                     loading={loading}
-                    onClick={CreateAboutUs}
+                    onClick={EditAboutUs}
                     className="bg-green-500 text-white flex items-center justify-center mt-[10px] w-full">
-                    Yaratish
+                    O`zgartirish
                 </Button>
             </div>
         </div>

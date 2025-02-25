@@ -117,7 +117,7 @@ const CustomCalendar = () => {
 
   // Events data
   const events = [
-    { date: "10", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" },
+    { date: "10", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi to‘g‘risida", status: "Kutilmoqda" },
     { date: "11", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" },
     { date: "11", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" },
     { date: "12", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" }
@@ -135,29 +135,34 @@ const CustomCalendar = () => {
         <div className="flex justify-between w-full flex-col md:flex-row gap-6">
           <div className="w-full ">
             {events.map((event, index) => (
-              <div key={index} className="flex items-center border rounded-lg p-4 mb-3 shadow-sm w-[100%]">
-                <div className="bg-gray-200 text-center px-4 py-2 rounded-lg">
+              <div key={index} className="flex items-center border rounded-lg py-[22px] px-[20px] mb-3 shadow-sm w-[100%]">
+                <div className="bg-gray-200 text-center px-4 py-2 rounded-lg ">
                   <p className="text-xl font-bold">{event.date}</p>
-                  <p className="text-sm font-medium">{event.month}</p>
+                  <p className="text-sm text-[#717680] font-medium">{event.month}</p>
                 </div>
                 <div className="ml-4 flex-1">
-                  <p className="text-sm text-gray-500">{event.time}</p>
-                  <p className="text-md font-semibold">{event.title}</p>
+                  <div className="flex items-end justify-between">
+                    <p className="text-sm text-gray-500">{event.time}</p>
+                    <span className="bg-[#ECFDF3] border-[1px] border-[#ABEFC6] text-green-600 px-3 py-1 rounded-[16px] text-sm mt-[-40px]">{event.status}</span>
+                  </div>
+
+                  <p className="text-md font-semibold mt-[10px]">{event.title}</p>
                 </div>
-                <span className="bg-green-100 text-green-600 px-3 py-1 rounded-lg text-sm mt-[-40px]">{event.status}</span>
               </div>
             ))}
           </div>
 
           <div className="">
-            <div className="bg-white w-[350px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
+            <div className="bg-white w-[350px] border-[1px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
               {/* Calendar header */}
               <div className="flex justify-between items-center mb-4">
                 <button
                   className="text-gray-600 focus:outline-none"
                   onClick={handlePrevMonth}
                 >
-                  &lt;
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M12.5 15L7.5 10L12.5 5" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
                 </button>
                 <h2 className="text-lg font-semibold text-gray-700">
                   {monthNames[currentMonth]} {currentYear}
@@ -166,7 +171,9 @@ const CustomCalendar = () => {
                   className="text-gray-600 focus:outline-none"
                   onClick={handleNextMonth}
                 >
-                  &gt;
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M7.5 15L12.5 10L7.5 5" stroke="#A4A7AE" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
                 </button>
               </div>
 

@@ -40,6 +40,7 @@ import Symbols from "./Pages/Symbols";
 import Finance from "./Pages/Finance";
 import Conatact from "./Pages/Contact";
 import StyleStudy from "./Pages/StyleStudy";
+import AboutUsEdit from "./AdminPages/AboutUsEdit";
 
 
 function App() {
@@ -70,9 +71,11 @@ function App() {
               <Route path="statistics" element={<Statistika />} />
               <Route path="admin/*" element={<AdminNotFound />} />
 
+
               <Route path="/admin/news" element={<AdminNews />} />
               <Route path="/admin/news/create" element={<AdminNewsCreate />} />
               <Route path='/admin/aboutUs/create' element={<AboutUsCreate />} />
+              <Route path="/admin/aboutUs/edit/:ID" element={<AboutUsEdit />} />
             </Route>
 
             <Route element={<MainLayout />}>
@@ -89,10 +92,10 @@ function App() {
               <Route path="/virtual-kabinet" element={<CabinetPage />} />
               <Route path="/korrupsiyaga-kurash" element={<Money />} />
               <Route path="/bosh-ish-orni" element={<WorkPage />} />
-              <Route path="/ramzlar" element={<Symbols/>} />
-              <Route path="/hisobot" element={<Finance/>} />
-              <Route path="/contact" element={<Conatact/>} />
-              <Route path="/oquv-uslubi" element={<StyleStudy/>} />
+              <Route path="/ramzlar" element={<Symbols />} />
+              <Route path="/hisobot" element={<Finance />} />
+              <Route path="/contact" element={<Conatact />} />
+              <Route path="/oquv-uslubi" element={<StyleStudy />} />
 
             </Route>
           </Route>

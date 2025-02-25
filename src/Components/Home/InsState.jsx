@@ -21,13 +21,10 @@ export default function InstituteStats() {
 
 
   return (
-    <section className="relative bg-[#1f235b] text-white py-16">
+    <section
+      style={{ backgroundImage: `url(${counter})` }}
+      className="relative  text-white py-16 bg-cover">
       <div className="Container">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: `url(${counter})` }}
-        ></div>
-
         <div className="relative z-10 text-center">
           <h2 className="text-2xl font-bold">
             Institut faoliyati bo‘yicha raqamli statistika

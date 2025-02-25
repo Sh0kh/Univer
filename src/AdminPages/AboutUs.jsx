@@ -57,9 +57,11 @@ export default function AdminAboutUs() {
           <div key={index} className="bg-white p-5 rounded-lg mt-5 shadow">
             <div className="flex items-center justify-end">
               <div className="flex items-center gap-2">
-                <IconButton className="bg-blue-500 text-white" variant="text">
-                  <FaPencilAlt className="h-4 w-4" />
-                </IconButton>
+                <NavLink to={`/admin/aboutUs/edit/${i?.id}`}>
+                  <IconButton className="bg-blue-500 text-white" variant="text">
+                    <FaPencilAlt className="h-4 w-4" />
+                  </IconButton>
+                </NavLink>
                 <AboutUsDelete Id={i?.id} refresh={fetchData} />
               </div>
             </div>

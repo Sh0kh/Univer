@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import logo from '../../img/Ratings badge.png';
+import logo from '../../img/Ratings badge.svg';
 
 export default function FooterMain() {
     return (
@@ -8,7 +8,7 @@ export default function FooterMain() {
                 <h1 className="text-lg font-bold text-[#ffff]">
                     Toshkent kimyo-texnologiya instituti <br /> Yangiyer filiali
                 </h1>
-                <p className="mb-[20px] mt-[10px] h-p text-sm text-gray-600">rasmiy veb sayti</p>
+                <p className="mb-[20px] mt-[10px] h-p text-sm text-white italic">rasmiy veb sayti</p>
                 <img src={logo} alt="" />
             </div>
             <div className="footermain_content flex items-start justify-between gap-[100px]">
