@@ -5,8 +5,11 @@ import Loader from "../lib/loader";
 import { AddOpenData } from "../AdminComponents/open-data/add-open-data";
 import { UpdateOpenData } from "../AdminComponents/open-data/update-open-data";
 import { DeleteOpenData } from "../AdminComponents/open-data/delete-open-data";
+import { AddCorruption } from "../AdminComponents/against-corruption/add-corruption";
+import { UpdateCorruption } from "../AdminComponents/against-corruption/update-corruption";
+import { DeleteCorruption } from "../AdminComponents/against-corruption/delete-corruption";
 
-export default function OpenData() {
+export default function AgainstCorruption() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -15,7 +18,7 @@ export default function OpenData() {
 
   const fetchData = async () => {
     try {
-      const response = await $api.get("/open-data");
+      const response = await $api.get("/fighting-corruption");
       setData(response.data.data); // API dan kelgan data-ni state-ga saqlaymiz
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
@@ -57,8 +60,8 @@ export default function OpenData() {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-          <UpdateOpenData onUpdated={fetchData} rowData={row} />
-          <DeleteOpenData onDeleted={fetchData} rowId={row.id} />
+            <UpdateCorruption onUpdated={fetchData} rowData={row} />
+            <DeleteCorruption onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
       width: "170px",
@@ -85,7 +88,7 @@ export default function OpenData() {
           ))}
         </div>
         <div>
-          <AddOpenData onAdded={fetchData} />
+          <AddCorruption onAdded={fetchData} />
         </div>
       </div>
       <CustomDataTable

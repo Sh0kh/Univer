@@ -42,6 +42,7 @@ import Conatact from "./Pages/Contact";
 import StyleStudy from "./Pages/StyleStudy";
 import AboutUsEdit from "./AdminPages/AboutUsEdit";
 import Review from "./AdminPages/Review";
+import AgainstCorruption from "./AdminPages/AgainstCorruption";
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
               <Route path="recvizits" element={<Recvisits />} />
               <Route path="management" element={<Management />} />
               <Route path="open-data" element={<OpenData />} />
+              <Route path="against-corrution" element={<AgainstCorruption />} />
               <Route path="partners" element={<AdminPartners />} />
               <Route path="events" element={<Events />} />
               <Route path="statistics" element={<Statistika />} />

@@ -53,7 +53,7 @@ const menuItems = [
     name: "Ochik ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
-      { name: "Kategoriya qo‘shish", path: "/admin/" },
+      { name: "Karrupsiyaga qarshi", path: "/admin/against-corrution" },
     ],
     path: "/admin/events",
     icon: <FaUsers className="text-lg" />,
