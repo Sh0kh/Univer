@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import DataTable from "react-data-table-component";
 import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
@@ -34,8 +33,8 @@ export default function Categories() {
   const columns = [
     {
       name: "Tr",
-      selector: (row, index) => (index + 1),
-      // selector: (row) => row.id,
+      // selector: (row, index) => (index + 1),
+      selector: (row) => row.id,
       width: "170px",
     },
     {

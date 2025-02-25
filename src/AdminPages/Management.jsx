@@ -6,8 +6,11 @@ import { Tooltip } from "@material-tailwind/react";
 import { AddRecvisitsDialog } from "../AdminComponents/recvisits/add-recvisit-dialog";
 import { UpdateRecvisitDialog } from "../AdminComponents/recvisits/update-recvisit-dialog";
 import { DeleteRecvisitDialog } from "../AdminComponents/recvisits/delete-recvisit-dialog";
+import { AddManagement } from "../AdminComponents/management/add-menegment";
+import { UpdateManagement } from "../AdminComponents/management/update-management";
+import { DeleteManagement } from "../AdminComponents/management/delete-management";
 
-export default function Recvisits() {
+export default function Management() {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
@@ -16,7 +19,7 @@ export default function Recvisits() {
 
   const fetchData = async () => {
     try {
-      const response = await $api.get("/requisites");
+      const response = await $api.get("/management");
       setData(response.data.data);
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
@@ -40,92 +43,48 @@ export default function Recvisits() {
       width: "80px",
     },
     {
-      name: `Sarlavha (${activeTab.toUpperCase()})`,
-      selector: (row) => (
-        <Tooltip content={row.title[activeTab]} placement="right">
-          <span>{row.title[activeTab]}</span>
-        </Tooltip>
-      ),
+      name: "Ism",
+      selector: (row) => row.name,
       sortable: true,
     },
     {
-      name: "Manzil",
-      selector: (row) => (
-        <Tooltip content={row.address} placement="right">
-          <span>{row.address}</span>
-        </Tooltip>
-      ),
+      name: `Lavozim (${activeTab.toUpperCase()})`,
+      selector: (row) => row.position[activeTab],
+    },
+    {
+      name: "Qabul kunlari",
+      selector: (row) => row.reception_days,
     },
     {
       name: "Telefon",
-      selector: (row) => (
-        <Tooltip content={row.phone} placement="right">
-          <span>{row.phone}</span>
-        </Tooltip>
-      ),
+      selector: (row) => row.phone,
     },
     {
-      name: "Hisob raqami",
-      selector: (row) => (
-        <Tooltip content={row.account_number} placement="right">
-          <span>{row.account_number}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "Bank",
-      selector: (row) => (
-        <Tooltip content={row.bank} placement="right">
-          <span>{row.bank}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "MFO",
-      selector: (row) => (
-        <Tooltip content={row.mfo} placement="right">
-          <span>{row.mfo}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "Shaxsiy hisob",
-      selector: (row) => (
-        <Tooltip content={row.personal_account} placement="right">
-          <span>{row.personal_account}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "STIR",
-      selector: (row) => (
-        <Tooltip content={row.stir} placement="right">
-          <span>{row.stir}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "OKNOX",
-      selector: (row) => (
-        <Tooltip content={row.oknox} placement="right">
-          <span>{row.oknox}</span>
-        </Tooltip>
-      ),
+      name: "Email",
+      selector: (row) => row.email,
     },
     {
       name: "Kategoriya",
+      selector: (row) => row.category?.title[activeTab],
+    },
+    {
+      name: "Rasm",
       selector: (row) => (
-        <Tooltip content={row.category?.title[activeTab]} placement="right">
-          <span>{row.category?.title[activeTab]}</span>
-        </Tooltip>
+       <div className="my-2">
+         <img
+          src={row.image[0]?.url}
+          alt={row.name}
+          className="w-32 h-16  object-cover"
+        />
+       </div>
       ),
     },
     {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-            <UpdateRecvisitDialog onUpdated={fetchData} rowData={row} />
-            <DeleteRecvisitDialog onDeleted={fetchData} rowId={row.id} />
+          <UpdateManagement onUpdated={fetchData} rowData={row} />
+          <DeleteManagement onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
       width: "170px",
@@ -136,7 +95,7 @@ export default function Recvisits() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Rekvizitlar</h2>
+      <h2 className="text-xl font-bold mb-4">Rahbariyat</h2>
       <div className="flex justify-between items-center mb-4">
         <div className="flex space-x-2">
           {["uz", "ru", "en", "kk"].map((lang) => (
@@ -151,7 +110,7 @@ export default function Recvisits() {
             </button>
           ))}
         </div>
-        <AddRecvisitsDialog onAdded={fetchData} />
+       <AddManagement onAdded={fetchData}/>
       </div>
       <CustomDataTable
         data={data}

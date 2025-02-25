@@ -34,6 +34,8 @@ import CategoryDetail from "./AdminPages/CategoryDetail";
 import AdminNewsCreate from "./AdminPages/AdminNewsCreate";
 import AboutUsCreate from "./AdminPages/AboutUsCreate";
 import Recvisits from "./AdminPages/Recvisits";
+import Management from "./AdminPages/Management";
+import OpenData from "./AdminPages/OpenData";
 
 function App() {
   return (
@@ -55,22 +57,17 @@ function App() {
               <Route path="aboutus" element={<AdminAboutUs />} />
               <Route path="categories" element={<Categories />} />
               <Route path="categories/detail/:categoryId" element={<CategoryDetail />} />
+              <Route path="recvizits" element={<Recvisits />} />
+              <Route path="management" element={<Management />} />
+              <Route path="open-data" element={<OpenData />} />
               <Route path="partners" element={<AdminPartners />} />
               <Route path="events" element={<Events />} />
               <Route path="statistics" element={<Statistika />} />
               <Route path="admin/*" element={<AdminNotFound />} />
-              <Route path="recvizits" element={<Recvisits />} />
 
               <Route path="/admin/news" element={<AdminNews />} />
               <Route path="/admin/news/create" element={<AdminNewsCreate />} />
               <Route path='/admin/aboutUs/create' element={<AboutUsCreate />} />
-              {/* <Route path="/inspectDocument" element={<InspectDocument />} />
-              <Route path="/openInfo" element={<OpenInfo />} />
-              <Route path="/center" element={<Center/>} />
-              <Route path="/rekvizits" element={<Rekvizits/>} />
-              <Route path="/cabinet" element={<CabinetPage/>} />
-              <Route path="/money" element={<Money/>} />
-              <Route path="/work" element={<WorkPage/>} /> */}
             </Route>
 
             <Route element={<MainLayout />}>

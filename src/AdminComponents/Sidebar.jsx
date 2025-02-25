@@ -17,10 +17,6 @@ const menuItems = [
   { name: "Asosiy", path: "/admin", icon: <FaHome className="text-lg" /> },
   {
     name: "Kategoriyalar",
-    subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-    ],
     path: "/admin/categories",
     icon: <TbCategoryPlus className="text-lg" />,
   },
@@ -44,10 +40,15 @@ const menuItems = [
     icon: <FaCommentAlt className="text-lg" />,
   },
   {
-    name: "Marosimlar",
+    name: "Management",
+    path: "/admin/management",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
+    name: "Ochik ma'lumotlar",
     subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
+      { name: "Ochiq Malumotlar", path: "/admin/open-data" },
+      { name: "Kategoriya qo‘shish", path: "/admin/" },
     ],
     path: "/admin/events",
     icon: <FaUsers className="text-lg" />,
