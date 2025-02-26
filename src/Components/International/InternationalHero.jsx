@@ -1,16 +1,56 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import ReactLoading from 'react-loading';
 export default function InternationalHero() {
+
+    const { i18n } = useTranslation();
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true)
+
+    const FetchData = async () => {
+        try {
+            const response = await axios.get("/international-relation");
+            setData(response?.data?.data);
+            console.log(response);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false)
+        }
+    };
+
+    useEffect(() => {
+        FetchData();
+    }, []);
+
+    if (loading) {
+        return (
+            < div className="flex items-center justify-center w-full h-[400px]" >
+                <ReactLoading type="spinningBubbles" color='#fffff' height={100} width={100} />
+            </div >
+        )
+    }
+
     return (
         <section className="mt-[32px] mb-[30px]">
             <div className="Container">
-                <p className="text-[16px] text-[#535862] mb-[10px]">
-                    Bugungi kunda Toshkent kimyo-texnologiya instituti Yangiyer filialida Belorussiya oliy ta’lim muassasalari bilan hamkorlikda qo‘shma taʼlim dasturlarini amalga oshirib kelmoqda.
-                </p>
-                <p className="text-[16px] text-[#535862] mb-[10px]">
-                    8 ta xorijiy davlatlarning 15 ta oliy taʼlim muassasalari bilan xalqaro hamkorlik aloqalari o‘rnatilgan.
-                </p>
-                <p className="text-[16px] text-[#535862] mb-[10px]">
-                    Hamkorlikning asosiy maqsadi - taʼlim sifatini oshirish, o‘zaro tajriba almashish, birgalikda ilmiy tadqiqotlar olib borish, ilmiy nashrlarni chop etish, professor-o‘qituvchilar va talabalar almashinuvini amalga oshirish, qo‘shma taʼlim dasturlari asosida kadrlar tayyorlash hisoblanadi.
-                </p>
+                {data?.length > 0 ? (
+                    data?.map((i, index) => (
+                        <div key={index}>
+                            <h1 className="mb-[10px] font-[var(--font-family)] font-semibold text-[30px] leading-[127%] text-[#181d27]">
+                                {i?.title[i18n?.language]}
+                            </h1>
+                            <div dangerouslySetInnerHTML={{ __html: i?.description[i18n.language] }} />
+                        </div>
+                    ))
+                ) : (
+                    < div className="flex items-center justify-center w-full h-[400px]" >
+                        <h1 className="text-[25px] opacity-[0.7]">
+                            Malumot yo'q
+                        </h1>
+                    </div>
+                )}
             </div>
         </section>
     )
