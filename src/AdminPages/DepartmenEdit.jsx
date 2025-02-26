@@ -93,7 +93,6 @@ export default function DepartmenEdit() {
     if (loading2) {
         return <Loader />;
     }
-
     return (
         <div>
             <h2 className="text-xl font-bold mb-4">{status === 'sections' ? "Bolim" : 'Markaz'} yangilash</h2>
