@@ -11,7 +11,9 @@
 .theme-dark {
   filter: grayscale(100%);
 }
-
+input{
+  outline: none;
+}
 .theme-gray {
   filter: grayscale(100%) invert(100%);
 }

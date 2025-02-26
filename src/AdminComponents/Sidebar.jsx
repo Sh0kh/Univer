@@ -40,6 +40,11 @@ const menuItems = [
     icon: <FaCommentAlt className="text-lg" />,
   },
   {
+    name: "Xalqaro aloqalar",
+    path: "/admin/international",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
     name: "Biz haqimizda",
     path: "/admin/aboutus",
     icon: <FaCommentAlt className="text-lg" />,
@@ -50,12 +55,16 @@ const menuItems = [
     icon: <FaCommentAlt className="text-lg" />,
   },
   {
+    name: "Hamkorlarimiz",
+    path: "/admin/OurPartners",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
     name: "Ochik ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
       { name: "Karrupsiyaga qarshi", path: "/admin/against-corrution" },
       { name: "Regularly Document", path: "/admin/regulatory-doc" },
-      { name: "International Relations", path: "/admin/international-relations" }
     ],
     path: "/admin/events",
     icon: <FaUsers className="text-lg" />,

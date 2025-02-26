@@ -46,7 +46,10 @@ import AgainstCorruption from "./AdminPages/AgainstCorruption";
 import ReviewCreate from "./AdminPages/ReviewCreate";
 import ReviewEdit from "./AdminPages/ReviewEdit";
 import RegulatoryDoc from "./AdminPages/RegulatoryDoc";
-import InternationalRelations from "./AdminPages/InternationalRelations";
+import AdminInternational from "./AdminPages/International";
+import InternationalCreate from "./AdminPages/InternationalCreate";
+import InternationalEdit from "./AdminPages/InternationalEdit";
+import OurPartners from "./AdminPages/OurPartners";
 
 function App() {
   return (
@@ -72,7 +75,6 @@ function App() {
               <Route path="management" element={<Management />} />
               <Route path="open-data" element={<OpenData />} />
               <Route path="regulatory-doc" element={<RegulatoryDoc />} />
-              <Route path="international-relations" element={<InternationalRelations />} />
               <Route path="against-corrution" element={<AgainstCorruption />} />
               <Route path="partners" element={<AdminPartners />} />
               <Route path="events" element={<Events />} />
@@ -88,6 +90,12 @@ function App() {
               <Route path='/admin/review' element={<Review />} />
               <Route path='/admin/review/create' element={<ReviewCreate />} />
               <Route path="/admin/review/edit/:ID" element={<ReviewEdit />} />
+
+              <Route path="/admin/International" element={<AdminInternational />} />
+              <Route path="/admin/International/create" element={<InternationalCreate />} />
+              <Route path="/admin/International/edit/:ID" element={<InternationalEdit />} />
+
+              <Route path="/admin/OurPartners" element={<OurPartners />} />
 
             </Route>
 

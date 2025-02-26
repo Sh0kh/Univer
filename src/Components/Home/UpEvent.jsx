@@ -153,8 +153,9 @@ const CustomCalendar = () => {
           </div>
 
           <div className="">
-            <div className="bg-white w-[350px] border-[1px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
+            <div className="Calendar bg-white w-[350px] border-[1px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
               {/* Calendar header */}
+
               <div className="flex justify-between items-center mb-4">
                 <button
                   className="text-gray-600 focus:outline-none"

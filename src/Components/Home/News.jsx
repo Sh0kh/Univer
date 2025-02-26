@@ -56,11 +56,11 @@ const News = () => {
         data?.length && true > 0 ? (
           <div className="grid md:grid-cols-3 gap-6">
             {data?.map((news) => (
-              <div key={news.id} className="bg-white rounded-lg overflow-hidden flex flex-col">
+              <div key={news.id} className="bg-white overflow-hidden flex flex-col">
                 <img
                   src={news.image[0]?.url || img_def}
                   alt=""
-                  className="news_img w-full h-244 object-cover rounded-lg"
+                  className="news_img w-full h-244 object-cover"
                 />
 
                 <div className="p-4 flex flex-col flex-grow   ">
