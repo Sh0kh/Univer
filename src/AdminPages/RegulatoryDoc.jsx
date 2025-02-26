@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
-import { AddCorruption } from "../AdminComponents/against-corruption/add-corruption";
-import { UpdateCorruption } from "../AdminComponents/against-corruption/update-corruption";
-import { DeleteCorruption } from "../AdminComponents/against-corruption/delete-corruption";
+import { AddRegularlyDoc } from "../AdminComponents/regularly-doc/add-regularly-doc";
+import { UpdateRegularlyDoc } from "../AdminComponents/regularly-doc/update-regularly-doc";
+import { DeleteRegularlyDoc } from "../AdminComponents/regularly-doc/delete-regularly-doc";
 
-export default function AgainstCorruption() {
+export default function RegulatoryDoc() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -15,7 +15,7 @@ export default function AgainstCorruption() {
 
   const fetchData = async () => {
     try {
-      const response = await $api.get("/fighting-corruption");
+      const response = await $api.get("/regulatory-documents");
       setData(response.data.data); // API dan kelgan data-ni state-ga saqlaymiz
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
@@ -57,8 +57,8 @@ export default function AgainstCorruption() {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-            <UpdateCorruption onUpdated={fetchData} rowData={row} />
-            <DeleteCorruption onDeleted={fetchData} rowId={row.id} />
+            <UpdateRegularlyDoc onUpdated={fetchData} rowData={row} />
+            <DeleteRegularlyDoc onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
       width: "170px",
@@ -85,7 +85,7 @@ export default function AgainstCorruption() {
           ))}
         </div>
         <div>
-          <AddCorruption onAdded={fetchData} />
+          <AddRegularlyDoc onAdded={fetchData} />
         </div>
       </div>
       <CustomDataTable

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
-import { AddCorruption } from "../AdminComponents/against-corruption/add-corruption";
-import { UpdateCorruption } from "../AdminComponents/against-corruption/update-corruption";
-import { DeleteCorruption } from "../AdminComponents/against-corruption/delete-corruption";
+import { AddRegularlyDoc } from "../AdminComponents/regularly-doc/add-regularly-doc";
+import { UpdateRegularlyDoc } from "../AdminComponents/regularly-doc/update-regularly-doc";
+import { DeleteRegularlyDoc } from "../AdminComponents/regularly-doc/delete-regularly-doc";
 
-export default function AgainstCorruption() {
+export default function InternationalRelations() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
@@ -15,7 +15,7 @@ export default function AgainstCorruption() {
 
   const fetchData = async () => {
     try {
-      const response = await $api.get("/fighting-corruption");
+      const response = await $api.get("/international-relations");
       setData(response.data.data); // API dan kelgan data-ni state-ga saqlaymiz
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
@@ -23,6 +23,8 @@ export default function AgainstCorruption() {
       setLoading(false);
     }
   };
+
+  console.log("Fetched data ", data);
 
   useEffect(() => {
     fetchData();
@@ -36,7 +38,12 @@ export default function AgainstCorruption() {
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
-      selector: (row) => row.name?.[activeTab] || "Noma'lum",
+      selector: (row) => row.title?.[activeTab] || "Noma'lum",
+      sortable: true,
+    },
+    {
+      name: `Sarlavha (${activeTab.toUpperCase()})`,
+      selector: (row) => row.description?.[activeTab] || "Noma'lum",
       sortable: true,
     },
     {
@@ -45,20 +52,16 @@ export default function AgainstCorruption() {
       sortable: true,
     },
     {
-      name: "URL",
-      selector: (row) => (
-        <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-          Havola
-        </a>
-      ),
-      sortable: false,
+      name: `Slug`,
+      selector: (row) => row?.slug || "Noma'lum",
+      sortable: true,
     },
     {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-            <UpdateCorruption onUpdated={fetchData} rowData={row} />
-            <DeleteCorruption onDeleted={fetchData} rowId={row.id} />
+            {/* <UpdateRegularlyDoc onUpdated={fetchData} rowData={row} />
+            <DeleteRegularlyDoc onDeleted={fetchData} rowId={row.id} /> */}
         </div>
       ),
       width: "170px",
@@ -85,7 +88,7 @@ export default function AgainstCorruption() {
           ))}
         </div>
         <div>
-          <AddCorruption onAdded={fetchData} />
+          {/* <AddRegularlyDoc onAdded={fetchData} /> */}
         </div>
       </div>
       <CustomDataTable
