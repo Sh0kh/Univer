@@ -1,29 +1,42 @@
 import React, { useState } from "react";
+import { IoLogoReact } from "react-icons/io5";
 import {
+  FaUniversity,
+  FaBuilding,
+  FaHandshake,
   FaHome,
-  FaUsers,
-  FaCity,
-  FaCommentAlt,
   FaChevronDown,
   FaChevronRight,
 } from "react-icons/fa";
-import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { TbCategoryPlus } from "react-icons/tb";
-import { RiLogoutBoxLine } from "react-icons/ri";
+import {
+  TbCategory,
+  TbNews,
+  TbClipboardList,
+  TbWorld,
+  TbServer,
+  TbFileSettings,
+} from "react-icons/tb";
+import {
+  MdRequestPage,
+  MdBusiness,
+} from "react-icons/md";
+import { AiOutlineInteraction, AiOutlineFileText } from "react-icons/ai";
+import { RiTeamFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
-import { IoLogoReact } from "react-icons/io5";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { RiLogoutBoxLine } from "react-icons/ri";
 
 const menuItems = [
   { name: "Asosiy", path: "/admin", icon: <FaHome className="text-lg" /> },
   {
     name: "Kategoriyalar",
     path: "/admin/categories",
-    icon: <TbCategoryPlus className="text-lg" />,
+    icon: <TbCategory className="text-lg" />,
   },
   {
     name: "Rekvisitlar",
     path: "/admin/recvizits",
-    icon: <TbCategoryPlus className="text-lg" />,
+    icon: <TbClipboardList className="text-lg" />,
   },
   {
     name: "Yangiliklar",
@@ -32,37 +45,37 @@ const menuItems = [
       { name: "Yangilik yaratish", path: "/admin/news/create" },
     ],
     path: "/admin/news",
-    icon: <FaCity className="text-lg" />,
+    icon: <TbNews className="text-lg" />,
   },
   {
     name: "Murojaatlarni ko‘rib chiqish tartibi",
     path: "/admin/review",
-    icon: <FaCommentAlt className="text-lg" />,
+    icon: <MdRequestPage className="text-lg" />,
   },
   {
     name: "Xalqaro aloqalar",
     path: "/admin/international",
-    icon: <FaCommentAlt className="text-lg" />,
+    icon: <TbWorld className="text-lg" />,
   },
   {
     name: "Biz haqimizda",
     path: "/admin/aboutus",
-    icon: <FaCommentAlt className="text-lg" />,
+    icon: <FaBuilding className="text-lg" />,
   },
   {
     name: "Management",
     path: "/admin/management",
-    icon: <FaCommentAlt className="text-lg" />,
+    icon: <RiTeamFill className="text-lg" />,
   },
   {
     name: "Hamkorlarimiz",
     path: "/admin/OurPartners",
-    icon: <FaCommentAlt className="text-lg" />,
+    icon: <FaHandshake className="text-lg" />,
   },
   {
     name: "Interakriv Hizmatlar",
     path: "/admin/Interactives/Services",
-    icon: <FaCommentAlt className="text-lg" />,
+    icon: <AiOutlineInteraction className="text-lg" />,
   },
   {
     name: "Ochik ma'lumotlar",
@@ -72,31 +85,35 @@ const menuItems = [
       { name: "Regularly Document", path: "/admin/regulatory-doc" },
     ],
     path: "/admin/events",
-    icon: <FaUsers className="text-lg" />,
+    icon: <AiOutlineFileText className="text-lg" />,
   },
+  // {
+  //   name: "Universitet statistikasi",
+  //   subItems: [
+  //     { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
+  //     { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
+  //   ],
+  //   path: "/admin/university-stats",
+  //   icon: <FaUniversity className="text-lg" />,
+  // },
+  // {
+  //   name: "Virtual Xizmatlar",
+  //   subItems: [
+  //     { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
+  //     { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
+  //   ],
+  //   path: "/admin/virtual-services",
+  //   icon: <TbServer className="text-lg" />,
+  // },
   {
-    name: "Universitet statistikasi",
-    subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-    ],
-    path: "/admin/university-stats",
-    icon: <FaCommentAlt className="text-lg" />,
+    name: "Bosh ish orinlari",
+    path: "/admin/vacancies",
+    icon: <RiTeamFill className="text-lg" />,
   },
-  {
-    name: "Virtual Xizmatlar",
-    subItems: [
-      { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-      { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-    ],
-    path: "/admin/virtual-services",
-    icon: <FaUsers className="text-lg" />,
-  },
-
   {
     name: "Hamkorlarimiz",
-    path: "/admin/partners",
-    icon: <FaCity className="text-lg" />,
+    path: "/admin/OurPartners",
+    icon: <MdBusiness className="text-lg" />,
   },
 ];
 
@@ -108,10 +125,11 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
     setOpenAccordion(openAccordion === index ? null : index);
   };
 
+
   return (
     <div
-      className={`h-screen bg-lb text-white transition-all duration-300 ${isCollapsed ? "w-20" : "w-64"
-        } p-4 shadow-lg flex flex-col justify-between fixed z-50`}
+      className={`h-screen bg-lb text-white transition-all duration-300 overflow-y-auto ${isCollapsed ? "w-20" : "w-64"
+        } p-4 shadow-lg flex flex-col justify-between fixed z-50 `}
     >
       <div>
         <h2

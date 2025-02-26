@@ -51,6 +51,9 @@ import InternationalCreate from "./AdminPages/InternationalCreate";
 import InternationalEdit from "./AdminPages/InternationalEdit";
 import OurPartners from "./AdminPages/OurPartners";
 import InteractivesServices from "./AdminPages/InteractivesServices";
+import Job from "./AdminPages/Job";
+import Department from "./AdminPages/Department";
+import CreateDepartment from "./AdminPages/CreateDepartment";
 
 function App() {
   return (
@@ -98,6 +101,10 @@ function App() {
 
               <Route path="/admin/OurPartners" element={<OurPartners />} />
               <Route path="/admin/Interactives/Services" element={<InteractivesServices />} />
+              <Route path="/admin/vacancies" element={<Job />} />
+
+              <Route path="/admin/department" element={<Department />} />
+              <Route path="/admin/department/create" element={<CreateDepartment />} />
 
             </Route>
 
