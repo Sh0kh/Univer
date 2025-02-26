@@ -115,11 +115,16 @@ const menuItems = [
   //   path: "/admin/OurPartners",
   //   icon: <MdBusiness className="text-lg" />,
   // },
-  // {
-  //   name: "Bolimlar",
-  //   path: "/admin/department",
-  //   icon: <MdBusiness className="text-lg" />,
-  // },
+  {
+    name: "Bolimlar",
+    path: "/admin/sections",
+    icon: <MdBusiness className="text-lg" />,
+  },
+  {
+    name: "Markazlar",
+    path: "/admin/centers",
+    icon: <MdBusiness className="text-lg" />,
+  },
 ];
 
 export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {

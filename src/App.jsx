@@ -18,6 +18,7 @@ import NotFound from "./Pages/NotFound";
 import Login from "./Pages/Login";
 import AdminNews from './AdminPages/News'
 import Center from "./Pages/Center";
+import AdminCenter from "./AdminPages/Centers";
 import Rekvizits from "./Pages/Rekvizits";
 import CabinetPage from "./Pages/CabinetPage";
 import Money from "./Pages/Money";
@@ -54,6 +55,8 @@ import InteractivesServices from "./AdminPages/InteractivesServices";
 import Job from "./AdminPages/Job";
 import Department from "./AdminPages/Department";
 import CreateDepartment from "./AdminPages/CreateDepartment";
+import DepartmenEdit from "./AdminPages/DepartmenEdit";
+import CreateCenter from "./AdminPages/CenterCreate";
 
 function App() {
   return (
@@ -103,8 +106,14 @@ function App() {
               <Route path="/admin/Interactives/Services" element={<InteractivesServices />} />
               <Route path="/admin/vacancies" element={<Job />} />
 
-              <Route path="/admin/department" element={<Department />} />
-              <Route path="/admin/department/create" element={<CreateDepartment />} />
+              <Route path="/admin/sections" element={<Department />} />
+              <Route path="/admin/sections/create" element={<CreateDepartment />} />
+              <Route path="/admin/sections-centers/edit/:ID" element={<DepartmenEdit />} />
+
+              <Route path="/admin/centers" element={<AdminCenter />} />
+              <Route path="/admin/centers/create" element={<CreateCenter />} />
+
+
 
             </Route>
 

@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 import { FaPencilAlt } from "react-icons/fa";
 import { DepartmentCenterDelete } from "../AdminComponents/department-centers/department-centers-delete";
 
-export default function Department() {
+export default function Center() {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
@@ -16,7 +16,7 @@ export default function Department() {
 
     const fetchData = async () => {
         try {
-            const response = await $api.get("/department-centers?status=sections");
+            const response = await $api.get("/department-centers?status=centers");
             setData(response.data.data);
         } catch (error) {
             console.error("Xatolik yuz berdi:", error);
@@ -63,7 +63,7 @@ export default function Department() {
 
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Bolimlar</h2>
+            <h2 className="text-xl font-bold mb-4">Markazlar</h2>
             <div className="flex justify-between items-center mb-4">
                 <div className="flex space-x-2">
                     {["uz", "ru", "en", "kk"].map((lang) => (
@@ -77,7 +77,7 @@ export default function Department() {
                         </button>
                     ))}
                 </div>
-                <NavLink className="block" to="/admin/sections/create">
+                <NavLink className="block" to="/admin/centers/create">
                     <Button className="bg-green-500 text-white">Malumot qo'shish</Button>
                 </NavLink>
             </div>
