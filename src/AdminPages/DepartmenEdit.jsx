@@ -45,7 +45,7 @@ export default function DepartmenEdit() {
             setRuInfo({ title: response?.data?.data?.title?.ru, description: response?.data?.data?.text?.ru })
             setEnInfo({ title: response?.data?.data?.title?.en, description: response?.data?.data?.text?.en })
             setKKInfo({ title: response?.data?.data?.title?.kk, description: response?.data?.data?.text?.kk })
-            // setSelectedCategory(response?.data?.data?.category?.category_id)
+            setSelectedCategory(response?.data?.data?.managment?.id)
             setStatus(response?.data?.data?.status)
         } catch (error) {
             console.log(error)
@@ -74,7 +74,7 @@ export default function DepartmenEdit() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            // category_id: selectedCategory,
+            categomanagment_idry_id: selectedCategory,
             status: status
         };
 

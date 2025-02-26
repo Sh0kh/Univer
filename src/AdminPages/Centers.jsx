@@ -44,6 +44,11 @@ export default function Center() {
             sortable: true,
         },
         {
+            name: `Markaz rahbari (${activeTab.toUpperCase()})`,
+            selector: (row) => row.managment?.name,
+            sortable: true,
+        },
+        {
             name: "Action",
             cell: (row) => (
                 <div className="flex space-x-2">

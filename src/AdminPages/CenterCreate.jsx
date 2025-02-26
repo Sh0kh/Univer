@@ -51,7 +51,7 @@ export default function CreateCenter() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            // category_id: selectedCategory,
+            managment_id: selectedCategory,
             status: "centers"
         };
 
