@@ -110,11 +110,16 @@ const menuItems = [
     path: "/admin/vacancies",
     icon: <RiTeamFill className="text-lg" />,
   },
-  {
-    name: "Hamkorlarimiz",
-    path: "/admin/OurPartners",
-    icon: <MdBusiness className="text-lg" />,
-  },
+  // {
+  //   name: "Hamkorlarimiz",
+  //   path: "/admin/OurPartners",
+  //   icon: <MdBusiness className="text-lg" />,
+  // },
+  // {
+  //   name: "Bolimlar",
+  //   path: "/admin/department",
+  //   icon: <MdBusiness className="text-lg" />,
+  // },
 ];
 
 export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
