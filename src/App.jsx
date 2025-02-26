@@ -50,6 +50,7 @@ import AdminInternational from "./AdminPages/International";
 import InternationalCreate from "./AdminPages/InternationalCreate";
 import InternationalEdit from "./AdminPages/InternationalEdit";
 import OurPartners from "./AdminPages/OurPartners";
+import InteractivesServices from "./AdminPages/InteractivesServices";
 
 function App() {
   return (
@@ -96,6 +97,7 @@ function App() {
               <Route path="/admin/International/edit/:ID" element={<InternationalEdit />} />
 
               <Route path="/admin/OurPartners" element={<OurPartners />} />
+              <Route path="/admin/Interactives/Services" element={<InteractivesServices />} />
 
             </Route>
 

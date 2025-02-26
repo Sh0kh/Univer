@@ -60,6 +60,11 @@ const menuItems = [
     icon: <FaCommentAlt className="text-lg" />,
   },
   {
+    name: "Interakriv Hizmatlar",
+    path: "/admin/Interactives/Services",
+    icon: <FaCommentAlt className="text-lg" />,
+  },
+  {
     name: "Ochik ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },

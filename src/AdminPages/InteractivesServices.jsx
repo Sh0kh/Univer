@@ -6,8 +6,11 @@ import { Tooltip } from "@material-tailwind/react";
 import { CreateOurPartners } from "../AdminComponents/OurPartners/create-our-partners";
 import { UpdateOurPartners } from "../AdminComponents/OurPartners/edit-our-partners";
 import { DeleteOurPartners } from "../AdminComponents/OurPartners/delete-our-partners";
+import { CreateInteractivesServices } from "../AdminComponents/interactives-services/create-interactives-services";
+import { EditInteractivesServices } from "../AdminComponents/interactives-services/edit-interactives-services";
+import { DeleteInteractivesServices } from "../AdminComponents/interactives-services/delete-interactives-services";
 
-export default function OurPartners() {
+export default function InteractivesServices() {
     const [data, setData] = useState([]);
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(10);
@@ -16,7 +19,7 @@ export default function OurPartners() {
 
     const fetchData = async () => {
         try {
-            const response = await $api.get("/our-partners");
+            const response = await $api.get("/interactives-services");
             setData(response.data.data);
         } catch (error) {
             console.error("Xatolik yuz berdi:", error);
@@ -41,7 +44,7 @@ export default function OurPartners() {
         },
         {
             name: "Nomi",
-            selector: (row) => row?.name,
+            selector: (row) => row?.title[activeTab],
             sortable: true,
         },
         {
@@ -49,21 +52,12 @@ export default function OurPartners() {
             selector: (row) => row.category?.title[activeTab],
         },
         {
-            name: "URL",
-            selector: (row) => (
-                <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                    Havola
-                </a>
-            ),
-            sortable: false,
-        },
-        {
             name: "Rasm",
             selector: (row) => (
                 <div className="my-2">
                     <img
                         src={row?.image[0]?.url}
-                        className="w-32 h-16  object-cover"
+                        className="w-[80px] h-[80px] "
                     />
                 </div>
             ),
@@ -72,8 +66,8 @@ export default function OurPartners() {
             name: "Action",
             cell: (row) => (
                 <div className="flex space-x-2">
-                    <UpdateOurPartners onUpdated={fetchData} rowData={row} />
-                    <DeleteOurPartners onDeleted={fetchData} rowId={row.id} />
+                    <EditInteractivesServices onUpdated={fetchData} rowData={row} />
+                    <DeleteInteractivesServices onDeleted={fetchData} rowId={row.id} />
                 </div>
             ),
             width: "170px",
@@ -84,7 +78,7 @@ export default function OurPartners() {
 
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Hamkorlarimiz</h2>
+            <h2 className="text-xl font-bold mb-4">Interaktiv xizmatlar</h2>
             <div className="flex justify-between items-center mb-4">
                 <div className="flex space-x-2">
                     {["uz", "ru", "en", "kk"].map((lang) => (
@@ -98,7 +92,7 @@ export default function OurPartners() {
                         </button>
                     ))}
                 </div>
-                <CreateOurPartners onAdded={fetchData} />
+                <CreateInteractivesServices onAdded={fetchData} />
             </div>
             <CustomDataTable
                 data={data}
