@@ -8,7 +8,7 @@ import ReactLoading from 'react-loading';
     
 
   const [data, setData] = useState([])
-  const { i18n } = useTranslation(); // Получаем текущий язык
+  const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true)
   const getInterService = async () => {
     try {

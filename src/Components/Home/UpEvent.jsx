@@ -1,24 +1,19 @@
 import React, { useState } from "react";
 
 const CustomCalendar = () => {
-  // Current selected date (January 10, 2025 as shown in the image)
   const [selectedDate, setSelectedDate] = useState(new Date(2025, 0, 10));
 
-  // Get current month and year
   const currentMonth = selectedDate.getMonth();
   const currentYear = selectedDate.getFullYear();
 
-  // Function to get days in a month
   const getDaysInMonth = (year, month) => {
     return new Date(year, month + 1, 0).getDate();
   };
 
-  // Function to get the first day of the month
   const getFirstDayOfMonth = (year, month) => {
     return new Date(year, month, 1).getDay();
   };
 
-  // Days of the week
   const weekdays = ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"];
 
   // Month names in Uzbek (based on "Yanvar" from the image)
@@ -102,20 +97,17 @@ const CustomCalendar = () => {
     ));
   };
 
-  // Check if a day is selected
   const isSelectedDay = (date) => {
     return date.getDate() === selectedDate.getDate() &&
       date.getMonth() === selectedDate.getMonth() &&
       date.getFullYear() === selectedDate.getFullYear();
   };
 
-  // Function to format date as shown in the image (Jan 10, 2025)
   const formatSelectedDate = () => {
     const options = { month: 'short', day: 'numeric', year: 'numeric' };
     return selectedDate.toLocaleDateString('en-US', options);
   };
 
-  // Events data
   const events = [
     { date: "10", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi to‘g‘risida", status: "Kutilmoqda" },
     { date: "11", month: "YAN", time: "14:00 - 16:00", title: "Raximova Guzalbegim Murodovnaning tabiiy fanlari doktori (DSc) dissertatsiya ishi himoyasi", status: "Kutilmoqda" },
@@ -154,7 +146,6 @@ const CustomCalendar = () => {
 
           <div className="">
             <div className="Calendar bg-white w-[350px] border-[1px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
-              {/* Calendar header */}
 
               <div className="flex justify-between items-center mb-4">
                 <button
@@ -178,7 +169,6 @@ const CustomCalendar = () => {
                 </button>
               </div>
 
-              {/* Date display */}
               <div className="flex mb-4 gap-2">
                 <div className="bg-white rounded-lg p-2 flex-1 text-center border-[2px]">
                   {formatSelectedDate()}
@@ -188,7 +178,6 @@ const CustomCalendar = () => {
                 </div>
               </div>
 
-              {/* Weekdays */}
               <div className="grid grid-cols-7 gap-1 mb-2">
                 {weekdays.map((day, index) => (
                   <div
@@ -200,7 +189,6 @@ const CustomCalendar = () => {
                 ))}
               </div>
 
-              {/* Calendar days - with increased spacing */}
               <div className="grid grid-cols-7 gap-1 flex-grow">
                 {calendarDays.map((day, index) => (
                   <div
@@ -216,7 +204,6 @@ const CustomCalendar = () => {
                 ))}
               </div>
 
-              {/* Extra space at the bottom */}
               <div className="mt-auto py-4"></div>
             </div>
           </div>

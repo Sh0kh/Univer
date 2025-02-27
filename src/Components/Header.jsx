@@ -103,7 +103,6 @@ export default function Header() {
                             ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M10 14.5347C11.2335 13.8218 12.7663 13.8218 13.9999 14.5347M2 15L2.70149 7.98511C2.72808 7.71915 2.74138 7.58617 2.76178 7.47208C3.00222 6.12702 4.1212 5.11436 5.48352 5.00894C5.59907 5 5.73271 5 6 5M22 15L21.2985 7.98511C21.2719 7.71916 21.2586 7.58617 21.2382 7.47208C20.9978 6.12702 19.8788 5.11436 18.5165 5.00894C18.4009 5 18.2673 5 18 5M8.82843 12.1716C10.3905 13.7337 10.3905 16.2663 8.82843 17.8284C7.26634 19.3905 4.73367 19.3905 3.17157 17.8284C1.60948 16.2663 1.60948 13.7337 3.17157 12.1716C4.73366 10.6095 7.26633 10.6095 8.82843 12.1716ZM20.8284 12.1716C22.3905 13.7337 22.3905 16.2663 20.8284 17.8284C19.2663 19.3905 16.7337 19.3905 15.1716 17.8284C13.6095 16.2663 13.6095 13.7337 15.1716 12.1716C16.7337 10.6095 19.2663 10.6095 20.8284 12.1716Z" stroke="#717680" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></button>
-                          
                             <select
                                 value={i18n.language}
                                 onChange={(e) => changeLanguage(e.target.value)}
@@ -198,10 +197,9 @@ export default function Header() {
                                     <path d="M20.5 15L13.8571 9M8.14286 9L1.50003 15M1 4L9.16492 9.71544C9.82609 10.1783 10.1567 10.4097 10.5163 10.4993C10.8339 10.5785 11.1661 10.5785 11.4837 10.4993C11.8433 10.4097 12.1739 10.1783 12.8351 9.71544L21 4M5.8 17H16.2C17.8802 17 18.7202 17 19.362 16.673C19.9265 16.3854 20.3854 15.9265 20.673 15.362C21 14.7202 21 13.8802 21 12.2V5.8C21 4.11984 21 3.27976 20.673 2.63803C20.3854 2.07354 19.9265 1.6146 19.362 1.32698C18.7202 1 17.8802 1 16.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V12.2C1 13.8802 1 14.7202 1.32698 15.362C1.6146 15.9265 2.07354 16.3854 2.63803 16.673C3.27976 17 4.11984 17 5.8 17Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                             </div>
-
                             <div>
                                 <p className="text-xs text-gray-500">Elektron pochta:</p>
-                                <h4 className="text-sm font-bold">info@imv.uz</h4>
+                                <h4 className="text-sm font-bold">info@tktiyf.uz</h4>
                             </div>
                         </div>
                         <div className="flex items-center space-x-2">
@@ -268,10 +266,7 @@ export default function Header() {
                                 </NavLink>
                                 <NavLink to="/bosh-ish-orni" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
                                     Bo'sh ish o'rinlari
-                                </NavLink>
-                                <NavLink to="/hisobot" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
-                                    Moliyaviy hisobot
-                                </NavLink>
+                                </NavLink>  
                             </div>
                         )}
                     </div>

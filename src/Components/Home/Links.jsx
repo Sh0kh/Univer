@@ -2,69 +2,14 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Mygov from "../../img/mygov.png";
+import Hemis from "../../img/hemis.png";
+import Ut from "../../img/ut.png";
 import LinkCard from "./LinkCard";
+import mn from "../../img/mn.png";
 
-// // Custom pagination component
-// const CustomPagination = (index, className) => {
-//   return `<span class="${className}">
-//             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-//               <circle cx="12" cy="12" r="6" fill="${className.includes('swiper-pagination-bullet-active') ? '#4338CA' : '#D1D5DB'}"/>
-//               <circle cx="12" cy="12" r="10" stroke="${className.includes('swiper-pagination-bullet-active') ? '#4338CA' : '#D1D5DB'}" fill="none"/>
-//             </svg>
-//           </span>`;
-// };
 
 export default function Links() {
-  const linksData = [
-    {
-      id: 1,
-      title: "O‘zbekiston Respublikasi hukumat portali",
-      url: "www.gov.uz",
-    },
-    {
-      id: 2,
-      title: "Elektron hukumat tizimi",
-      url: "www.e-gov.uz",
-    },
-    {
-      id: 3,
-      title: "Davlat xizmatlari markazi",
-      url: "www.dxm.uz",
-    },
-    {
-        id: 4,
-        title: "Davlat xizmatlari markazi",
-        url: "www.dxm.uz",
-        
-      },
-      {
-        id: 5,
-        title: "Davlat xizmatlari markazi",
-        url: "www.dxm.uz",
-      },
-      {
-        id: 6,
-        title: "Davlat xizmatlari markazi",
-        url: "www.dxm.uz",
-      },
-      {
-        id: 7,
-        title: "Davlat xizmatlari markazi",
-        url: "www.dxm.uz",
-      },
-      
-      {
-        id: 8,
-        title: "Davlat xizmatlari markazi",
-        url: "www.dxm.uz",
-      },
-      {
-        id: 9,
-        title: "Davlat xizmatlari markazi",
-        url: "www.dxm.uz",
-      },
-  ];
-
   return (
     <section className="links p-[80px]">
       <div className="Container">
@@ -80,32 +25,82 @@ export default function Links() {
           spaceBetween={20}
           slidesPerView={3}
           pagination={{
-            clickable: true, 
+            clickable: true,
           }}
           breakpoints={{
             768: {
               slidesPerView: 3,
             },
             500: {
-              slidesPerView: 2, 
+              slidesPerView: 2,
             },
-            300:{
-              slidesPerView: 1, 
+            300: {
+              slidesPerView: 1,
             },
           }}
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           modules={[Pagination, Autoplay]}
           className="links_wr"
         >
-          {linksData.map((item) => (
-            <SwiperSlide key={item.id}>
+          <SwiperSlide>
+            <a href="https://my.gov.uz/ru" target="_blank" rel="noopener noreferrer">
+              <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
+                <img src={Mygov} className="mb-[10px]" alt="Foto" />
+                <h1 className="text-lg font-bold  ">
+                  Yagona interaktiv davlat xizmatlari portali
+                </h1>
+                <p className="text-sm text-gray-600">www.my.gov.uz/</p>
+              </div>
+            </a>
+          </SwiperSlide>
+          <SwiperSlide>
+            <a href="https://digital.uz/oz" target="_blank" rel="noopener noreferrer">
+              <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
+                <img src={Ut} className="h-[70px] mb-[10px]" alt="Foto" />
+                <h1 className="text-lg font-bold">
+                  Raqamli texnologiyalar vazirligi
+                </h1>
+                <p className="text-sm text-gray-600">digital.uz/oz</p>
+              </div>
+            </a>
+          </SwiperSlide>
+          <SwiperSlide>
+            <a href="https://stktiyf.e-edu.uz/dashboard/login" target="_blank" rel="noopener noreferrer">
+              <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
+                <img src={Hemis} className="h-[50px] mt-[25px] mb-[5px]" alt="Foto" />
+                <h1 className="text-lg font-bold">
+                  Oliy ta’lim jarayonlarini boshqarish axborot tizimi
+                </h1>
+                <p className="text-sm text-gray-600">hemis.uz</p>
+              </div>
+            </a>
+          </SwiperSlide>
+
+
+          <SwiperSlide>
+            <a href="https://president.uz/oz" target="_blank" rel="noopener noreferrer">
               <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
                 <LinkCard />
-                <h1 className="text-lg font-bold">{item.title}</h1>
-                <p className="text-sm text-gray-600">{item.url}</p>
+                <h1 className="text-lg font-bold">
+                  O'zbekiston respublikasi prezidenti
+                </h1>
+                <p className="text-sm text-gray-600">president.uz</p>
               </div>
-            </SwiperSlide>
-          ))}
+            </a>
+          </SwiperSlide>
+
+          <SwiperSlide>
+            <a href="https://petition.gov.uz/uz" target="_blank" rel="noopener noreferrer">
+              <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
+                <img src={mn} className="h-[50px] mt-[25px] mb-[5px]" alt="Foto" />
+                <h1 className="text-lg font-bold">
+                  Jamoaviy murojaat portali
+                </h1>
+                <p className="text-sm text-gray-600">petition.gov.uz</p>
+              </div>
+            </a>
+          </SwiperSlide>
+
         </Swiper>
       </div>
     </section>
