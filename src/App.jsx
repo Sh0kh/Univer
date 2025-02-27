@@ -58,6 +58,7 @@ import DepartmenEdit from "./AdminPages/DepartmenEdit";
 import CreateCenter from "./AdminPages/CenterCreate";
 import ScheduleEvent from "./AdminPages/ScheduleEvent";
 import MessageUser from "./AdminPages/MessageUser";
+import AllNews from "./Pages/AllNews";
 
 function App() {
   return (
@@ -135,6 +136,7 @@ function App() {
               <Route path="/hisobot" element={<Finance />} />
               <Route path="/contact" element={<Conatact />} />
               <Route path="/oquv-uslubi" element={<StyleStudy />} />
+              <Route path="/barcha-yangiliklar" element={<AllNews />} />
 
             </Route>
           </Route>

@@ -43,7 +43,7 @@ export default function PartnersHero() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        <img src={item?.image?.url || img_def} alt={`Partner ${index + 1}`} className="max-w-[300px] max-h-[122px] h-full w-full h-auto object-contain" />
+                                        <img src={item?.image[0]?.url || img_def} alt={`Partner ${index + 1}`} className="max-w-[300px] max-h-[122px] h-full w-full h-auto object-contain" />
                                     </a>
 
                                 </div>

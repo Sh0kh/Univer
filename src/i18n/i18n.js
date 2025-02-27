@@ -6,11 +6,13 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import en from '../locales/en.json';
 import ru from '../locales/ru.json';
 import uz from '../locales/uz.json';
+import kk from '../locales/kk.json';
 
 const resources = {
   en: { translation: en },
   ru: { translation: ru },
   uz: { translation: uz },
+  kk: { translation: kk }, // Добавлен казахский язык
 };
 
 i18n

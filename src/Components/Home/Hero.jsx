@@ -4,8 +4,43 @@ import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import foto from '../../img/DSC07759.png'
 import foto2 from '../../img/IMG_0188.png'
+import Bg from "../../img/Footer.png";
+import axios from "axios";
+import ReactLoading from "react-loading";
+import { useEffect, useState } from 'react';
 
 export default function Hero() {
+    const [loading, setLoading] = useState(true);
+    const [data, setData] = useState([]);
+
+    const getNews = async () => {
+        try {
+            const response = await axios.get(`/carousel`);
+            setData(response?.data?.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getNews();
+    }, []);
+
+    if (loading) {
+        return (
+            <div
+                className="flex items-center justify-center h-screen fixed inset-0 z-50"
+                style={{ backgroundImage: `url(${Bg})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat" }}
+            >
+                <ReactLoading type="spinningBubbles" color="#ffffff" height={100} width={100} />
+            </div>
+        );
+    }
+
+
+
     return (
         <Swiper
             modules={[Pagination, Autoplay]}
