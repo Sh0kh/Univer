@@ -44,7 +44,7 @@ import ReactLoading from 'react-loading';
                 <div className="img_c w-[52px] h-[52px] bg-[#1f235b] p-[14px]">
                   <img src={item?.image?.url} alt="" />
                 </div>
-                <h4>{item?.title[i18n.language] || news.title["uz"]}</h4>
+                <h4>{item?.title[i18n.language]}</h4>
               </div>
             ))}
           </div>
