@@ -5,6 +5,7 @@ import axios from "axios";
 import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
 import img_def from '../../img/default_image.jpg'
+import { NavLink } from "react-router-dom";
 
 
 
@@ -44,9 +45,15 @@ const News = () => {
         </h2>
         <div className="absolute left-0 top-150 w-full border-t border-[#1f235b] -z-10"></div>
         <div className="absolute left-0 top-150 w-1/4 border-t-2 border-[#1f235b] -z-10"></div>
-        <button className="button_new text-gray-700 font-medium hover:underline absolute right-0 top-0">
-          Ko‘proq ko‘rish
-        </button>
+        <NavLink
+          to={'/barcha-yangiliklar'}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+          <button className="button_new text-gray-700 font-medium hover:underline absolute right-0 top-0">
+            Ko‘proq ko‘rish
+          </button>
+        </NavLink>
+
       </div>
       {loading ? (
         < div className="flex items-center justify-center w-full h-[400px]" >
@@ -60,7 +67,7 @@ const News = () => {
                 <img
                   src={news.image[0]?.url || img_def}
                   alt=""
-                  className="news_img w-full h-244 object-cover"
+                  className="news_img w-full h-[224px] object-cover"
                 />
 
                 <div className="p-4 flex flex-col flex-grow   ">
