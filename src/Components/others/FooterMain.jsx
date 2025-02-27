@@ -18,64 +18,81 @@ export default function FooterMain() {
                             UMUMIY MA’LUMOT
                         </li>
                     </NavLink>
-                    <NavLink to="/aboutus">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/biz-haqimizda">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Biz haqimizda
                         </li>
                     </NavLink>
-                    <NavLink to="/staff">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/rahbariyat">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Rahbariyat
                         </li>
                     </NavLink>
-                    <NavLink to="">
-                        <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
-                            Fakultet va kafedralar
-                        </li>
-                    </NavLink>
-                    <NavLink to="/center">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/bo'lim-markazlar">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Bo’lim va markazlar
                         </li>
                     </NavLink>
-                    <NavLink to="/rekvisits">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/rekvizitlar">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Rekvizitlar
                         </li>
                     </NavLink>
-                    <NavLink to="/">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/virtual-kabinet">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Direktor virtual qabulxonasi
                         </li>
                     </NavLink>
                 </ul>
                 <ul>
-                    <NavLink to="/openInfo">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/ochiq-ma'lumotlar">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Ochiq ma’lumotlar
                         </li>
                     </NavLink>
-                    <NavLink to="/">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/korrupsiyaga-kurash">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Korrupsiyaga qarshi kurashish
                         </li>
                     </NavLink>
-                    <NavLink to="/documents">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/hujjatlar">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Me’yoriy hujjatlar
                         </li>
                     </NavLink>
-                    <NavLink to="/">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/bosh-ish-orni">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Bo’sh ish o’rinlari
                         </li>
                     </NavLink>
-                    <NavLink to="/International">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/xalqaro-aloqalar">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Xalqaro aloqalar
                         </li>
                     </NavLink>
-                    <NavLink to="/partners">
+                    <NavLink
+                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                        to="/hamkorlarimiz">
                         <li className="font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
                             Hamkorlarimiz
                         </li>

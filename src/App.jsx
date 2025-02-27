@@ -39,7 +39,6 @@ import OpenData from "./AdminPages/OpenData";
 import Symbols from "./Pages/Symbols";
 import Finance from "./Pages/Finance";
 import Conatact from "./Pages/Contact";
-import StyleStudy from "./Pages/StyleStudy";
 import AboutUsEdit from "./AdminPages/AboutUsEdit";
 import Review from "./AdminPages/Review";
 import AgainstCorruption from "./AdminPages/AgainstCorruption";
@@ -59,6 +58,7 @@ import CreateCenter from "./AdminPages/CenterCreate";
 import ScheduleEvent from "./AdminPages/ScheduleEvent";
 import MessageUser from "./AdminPages/MessageUser";
 import AllNews from "./Pages/AllNews";
+import SectionCenter from "./Pages/Section-Center";
 
 function App() {
   return (
@@ -135,8 +135,8 @@ function App() {
               <Route path="/ramzlar" element={<Symbols />} />
               <Route path="/hisobot" element={<Finance />} />
               <Route path="/contact" element={<Conatact />} />
-              <Route path="/oquv-uslubi" element={<StyleStudy />} />
               <Route path="/barcha-yangiliklar" element={<AllNews />} />
+              <Route path="/markazlar-bolimlar/:ID" element={<SectionCenter />} />
 
             </Route>
           </Route>

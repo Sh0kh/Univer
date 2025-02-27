@@ -36,7 +36,7 @@ export default function PartnersHero() {
                             {data.map((item, index) => (
                                 <div
                                     key={index}
-                                    className=" bg-[#FDFDFD]  hover:shadow-lg cursor-pointer duration-500 border  flex items-center justify-center border-[#F5F5F5] rounded-lg"
+                                    className=" bg-[#FDFDFD] py-[20px]  hover:shadow-lg cursor-pointer duration-500 border  flex items-center justify-center border-[#F5F5F5] rounded-lg"
                                 >
                                     <a
                                         href={item?.url}
@@ -49,14 +49,12 @@ export default function PartnersHero() {
                                 </div>
                             ))}
                         </div>
-
                     ) : (
                         <div className="flex items-center justify-center">
                             <h1>
                                 Empty data
                             </h1>
                         </div>
-
                     ))}
             </div>
         </section>
