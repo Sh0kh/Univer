@@ -30,7 +30,6 @@ import Categories from "./AdminPages/Categories";
 import AdminPartners from "./AdminPages/Partners";
 import Events from "./AdminPages/Events";
 import Statistika from "./AdminPages/Statistika";
-import AdminNotFound from "./AdminPages/NotFound";
 import CategoryDetail from "./AdminPages/CategoryDetail";
 import AdminNewsCreate from "./AdminPages/AdminNewsCreate";
 import AboutUsCreate from "./AdminPages/AboutUsCreate";
@@ -57,6 +56,8 @@ import Department from "./AdminPages/Department";
 import CreateDepartment from "./AdminPages/CreateDepartment";
 import DepartmenEdit from "./AdminPages/DepartmenEdit";
 import CreateCenter from "./AdminPages/CenterCreate";
+import ScheduleEvent from "./AdminPages/ScheduleEvent";
+import MessageUser from "./AdminPages/MessageUser";
 
 function App() {
   return (
@@ -83,10 +84,11 @@ function App() {
               <Route path="open-data" element={<OpenData />} />
               <Route path="regulatory-doc" element={<RegulatoryDoc />} />
               <Route path="against-corrution" element={<AgainstCorruption />} />
+              <Route path="schedule-event" element={<ScheduleEvent />} />
               <Route path="partners" element={<AdminPartners />} />
               <Route path="events" element={<Events />} />
               <Route path="statistics" element={<Statistika />} />
-              <Route path="admin/*" element={<AdminNotFound />} />
+              <Route path="message-user" element={<MessageUser />} />
 
 
               <Route path="/admin/news" element={<AdminNews />} />
@@ -112,8 +114,6 @@ function App() {
 
               <Route path="/admin/centers" element={<AdminCenter />} />
               <Route path="/admin/centers/create" element={<CreateCenter />} />
-
-
 
             </Route>
 

@@ -40,11 +40,11 @@ import ReactLoading from 'react-loading';
   
           <div className="inter_wr grid grid-cols-2   gap-[40px] ">
             {data?.map((item) => (
-              <div key={item.id} className=" inter_card hover:shadow-lg hover:shadow-xl duration-500 w-[auto] ">
+              <div key={item.id} className=" inter_card hover:shadow-xl duration-500 w-[auto] ">
                 <div className="img_c w-[52px] h-[52px] bg-[#1f235b] p-[14px]">
                   <img src={item?.image?.url} alt="" />
                 </div>
-                <h4>{item?.title[i18n.language] || news.title["uz"]}</h4>
+                <h4>{item?.title[i18n.language] || item?.title['uz']}</h4>
               </div>
             ))}
           </div>

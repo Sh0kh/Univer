@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { IoLogoReact } from "react-icons/io5";
+import { FaChartPie } from "react-icons/fa6";
+import { TiMessages } from "react-icons/ti";
 import {
-  FaUniversity,
   FaBuilding,
   FaHandshake,
   FaHome,
@@ -13,8 +14,6 @@ import {
   TbNews,
   TbClipboardList,
   TbWorld,
-  TbServer,
-  TbFileSettings,
 } from "react-icons/tb";
 import {
   MdRequestPage,
@@ -25,6 +24,7 @@ import { RiTeamFill } from "react-icons/ri";
 import { Link, useLocation } from "react-router-dom";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { RiLogoutBoxLine } from "react-icons/ri";
+import { GrSchedule } from "react-icons/gr";
 
 const menuItems = [
   { name: "Asosiy", path: "/admin", icon: <FaHome className="text-lg" /> },
@@ -78,6 +78,11 @@ const menuItems = [
     icon: <AiOutlineInteraction className="text-lg" />,
   },
   {
+    name: "Marosimlar Jadvali",
+    path: "/admin/schedule-event",
+    icon: <GrSchedule className="text-lg" />,
+  },
+  {
     name: "Ochik ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
@@ -119,6 +124,16 @@ const menuItems = [
     name: "Bolimlar",
     path: "/admin/sections",
     icon: <MdBusiness className="text-lg" />,
+  },
+  {
+    name: "Statistika",
+    path: "/admin/statistics",
+    icon: <FaChartPie className="text-lg" />,
+  },
+  {
+    name: "Virtual Murojatlar",
+    path: "/admin/message-user",
+    icon: <TiMessages className="text-lg" />,
   },
   {
     name: "Markazlar",
