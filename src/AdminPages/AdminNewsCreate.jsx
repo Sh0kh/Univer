@@ -61,8 +61,6 @@ export default function NewsCreate() {
                 console.warn("Файл не выбран!");
             }
 
-            console.log("Отправляемые данные:", Object.fromEntries(formData.entries()));
-
             await $api.post(`/news`, formData, {
                 headers: { "Content-Type": "multipart/form-data" },
             });

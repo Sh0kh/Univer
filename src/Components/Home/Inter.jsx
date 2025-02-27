@@ -14,8 +14,6 @@ import ReactLoading from 'react-loading';
     try {
       const response = await axios.get(`/interactives-service`)
       setData(response?.data?.data)
-    console.log(response);
-
     } catch (error) {
       console.log(error)
     } finally {

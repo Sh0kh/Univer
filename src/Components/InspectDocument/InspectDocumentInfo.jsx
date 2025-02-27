@@ -13,7 +13,6 @@ export default function InspectDocumentInfo() {
         try {
             const response = await axios.get("/review-proces");
             setData(response?.data?.data);
-            console.log(response);
         } catch (error) {
             console.log(error);
         } finally {

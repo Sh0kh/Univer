@@ -9,9 +9,6 @@ export default function ContactHero() {
   
     const handleFileChange = (event) => {
       const file = event.target.files[0];
-      if (file) {
-        console.log("Yuklangan fayl:", file.name);
-      }
     };
 
   return (

@@ -43,7 +43,6 @@ export default function CenterHero() {
     try {
       const response = await axios.get("/department-center?status=centers");
       setData(response?.data?.data);
-      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {
@@ -54,7 +53,6 @@ export default function CenterHero() {
     try {
       const response = await axios.get("/department-center?status=sections");
       setData2(response?.data?.data);
-      console.log(response);
     } catch (error) {
       console.log(error);
     } finally {

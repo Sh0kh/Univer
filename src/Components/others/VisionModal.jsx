@@ -4,8 +4,6 @@ const VisionModal = forwardRef(({ isOpen }, ref) => {
     const [fontSize, setFontSize] = useState(100);
     const [zoom, setZoom] = useState(100);
 
-    console.log(isOpen)
-
     useEffect(() => {
         document.documentElement.style.fontSize = `${fontSize}%`;
     }, [fontSize]);
