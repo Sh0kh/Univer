@@ -12,7 +12,6 @@ export default function InternationalHero() {
         try {
             const response = await axios.get("/international-relation");
             setData(response?.data?.data);
-            console.log(response);
         } catch (error) {
             console.log(error);
         } finally {

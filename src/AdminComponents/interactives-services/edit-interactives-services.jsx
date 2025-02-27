@@ -25,8 +25,6 @@ export function EditInteractivesServices({ onUpdated, rowData }) {
         category_id: "",
     });
 
-    console.log(rowData)
-
     useEffect(() => {
         if (rowData) {
             setForm({

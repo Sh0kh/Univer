@@ -17,7 +17,6 @@ import { sweetAlert } from "../../utils/sweetalert";
 import { FaPencilAlt } from "react-icons/fa";
 
 export function UpdateRecvisitDialog({ onUpdated, rowData }) {
-  console.log(rowData);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   const [categoryId, setCategoryId] = useState(null);

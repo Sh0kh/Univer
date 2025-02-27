@@ -3,9 +3,6 @@ import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { UpdateStatistic } from "../AdminComponents/statistika/update-statistics";
-// import { AddStatistic } from "../AdminComponents/statistics/add-statistic";
-// import { DeleteStatistic } from "../AdminComponents/statistics/delete-statistic";
-// import { UpdateStatistic } from "../AdminComponents/statistics/update-statistic";
 
 export default function Statistika() {
   const [loading, setLoading] = useState(true);

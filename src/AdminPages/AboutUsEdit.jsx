@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     Button,
     Select,
@@ -34,8 +34,6 @@ export default function AboutUsEdit() {
             console.error("Xatolik yuz berdi:", error);
         }
     };
-
-
 
     const FechAboutUsId = async () => {
         try {
@@ -85,8 +83,6 @@ export default function AboutUsEdit() {
             setLoading(false)
         }
     };
-
-
 
     if (loading2) {
         return <Loader />;

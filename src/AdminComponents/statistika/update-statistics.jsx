@@ -29,7 +29,7 @@ export function UpdateStatistic({ onUpdated, rowData }) {
   // Eski ma'lumotlarni yuklash
   useEffect(() => {
     if (rowData) {
-      console.log("Yuklangan ma'lumotlar:", rowData); // 🔍 Tekshirish
+
       setForm({
         students_count: rowData.students_count ?? 0,
         professors_count: rowData.professors_count ?? 0,
