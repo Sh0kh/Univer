@@ -57,7 +57,11 @@ export default function AllNews() {
                 data?.length && true > 0 ? (
                     <div className="grid md:grid-cols-3 gap-6">
                         {data?.map((news) => (
-                            <div key={news.id} className="bg-white overflow-hidden flex flex-col group">
+                            <NavLink
+                                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                to={`/yangilik/${news?.id}`}
+                                className='bg-white overflow-hidden flex flex-col group'
+                            >
                                 <div className="overflow-hidden">
                                     <img
                                         src={news.image[0]?.url || img_def}
@@ -79,15 +83,14 @@ export default function AllNews() {
                                     <h3 className="overflow-hidden text-gray-500 text-[16px] font-normal line-clamp-2">
                                         {news.description[i18n.language] || news.description["uz"]}
                                     </h3>
-                                    <NavLink
-                                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                        to={`/yangilik/${news?.id}`}
-                                        className="text-black mt-[16px] inline-block font-medium hover:underline"
+
+                                    <a href="#" className="text-black mt-[16px] inline-block font-medium hover:underline"
                                     >
                                         Batafsil →
-                                    </NavLink>
+                                    </a>
+
                                 </div>
-                            </div>
+                            </NavLink>
                         ))}
                     </div>
                 ) : (

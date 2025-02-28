@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
 import foto from '../../img/Footer.png'
+import { useTranslation } from "react-i18next";
 
-export default function BigModal({ isOpen, onClose, IsScroll }) {
+export default function BigModal({ isOpen, onClose, IsScroll, data }) {
   const [visible, setVisible] = useState(false);
+  const { i18n } = useTranslation();
+
 
   useEffect(() => {
     if (isOpen) {
@@ -25,12 +28,12 @@ export default function BigModal({ isOpen, onClose, IsScroll }) {
   };
 
   const handleScroll = () => {
-    onClose(); // Закрываем модалку при прокрутке
+    onClose();
   };
 
   return (
     <div
-      className={`big_modal fixed left-0 right-0 bottom-0 ${IsScroll ? "" : "!top-[184px]"
+      className={`big_modal fixed left-0 right-0 bottom-0 ${IsScroll ? "" : "!top-[172px]"
         } z-[100000]  bg-cover bg-center bg-no-repeat`}
       style={{
         backgroundImage: `url(${foto})`,
@@ -59,7 +62,7 @@ export default function BigModal({ isOpen, onClose, IsScroll }) {
         </svg>
 
         {/* Контент модального окна */}
-        <div className="modal_wr flex items-center justify-between gap-[100px]">
+        <div className="modal_wr flex items-start justify-between gap-[100px]">
           <ul>
             <li className="font-[var(--font-family)] font-semibold mb-[20px] text-[18px] leading-[156%] text-white">
               UMUMIY MA’LUMOT
@@ -84,6 +87,20 @@ export default function BigModal({ isOpen, onClose, IsScroll }) {
               </NavLink>
             ))}
           </ul>
+          {data?.map((i, index) => (
+            <ul>
+              <li className="font-[var(--font-family)] font-semibold mb-[20px] text-[18px] leading-[156%] text-white">
+                {i?.title[i18n?.language]}
+              </li>
+                {i?.details?.map((link, index) => (
+                <NavLink onClick={handleClose} key={index} to={`/post/${link?.id}`}>
+                  <li className="font-semibold text-[16px] text-[#a4a7ae] hover:text-white transition-colors">
+                    {link.title[i18n?.language]}
+                  </li>
+                </NavLink>
+              ))}
+            </ul>
+          ))}
         </div>
       </div>
     </div>

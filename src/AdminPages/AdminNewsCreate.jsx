@@ -96,7 +96,7 @@ export default function NewsCreate() {
 
     const FechCategoryOne = async () => {
         try {
-            const response = await $api.get(`/category/${selectedCategory}`);
+            const response = await $api.get(`/category-show/${selectedCategory}`);
             setOneCategory(response.data.data?.details);
         } catch (error) {
             console.error("Xatolik yuz berdi:", error);
