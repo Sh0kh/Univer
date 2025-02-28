@@ -34,7 +34,7 @@ export default function PostEdit() {
             setRuInfo({ title: response?.data?.data?.title?.ru, description: response?.data?.data?.text?.ru });
             setEnInfo({ title: response?.data?.data?.title?.en, description: response?.data?.data?.text?.en });
             setKKInfo({ title: response?.data?.data?.title?.kk, description: response?.data?.data?.text?.kk });
-            setSelectedCategory(response?.data?.data?.category?.category_id || 8);
+            setSelectedCategory(response?.data?.data?.category?.category_id || "");
             setSelectedSubCategory(response?.data?.data?.category?.id || "");
         } catch (error) {
             console.error(error);
@@ -63,11 +63,14 @@ export default function PostEdit() {
     };  
 
     useEffect(() => {
-        FetchPostID();
+        setTimeout(() => {
+            FetchPostID();
+        }, 300)
         FechCategory();
         FechCategoryOne()
-    }, [loading2]);
+    }, []);
 
+    console.log(data);
    
 
     const EditAboutUs = async () => {
