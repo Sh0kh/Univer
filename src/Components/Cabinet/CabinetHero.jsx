@@ -2,9 +2,14 @@ import axios from "axios";
 import foto from "../../img/direktor.png";
 import { useRef, useState } from "react";
 import { sweetAlert } from "../../utils/sweetalert";
+import { useTranslation } from "react-i18next";
 
-export default function CabinetHero() {
+export default function CabinetHero({ data }) {
   const fileInputRef = useRef(null);
+  console.log(data);
+    const { i18n } = useTranslation();
+  
+
   const [formData, setFormData] = useState({
     region: "",
     district: "",
@@ -74,17 +79,18 @@ export default function CabinetHero() {
     <section className="cabinetHero mt-[30px] p-[20px]">
       <div className="Container">
         <div className="cabinet_face flex items-center justify-start gap-[30px]">
-          <img src={foto} alt="" />
+          <img 
+          className="w-[130px] h-[130px] rounded-[50%] object-cover"
+          src={data?.image[0]?.url} alt="" />
           <h1 className="font-semibold text-[20px]  text-[#0a0d12]">
-            Toshkent kimyo-texnologiya instituti Yangiyer filiali direktori{" "}
+            {data?.position[i18n?.language]}{" "}
             <span className="text-[#2d31a6]">
-              Xakimov Zafar Tulyaganovichning
+              {data?.name}
             </span>
             <br />
-            virtual qabulxonasi
+            {" "} virtual qabulxonasi
           </h1>
         </div>
-
         <div className="cb-or relative pb-4 flex items-center justify-start gap-[30px] pt-[20px]  mb-6 mt-[20px]">
           <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#3538cd]">
             Murojaat yuborish
