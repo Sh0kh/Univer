@@ -1,4 +1,4 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'https://dropcard.uz/api'
+axios.defaults.baseURL = 'https://api.ticty.uz/api'
 
 export default axios

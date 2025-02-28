@@ -60,6 +60,9 @@ import MessageUser from "./AdminPages/MessageUser";
 import AllNews from "./Pages/AllNews";
 import SectionCenter from "./Pages/Section-Center";
 import NewDetail from "./Pages/NewsDetail";
+import Post from "./AdminPages/Post";
+import PostCreate from "./AdminPages/PostCreate";
+import PostEdit from "./Pages/PostEdit";
 
 function App() {
   return (
@@ -116,6 +119,10 @@ function App() {
 
               <Route path="/admin/centers" element={<AdminCenter />} />
               <Route path="/admin/centers/create" element={<CreateCenter />} />
+
+              <Route path="/admin/post" element={<Post />} />
+              <Route path="/admin/post/create" element={<PostCreate />} />
+              <Route path="/admin/post/edit/:ID" element={<PostEdit />} />
 
             </Route>
 

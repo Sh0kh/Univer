@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const BASE_URL = "https://dropcard.uz";
+export const BASE_URL = "https://api.ticty.uz";
 
 export const $api = axios.create({
-  baseURL: `${BASE_URL}/api`,
+  baseURL: `${BASE_URL}/api`, 
   headers: {
     "Content-Type": "application/json",
   },

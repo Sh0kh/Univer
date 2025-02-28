@@ -9,6 +9,8 @@ import {
   FaChevronDown,
   FaChevronRight,
 } from "react-icons/fa";
+import { BsFillPostcardFill } from "react-icons/bs";
+
 import {
   TbCategory,
   TbNews,
@@ -81,6 +83,11 @@ const menuItems = [
     name: "Marosimlar Jadvali",
     path: "/admin/schedule-event",
     icon: <GrSchedule className="text-lg" />,
+  },
+  {
+    name: "Postlar",
+    path: "/admin/post",
+    icon: <BsFillPostcardFill className="text-lg" />,
   },
   {
     name: "Ochik ma'lumotlar",

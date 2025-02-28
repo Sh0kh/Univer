@@ -18,7 +18,7 @@ export function DeleteManagement({ rowId, onDeleted }) {
 
   const handleOpen = () => setOpen(!open);
 
-  const handleDeleteCategory = async () => {
+  const handleDeleteCategory = async () => {Q
     setLoading(true);
     try {
       await $api.delete(`/management/${rowId}`);

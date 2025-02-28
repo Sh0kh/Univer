@@ -142,7 +142,7 @@ export default function NewsCreate() {
                             </Option>
                         ))}
                     </Select>
-                    <Select label="Kategoriya tanlang" onChange={(value) => setSelectedSubCategory(value)}>
+                    <Select label="Kategoriya detail tanlang" onChange={(value) => setSelectedSubCategory(value)}>
                         {OneCategory?.map((item) => (
                             <Option key={item.id} value={item.id}>
                                 {item.title[activeTab]}

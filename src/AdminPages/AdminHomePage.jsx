@@ -30,19 +30,19 @@ export default function AdminHomePage() {
       <h1 className="text-2xl font-bold mb-6">Boshqaruv Paneli</h1>
       <div className="grid grid-cols-4 gap-6">
         <div className="bg-blue-500 text-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-4xl font-bold">{data.students_count}</h2>
+          <h2 className="text-4xl font-bold">{data?.students_count || 0}</h2>
           <p className="text-lg">Talabalar</p>
         </div>
         <div className="bg-green-500 text-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-4xl font-bold">{data.professors_count}</h2>
+          <h2 className="text-4xl font-bold">{data?.professors_count || 0}</h2>
           <p className="text-lg">Professorlar</p>
         </div>
         <div className="bg-yellow-500 text-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-4xl font-bold">{data.faculties_count}</h2>
+          <h2 className="text-4xl font-bold">{data?.faculties_count || 0}</h2>
           <p className="text-lg">Fakultetlar</p>
         </div>
         <div className="bg-red-500 text-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-4xl font-bold">{data.education_programs_count}</h2>
+          <h2 className="text-4xl font-bold">{data?.education_programs_count || 0}</h2>
           <p className="text-lg">Ta'lim Dasturlari</p>
         </div>
       </div>
