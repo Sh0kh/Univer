@@ -16,6 +16,7 @@
     "axios": "^1.7.7",
     "froala-editor": "^4.5.0",
     "gsap": "^3.12.7",
+    "gsap-trial": "^3.12.5",
     "hamburger-react": "^2.5.2",
     "i18next": "^24.2.1",
     "i18next-browser-languagedetector": "^8.0.2",

@@ -8,7 +8,7 @@ export default function NewsHero({ data }) {
 
     return (
         <section className="mt-8 md:mt-12 lg:mt-16">
-            <div className="Container px-4 sm:px-6 lg:px-8">
+            <div className="Container">
                 <h1 className="mb-3 text-2xl md:text-3xl lg:text-4xl font-bold leading-[127%] text-[#181d27]">
                     {data?.title[i18n?.language]}
                 </h1>
