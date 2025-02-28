@@ -59,6 +59,7 @@ import ScheduleEvent from "./AdminPages/ScheduleEvent";
 import MessageUser from "./AdminPages/MessageUser";
 import AllNews from "./Pages/AllNews";
 import SectionCenter from "./Pages/Section-Center";
+import NewDetail from "./Pages/NewsDetail";
 
 function App() {
   return (
@@ -137,6 +138,7 @@ function App() {
               <Route path="/contact" element={<Conatact />} />
               <Route path="/barcha-yangiliklar" element={<AllNews />} />
               <Route path="/markazlar-bolimlar/:ID" element={<SectionCenter />} />
+              <Route path="/yangilik/:ID" element={<NewDetail />} />
 
             </Route>
           </Route>

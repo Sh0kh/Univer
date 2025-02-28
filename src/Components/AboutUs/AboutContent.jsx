@@ -41,7 +41,7 @@ export default function AboutContent() {
                     data?.map((i, index) => {
                         return (
                             <div key={index}>
-                                <h1 className="mb-[10px] font-[var(--font-family)] text-[30px] leading-[127%] text-[#181d27]">
+                                <h1 className="mb-[10px] font-bold text-[30px] leading-[127%] text-[#181d27]">
                                     {i?.title[i18n?.language]}
                                 </h1>
                                 <div dangerouslySetInnerHTML={{ __html: i?.text[i18n.language] || i?.text['uz'] }} />

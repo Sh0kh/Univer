@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 
 export default function MiniHeader({ title, minititle }) {
+
+
     return (
         <div className="miniHeader bg-[#fafafa] py-[16px]">
             <div className="Container">

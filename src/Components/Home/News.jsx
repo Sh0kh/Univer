@@ -53,7 +53,6 @@ const News = () => {
             Ko‘proq ko‘rish
           </button>
         </NavLink>
-
       </div>
       {loading ? (
         < div className="flex items-center justify-center w-full h-[400px]" >
@@ -63,32 +62,38 @@ const News = () => {
         data?.length && true > 0 ? (
           <div className="grid md:grid-cols-3 gap-6">
             {data?.map((news) => (
-              <div key={news.id} className="bg-white overflow-hidden flex flex-col">
-                <img
-                  src={news.image[0]?.url || img_def}
-                  alt=""
-                  className="news_img w-full h-[224px] object-cover"
-                />
+              <div key={news.id} className="bg-white overflow-hidden flex flex-col group">
+                <div className="overflow-hidden">
+                  <img
+                    src={news.image[0]?.url || img_def}
+                    alt=""
+                    className="news_img w-full h-[224px] object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                  />
+                </div>
 
-                <div className="p-4 flex flex-col flex-grow   ">
+                <div className="p-4 flex flex-col flex-grow">
                   <div className="text-gray-500 text-sm flex items-center space-x-3">
                     <img src={calendar} alt="date" />
-                    <span>{news?.created_at}</span>
+                    <span>{news?.date}</span>
                     <img src={eye} alt="views" />
                     <span>{news?.view}</span>
                   </div>
-                  <h3 className="font-semibold text-lg   text-gray-900 flex-grow line-clamp-2 mt-[17px] mb-[16px]">
+                  <h3 className="font-semibold text-lg text-gray-900 flex-grow line-clamp-2 mt-[17px] mb-[16px]">
                     {news.title[i18n.language] || news.title["uz"]}
                   </h3>
-                  <h3 className="overflow-hidden text-gray-500  text-[16px] font-normal line-clamp-2"
-                  >
+                  <h3 className="overflow-hidden text-gray-500 text-[16px] font-normal line-clamp-2">
                     {news.description[i18n.language] || news.description["uz"]}
                   </h3>
-                  <a href="#" className="text-black  mt-[16px] inline-block font-medium hover:underline">
+                  <NavLink
+                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    to={`/yangilik/${news?.id}`}
+                    className="text-black mt-[16px] inline-block font-medium hover:underline"
+                  >
                     Batafsil →
-                  </a>
+                  </NavLink>
                 </div>
               </div>
+
             ))}
           </div>
         ) : (
