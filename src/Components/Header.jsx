@@ -1,14 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import glass from '../img/glass.png';
-import eye from '../img/eye.png';
-import sound from '../img/sound.png';
-import logo from '../img/logo.png';
 
 import burger from '../img/More.png';
 import BigModal from './others/BigModal';
 import VisionModal from './others/VisionModal';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 export default function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,7 +13,11 @@ export default function Header() {
     const [visionModal, setVisionModal] = useState(false);
     const [showTopBar, setShowTopBar] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [data, setData] = useState([])
+    const [subModal, setSubModal] = useState(false)
 
+
+    const subRef = useRef(null);
     const modalRef = useRef(null);
     const modalRef1 = useRef(null);
     const { i18n } = useTranslation();
@@ -25,13 +26,30 @@ export default function Header() {
         e.stopPropagation();
         setShowModal(!showModal);
     };
+    const handleMenuSubClick = (e, index) => {
+        console.log(index)
+        e.stopPropagation();
+        setSubModal(index);
+    };
 
     const changeLanguage = (lang) => {
         i18n.changeLanguage(lang);
         console.log(lang);
     };
 
-    // Handle scroll events
+    const getCategory = async () => {
+        try {
+            const response = await axios.get(`categoriys`)
+            setData(response?.data?.data)
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getCategory()
+    }, [])
+
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -54,6 +72,7 @@ export default function Header() {
         };
     }, [lastScrollY]);
 
+
     useEffect(() => {
         const handleClickOutside = (e) => {
             if (modalRef.current && !modalRef.current.contains(e.target)) {
@@ -75,6 +94,19 @@ export default function Header() {
         document.addEventListener('click', handleClickOutside2);
         return () => {
             document.removeEventListener('click', handleClickOutside2);
+        };
+    }, []);
+
+
+    useEffect(() => {
+        const handleClickOutside3 = (e) => {
+            if (subRef.current && !subRef.current.contains(e.target)) {
+                setSubModal(false);
+            }
+        };
+        document.addEventListener('click', handleClickOutside3);
+        return () => {
+            document.removeEventListener('click', handleClickOutside3);
         };
     }, []);
 
@@ -221,9 +253,9 @@ export default function Header() {
             <nav className="w-full bg-[#002266] text-white py-3 px-4 p-[16px]">
                 <div className="Container flex items-center gap-[44px]">
                     <img src={burger} onClick={() => setIsModalOpen(true)} alt="Menu" />
-                    <BigModal IsScroll={showTopBar} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+                    <BigModal data={data} IsScroll={showTopBar} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
                     <div className="menu_wr relative">
-                        <a href="#" onClick={handleMenuClick} className="hover:underline uppercase">
+                        <a href="#" onClick={handleMenuClick} className="hover:opacity-[0.8] duration-300 uppercase">
                             Umumiy ma'lumot
                         </a>
                         {showModal && (
@@ -266,24 +298,30 @@ export default function Header() {
                                 </NavLink>
                                 <NavLink to="/bosh-ish-orni" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
                                     Bo'sh ish o'rinlari
-                                </NavLink>  
+                                </NavLink>
                             </div>
                         )}
                     </div>
-                    <div className="menu_wr">
-                        <a href="#" className="hover:underline uppercase">Qabul 2024-2025</a>
-                    </div>
-                    <div className="menu_wr">
-                        <a href="#" className="hover:underline uppercase">Ta'lim</a>
-                    </div>
-                    <div className="menu_wr">
-                        <a href="#" className="hover:underline uppercase">Ilm-fan</a>
-                    </div>
-                    <div className="menu_wr">
-                        <a href="#" className="hover:underline uppercase">Talabalarga</a>
-                    </div>
-                    <a href="#" className="hover:underline uppercase">Axborot xizmati</a>
-                    <NavLink to="/contact" className="hover:underline uppercase">Bog'lanish</NavLink>
+                    {data?.map((i, index) => (
+                        <div className='relative'>
+                            <a href="#" onClick={(e) => handleMenuSubClick(e, index)} className="hover:opacity-[0.8] duration-300 uppercase">
+                                {i?.title[i18n?.language]}
+                            </a>
+                            {subModal === index && (
+                                <div
+                                    ref={subRef}
+                                    className="absolute top-[45px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto "
+                                >
+                                    {i?.details?.map((event, index2) => (
+                                        <NavLink key={index2} to={`/post/${event?.id}`} className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                            {event?.title[i18n?.language]}
+                                        </NavLink>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                    <NavLink to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">Bog'lanish</NavLink>
                 </div>
             </nav>
             <VisionModal isOpen={visionModal} ref={modalRef1} />

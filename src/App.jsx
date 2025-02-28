@@ -63,6 +63,7 @@ import NewDetail from "./Pages/NewsDetail";
 import Post from "./AdminPages/Post";
 import PostCreate from "./AdminPages/PostCreate";
 import PostEdit from "./Pages/PostEdit";
+import UserPost from "./Pages/Post";
 
 function App() {
   return (
@@ -146,7 +147,7 @@ function App() {
               <Route path="/barcha-yangiliklar" element={<AllNews />} />
               <Route path="/markazlar-bolimlar/:ID" element={<SectionCenter />} />
               <Route path="/yangilik/:ID" element={<NewDetail />} />
-
+              <Route path="/post/:ID" element={<UserPost />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

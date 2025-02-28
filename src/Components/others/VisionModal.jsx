@@ -1,6 +1,6 @@
 import { useState, useEffect, forwardRef } from "react";
 
-const VisionModal = forwardRef(({ isOpen }, ref) => {
+const VisionModal = forwardRef(({ isOpen, }, ref) => {
     const [fontSize, setFontSize] = useState(100);
     const [zoom, setZoom] = useState(100);
 

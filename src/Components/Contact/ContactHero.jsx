@@ -105,7 +105,7 @@ export default function ContactHero() {
                 <h3 className="mb-[10px] text-lg font-semibold text-[#181d27]">
                   Email
                 </h3>
-                <p className="text-[#535862] text-[16px]">info@domain.uz</p>
+                <p className="text-[#535862] text-[16px]">info@tktiyf.uz</p>
               </div>
             </div>
 
@@ -146,7 +146,8 @@ export default function ContactHero() {
                     rel="noopener noreferrer"
                     className="text-blue-600"
                   >
-                    Sirdaryo viloyati, Yangiyer shahri, Mustaqillik ko‘chasi 12A
+                    Sirdaryo viloyati, Yangiyer shahar,
+                    Tinchlik ko'chasi, 1-uy
                   </a>
                 </p>
               </div>
@@ -175,7 +176,8 @@ export default function ContactHero() {
                 <h3 className="mb-[10px] text-lg font-semibold text-[#181d27]">
                   Telefon
                 </h3>
-                <p className="text-[#535862] text-[16px]">info@tkityf.uz</p>
+                <p className="text-[#535862] text-[16px]">+998 (95) 511 58 56
+                </p>
               </div>
             </div>
           </div>
@@ -184,21 +186,12 @@ export default function ContactHero() {
           <div className="w-full md:w-2/3">
             <iframe
               className="w-full h-[300px] md:h-[350px] rounded-lg shadow-lg"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3803.812817206053!2d68.78703817509438!3d40.491661450515594!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae9be40f4ebdbf%3A0x3b60b30ddbb69e69!2sGuliston%2C%20Uzbekistan!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s"
-              allowFullScreen=""
-              loading="lazy"
-            ></iframe>
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2941.5948881208537!2d68.81028791216428!3d40.260872638163164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38b2190e463cfec1%3A0xb544c6812684a012!2sToshkent%20kimyo-texnologiya%20instituti%20Yangiyer%20filiali!5e1!3m2!1sru!2s!4v1740749150665!5m2!1sru!2s" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
         <div className="cb-or mt-[100px] relative pb-4 flex items-center justify-start gap-[30px] pt-[20px]  mb-6">
           <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#3538cd]">
             Murojaat yuborish
-          </h4>
-          <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#717680]">
-            Murojaatni tekshirish
-          </h4>
-          <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#717680]">
-            Ommaviy oferta
           </h4>
           <div className="absolute left-0 top-150 w-full border-t border-[#f5f5f5] -z-10"></div>
           <div className="absolute left-0 top-150 w-[113px] border-t-2 border-[#3538cd] -z-10"></div>
@@ -213,7 +206,7 @@ export default function ContactHero() {
               Viloyat
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className=" hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className=" hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="region"
@@ -248,7 +241,7 @@ export default function ContactHero() {
               Tuman
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="district"
@@ -283,7 +276,7 @@ export default function ContactHero() {
               Shahar
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="city"
@@ -318,7 +311,7 @@ export default function ContactHero() {
               F.I.Sh
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="fullName"
@@ -353,7 +346,7 @@ export default function ContactHero() {
               Telefon
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] h-[44px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] h-[44px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="phone"
@@ -388,7 +381,7 @@ export default function ContactHero() {
               Email
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="email"
@@ -449,15 +442,15 @@ export default function ContactHero() {
               </defs>
             </svg>
           </div>
-
-          <input
+          <textarea
             className="w-full max-w-[1280px] h-[154px] border border-[#f5f5f5] rounded-lg p-[12px_14px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white"
             type="text"
             name="message"
             value={formData.message}
             onChange={handleChange}
             placeholder="Kiriting"
-          />
+          ></textarea>
+
           <div className="cabinet_file mt-[40px]" onClick={handleClick}>
             <input
               type="file"

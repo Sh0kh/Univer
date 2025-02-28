@@ -60,7 +60,7 @@ export default function PostEdit() {
         } catch (error) {
             console.error("Xatolik yuz berdi:", error);
         }
-    };
+    };  
 
     useEffect(() => {
         setTimeout(() => {

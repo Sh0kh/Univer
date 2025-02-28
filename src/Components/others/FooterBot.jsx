@@ -4,7 +4,9 @@ export default function FooterBot() {
     <div className="footerbot  mt-[90px] flex items-center justify-between">
       <h1>TKTIYF © 2025. Barcha huquqlar himoyalangan</h1>
       <div className="social_footer flex items-center justify-between gap-[20px]">
-        
+        <a href="http://" target="_blank" rel="noopener noreferrer">
+          
+        </a>
         <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M15.9455 23.3315L10.396 15.4216L3.44886 23.3315H0.509766L9.09209 13.5626L0.509766 1.33154H8.05571L13.286 8.78656L19.8393 1.33154H22.7784L14.5943 10.648L23.4914 23.3315H15.9455ZM19.2185 21.1016H17.2398L4.71811 3.56154H6.6971L11.7121 10.5847L12.5793 11.8034L19.2185 21.1016Z" fill="#717680" />
         </svg>

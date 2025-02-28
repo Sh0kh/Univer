@@ -41,7 +41,7 @@ export default function CabinetHero() {
     data.append("phone", formData.phone);
     data.append("email", formData.email);
     data.append("message_text", formData.message);
-    data.append("management_id", "7"); // Har doim 7 bo'ladi
+    data.append("management_id", "7");
     if (formData.file) {
       data.append("file", formData.file);
     }
@@ -68,6 +68,7 @@ export default function CabinetHero() {
       console.error("Xatolik yuz berdi:", error);
     }
   };
+
 
   return (
     <section className="cabinetHero mt-[30px] p-[20px]">
@@ -102,31 +103,15 @@ export default function CabinetHero() {
               Viloyat
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className=" hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className=" hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="region"
                 value={formData.region}
                 onChange={handleChange}
-                className="active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]"
+                className="active:border-none font-normal  text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]"
                 placeholder="Tanlang"
               />
-
-              <svg
-                width="12"
-                height="8"
-                viewBox="0 0 12 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M1 1.5L6 6.5L11 1.5"
-                  stroke="#717680"
-                  stroke-width="1.66667"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
             </div>
           </div>
           <div className="cabinet_card ">
@@ -137,13 +122,13 @@ export default function CabinetHero() {
               Tuman
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="district"
                 value={formData.district}
                 onChange={handleChange}
-                className="active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]"
+                className="active:border-none font-normal  text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]"
                 placeholder="Tanlang"
               />
 
@@ -166,13 +151,13 @@ export default function CabinetHero() {
           </div>
           <div className="cabinet_card ">
             <h4
-              className="font-medium text-[14px] leading-[143%] mb-[10px]
+              className="font-medium  text-[14px] leading-[143%] mb-[10px]
                     mr-[-10px] text-[#414651]"
             >
               Shahar
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="city"
@@ -207,7 +192,7 @@ export default function CabinetHero() {
               F.I.Sh
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="fullName"
@@ -242,7 +227,7 @@ export default function CabinetHero() {
               Telefon
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] h-[44px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] h-[44px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="phone"
@@ -277,7 +262,7 @@ export default function CabinetHero() {
               Email
               <span className="text-[#444ce7]">*</span>
             </h4>
-            <div className="hover:shadow-lg flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
+            <div className="hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white">
               <input
                 type="text"
                 name="email"
@@ -338,15 +323,14 @@ export default function CabinetHero() {
               </defs>
             </svg>
           </div>
-
-          <input
-            className="w-full max-w-[1280px] h-[154px] border border-[#f5f5f5] rounded-lg p-[12px_14px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white"
-            type="text"
-            name="message"
+          <textarea
+            className="w-full max-w-[1280px]  h-[154px] border border-[#f5f5f5] rounded-lg p-[12px_14px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white"
             value={formData.message}
             onChange={handleChange}
             placeholder="Kiriting"
-          />
+            name="message"
+          ></textarea>
+
           <div className="cabinet_file mt-[40px]" onClick={handleClick}>
             <input
               type="file"
