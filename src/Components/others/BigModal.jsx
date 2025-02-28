@@ -37,7 +37,7 @@ export default function BigModal({ isOpen, onClose, IsScroll, data }) {
         } z-[100000]  bg-cover bg-center bg-no-repeat`}
       style={{
         backgroundImage: `url(${foto})`,
-        transform: visible ? "translateX(0)" : "translateX(-100%)",
+        transform: visible ? "translateX(0)" : "translateX(-200%)",
         transition: "transform 0.5s ease-in-out",
       }}
     >
