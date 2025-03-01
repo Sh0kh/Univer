@@ -99,7 +99,7 @@ export function EditInteractivesServices({ onUpdated, rowData }) {
                         {["uz", "ru", "en", "kk"].map((lang) => (
                             <div key={lang} className="w-full">
                                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                                    Nomi ({lang.toUpperCase()})
+                                    Nomi ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                                 </Typography>
                                 <Input value={form.title[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
                             </div>

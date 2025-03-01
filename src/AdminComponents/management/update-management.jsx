@@ -112,7 +112,7 @@ export function UpdateManagement({ onUpdated, rowData }) {
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Lavozim ({lang.toUpperCase()})
+                  Lavozim ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input value={form.position[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
               </div>

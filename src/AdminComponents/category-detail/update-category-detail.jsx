@@ -99,7 +99,7 @@ export function UpdateCategoryDetail({ categoryData, onCategoryUpdated }) {
                 color="blue-gray"
                 className="mb-2 text-left font-medium"
               >
-                Sarlavha ({lang.toUpperCase()})
+                Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
               </Typography>
               <Input
                 value={category[lang]}
@@ -107,7 +107,7 @@ export function UpdateCategoryDetail({ categoryData, onCategoryUpdated }) {
                   setCategory({ ...category, [lang]: e.target.value })
                 }
                 required
-                placeholder={`Kategoriya nomi (${lang.toUpperCase()})`}
+                placeholder={`Kategoriya nomi (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
                 error={errors[lang]}
               />
               {errors[lang] && (

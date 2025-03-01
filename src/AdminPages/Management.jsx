@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { $api } from "../utils";
-import { Tooltip } from "@material-tailwind/react";
-import { AddRecvisitsDialog } from "../AdminComponents/recvisits/add-recvisit-dialog";
-import { UpdateRecvisitDialog } from "../AdminComponents/recvisits/update-recvisit-dialog";
-import { DeleteRecvisitDialog } from "../AdminComponents/recvisits/delete-recvisit-dialog";
+import { Tooltip, Avatar } from "@material-tailwind/react";
 import { AddManagement } from "../AdminComponents/management/add-menegment";
 import { UpdateManagement } from "../AdminComponents/management/update-management";
 import { DeleteManagement } from "../AdminComponents/management/delete-management";
@@ -43,6 +40,17 @@ export default function Management() {
       width: "80px",
     },
     {
+      name: "Avatar",
+      selector: (row) => (
+        <div className="my-2">
+          <Avatar size="lg"
+            src={row.image[0]?.url || 'https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg'}
+            className=" object-cover"
+          />
+        </div>
+      ),
+    },
+    {
       name: "Ism",
       selector: (row) => row.name,
       sortable: true,
@@ -67,18 +75,7 @@ export default function Management() {
       name: "Kategoriya",
       selector: (row) => row.category?.title[activeTab],
     },
-    {
-      name: "Rasm",
-      selector: (row) => (
-       <div className="my-2">
-         <img
-          src={row.image[0]?.url}
-          alt={row.name}
-          className="w-32 h-16  object-cover"
-        />
-       </div>
-      ),
-    },
+
     {
       name: "Action",
       cell: (row) => (
@@ -106,11 +103,11 @@ export default function Management() {
               }`}
               onClick={() => setActiveTab(lang)}
             >
-              {lang.toUpperCase()}
+              {lang == "kk" ? "CHI" : lang.toUpperCase()}
             </button>
           ))}
         </div>
-       <AddManagement onAdded={fetchData}/>
+        <AddManagement onAdded={fetchData} />
       </div>
       <CustomDataTable
         data={data}

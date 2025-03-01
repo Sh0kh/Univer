@@ -10,6 +10,12 @@ import {
   DialogFooter,
   Select,
   Option,
+  Card,
+  List,
+  ListItem,
+  ListItemPrefix,
+  Radio,
+  Checkbox,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { $api } from "../../utils";
@@ -29,6 +35,7 @@ export function AddManagement({ onAdded }) {
     phone: "",
     email: "",
     image: "",
+    message_receiver: false,
   });
 
   const handleOpen = () => setOpen(!open);
@@ -63,11 +70,9 @@ export function AddManagement({ onAdded }) {
 
     const formData = new FormData();
     formData.append("photo", imageFile);
-
   };
 
   const handleAdd = async () => {
-
     setLoading(true);
     try {
       const formData = new FormData();
@@ -81,6 +86,7 @@ export function AddManagement({ onAdded }) {
       formData.append("email", form.email);
       formData.append("category_id", categoryId);
       formData.append("photo", imageFile);
+      formData.append("message_receiver", form.message_receiver);
 
       await $api.post("/management", formData, {
         headers: {
@@ -132,18 +138,77 @@ export function AddManagement({ onAdded }) {
           <div className="grid grid-cols-2 gap-4">
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
-                <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Lavozim ({lang.toUpperCase()})
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="mb-2 font-medium"
+                >
+                  Lavozim ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
-                <Input value={form.position[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
+                <Input
+                  value={form.position[lang]}
+                  onChange={(e) => handlePositionChange(e, lang)}
+                  required
+                />
               </div>
             ))}
-            <Input label="F.I.O" value={form.name} onChange={(e) => handleInputChange(e, "name")} required />
-            <Input label="Qabul kunlari" value={form.reception_days} onChange={(e) => handleInputChange(e, "reception_days")} required />
-            <Input label="Telefon" value={form.phone} onChange={(e) => handleInputChange(e, "phone")} required />
-            <Input label="Email" value={form.email} onChange={(e) => handleInputChange(e, "email")} required />
+            <Input
+              label="F.I.O"
+              value={form.name}
+              onChange={(e) => handleInputChange(e, "name")}
+              required
+            />
+            <Input
+              label="Qabul kunlari"
+              value={form.reception_days}
+              onChange={(e) => handleInputChange(e, "reception_days")}
+              required
+            />
+            <Input
+              label="Telefon"
+              value={form.phone}
+              onChange={(e) => handleInputChange(e, "phone")}
+              required
+            />
+            <Input
+              label="Email"
+              value={form.email}
+              onChange={(e) => handleInputChange(e, "email")}
+              required
+            />
+            <Card className="w-full max-w-[24rem]">
+              <List className="flex-row">
+                <ListItem
+                  className="p-2 cursor-pointer"
+                  onClick={() =>
+                    setForm({
+                      ...form,
+                      message_receiver: !form.message_receiver,
+                    })
+                  }
+                >
+                  <ListItemPrefix className="mr-3">
+                    <Checkbox
+                      type="checkbox"
+                      checked={form.message_receiver}
+                      readOnly
+                    />
+                  </ListItemPrefix>
+                  <Typography
+                    color="blue-gray"
+                    className="font-medium text-blue-gray-400"
+                  >
+                    Murojaatlar qabul qiluvchi sifatida belgilash
+                  </Typography>
+                </ListItem>
+              </List>
+            </Card>
             <div className="w-72">
-              <Select value={categoryId} onChange={(e) => setCategoryId(e)} label="Kategoriya tanlash">
+              <Select
+                value={categoryId}
+                onChange={(e) => setCategoryId(e)}
+                label="Kategoriya tanlash"
+              >
                 {categories?.length > 0 &&
                   categories.map((option) => (
                     <Option key={option.id} value={option.id}>
@@ -153,16 +218,28 @@ export function AddManagement({ onAdded }) {
               </Select>
             </div>
             <div>
-              <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-2 font-medium"
+              >
                 Rasm yuklash
               </Typography>
-              <Input type="file" onChange={handleImageUpload} accept="image/*" />
+              <Input
+                type="file"
+                onChange={handleImageUpload}
+                accept="image/*"
+              />
             </div>
           </div>
         </DialogBody>
 
         <DialogFooter>
-          <Button onClick={handleAdd} disabled={loading} className="bg-blue-500 text-white">
+          <Button
+            onClick={handleAdd}
+            disabled={loading}
+            className="bg-blue-500 text-white"
+          >
             {loading ? "Saqlanmoqda..." : "Saqlash"}
           </Button>
         </DialogFooter>

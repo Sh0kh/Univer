@@ -21,14 +21,17 @@ export default function Categories() {
       setData(response.data.data);
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
+      location.reload();
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    setTimeout(() => {
+      fetchData();
+    }, 300);
+  }, [window.location.href]);
 
   const columns = [
     {
@@ -43,15 +46,20 @@ export default function Categories() {
       sortable: true,
     },
     {
-      name: `Categoriya detallari`,
+      name: `Kategoriya bo'limlari`,
       selector: (row) => {
-        return <Link to={`detail/${row.id}`} className=" w-32 p-2 flex justify-center bg-blue-700 opacity-70 cursor-pointer text-white">
-          <FaRightToBracket className=" text-xl text-center"/>
-        </Link>;
+        return (
+          <Link
+            to={`detail/${row.id}`}
+            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+          >
+            <FaRightToBracket className=" text-xl text-center" />
+          </Link>
+        );
       },
     },
     {
-      name: "Slug",
+      name: "Slag",
       selector: (row) => row.slug,
       sortable: true,
     },
@@ -60,7 +68,7 @@ export default function Categories() {
       cell: (row) => (
         <div className="flex space-x-2">
           <UpdateCategory categoryData={row} onCategoryUpdated={fetchData} />
-          <DeleteCategory categoryId={row.id} onCategoryDeleted={fetchData}/>
+          <DeleteCategory categoryId={row.id} onCategoryDeleted={fetchData} />
         </div>
       ),
       width: "170px",
@@ -84,7 +92,7 @@ export default function Categories() {
               }`}
               onClick={() => setActiveTab(lang)}
             >
-              {lang.toUpperCase()}
+              {lang == "kk" ? "CHI" : lang.toUpperCase()}
             </button>
           ))}
         </div>

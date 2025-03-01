@@ -80,13 +80,13 @@ export function AddCategory({ onCategoryAdded }) {
           {["uz", "ru", "en", "kk"].map((lang) => (
             <div key={lang}>
               <Typography variant="small" color="blue-gray" className="mb-2 text-left font-medium">
-                Sarlavha ({lang.toUpperCase()})
+                Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
               </Typography>
               <Input
                 value={category[lang]}
                 onChange={(e) => setCategory({ ...category, [lang]: e.target.value })}
                 required
-                placeholder={`Kategoriya nomi (${lang.toUpperCase()})`}
+                placeholder={`Kategoriya nomi (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
                 error={errors[lang]}
               />
               {errors[lang] && (
