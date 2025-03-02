@@ -54,7 +54,6 @@ function ProfileMenu() {
       <MenuList className="p-1">
         <Link to="profile">
           <MenuItem
-            onClick={closeMenu}
             className="flex items-center gap-2 rounded"
           >
             <UserCircleIcon className="h-4 w-4" strokeWidth={2} />

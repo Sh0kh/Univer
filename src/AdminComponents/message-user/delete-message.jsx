@@ -27,7 +27,7 @@ export function DeleteMessage({ rowId, onDeleted }) {
       setOpen(false);
     } catch (error) {
       setOpen(false);
-      console.error("Kategoriya o‘chirishda xatolik:", error);
+      console.error("Malumotni o‘chirishda xatolik:", error);
       sweetAlert(`Xatolik: ${error}`, "error");
     }
     setLoading(false);
@@ -44,7 +44,7 @@ export function DeleteMessage({ rowId, onDeleted }) {
       <Dialog open={open} handler={handleOpen} size="xs" className="p-4">
         <DialogHeader className="relative">
           <Typography variant="h5" color="red">
-            Kategoriya o‘chirish
+            Malumotni o‘chirish
           </Typography>
           <IconButton
             size="sm"

@@ -18,8 +18,6 @@ import { FaPencilAlt } from "react-icons/fa";
 
 export function UpdateRecvisitDialog({ onUpdated, rowData }) {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
-  const [categoryId, setCategoryId] = useState(null);
   const [loading, setLoading] = useState(false);
 
   // Barcha maydonlar uchun state
@@ -42,19 +40,6 @@ export function UpdateRecvisitDialog({ onUpdated, rowData }) {
 
   const handleOpen = () => setOpen(!open);
 
-  const fetchData = async () => {
-    try {
-      const response = await $api.get("/category");
-      setData(response.data.data);
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const handleInputChange = (e, field) => {
     setForm({ ...form, [field]: e.target.value });
   };
@@ -63,17 +48,11 @@ export function UpdateRecvisitDialog({ onUpdated, rowData }) {
     setForm({ ...form, title: { ...form.title, [lang]: e.target.value } });
   };
 
-  const handleAdd = async () => {
-    if (!categoryId) {
-      sweetAlert("Kategoriya tanlang!", "error");
-      return;
-    }
-
+  const handleUpdate = async () => {
     setLoading(true);
     try {
       await $api.put(`/requisites/${rowData.id}`, {
-        ...form,
-        category_id: categoryId,
+        ...form
       });
       onUpdated();
       setForm({
@@ -119,20 +98,6 @@ export function UpdateRecvisitDialog({ onUpdated, rowData }) {
 
         <DialogBody className="space-y-4 pb-6">
           {/* Kategoriya tanlash */}
-          <div className="w-72">
-            <Select
-              onChange={(e) => setCategoryId(e)}
-              label="Kategoriya tanlash"
-              value={rowData?.category.id}
-            >
-              {data?.length > 0 &&
-                data.map((option) => (
-                  <Option key={option.id} value={option.id}>
-                    {option?.title["uz"]}
-                  </Option>
-                ))}
-            </Select>
-          </div>
 
           <div className=" grid grid-cols-2 gap-4">
             {/* Title (ko‘p tilli) */}
@@ -222,7 +187,7 @@ export function UpdateRecvisitDialog({ onUpdated, rowData }) {
 
         <DialogFooter>
           <Button
-            onClick={handleAdd}
+            onClick={handleUpdate}
             loading={loading}
             className="bg-blue-500 text-white"
           >

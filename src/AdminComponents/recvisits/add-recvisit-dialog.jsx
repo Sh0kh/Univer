@@ -17,11 +17,8 @@ import { sweetAlert } from "../../utils/sweetalert";
 
 export function AddRecvisitsDialog({ onAdded }) {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
-  const [categoryId, setCategoryId] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Barcha maydonlar uchun state
   const [form, setForm] = useState({
     title: { uz: "", ru: "", en: "", kk: "" },
     address: "",
@@ -36,36 +33,22 @@ export function AddRecvisitsDialog({ onAdded }) {
 
   const handleOpen = () => setOpen(!open);
 
-  const fetchData = async () => {
-    try {
-      const response = await $api.get("/category");
-      setData(response.data.data);
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const handleInputChange = (e, field) => {
-    setForm({ ...form, [field]: e.target.value });
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   const handleTitleChange = (e, lang) => {
-    setForm({ ...form, title: { ...form.title, [lang]: e.target.value } });
+    setForm((prev) => ({
+      ...prev,
+      title: { ...prev.title, [lang]: e.target.value },
+    }));
   };
 
   const handleAdd = async () => {
-    if (!categoryId) {
-      sweetAlert("Kategoriya tanlang!", "error");
-      return;
-    }
-
     setLoading(true);
     try {
-      await $api.post("/requisites", { ...form, category_id: categoryId });
+      await $api.post("/requisites", {
+        ...form});
       onAdded();
       setForm({
         title: { uz: "", ru: "", en: "", kk: "" },
@@ -109,20 +92,7 @@ export function AddRecvisitsDialog({ onAdded }) {
         </DialogHeader>
 
         <DialogBody className="space-y-4 pb-6">
-          {/* Kategoriya tanlash */}
-          <div className="w-72">
-            <Select
-              onChange={(e) => setCategoryId(e)}
-              label="Kategoriya tanlash"
-            >
-              {data?.length > 0 &&
-                data.map((option) => (
-                  <Option key={option.id} value={option.id}>
-                    {option?.title["uz"]}
-                  </Option>
-                ))}
-            </Select>
-          </div>
+          
 
           <div className=" grid grid-cols-2 gap-4">
             {/* Title (ko‘p tilli) */}
@@ -138,7 +108,9 @@ export function AddRecvisitsDialog({ onAdded }) {
                 <Input
                   value={form.title[lang]}
                   onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
+                  placeholder={`Sarlavha (${
+                    lang == "kk" ? "CHI" : lang.toUpperCase()
+                  })`}
                   required
                 />
               </div>
@@ -211,12 +183,8 @@ export function AddRecvisitsDialog({ onAdded }) {
         </DialogBody>
 
         <DialogFooter>
-          <Button
-            onClick={handleAdd}
-            loading={loading}
-            className="bg-blue-500 text-white"
-          >
-            Saqlash
+          <Button onClick={handleAdd} disabled={loading} className="bg-blue-500 text-white">
+            {loading ? "Saqlanmoqda..." : "Saqlash"}
           </Button>
         </DialogFooter>
       </Dialog>
