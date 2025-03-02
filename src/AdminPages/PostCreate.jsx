@@ -26,6 +26,8 @@ export default function PostCreate() {
     const [activeTab, setActiveTab] = useState("uz");
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
+
+
     const FechCategory = async () => {
         try {
             const response = await $api.get("/category");
@@ -34,14 +36,18 @@ export default function PostCreate() {
             console.error("Xatolik yuz berdi:", error);
         }
     };
+
+
     const FechCategoryOne = async () => {
         try {
-            const response = await $api.get(`/category-show/${selectedCategory}`);
+            const response = await $api.get(`/category/${selectedCategory}`);
             setOneCategory(response.data.data?.details);
         } catch (error) {
             console.error("Xatolik yuz berdi:", error);
         }
     };
+
+
 
 
     useEffect(() => {
@@ -82,8 +88,6 @@ export default function PostCreate() {
             setLoading(false)
         }
     };
-
-    
 
 
     return (
