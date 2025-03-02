@@ -21,7 +21,6 @@ export default function Categories() {
       setData(response.data.data);
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
-      location.reload();
     } finally {
       setLoading(false);
     }
