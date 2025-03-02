@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import burger from '../img/More.png';
 import BigModal from './others/BigModal';
 import VisionModal from './others/VisionModal';
@@ -241,8 +240,11 @@ export default function Header() {
                         <a
                             onMouseEnter={() => setShowModal(true)}
                             onMouseLeave={() => setShowModal(false)}
-                            href="#" className="hover:opacity-[0.8] py-[16px]  duration-300 uppercase">
+                            href="#" className="hover:opacity-[0.8] py-[16px] flex items-center gap-[5px] duration-300 uppercase">
                             Umumiy ma'lumot
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                         </a>
                         {showModal && (
                             <div
@@ -256,7 +258,7 @@ export default function Header() {
                                     Biz haqimizda
                                 </NavLink>
                                 <NavLink to="/rahbariyat" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Raxbariyat
+                                    Rahbariyat
                                 </NavLink>
                                 <NavLink to="/hamkorlarimiz" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Hamkorlarimiz
@@ -297,8 +299,11 @@ export default function Header() {
                                 onMouseEnter={() => setSubModal(index)}
                                 onMouseLeave={() => setSubModal(null)}
                             >
-                                <a href="#" className="hover:opacity-[0.8] duration-300 uppercase">
+                                <a href="#" className="hover:opacity-[0.8] flex items-center gap-[5px] duration-300 uppercase">
                                     {i?.title[i18n?.language]}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
                                 </a>
                                 {subModal === index && (
                                     <div
