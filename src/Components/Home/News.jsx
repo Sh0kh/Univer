@@ -1,41 +1,56 @@
-import React, { useEffect, useState } from "react";
-import calendar from '../../img/calendar.png'
-import eye from '../../img/eye1.png'
+import React, { useEffect, useState, useRef } from "react";
+import calendar from '../../img/calendar.png';
+import eye from '../../img/eye1.png';
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
-import img_def from '../../img/default_image.jpg'
+import img_def from '../../img/default_image.jpg';
 import { NavLink } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
-
-
+gsap.registerPlugin(ScrollTrigger);
 
 const News = () => {
   const { i18n } = useTranslation();
-  const [loading, setLoading] = useState(true)
-
-
-  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const cardsRef = useRef([]);
 
   const getNews = async () => {
     try {
-      const response = await axios.get(`/news-all`)
-      setData(response?.data?.data)
+      const response = await axios.get(`/news-all`);
+      setData(response?.data?.data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
-    getNews()
-  }, [])
+    getNews();
+  }, []);
 
-
-
-
+  useEffect(() => {
+    if (data.length > 0) {
+      gsap.fromTo(
+        cardsRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          stagger: 0.2,
+          duration: 0.6,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".news",
+            start: "top 40%",
+          }
+        }
+      );
+    }
+  }, [data]);
 
   return (
     <section className="news py-10 px-4 max-w-6xl mx-auto">
@@ -55,17 +70,19 @@ const News = () => {
         </NavLink>
       </div>
       {loading ? (
-        < div className="flex items-center justify-center w-full h-[400px]" >
+        <div className="flex items-center justify-center w-full h-[400px]">
           <ReactLoading type="spinningBubbles" color='#fffff' height={100} width={100} />
-        </div >
+        </div>
       ) : (
-        data?.length && true > 0 ? (
+        data?.length > 0 ? (
           <div className="grid md:grid-cols-3 gap-6">
-            {data?.map((news) => (
+            {data.map((news, index) => (
               <NavLink
+                key={news.id}
+                ref={(el) => (cardsRef.current[index] = el)}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 to={`/yangilik/${news?.id}`}
-                className='bg-white overflow-hidden flex flex-col group'
+                className="bg-white overflow-hidden flex flex-col group opacity-0"
               >
                 <div className="overflow-hidden">
                   <img
@@ -89,28 +106,20 @@ const News = () => {
                     {news.description[i18n.language] || news.description["uz"]}
                   </h3>
 
-                  <a href="#" className="text-black mt-[16px] inline-block font-medium hover:underline"
-                  >
+                  <a href="#" className="text-black mt-[16px] inline-block font-medium hover:underline">
                     Batafsil →
                   </a>
-
                 </div>
               </NavLink>
-
             ))}
           </div>
         ) : (
           <div className="flex items-center justify-center">
-            <h1>
-              Empty data
-            </h1>
+            <h1>Malumot yo'q</h1>
           </div>
         )
       )}
-      <button className="button_news text-gray-700 font-medium hover:underline ">
-        Ko‘proq ko‘rish
-      </button>
-    </section >
+    </section>
   );
 };
 

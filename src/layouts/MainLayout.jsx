@@ -12,7 +12,7 @@ export default function MainLayout() {
     return (
         <DataContext.Provider>
             <Header />
-            <div className="pt-[238px]">
+            <div className="pt-[225px]">
                 <Outlet /> {/* Данные будут доступны в дочерних компонентах */}
             </div>
             <Footer />

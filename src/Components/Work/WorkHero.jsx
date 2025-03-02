@@ -49,7 +49,6 @@ export default function WorkHero() {
                     </span>
                     <div className="aniq_div">
                       <span className="aniq"> •  {i?.faculty[i18n?.language]}</span>
-
                     </div>
                   </div>
                   <h4 className="mb-[10px]">
@@ -77,7 +76,7 @@ export default function WorkHero() {
                           </clipPath>
                         </defs>
                       </svg>
-                      <h4>T
+                      <h4>
                         {i?.employment_type[i18n?.language]}
                       </h4>
                     </div>

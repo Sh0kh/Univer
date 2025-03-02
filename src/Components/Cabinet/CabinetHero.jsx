@@ -7,8 +7,8 @@ import { useTranslation } from "react-i18next";
 export default function CabinetHero({ data }) {
   const fileInputRef = useRef(null);
   console.log(data);
-    const { i18n } = useTranslation();
-  
+  const { i18n } = useTranslation();
+
 
   const [formData, setFormData] = useState({
     region: "",
@@ -79,9 +79,9 @@ export default function CabinetHero({ data }) {
     <section className="cabinetHero mt-[30px] p-[20px]">
       <div className="Container">
         <div className="cabinet_face flex items-center justify-start gap-[30px]">
-          <img 
-          className="w-[130px] h-[130px] rounded-[50%] object-cover"
-          src={data?.image[0]?.url} alt="" />
+          <img
+            className="w-[130px] h-[130px] rounded-[50%] object-cover"
+            src={data?.image[0]?.url} alt="" />
           <h1 className="font-semibold text-[20px]  text-[#0a0d12]">
             {data?.position[i18n?.language]}{" "}
             <span className="text-[#2d31a6]">
@@ -95,7 +95,6 @@ export default function CabinetHero({ data }) {
           <h4 className="mt-[-20px] font-semibold text-[14px] leading-[143%] text-[#3538cd]">
             Murojaat yuborish
           </h4>
-
           <div className="absolute left-0 top-150 w-full border-t border-[#f5f5f5] -z-10"></div>
           <div className="absolute left-0 top-150 w-[113px] border-t-2 border-[#3538cd] -z-10"></div>
         </div>

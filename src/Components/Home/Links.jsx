@@ -10,6 +10,9 @@ import mn from "../../img/mn.png";
 
 
 export default function Links() {
+
+
+
   return (
     <section className="links p-[80px]">
       <div className="Container">
@@ -46,7 +49,7 @@ export default function Links() {
             <a href="https://my.gov.uz/ru" target="_blank" rel="noopener noreferrer">
               <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
                 <img src={Mygov} className="mb-[10px]" alt="Foto" />
-                <h1 className="text-lg font-bold  ">
+                <h1 className="text-lg font-bold">
                   Yagona interaktiv davlat xizmatlari portali
                 </h1>
                 <p className="text-sm text-gray-600">www.my.gov.uz/</p>
@@ -75,8 +78,6 @@ export default function Links() {
               </div>
             </a>
           </SwiperSlide>
-
-
           <SwiperSlide>
             <a href="https://president.uz/oz" target="_blank" rel="noopener noreferrer">
               <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
@@ -88,7 +89,6 @@ export default function Links() {
               </div>
             </a>
           </SwiperSlide>
-
           <SwiperSlide>
             <a href="https://petition.gov.uz/uz" target="_blank" rel="noopener noreferrer">
               <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
@@ -100,7 +100,6 @@ export default function Links() {
               </div>
             </a>
           </SwiperSlide>
-
         </Swiper>
       </div>
     </section>

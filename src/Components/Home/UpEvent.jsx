@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReactLoading from 'react-loading';
 import { useTranslation } from "react-i18next";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+
 
 const CustomCalendar = () => {
   const today = new Date(); // Текущая дата
@@ -12,6 +16,7 @@ const CustomCalendar = () => {
   const currentYear = selectedDate.getFullYear();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true)
+
 
 
   const getDaysInMonth = (year, month) => {
@@ -149,6 +154,44 @@ const CustomCalendar = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (!document.querySelector(".Calendar")) return; // Если элемента нет — выходим
+
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    const animation = gsap.from(".Calendar", {
+      opacity: 0,
+      x: 200,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".Calendar",
+        start: "top 98%", // Начало анимации, когда верх элемента достигает низа viewport
+        end: "top 40%",
+        markers: false, // Для отладки можно установить true
+        scrub: 0.5, // Для плавной привязки к скроллу можно установить true или число (0.5)
+      },
+    });
+    const animation2 = gsap.from(".CalCard", {
+      opacity: 0,
+      x: -200,
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".CalCard",
+        start: "top 98%", // Начало анимации, когда верх элемента достигает низа viewport
+        end: "top 40%",
+        markers: false, // Для отладки можно установить true
+        scrub: 0.5, // Для плавной привязки к скроллу можно установить true или число (0.5)
+      },
+    });
+
+    // Функция очистки
+    return () => {
+      animation.kill();
+      animation2.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [loading]);
+
   if (loading) {
     return (
       < div className="flex items-center justify-center w-full h-[400px]" >
@@ -158,16 +201,15 @@ const CustomCalendar = () => {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="bg-white p-6 rounded-lg shadow-md overflow-hidden">
       <div className="Container">
         <div className="flex justify-between items-center pb-2 mb-4 border-b-2 border-gray-200 relative">
           <h2 className="text-xl font-semibold text-[#1f235b]">• Kutilayotgan tadbirlar</h2>
-          <a href="#" className="text-[#1f235b] font-medium">Ko'proq ko'rish</a>
           <div className="absolute bottom-[-2px] left-0 w-20 h-[2px] bg-[#1f235b]"></div>
         </div>
 
         <div className="flex justify-between w-full flex-col md:flex-row gap-6">
-          <div className="w-full ">
+          <div className="w-full CalCard">
             {data?.data?.map((event, index) => {
               const [day, month] = event.date.split(".");
               const monthShort = new Date(2025, parseInt(month) - 1).toLocaleString("en", { month: "short" }).toUpperCase();
@@ -194,77 +236,75 @@ const CustomCalendar = () => {
             })}
           </div>
 
-          <div className="">
-            <div className="Calendar bg-white w-[350px] border-[1px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
-              <div className="flex justify-between items-center mb-4">
-                <button
-                  className="text-gray-600 focus:outline-none"
-                  onClick={handlePrevMonth}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M12.5 15L7.5 10L12.5 5" stroke="#A4A7AE" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                <h2 className="text-lg font-semibold text-gray-700">
-                  {monthNames[currentMonth]} {currentYear}
-                </h2>
-                <button
-                  className="text-gray-600 focus:outline-none"
-                  onClick={handleNextMonth}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M7.5 15L12.5 10L7.5 5" stroke="#A4A7AE" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-              </div>
+          <div className="Calendar bg-white w-[350px] border-[1px] h-[500px] rounded-lg p-4 shadow-md flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <button
+                className="text-gray-600 focus:outline-none"
+                onClick={handlePrevMonth}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M12.5 15L7.5 10L12.5 5" stroke="#A4A7AE" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <h2 className="text-lg font-semibold text-gray-700">
+                {monthNames[currentMonth]} {currentYear}
+              </h2>
+              <button
+                className="text-gray-600 focus:outline-none"
+                onClick={handleNextMonth}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7.5 15L12.5 10L7.5 5" stroke="#A4A7AE" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
 
-              <div className="flex mb-4 gap-2">
-                <div className="bg-white rounded-lg p-2 flex-1 text-center border-[2px]">
-                  {formatSelectedDate()}
-                </div>
+            <div className="flex mb-4 gap-2">
+              <div className="bg-white rounded-lg p-2 flex-1 text-center border-[2px]">
+                {formatSelectedDate()}
+              </div>
+              <div
+                className="bg-white rounded-lg p-2 px-4 text-center border-[2px] cursor-pointer hover:bg-gray-100"
+                onClick={() => setSelectedDate(new Date())}
+              >
+                Bugun
+              </div>
+            </div>
+
+            <div className="grid grid-cols-7 gap-1 mb-2">
+              {weekdays.map((day, index) => (
                 <div
-                  className="bg-white rounded-lg p-2 px-4 text-center border-[2px] cursor-pointer hover:bg-gray-100"
-                  onClick={() => setSelectedDate(new Date())}
+                  key={index}
+                  className="text-center text-sm font-medium py-1"
                 >
-                  Bugun
+                  {day}
                 </div>
-              </div>
+              ))}
+            </div>
 
-              <div className="grid grid-cols-7 gap-1 mb-2">
-                {weekdays.map((day, index) => (
+            <div className="grid grid-cols-7 gap-1 flex-grow">
+              {calendarDays.map((day, index) => {
+                const hasEventOnDay = hasEvent(day.date);
+                const isTodayDay = isToday(day.date);
+
+                return (
                   <div
                     key={index}
-                    className="text-center text-sm font-medium py-1"
-                  >
-                    {day}
-                  </div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-7 gap-1 flex-grow">
-                {calendarDays.map((day, index) => {
-                  const hasEventOnDay = hasEvent(day.date);
-                  const isTodayDay = isToday(day.date);
-
-                  return (
-                    <div
-                      key={index}
-                      className={`relative text-center rounded-full w-8 h-8 mx-auto flex items-center justify-center my-2 cursor-pointer
+                    className={`relative text-center rounded-full w-8 h-8 mx-auto flex items-center justify-center my-2 cursor-pointer
                         ${day.currentMonth ? 'text-gray-700' : 'text-gray-400'}
                         ${isSelectedDay(day.date) ? 'bg-blue-600 text-white' : ''}
                         ${hasEventOnDay && !isSelectedDay(day.date) ? 'bg-[#e6e5e5] ' : ''}
                         ${isTodayDay && !isSelectedDay(day.date) ? 'border-2 border-green-500' : ''}
                       `}
-                      onClick={() => setSelectedDate(day.date)}
-                    >
-                      {day.day}
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div className="mt-auto py-4"></div>
+                    onClick={() => setSelectedDate(day.date)}
+                  >
+                    {day.day}
+                  </div>
+                );
+              })}
             </div>
+
+            <div className="mt-auto py-4"></div>
           </div>
         </div>
       </div>

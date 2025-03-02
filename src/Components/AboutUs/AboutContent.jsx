@@ -40,7 +40,7 @@ export default function AboutContent() {
                 {data?.length > 0 ? (
                     data?.map((i, index) => {
                         return (
-                            <div key={index}>
+                            <div key={index} className="mb-[30px]">
                                 <h1 className="mb-[10px] font-bold text-[30px] leading-[127%] text-[#181d27]">
                                     {i?.title[i18n?.language]}
                                 </h1>

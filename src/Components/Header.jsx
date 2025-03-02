@@ -6,8 +6,11 @@ import BigModal from './others/BigModal';
 import VisionModal from './others/VisionModal';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import LanguageSelect from './others/LanguageSelect';
+import PhoneHeaderModal from './others/PhoneHeaderModal';
 
 export default function Header() {
+    const [PhoneModal, setPhoneModal] = useState(false)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [visionModal, setVisionModal] = useState(false);
@@ -22,20 +25,6 @@ export default function Header() {
     const modalRef1 = useRef(null);
     const { i18n } = useTranslation();
 
-    const handleMenuClick = (e) => {
-        e.stopPropagation();
-        setShowModal(!showModal);
-    };
-    const handleMenuSubClick = (e, index) => {
-        console.log(index)
-        e.stopPropagation();
-        setSubModal(index);
-    };
-
-    const changeLanguage = (lang) => {
-        i18n.changeLanguage(lang);
-        console.log(lang);
-    };
 
     const getCategory = async () => {
         try {
@@ -111,39 +100,30 @@ export default function Header() {
     }, []);
 
     return (
-        <header className={`bg-white fixed shadow-md transition-all  duration-1000 w-full z-50 ${showTopBar ? "" : " top-[-25px]"}`
+        <header className={`bg-white fixed  shadow-md transition-all  duration-1000 w-full z-50 ${showTopBar ? "" : " top-[-25px]"}`
         }>
             <div
-                className={`py-3 border-b bg-[#F5F5F5] transition-all duration-1000 overflow-hidden ${showTopBar ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0'
+                className={`py-3 border-b bg-[#F5F5F5] transition-all duration-1000  ${showTopBar ? 'opacity-100 max-h-20' : 'opacity-0 max-h-0'
                     }`}
             >
                 <div className="Container">
                     <div className="flex justify-between items-center">
-                        <ul className="Grow_q flex space-x-4 text-sm text-gray-600">
+                        <ul className="Grow_q2 flex space-x-4 text-sm text-gray-600">
                             <a href="https://stktiyf.e-edu.uz/dashboard/login" target="_blank" rel="noopener noreferrer">
                                 <li>Hemis</li>
                             </a>
-                            <li>Murojaatlar</li>
                             <NavLink to="/ramzlar">
                                 <li>Davlat ramzlari</li>
                             </NavLink>
                         </ul>
-                        <div className="flex space-x-2">
+                        <div className="flex  items-center space-x-2">
                             <button
                                 className='bg-[white] p-[8px] rounded-[50%]'
                                 onClick={(e) => { e.stopPropagation(); setVisionModal(prev => !prev); }}
                             ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M10 14.5347C11.2335 13.8218 12.7663 13.8218 13.9999 14.5347M2 15L2.70149 7.98511C2.72808 7.71915 2.74138 7.58617 2.76178 7.47208C3.00222 6.12702 4.1212 5.11436 5.48352 5.00894C5.59907 5 5.73271 5 6 5M22 15L21.2985 7.98511C21.2719 7.71916 21.2586 7.58617 21.2382 7.47208C20.9978 6.12702 19.8788 5.11436 18.5165 5.00894C18.4009 5 18.2673 5 18 5M8.82843 12.1716C10.3905 13.7337 10.3905 16.2663 8.82843 17.8284C7.26634 19.3905 4.73367 19.3905 3.17157 17.8284C1.60948 16.2663 1.60948 13.7337 3.17157 12.1716C4.73366 10.6095 7.26633 10.6095 8.82843 12.1716ZM20.8284 12.1716C22.3905 13.7337 22.3905 16.2663 20.8284 17.8284C19.2663 19.3905 16.7337 19.3905 15.1716 17.8284C13.6095 16.2663 13.6095 13.7337 15.1716 12.1716C16.7337 10.6095 19.2663 10.6095 20.8284 12.1716Z" stroke="#717680" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg></button>
-                            <select
-                                value={i18n.language}
-                                onChange={(e) => changeLanguage(e.target.value)}
-                                className="border outline-none rounded-[50px] text-[#656565] px-2 py-1 text-sm">
-                                <option value="uz">Ozbekcha</option>
-                                <option value="ru">Russcha</option>
-                                <option value="en">Inglizcha</option>
-                                <option value="kk">Xitoycha</option>
-                            </select>
+                            <LanguageSelect />
                         </div>
                     </div>
                 </div>
@@ -250,81 +230,102 @@ export default function Header() {
                     </div>
                 </div>
             </div>
-            <nav className="w-full bg-[#002266] text-white py-3 px-4 p-[16px]">
+            <nav className="w-full bg-[#002266] text-white px-4">
                 <div className="Container flex items-center gap-[44px]">
-                    <img src={burger} onClick={() => setIsModalOpen(true)} alt="Menu" />
+                    <img className='Header_big_modal' src={burger} onClick={() => setIsModalOpen(true)} alt="Menu" />
+                    <img className='Phone_modal hidden' src={burger} onClick={() => setPhoneModal(true)} alt="Phone modal" />
                     <BigModal data={data} IsScroll={showTopBar} isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
-                    <div className="menu_wr relative">
-                        <a href="#" onClick={handleMenuClick} className="hover:opacity-[0.8] duration-300 uppercase">
+                    <div
+                        className="menu_wr flex items-center justify-between w-full gap-[10px] relative"
+                    >
+                        <a
+                            onMouseEnter={() => setShowModal(true)}
+                            onMouseLeave={() => setShowModal(false)}
+                            href="#" className="hover:opacity-[0.8] py-[16px]  duration-300 uppercase">
                             Umumiy ma'lumot
                         </a>
                         {showModal && (
                             <div
+                                onMouseEnter={() => setShowModal(true)}
+                                onMouseLeave={() => setShowModal(false)}
+
                                 ref={modalRef}
-                                className="absolute top-[45px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto h-[500px]"
+                                className="absolute top-[55px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto h-[500px]"
                             >
-                                <NavLink to="/biz-haqimizda" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/biz-haqimizda" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Biz haqimizda
                                 </NavLink>
-                                <NavLink to="/rahbariyat" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/rahbariyat" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Raxbariyat
                                 </NavLink>
-                                <NavLink to="/hamkorlarimiz" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/hamkorlarimiz" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Hamkorlarimiz
                                 </NavLink>
-                                <NavLink to="/xalqaro-aloqalar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/xalqaro-aloqalar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Xalqaro aloqalar
                                 </NavLink>
-                                <NavLink to="/hujjatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/hujjatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Me'yoriy hujjatlar
                                 </NavLink>
-                                <NavLink to="/murojaatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/murojaatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Murojaatlarni ko'rib chiqish tartibi
                                 </NavLink>
-                                <NavLink to="/ochiq-ma'lumotlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/ochiq-ma'lumotlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Ochiq ma'lumotlar
                                 </NavLink>
-                                <NavLink to="/bo'lim-markazlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/bo'lim-markazlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Bo'lim va markazlar
                                 </NavLink>
-                                <NavLink to="/rekvizitlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/rekvizitlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Rekvizitlar
                                 </NavLink>
-                                <NavLink to="/virtual-kabinet" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/virtual-kabinet" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Direktor virtual qabulxonasi
                                 </NavLink>
-                                <NavLink to="/korrupsiyaga-kurash" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/korrupsiyaga-kurash" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Korrupsiyaga qarshi kurashish
                                 </NavLink>
-                                <NavLink to="/bosh-ish-orni" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
+                                <NavLink to="/bosh-ish-orni" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
                                     Bo'sh ish o'rinlari
                                 </NavLink>
                             </div>
                         )}
+                        {data?.map((i, index) => (
+                            <div
+                                key={index}
+                                className='relative py-[16px]'
+                                onMouseEnter={() => setSubModal(index)}
+                                onMouseLeave={() => setSubModal(null)}
+                            >
+                                <a href="#" className="hover:opacity-[0.8] duration-300 uppercase">
+                                    {i?.title[i18n?.language]}
+                                </a>
+                                {subModal === index && (
+                                    <div
+                                        ref={subRef}
+                                        className="absolute top-[55px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto"
+                                    >
+                                        {i?.details?.map((event, index2) => (
+                                            <NavLink
+                                                key={index2}
+                                                to={`/post/${event?.id}`}
+                                                className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block"
+                                            >
+                                                {event?.title[i18n?.language]}
+                                            </NavLink>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                        <NavLink to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">Bog'lanish</NavLink>
                     </div>
-                    {data?.map((i, index) => (
-                        <div className='relative'>
-                            <a href="#" onClick={(e) => handleMenuSubClick(e, index)} className="hover:opacity-[0.8] duration-300 uppercase">
-                                {i?.title[i18n?.language]}
-                            </a>
-                            {subModal === index && (
-                                <div
-                                    ref={subRef}
-                                    className="absolute top-[45px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto "
-                                >
-                                    {i?.details?.map((event, index2) => (
-                                        <NavLink key={index2} to={`/post/${event?.id}`} className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block ">
-                                            {event?.title[i18n?.language]}
-                                        </NavLink>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                    <NavLink to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">Bog'lanish</NavLink>
+
                 </div>
             </nav>
             <VisionModal isOpen={visionModal} ref={modalRef1} />
+
+            <PhoneHeaderModal data={data} IsScroll={showTopBar} isOpen={PhoneModal} onClose={() => setPhoneModal(false)} />
         </header >
     );
 }

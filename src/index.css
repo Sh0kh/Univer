@@ -11,9 +11,11 @@
 .theme-dark {
   filter: grayscale(100%);
 }
-input{
+
+input {
   outline: none;
 }
+
 .theme-gray {
   filter: grayscale(100%) invert(100%);
 }
@@ -100,20 +102,23 @@ html {
 
 }
 
-.study_h1{
+.study_h1 {
   font-family: var(--font-family);
-font-weight: 600;
-font-size: 30px;
-line-height: 127%;
-color: #181d27;
-margin: 20px 0;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 127%;
+  color: #181d27;
+  margin: 20px 0;
 }
-.file_sent{
+
+.file_sent {
   margin: 0 auto;
 }
-.info{
+
+.info {
   margin-bottom: -40px;
 }
+
 .finance_w {
   display: flex;
   align-items: center;
@@ -155,12 +160,6 @@ margin: 20px 0;
   border-radius: 5px;
 }
 
-.menu_wr {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
 
 ::-webkit-scrollbar {
   width: 5px;
@@ -303,8 +302,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .img_c {
   border-radius: 5px;
   padding: 14px;
-  width: 52px;
-  height: 52px;
+
   background: #1f235b;
 }
 
@@ -547,10 +545,12 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .aniq_div {
+  /* display: flex;
+  align-items:center;
+  justify-content: center; */
   border: 1px solid #b2ddff;
   border-radius: 16px;
-  padding-left: 10px;
-  width: 268px;
+  padding: 0px 10px;
   height: 24px;
   background: #eff8ff;
 }
@@ -567,11 +567,8 @@ input[type="number"]::-webkit-inner-spin-button {
   font-family: var(--font-family);
   font-weight: 500;
   font-size: 14px;
-  line-height: 143%;
-  text-align: center;
+  /* line-height: 143%; */
   color: #175cd3;
-
-  margin-top: -20px;
   text-align: center
 }
 
@@ -693,7 +690,28 @@ input[type="number"]::-webkit-inner-spin-button {
   position: fixed;
   right: 0;
   bottom: 0;
-  top: 236px;
+  top: 225px;
+  z-index: 100000;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.PhoneModal {
+  background-image: url(../src/img/Footer.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  padding: 10px;
+  width: 100%;
+  background-color: #000;
+  display: block;
+  left: 0;
+  /* overflow-y:scroll ; */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0px;
   z-index: 100000;
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;

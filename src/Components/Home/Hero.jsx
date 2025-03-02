@@ -3,6 +3,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import Bg from "../../img/Footer.png";
+import gsap from 'gsap';
 import axios from "axios";
 import ReactLoading from "react-loading";
 import { useEffect, useState } from 'react';
@@ -14,6 +15,16 @@ export default function Hero() {
     const [data, setData] = useState([]);
     const { i18n } = useTranslation();
 
+    useEffect(() => {
+        gsap.fromTo('.Debtors',
+            { opacity: 0, y: "10%" },
+            { opacity: 1, duration: 1, ease: "power1.inOut", y: "0" }
+        );
+    }, []);
+
+    useEffect(() => {
+        getNews();
+    }, []);
 
     const getNews = async () => {
         try {
@@ -27,8 +38,14 @@ export default function Hero() {
     };
 
     useEffect(() => {
-        getNews();
-    }, []);
+        if (!loading) {
+            gsap.fromTo(
+                ".slide-content > *",
+                { opacity: 0, x: "-50px" },
+                { opacity: 1, x: "0", duration: 1, stagger: 0.3, ease: "power2.out" }
+            );
+        }
+    }, [loading]);
 
     if (loading) {
         return (
@@ -49,10 +66,10 @@ export default function Hero() {
             className="w-full h-[700px] bg-cover bg-center"
         >
             {data?.map((i, index) => (
-                <SwiperSlide key={index} className=" w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${i?.image[0]?.url})` }}>
+                <SwiperSlide key={index} className="w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${i?.image[0]?.url})` }}>
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
                         <div className="container mx-auto px-6 md:px-12 lg:px-20">
-                            <div className="max-w-2xl text-white">
+                            <div className="max-w-2xl text-white slide-content">
                                 <h1 className="text-3xl md:text-5xl font-bold leading-tight">
                                     {i?.title[i18n?.language]}
                                 </h1>
