@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import Mygov from "../../img/mygov.png";
 import Hemis from "../../img/hemis.png";
-import Ut from "../../img/ut.png";
+// import Ut from "../../img/ut.png";
 import LinkCard from "./LinkCard";
 import mn from "../../img/mn.png";
 
@@ -56,7 +56,7 @@ export default function Links() {
               </div>
             </a>
           </SwiperSlide>
-          <SwiperSlide>
+          {/* <SwiperSlide>
             <a href="https://digital.uz/oz" target="_blank" rel="noopener noreferrer">
               <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
                 <img src={Ut} className="h-[70px] mb-[10px]" alt="Foto" />
@@ -66,7 +66,7 @@ export default function Links() {
                 <p className="text-sm text-gray-600">digital.uz/oz</p>
               </div>
             </a>
-          </SwiperSlide>
+          </SwiperSlide> */}
           <SwiperSlide>
             <a href="https://stktiyf.e-edu.uz/dashboard/login" target="_blank" rel="noopener noreferrer">
               <div className="links_card h-[200px] p-4 bg-white shadow-md rounded-md">
