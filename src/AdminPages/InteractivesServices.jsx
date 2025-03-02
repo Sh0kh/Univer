@@ -3,9 +3,6 @@ import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { $api } from "../utils";
 import { Tooltip } from "@material-tailwind/react";
-import { CreateOurPartners } from "../AdminComponents/OurPartners/create-our-partners";
-import { UpdateOurPartners } from "../AdminComponents/OurPartners/edit-our-partners";
-import { DeleteOurPartners } from "../AdminComponents/OurPartners/delete-our-partners";
 import { CreateInteractivesServices } from "../AdminComponents/interactives-services/create-interactives-services";
 import { EditInteractivesServices } from "../AdminComponents/interactives-services/edit-interactives-services";
 import { DeleteInteractivesServices } from "../AdminComponents/interactives-services/delete-interactives-services";
@@ -46,10 +43,6 @@ export default function InteractivesServices() {
             name: "Nomi",
             selector: (row) => row?.title[activeTab],
             sortable: true,
-        },
-        {
-            name: "Kategoriya",
-            selector: (row) => row.category?.title[activeTab],
         },
         {
             name: "Rasm",

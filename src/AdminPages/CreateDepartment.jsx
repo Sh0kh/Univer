@@ -51,7 +51,7 @@ export default function CreateDepartment() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            // category_id: selectedCategory,
+            managment_id: selectedCategory,
             status: "sections"
         };
 
@@ -88,7 +88,7 @@ export default function CreateDepartment() {
                     ))}
                 </div>
                 <div>
-                    <NavLink className={`block`} to={'/admin/department'}>
+                    <NavLink className={`block`} to={'/admin/sections'}>
                         <Button className="bg-green-500 text-white">
                             Malumot ko'rish
                         </Button>

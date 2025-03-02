@@ -18,7 +18,6 @@ import { FaPencilAlt } from "react-icons/fa";
 
 export function UpdateOurPartners({ onUpdated, rowData }) {
     const [open, setOpen] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         name: "",
@@ -26,7 +25,6 @@ export function UpdateOurPartners({ onUpdated, rowData }) {
         url: "",
         phone: "",
         email: "",
-        category_id: "",
     });
 
     useEffect(() => {
@@ -34,34 +32,14 @@ export function UpdateOurPartners({ onUpdated, rowData }) {
             setForm({
                 name: rowData.name || "",
                 url: rowData.url || "",
-                category_id: rowData?.category?.category_id || "",
             });
         }
     }, [rowData]);
-
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await $api.get("/category");
-                setCategories(response.data.data);
-            } catch (error) {
-                console.error("Xatolik yuz berdi:", error);
-            }
-        };
-        fetchCategories();
-    }, []);
 
     const handleOpen = () => setOpen(!open);
 
     const handleInputChange = (e, field) => {
         setForm({ ...form, [field]: e.target.value });
-    };
-
-    const handlePositionChange = (e, lang) => {
-        setForm({
-            ...form,
-            position: { ...form.position, [lang]: e.target.value },
-        });
     };
 
     const handleUpdate = async () => {
@@ -103,16 +81,6 @@ export function UpdateOurPartners({ onUpdated, rowData }) {
                     <div className="flex items-center flex-col gap-[10px]">
                         <Input label="Nomi" value={form.name} onChange={(e) => handleInputChange(e, "name")} required />
                         <Input label="Havola" value={form.url} onChange={(e) => handleInputChange(e, "url")} required />
-                        <div className="w-full">
-                            <Select value={form.category_id} onChange={(value) => setForm({ ...form, category_id: value })} label="Kategoriya tanlash">
-                                {categories?.length > 0 &&
-                                    categories.map((option) => (
-                                        <Option key={option.id} value={option.id}>
-                                            {option?.title["uz"]}
-                                        </Option>
-                                    ))}
-                            </Select>
-                        </div>
                     </div>
                 </DialogBody>
 

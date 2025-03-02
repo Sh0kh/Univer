@@ -20,21 +20,8 @@ export default function ReviewCreate() {
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
     const [KKinfo, setKKInfo] = useState({ title: "", description: "" });
-    const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([])
-    const [loading, setLoading] = useState(false)
-    const FechCategory = async () => {
-        try {
-            const response = await $api.get("/category");
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-    useEffect(() => {
-        FechCategory();
-    }, []);
+    const [loading, setLoading] = useState(false);
 
     const CreateAboutUs = async () => {
         setLoading(true)
@@ -51,7 +38,6 @@ export default function ReviewCreate() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            category_id: selectedCategory
         };
 
         try {
@@ -61,7 +47,6 @@ export default function ReviewCreate() {
             setRuInfo({ title: "", description: "" });
             setEnInfo({ title: "", description: "" });
             setKKInfo({ title: "", description: "" });
-            setSelectedCategory(null);
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
         } finally {
@@ -95,13 +80,6 @@ export default function ReviewCreate() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
-                    {data.map((item) => (
-                        <Option key={item.id} value={item.id}>
-                            {item.title[activeTab]}
-                        </Option>
-                    ))}
-                </Select>
                 <div className="mt-5">
                     {activeTab === "uz" ? (
                         <UzEditor value={uzinfo} onChange={setUzInfo} />

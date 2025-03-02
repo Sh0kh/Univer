@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
     Button,
-    Select,
-    Option,
     Input,
     Checkbox
 } from "@material-tailwind/react";
@@ -16,11 +14,7 @@ import { sweetAlert } from "../utils/sweetalert";
 
 export default function NewsCreate() {
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedSubCategory, setSelectedSubCategory] = useState("");
     const [selectedFile, setSelectedFile] = useState(null);
-    const [OneCategory, setOneCategory] = useState([]);
     const [date, setDate] = useState("");
     const [showInCarousel, setShowInCarousel] = useState(false);
     const [loading, setLoading] = useState(false)
@@ -51,7 +45,6 @@ export default function NewsCreate() {
             formData.append("description[en]", Eninfo.description);
             formData.append("description[kk]", KKinfo.description);
 
-            formData.append("category_detal_id", selectedSubCategory);
             formData.append("show_in_carousel", showInCarousel);
             formData.append("date", date);
 
@@ -72,7 +65,6 @@ export default function NewsCreate() {
             setRuInfo({ title: "", description: "" });
             setEnInfo({ title: "", description: "" });
             setKKInfo({ title: "", description: "" });
-            setSelectedSubCategory("");
             setShowInCarousel(false);
             setDate("");
             setSelectedFile(null);
@@ -83,31 +75,6 @@ export default function NewsCreate() {
             setLoading(false)
         }
     };
-
-
-    const FechCategory = async () => {
-        try {
-            const response = await $api.get("/category");
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-
-    const FechCategoryOne = async () => {
-        try {
-            const response = await $api.get(`/category-show/${selectedCategory}`);
-            setOneCategory(response.data.data?.details);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-
-    useEffect(() => {
-        FechCategory();
-        FechCategoryOne();
-    }, [selectedCategory]);
-
 
     return (
         <div>
@@ -134,23 +101,6 @@ export default function NewsCreate() {
             </div>
 
             <div className="bg-[white] p-[10px] rounded-[10px]">
-                <div className="mt-4 flex items-center gap-[10px]">
-                    <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
-                        {data.map((item) => (
-                            <Option key={item.id} value={item.id}>
-                                {item.title[activeTab]}
-                            </Option>
-                        ))}
-                    </Select>
-                    <Select label="Kategoriya detail tanlang" onChange={(value) => setSelectedSubCategory(value)}>
-                        {OneCategory?.map((item) => (
-                            <Option key={item.id} value={item.id}>
-                                {item.title[activeTab]}
-                            </Option>
-                        ))}
-                    </Select>
-                </div>
-
                 <div className="mt-5">
                     {activeTab === "uz" ? (
                         <UzNewsCreate value={uzinfo} onChange={setUzInfo} />

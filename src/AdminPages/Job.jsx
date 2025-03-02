@@ -3,8 +3,6 @@ import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { $api } from "../utils";
 import { Tooltip } from "@material-tailwind/react";
-
-import { DeleteManagement } from "../AdminComponents/management/delete-management";
 import { CreateJob } from "../AdminComponents/job/create-job";
 import { UpdateJob } from "../AdminComponents/job/update-job";
 import { DeleteJob } from "../AdminComponents/job/delete-job";

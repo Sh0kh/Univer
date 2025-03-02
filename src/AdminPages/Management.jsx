@@ -72,11 +72,6 @@ export default function Management() {
       selector: (row) => row.email,
     },
     {
-      name: "Kategoriya",
-      selector: (row) => row.category?.title[activeTab],
-    },
-
-    {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">

@@ -23,8 +23,6 @@ import { sweetAlert } from "../../utils/sweetalert";
 
 export function AddManagement({ onAdded }) {
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
-  const [categoryId, setCategoryId] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
 
@@ -39,18 +37,6 @@ export function AddManagement({ onAdded }) {
   });
 
   const handleOpen = () => setOpen(!open);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await $api.get("/category");
-        setCategories(response.data.data);
-      } catch (error) {
-        console.error("Xatolik yuz berdi:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   const handleInputChange = (e, field) => {
     setForm({ ...form, [field]: e.target.value });
@@ -84,7 +70,6 @@ export function AddManagement({ onAdded }) {
       formData.append("reception_days", form.reception_days);
       formData.append("phone", form.phone);
       formData.append("email", form.email);
-      formData.append("category_id", categoryId);
       formData.append("photo", imageFile);
       formData.append("message_receiver", form.message_receiver);
 
@@ -103,7 +88,6 @@ export function AddManagement({ onAdded }) {
         email: "",
         image: "",
       });
-      setCategoryId("");
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
     } catch (error) {
@@ -198,25 +182,11 @@ export function AddManagement({ onAdded }) {
                     color="blue-gray"
                     className="font-medium text-blue-gray-400"
                   >
-                    Murojaatlar qabul qiluvchi sifatida belgilash
+                    Murojaatlar qabul qiluvchi
                   </Typography>
                 </ListItem>
               </List>
             </Card>
-            <div className="w-72">
-              <Select
-                value={categoryId}
-                onChange={(e) => setCategoryId(e)}
-                label="Kategoriya tanlash"
-              >
-                {categories?.length > 0 &&
-                  categories.map((option) => (
-                    <Option key={option.id} value={option.id}>
-                      {option?.title["uz"]}
-                    </Option>
-                  ))}
-              </Select>
-            </div>
             <div>
               <Typography
                 variant="small"

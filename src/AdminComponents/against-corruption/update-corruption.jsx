@@ -18,36 +18,19 @@ import { FaPencilAlt } from "react-icons/fa";
 
 export function UpdateCorruption({ onUpdated, rowData }) {
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
     url: "",
-    category_id: "",
   });
 
   const handleOpen = () => setOpen(!open);
-
-  // Kategoriyalarni olish
-  const fetchCategories = async () => {
-    try {
-      const response = await $api.get("/category");
-      setCategories(response.data.data);
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     if (rowData) {
       setForm({
         name: rowData.name,
         url: rowData.url,
-        category_id: rowData.category?.id || "",
       });
     }
   }, [rowData]);
@@ -65,21 +48,7 @@ export function UpdateCorruption({ onUpdated, rowData }) {
     setForm((prev) => ({ ...prev, url: e.target.value }));
   };
 
-  // Kategoriya tanlash
-  const handleCategoryChange = (value) => {
-    setForm((prev) => ({ ...prev, category_id: value }));
-  };
-
   const handleUpdate = async () => {
-    if (!form.category_id) {
-      sweetAlert("Kategoriya tanlang!", "error");
-      return;
-    }
-    if (!form.url) {
-      sweetAlert("URL kiritish majburiy!", "error");
-      return;
-    }
-
     setLoading(true);
     try {
       await $api.put(`/fighting-corruptions/${rowData.id}`, form);
@@ -88,6 +57,7 @@ export function UpdateCorruption({ onUpdated, rowData }) {
       handleOpen();
     } catch (error) {
       console.error("Xatolik:", error);
+      setOpen(false);
       sweetAlert("Xatolik yuz berdi!", "error");
     }
     setLoading(false);
@@ -115,22 +85,6 @@ export function UpdateCorruption({ onUpdated, rowData }) {
         </DialogHeader>
 
         <DialogBody className="space-y-4 pb-6">
-          {/* Kategoriya tanlash */}
-          <div className="w-72">
-            <Select
-              value={form.category_id}
-              onChange={(value) => handleCategoryChange(value)}
-              label="Kategoriya tanlash"
-            >
-              {categories?.length > 0 &&
-                categories.map((option) => (
-                  <Option key={option.id} value={option.id}>
-                    {option?.title["uz"]}
-                  </Option>
-                ))}
-            </Select>
-          </div>
-
           {/* Title (ko‘p tilli) */}
           <div className="grid grid-cols-2 gap-4">
             {["uz", "ru", "en", "kk"].map((lang) => (

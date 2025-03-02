@@ -40,11 +40,6 @@ export default function RegulatoryDoc() {
       sortable: true,
     },
     {
-      name: `Kategoriya (${activeTab.toUpperCase()})`,
-      selector: (row) => row?.category?.title?.[activeTab] || "Noma'lum",
-      sortable: true,
-    },
-    {
       name: "URL",
       selector: (row) => (
         <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
