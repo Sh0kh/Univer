@@ -14,7 +14,6 @@ import RuAboutUsCreate from "../AdminComponents/text-editor/ru";
 import { $api } from "../utils";
 import { sweetAlert } from "../utils/sweetalert";
 
-
 export default function CreateCenter() {
     const [uzinfo, setUzInfo] = useState({ title: "", description: "" });
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
@@ -83,12 +82,12 @@ export default function CreateCenter() {
                                 }`}
                             onClick={() => setActiveTab(lang)}
                         >
-                            {lang.toUpperCase()}
+                            {lang == "kk" ? "CHI" : lang.toUpperCase()}
                         </button>
                     ))}
                 </div>
                 <div>
-                    <NavLink className={`block`} to={'/admin/center'}>
+                    <NavLink className={`block`} to={'/admin/centers'}>
                         <Button className="bg-green-500 text-white">
                             Malumot ko'rish
                         </Button>
@@ -96,7 +95,7 @@ export default function CreateCenter() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
+                <Select label="Rahbar tanlang" onChange={(value) => setSelectedCategory(value)}>
                     {data.map((item) => (
                         <Option key={item.id} value={item.id}>
                             {item.name}

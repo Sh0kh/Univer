@@ -12,7 +12,7 @@ import { $api } from "../../utils";
 import { TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sweetAlert } from "../../utils/sweetalert";
 
-export function DeleteRegularlyDoc({ rowId, onDeleted }) {
+export function DeleteAdmin({ rowId, onDeleted }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,7 @@ export function DeleteRegularlyDoc({ rowId, onDeleted }) {
   const handleDeleteCategory = async () => {
     setLoading(true);
     try {
-      await $api.delete(`/regulatory-documents/${rowId}`);
+      await $api.delete(`/user/${rowId}`);
       onDeleted();
       sweetAlert("Muvaffaqiyatli o'chirildi", "success");
       setOpen(false);

@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
     Button,
-    Select,
-    Option,
-    Input,
-    Checkbox
+
 } from "@material-tailwind/react";
 import UzAboutUsCreate from "../AdminComponents/text-editor/uz";
 import EnAboutUsCreate from "../AdminComponents/text-editor/en";
@@ -20,21 +17,9 @@ export default function AboutUsCreate() {
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
     const [KKinfo, setKKInfo] = useState({ title: "", description: "" });
-    const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
-    const FechCategory = async () => {
-        try {
-            const response = await $api.get("/category");
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-    useEffect(() => {
-        FechCategory();
-    }, []);
+
 
     const CreateAboutUs = async () => {
         setLoading(true)
@@ -51,7 +36,6 @@ export default function AboutUsCreate() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            category_id: selectedCategory
         };
 
         try {
@@ -61,7 +45,6 @@ export default function AboutUsCreate() {
             setRuInfo({ title: "", description: "" });
             setEnInfo({ title: "", description: "" });
             setKKInfo({ title: "", description: "" });
-            setSelectedCategory(null);
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
         } finally {
@@ -82,7 +65,7 @@ export default function AboutUsCreate() {
                                 }`}
                             onClick={() => setActiveTab(lang)}
                         >
-                            {lang.toUpperCase()}
+                            {lang == "kk" ? "CHI" : lang.toUpperCase()}
                         </button>
                     ))}
                 </div>
@@ -95,13 +78,6 @@ export default function AboutUsCreate() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
-                    {data.map((item) => (
-                        <Option key={item.id} value={item.id}>
-                            {item.title[activeTab]}
-                        </Option>
-                    ))}
-                </Select>
                 <div className="mt-5">
                     {activeTab === "uz" ? (
                         <UzAboutUsCreate value={uzinfo} onChange={setUzInfo} />

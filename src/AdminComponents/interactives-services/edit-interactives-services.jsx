@@ -8,8 +8,6 @@ import {
     DialogHeader,
     DialogBody,
     DialogFooter,
-    Select,
-    Option,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { $api } from "../../utils";
@@ -18,11 +16,9 @@ import { FaPencilAlt } from "react-icons/fa";
 
 export function EditInteractivesServices({ onUpdated, rowData }) {
     const [open, setOpen] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         title: { uz: "", ru: "", en: "", kk: "" },
-        category_id: "",
     });
 
     useEffect(() => {
@@ -34,23 +30,7 @@ export function EditInteractivesServices({ onUpdated, rowData }) {
         }
     }, [rowData]);
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await $api.get("/category");
-                setCategories(response.data.data);
-            } catch (error) {
-                console.error("Xatolik yuz berdi:", error);
-            }
-        };
-        fetchCategories();
-    }, []);
-
     const handleOpen = () => setOpen(!open);
-
-    const handleInputChange = (e, field) => {
-        setForm({ ...form, [field]: e.target.value });
-    };
 
     const handlePositionChange = (e, lang) => {
         setForm({
@@ -99,21 +79,12 @@ export function EditInteractivesServices({ onUpdated, rowData }) {
                         {["uz", "ru", "en", "kk"].map((lang) => (
                             <div key={lang} className="w-full">
                                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                                    Nomi ({lang.toUpperCase()})
+                                    Nomi ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                                 </Typography>
                                 <Input value={form.title[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
                             </div>
                         ))}
-                        <div className="w-full">
-                            <Select value={form.category_id} onChange={(value) => setForm({ ...form, category_id: value })} label="Kategoriya tanlash">
-                                {categories?.length > 0 &&
-                                    categories.map((option) => (
-                                        <Option key={option.id} value={option.id}>
-                                            {option?.title["uz"]}
-                                        </Option>
-                                    ))}
-                            </Select>
-                        </div>
+                       
                     </div>
                 </DialogBody>
 

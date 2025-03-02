@@ -122,12 +122,12 @@ export function AddScheduledEvent({ onAdded }) {
                   color="blue-gray"
                   className="mb-2 font-medium"
                 >
-                  Sarlavha ({lang.toUpperCase()})
+                  Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input
                   value={form.title[lang]}
                   onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang.toUpperCase()})`}
+                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
                   required
                 />
               </div>

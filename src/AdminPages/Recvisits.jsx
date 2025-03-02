@@ -113,14 +113,6 @@ export default function Recvisits() {
       ),
     },
     {
-      name: "Kategoriya",
-      selector: (row) => (
-        <Tooltip content={row.category?.title[activeTab]} placement="right">
-          <span>{row.category?.title[activeTab]}</span>
-        </Tooltip>
-      ),
-    },
-    {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
@@ -147,7 +139,7 @@ export default function Recvisits() {
               }`}
               onClick={() => setActiveTab(lang)}
             >
-              {lang.toUpperCase()}
+              {lang == "kk" ? "CHI" : lang.toUpperCase()}
             </button>
           ))}
         </div>

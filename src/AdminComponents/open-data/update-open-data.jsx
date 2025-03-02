@@ -18,36 +18,19 @@ import { FaPencilAlt } from "react-icons/fa";
 
 export function UpdateOpenData({ onUpdated, rowData }) {
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
     url: "",
-    category_id: "",
   });
 
   const handleOpen = () => setOpen(!open);
-
-  // Kategoriyalarni olish
-  const fetchCategories = async () => {
-    try {
-      const response = await $api.get("/category");
-      setCategories(response.data.data);
-    } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     if (rowData) {
       setForm({
         name: rowData.name,
         url: rowData.url,
-        category_id: rowData.category?.id || "",
       });
     }
   }, [rowData]);
@@ -65,10 +48,6 @@ export function UpdateOpenData({ onUpdated, rowData }) {
     setForm((prev) => ({ ...prev, url: e.target.value }));
   };
 
-  // Kategoriya tanlash
-  const handleCategoryChange = (value) => {
-    setForm((prev) => ({ ...prev, category_id: value }));
-  };
 
   const handleUpdate = async () => {
     if (!form.category_id) {
@@ -102,7 +81,7 @@ export function UpdateOpenData({ onUpdated, rowData }) {
       <Dialog open={open} handler={handleOpen} size="lg" className="p-4">
         <DialogHeader className="relative">
           <Typography variant="h4" color="blue-gray">
-            Rekvizitni tahrirlash
+            Malumotlarni tahrirlash
           </Typography>
           <IconButton
             size="sm"
@@ -115,21 +94,6 @@ export function UpdateOpenData({ onUpdated, rowData }) {
         </DialogHeader>
 
         <DialogBody className="space-y-4 pb-6">
-          {/* Kategoriya tanlash */}
-          <div className="w-72">
-            <Select
-              value={form.category_id}
-              onChange={(value) => handleCategoryChange(value)}
-              label="Kategoriya tanlash"
-            >
-              {categories?.length > 0 &&
-                categories.map((option) => (
-                  <Option key={option.id} value={option.id}>
-                    {option?.title["uz"]}
-                  </Option>
-                ))}
-            </Select>
-          </div>
 
           {/* Title (ko‘p tilli) */}
           <div className="grid grid-cols-2 gap-4">
@@ -140,12 +104,12 @@ export function UpdateOpenData({ onUpdated, rowData }) {
                   color="blue-gray"
                   className="mb-2 font-medium"
                 >
-                  Sarlavha ({lang.toUpperCase()})
+                  Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input
                   value={form.name[lang]}
                   onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang.toUpperCase()})`}
+                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
                   required
                 />
               </div>

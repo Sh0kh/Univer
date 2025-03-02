@@ -18,7 +18,7 @@ export default function CategoryDetail() {
 
   const fetchData = async () => {
     try {
-      const { data } = await $api.get(`/category/${categoryId}`);
+      const { data } = await $api.get(`/category-show/${categoryId}`);
       setCategoryTitle(data?.data?.title || {});
       setDetails(data?.data?.details || []);
     } catch (error) {
@@ -50,7 +50,7 @@ export default function CategoryDetail() {
     },
     {
       name: "Qo‘shilgan Sana",
-      selector: (row) => new Date(row.created_at).toLocaleDateString(),
+      selector: (row) => new Date(row.category.created_at).toLocaleDateString(),
       sortable: true,
     },
     {
@@ -84,7 +84,7 @@ export default function CategoryDetail() {
               }`}
               onClick={() => setActiveTab(lang)}
             >
-              {lang.toUpperCase()}
+               {lang == "kk" ? "CHI" : lang.toUpperCase()}
             </button>
           ))}
         </div>

@@ -45,10 +45,6 @@ export default function OurPartners() {
             sortable: true,
         },
         {
-            name: "Kategoriya",
-            selector: (row) => row.category?.title[activeTab],
-        },
-        {
             name: "URL",
             selector: (row) => (
                 <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
@@ -94,7 +90,7 @@ export default function OurPartners() {
                                 }`}
                             onClick={() => setActiveTab(lang)}
                         >
-                            {lang.toUpperCase()}
+                            {lang == "kk" ? "CHI" : lang.toUpperCase()}
                         </button>
                     ))}
                 </div>

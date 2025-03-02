@@ -36,12 +36,23 @@ const Login = () => {
     }
   };
 
+  // Enter tugmasini bosganda ishlaydigan funksiya
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // Formning avtomatik jo‘natilishining oldini olamiz
+      handleLogin();
+    }
+  };
+
   return (
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="w-full max-w-md p-6 bg-white bg-opacity-90 rounded-lg shadow-lg text-center">
+      <form 
+        className="w-full max-w-md p-6 bg-white bg-opacity-90 rounded-lg shadow-lg text-center"
+        onKeyDown={handleKeyDown} // Enter tugmachasini kuzatish uchun qo‘shildi
+      >
         <h2 className="text-2xl font-semibold text-center mb-6">Kirish</h2>
         <div className="space-y-4">
           <Input
@@ -86,7 +97,7 @@ const Login = () => {
             {loading ? "Yuklanmoqda..." : "Jo'natish"}
           </Button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

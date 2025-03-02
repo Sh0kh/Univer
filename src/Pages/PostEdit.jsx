@@ -116,7 +116,7 @@ export default function PostEdit() {
                             className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"}`}
                             onClick={() => setActiveTab(lang)}
                         >
-                            {lang.toUpperCase()}
+                            {lang == "kk" ? "CHI" : lang.toUpperCase()}
                         </button>
                     ))}
                 </div>

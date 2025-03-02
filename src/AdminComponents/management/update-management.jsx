@@ -8,17 +8,19 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
-  Select,
-  Option,
+  Card,
+  ListItem,
+  ListItemPrefix,
+  Checkbox,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { $api } from "../../utils";
 import { sweetAlert } from "../../utils/sweetalert";
 import { FaPencilAlt } from "react-icons/fa";
+import { List } from "lucide-react";
 
 export function UpdateManagement({ onUpdated, rowData }) {
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -42,22 +44,10 @@ export function UpdateManagement({ onUpdated, rowData }) {
         reception_days: rowData.reception_days || "",
         phone: rowData.phone || "",
         email: rowData.email || "",
-        category_id: rowData?.category?.category_id || "",
+        // message_receiver: rowData.message_receiver || false,
       });
     }
   }, [rowData]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await $api.get("/category");
-        setCategories(response.data.data);
-      } catch (error) {
-        console.error("Xatolik yuz berdi:", error);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   const handleOpen = () => setOpen(!open);
 
@@ -111,31 +101,63 @@ export function UpdateManagement({ onUpdated, rowData }) {
           <div className="grid grid-cols-2 gap-4">
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
-                <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Lavozim ({lang.toUpperCase()})
+                <Typography
+                  variant="small"
+                  color="blue-gray"
+                  className="mb-2 font-medium"
+                >
+                  Lavozim ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
-                <Input value={form.position[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
+                <Input
+                  value={form.position[lang]}
+                  onChange={(e) => handlePositionChange(e, lang)}
+                  required
+                />
               </div>
             ))}
-            <Input label="F.I.O" value={form.name} onChange={(e) => handleInputChange(e, "name")} required />
-            <Input label="Qabul kunlari" value={form.reception_days} onChange={(e) => handleInputChange(e, "reception_days")} required />
-            <Input label="Telefon" value={form.phone} onChange={(e) => handleInputChange(e, "phone")} required />
-            <Input label="Email" value={form.email} onChange={(e) => handleInputChange(e, "email")} required />
-            <div className="w-72">
-              <Select value={form.category_id} onChange={(value) => setForm({ ...form, category_id: value })} label="Kategoriya tanlash">
-                {categories?.length > 0 &&
-                  categories.map((option) => (
-                    <Option key={option.id} value={option.id}>
-                      {option?.title["uz"]}
-                    </Option>
-                  ))}
-              </Select>
-            </div>
+            <Input
+              label="F.I.O"
+              value={form.name}
+              onChange={(e) => handleInputChange(e, "name")}
+              required
+            />
+            <Input
+              label="Qabul kunlari"
+              value={form.reception_days}
+              onChange={(e) => handleInputChange(e, "reception_days")}
+              required
+            />
+            <Input
+              label="Telefon"
+              value={form.phone}
+              onChange={(e) => handleInputChange(e, "phone")}
+              required
+            />
+            <Input
+              label="Email"
+              value={form.email}
+              onChange={(e) => handleInputChange(e, "email")}
+              required
+            />
+            {/* <Checkbox
+              checked={form.message_receiver}
+              label={
+                <div>
+                  <Typography color="blue-gray" className="font-medium">
+                    Rektor 
+                  </Typography>
+                </div>
+              }
+            /> */}
           </div>
         </DialogBody>
 
         <DialogFooter>
-          <Button onClick={handleUpdate} disabled={loading} className="bg-blue-500 text-white">
+          <Button
+            onClick={handleUpdate}
+            disabled={loading}
+            className="bg-blue-500 text-white"
+          >
             {loading ? "Saqlanmoqda..." : "Saqlash"}
           </Button>
         </DialogFooter>

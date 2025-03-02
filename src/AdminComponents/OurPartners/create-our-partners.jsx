@@ -17,8 +17,6 @@ import { sweetAlert } from "../../utils/sweetalert";
 
 export function CreateOurPartners({ onAdded }) {
     const [open, setOpen] = useState(false);
-    const [categories, setCategories] = useState([]);
-    const [categoryId, setCategoryId] = useState("");
     const [loading, setLoading] = useState(false);
     const [imageFile, setImageFile] = useState(null);
 
@@ -30,27 +28,8 @@ export function CreateOurPartners({ onAdded }) {
 
     const handleOpen = () => setOpen(!open);
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await $api.get("/category");
-                setCategories(response.data.data);
-            } catch (error) {
-                console.error("Xatolik yuz berdi:", error);
-            }
-        };
-        fetchCategories();
-    }, []);
-
     const handleInputChange = (e, field) => {
         setForm({ ...form, [field]: e.target.value });
-    };
-
-    const handlePositionChange = (e, lang) => {
-        setForm({
-            ...form,
-            position: { ...form.position, [lang]: e.target.value },
-        });
     };
 
     const handleImageUpload = async (e) => {
@@ -70,7 +49,6 @@ export function CreateOurPartners({ onAdded }) {
             const formData = new FormData();
             formData.append("name", form.name);
             formData.append("url", form.url);
-            formData.append("category_id", categoryId);
             formData.append("photo", imageFile);
 
             await $api.post("/our-partners", formData, {
@@ -85,7 +63,6 @@ export function CreateOurPartners({ onAdded }) {
                 url: "",
                 image: "",
             });
-            setCategoryId("");
             sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
             handleOpen();
         } catch (error) {
@@ -120,16 +97,6 @@ export function CreateOurPartners({ onAdded }) {
                     <div className="flex items-center gap-[10px] flex-col">
                         <Input label="Nomi" value={form.name} onChange={(e) => handleInputChange(e, "name")} required />
                         <Input label="Havola" value={form.url} onChange={(e) => handleInputChange(e, "url")} required />
-                        <div className="w-[100%]">
-                            <Select value={categoryId} onChange={(e) => setCategoryId(e)} label="Kategoriya tanlash">
-                                {categories?.length > 0 &&
-                                    categories.map((option) => (
-                                        <Option key={option.id} value={option.id}>
-                                            {option?.title["uz"]}
-                                        </Option>
-                                    ))}
-                            </Select>
-                        </div>
                         <div className="w-[100%]">
                             <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
                                 Rasm yuklash

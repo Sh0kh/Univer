@@ -27,7 +27,7 @@ export function DeleteCategoryDetail({ categoryId, onCategoryDeleted }) {
       setOpen(false);
     } catch (error) {
       setOpen(false);
-      console.error("Kategoriya o‘chirishda xatolik:", error);
+      console.error("Malumotni o‘chirishda xatolik:", error);
       sweetAlert(`Xatolik: ${error}`, "error");
     }
     setLoading(false);

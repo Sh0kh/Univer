@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Dialog,
     Button,
@@ -8,8 +8,6 @@ import {
     DialogHeader,
     DialogBody,
     DialogFooter,
-    Select,
-    Option,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { $api } from "../../utils";
@@ -17,7 +15,6 @@ import { sweetAlert } from "../../utils/sweetalert";
 
 export function CreateInteractivesServices({ onAdded }) {
     const [open, setOpen] = useState(false);
-    const [categories, setCategories] = useState([]);
     const [categoryId, setCategoryId] = useState("");
     const [loading, setLoading] = useState(false);
     const [imageFile, setImageFile] = useState(null);
@@ -29,22 +26,6 @@ export function CreateInteractivesServices({ onAdded }) {
     });
 
     const handleOpen = () => setOpen(!open);
-
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const response = await $api.get("/category");
-                setCategories(response.data.data);
-            } catch (error) {
-                console.error("Xatolik yuz berdi:", error);
-            }
-        };
-        fetchCategories();
-    }, []);
-
-    const handleInputChange = (e, field) => {
-        setForm({ ...form, [field]: e.target.value });
-    };
 
     const handlePositionChange = (e, lang) => {
         setForm({
@@ -122,19 +103,11 @@ export function CreateInteractivesServices({ onAdded }) {
                         {["uz", "ru", "en", "kk"].map((lang) => (
                             <div key={lang} className="w-full">
                                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                                    Nomi ({lang.toUpperCase()})
+                                    Nomi ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                                 </Typography>
                                 <Input value={form.name[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
                             </div>
                         ))}                        <div className="w-[100%]">
-                            <Select value={categoryId} onChange={(e) => setCategoryId(e)} label="Kategoriya tanlash">
-                                {categories?.length > 0 &&
-                                    categories.map((option) => (
-                                        <Option key={option.id} value={option.id}>
-                                            {option?.title["uz"]}
-                                        </Option>
-                                    ))}
-                            </Select>
                         </div>
                         <div className="w-[100%]">
                             <Typography variant="small" color="blue-gray" className="mb-2 font-medium">

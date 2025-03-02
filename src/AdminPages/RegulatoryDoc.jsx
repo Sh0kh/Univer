@@ -40,11 +40,6 @@ export default function RegulatoryDoc() {
       sortable: true,
     },
     {
-      name: `Kategoriya (${activeTab.toUpperCase()})`,
-      selector: (row) => row?.category?.title?.[activeTab] || "Noma'lum",
-      sortable: true,
-    },
-    {
       name: "URL",
       selector: (row) => (
         <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
@@ -80,7 +75,7 @@ export default function RegulatoryDoc() {
               className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"}`}
               onClick={() => setActiveTab(lang)}
             >
-              {lang.toUpperCase()}
+              {lang == "kk" ? "CHI" : lang.toUpperCase()}
             </button>
           ))}
         </div>

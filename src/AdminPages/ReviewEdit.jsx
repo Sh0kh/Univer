@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
     Button,
-    Select,
-    Option,
 } from "@material-tailwind/react";
 import UzAboutUsCreate from "../AdminComponents/text-editor/uz";
 import EnAboutUsCreate from "../AdminComponents/text-editor/en";
@@ -19,23 +17,10 @@ export default function ReviewEdit() {
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
     const [KKinfo, setKKInfo] = useState({ title: "", description: "" });
-    const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [loading2, setLoading2] = useState(true)
     const { ID } = useParams()
-
-    const FechCategory = async () => {
-        try {
-            const response = await $api.get("/category");
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-
-
 
     const FechAboutUsId = async () => {
         try {
@@ -44,7 +29,6 @@ export default function ReviewEdit() {
             setRuInfo({ title: response?.data?.data?.title?.ru, description: response?.data?.data?.description?.ru })
             setEnInfo({ title: response?.data?.data?.title?.en, description: response?.data?.data?.description?.en })
             setKKInfo({ title: response?.data?.data?.title?.kk, description: response?.data?.data?.description?.kk })
-            setSelectedCategory(response?.data?.data?.category?.category_id)
         } catch (error) {
             console.log(error)
         } finally {
@@ -53,8 +37,6 @@ export default function ReviewEdit() {
     }
 
     useEffect(() => {
-
-        FechCategory();
         FechAboutUsId()
     }, []);
 
@@ -73,7 +55,6 @@ export default function ReviewEdit() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            category_id: selectedCategory
         };
 
         try {
@@ -104,7 +85,7 @@ export default function ReviewEdit() {
                                 }`}
                             onClick={() => setActiveTab(lang)}
                         >
-                            {lang.toUpperCase()}
+                            {lang == "kk" ? "CHI" : lang.toUpperCase()}
                         </button>
                     ))}
                 </div>
@@ -113,15 +94,6 @@ export default function ReviewEdit() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <Select
-                    value={selectedCategory}
-                    label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
-                    {data.map((item) => (
-                        <Option key={item.id} value={item.id}>
-                            {item.title[activeTab]}
-                        </Option>
-                    ))}
-                </Select>
                 <div className="mt-5">
                     {activeTab === "uz" ? (
                         <UzAboutUsCreate value={uzinfo} onChange={setUzInfo} />

@@ -116,7 +116,7 @@ export function CreateJob({ onAdded }) {
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Nomi ({lang.toUpperCase()})
+                  Nomi ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input value={form.title[lang]} onChange={(e) => handletitleChange(e, lang)} required />
               </div>
@@ -124,7 +124,7 @@ export function CreateJob({ onAdded }) {
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Lavozim ({lang.toUpperCase()})
+                  Lavozim ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input value={form.faculty[lang]} onChange={(e) => handleFacultyChange(e, lang)} required />
               </div>
@@ -132,7 +132,7 @@ export function CreateJob({ onAdded }) {
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Batafsil malumot ({lang.toUpperCase()})
+                  Batafsil malumot ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input value={form.description[lang]} onChange={(e) => handleDescriptionChange(e, lang)} required />
               </div>
@@ -140,7 +140,7 @@ export function CreateJob({ onAdded }) {
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Manzil ({lang.toUpperCase()})
+                  Manzil ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input value={form.location[lang]} onChange={(e) => handlelocationChange(e, lang)} required />
               </div>
@@ -148,7 +148,7 @@ export function CreateJob({ onAdded }) {
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
                 <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
-                  Ish turi ({lang.toUpperCase()})
+                  Ish turi ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input value={form.employment_type[lang]} onChange={(e) => handleEmployment_typeChange(e, lang)} required />
               </div>
