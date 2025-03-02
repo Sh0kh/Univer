@@ -18,7 +18,7 @@ export default function CategoryDetail() {
 
   const fetchData = async () => {
     try {
-      const { data } = await $api.get(`/category-show/${categoryId}`);
+      const { data } = await $api.get(`/category/${categoryId}`);
       setCategoryTitle(data?.data?.title || {});
       setDetails(data?.data?.details || []);
     } catch (error) {
@@ -46,11 +46,6 @@ export default function CategoryDetail() {
     {
       name: "Slug",
       selector: (row) => row.slug,
-      sortable: true,
-    },
-    {
-      name: "Qo‘shilgan Sana",
-      selector: (row) => new Date(row.category.created_at).toLocaleDateString(),
       sortable: true,
     },
     {
