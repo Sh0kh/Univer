@@ -79,7 +79,7 @@ export default function Hero() {
 
                                 <NavLink
                                     onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                    to={'/barcha-yangiliklar'} >
+                                    to={`/yangilik/${i?.id}`} >
                                     <button className="flex items-center justify-between mt-[40px] border-[#d5d7da] rounded-lg px-[18px] py-[12px] w-[124px] h-[48px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05),_inset_0_-2px_0_0_rgba(10,13,18,0.05),_inset_0_0_0_1px_rgba(10,13,18,0.18)] bg-white font-semibold">
                                         <span className="text-[16px] leading-[150%] text-[#414651]">Batafsil</span>
                                         <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
