@@ -21,7 +21,7 @@ export function DeleteCategoryDetail({ categoryId, onCategoryDeleted }) {
   const handleDeleteCategory = async () => {
     setLoading(true);
     try {
-      await $api.delete(`/category-detal/${categoryId}`);
+      await $api.delete(`/category-detail/${categoryId}`);
       onCategoryDeleted();
       sweetAlert("Muvaffaqiyatli o'chirildi", "success");
       setOpen(false);

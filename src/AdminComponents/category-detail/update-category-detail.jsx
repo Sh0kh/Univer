@@ -55,7 +55,7 @@ export function UpdateCategoryDetail({ categoryData, onCategoryUpdated }) {
 
     setLoading(true);
     try {
-      await $api.put(`/category-detal/${categoryData.id}`, {
+      await $api.put(`/category-detail/${categoryData.id}`, {
         title: category,
         category_id: categoryId,
       });
