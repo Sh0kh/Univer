@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
+import { $api } from "../utils";
     
 
 export default function UserPost() {
@@ -15,8 +16,8 @@ export default function UserPost() {
 
     const getPost = async () => {
         try {
-            const response = await axios.get(`/category-detail-first/${ID}`)
-            setData(response?.data?.data?.post)
+            const response = await $api.get(`/category-detail/${ID}`)
+            setData(response?.data?.data?.posts)
         } catch (error) {
             console.log(error)
         } finally {
@@ -42,5 +43,5 @@ export default function UserPost() {
             <MiniHeader title={data[0]?.title[i18n?.language]} minititle={data[0]?.title[i18n?.language]} />
             <PostHero data={data} />
         </div>
-    )
+    )   
 }
