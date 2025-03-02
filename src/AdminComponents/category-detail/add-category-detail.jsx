@@ -43,7 +43,7 @@ export function AddCategoryDetail({ onCategoryDetailAdded }) {
 
     setLoading(true);
     try {
-      await $api.post("/category-detal", { title: category, category_id: categoryId, });
+      await $api.post("/category-detail", { title: category, category_id: categoryId, });
       onCategoryDetailAdded();
       setCategory({ uz: "", ru: "", en: "", kk: "" });
       setErrors({ uz: false, ru: false, en: false, kk: false });
