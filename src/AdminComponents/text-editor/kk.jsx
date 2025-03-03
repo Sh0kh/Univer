@@ -1,11 +1,17 @@
 import { Input } from "@material-tailwind/react";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 export default function KKEditor({ value, onChange }) {
-    const [content, setContent] = useState(value?.description || "");
+    const [content, setContent] = useState();
     const quillRef = useRef(null);
+
+
+
+    useEffect(() => {
+        setContent(value?.description || "");
+    }, [value]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

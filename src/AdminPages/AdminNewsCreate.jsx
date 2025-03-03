@@ -106,6 +106,7 @@ export default function NewsCreate() {
       setShowInCarousel(false);
       setDate("");
       setSelectedFile(null);
+      setFilePreview(null)
     } catch (error) {
       sweetAlert(`Xatolik: ${error.message}`, "error");
       console.error("Xatolik yuz berdi:", error);

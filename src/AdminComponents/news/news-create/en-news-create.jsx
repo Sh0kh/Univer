@@ -1,10 +1,14 @@
 import { Input, Textarea } from "@material-tailwind/react";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 export default function EnNewsCreate({ value, onChange }) {
-    const [content, setContent] = useState(value?.summary || "");
+    const [content, setContent] = useState();
+
+    useEffect(() => {
+        setContent(value?.summary || "");
+    }, [value]);
     const quillRef = useRef(null);
     const handleChange = (e) => {
         const { name, value } = e.target;

@@ -1,11 +1,15 @@
 import { Input } from "@material-tailwind/react";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 export default function UzEditor({ value, onChange }) {
-    const [content, setContent] = useState(value?.description || "");
+    const [content, setContent] = useState();
     const quillRef = useRef(null);
+
+    useEffect(() => {
+        setContent(value?.description || "");
+    }, [value]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -86,7 +90,7 @@ export default function UzEditor({ value, onChange }) {
                     modules={modules}
                     formats={formats}
                     placeholder="..."
-                    style={{ height: "300px", marginBottom:'50px' }}
+                    style={{ height: "300px", marginBottom: '50px' }}
                 />
             </div>
             <style jsx>{`

@@ -4,6 +4,8 @@ import { FaChartPie } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
 import { MdPermMedia } from "react-icons/md";
 import { MdFindInPage } from "react-icons/md";
+import { IoPeopleSharp } from "react-icons/io5";
+
 import {
   FaBuilding,
   FaHandshake,
@@ -67,6 +69,10 @@ const menuItems = [
         name: "Rekvizitlar",
         path: "/admin/recvizits",
       },
+      {
+        name: "Interakriv Hizmatlar",
+        path: "/admin/Interactives/Services",
+      },
     ],
     path: "/admin/events",
     icon: <MdFindInPage className="text-lg" />,
@@ -109,34 +115,8 @@ const menuItems = [
 
     ],
     path: "/admin/events",
-    icon: <MdPermMedia className="text-lg" />,
+    icon: <IoPeopleSharp  className="text-lg" />,
   },
-  // {
-  //   name: "Murojaatlarni ko‘rib chiqish tartibi",
-  //   path: "/admin/review",
-  //   icon: <MdRequestPage className="text-lg" />,
-  // },
-  // {
-  //   name: "Xalqaro aloqalar",
-  //   path: "/admin/international",
-  //   icon: <TbWorld className="text-lg" />,
-  // },
-  // {
-  //   name: "Biz haqimizda",
-  //   path: "/admin/aboutus",
-  //   icon: <FaBuilding className="text-lg" />,
-  // },
-  // {
-  //   name: "Hamkorlarimiz",
-  //   path: "/admin/OurPartners",
-  //   icon: <FaHandshake className="text-lg" />,
-  // },
-  {
-    name: "Interakriv Hizmatlar",
-    path: "/admin/Interactives/Services",
-    icon: <AiOutlineInteraction className="text-lg" />,
-  },
-
   {
     name: "Ochiq ma'lumotlar",
     subItems: [
