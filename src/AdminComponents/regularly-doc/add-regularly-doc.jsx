@@ -16,6 +16,7 @@ import { sweetAlert } from "../../utils/sweetalert";
 export function AddRegularlyDoc({ onAdded }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
     url: "",
@@ -23,7 +24,6 @@ export function AddRegularlyDoc({ onAdded }) {
 
   const handleOpen = () => setOpen(!open);
 
-  // Title o'zgarishini boshqarish
   const handleTitleChange = (e, lang) => {
     setForm((prev) => ({
       ...prev,
@@ -31,17 +31,33 @@ export function AddRegularlyDoc({ onAdded }) {
     }));
   };
 
-  // URL o'zgarishini boshqarish
   const handleUrlChange = (e) => {
     setForm((prev) => ({ ...prev, url: e.target.value }));
   };
 
-  // Kategoriya tanlash
-  const handleCategoryChange = (value) => {
-    setForm((prev) => ({ ...prev, category_id: value }));
+  const validateForm = () => {
+    let newErrors = {};
+    
+    // Har bir til bo'yicha sarlavhani tekshirish
+    Object.keys(form.name).forEach((lang) => {
+      if (!form.name[lang].trim()) {
+        newErrors[lang] = `Sarlavha (${lang.toUpperCase()}) talab qilinadi`;
+      }
+    });
+    
+    // URL ni tekshirish
+    if (!form.url.trim()) {
+      newErrors.url = "URL talab qilinadi";
+    } else if (!/^https?:\/\/.+/.test(form.url)) {
+      newErrors.url = "Yaroqli URL kiriting";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleAdd = async () => {
+    if (!validateForm()) return;
 
     setLoading(true);
     try {
@@ -49,6 +65,8 @@ export function AddRegularlyDoc({ onAdded }) {
       onAdded();
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
+      setForm({ name: { uz: "", ru: "", en: "", kk: "" }, url: "" }); // Formni tozalash
+      setErrors({});
     } catch (error) {
       console.error("Xatolik:", error);
       sweetAlert("Xatolik yuz berdi!", "error");
@@ -78,7 +96,6 @@ export function AddRegularlyDoc({ onAdded }) {
         </DialogHeader>
 
         <DialogBody className="space-y-4 pb-6">
-
           {/* Title (ko‘p tilli) */}
           <div className="grid grid-cols-2 gap-4">
             {["uz", "ru", "en", "kk"].map((lang) => (
@@ -88,14 +105,16 @@ export function AddRegularlyDoc({ onAdded }) {
                   color="blue-gray"
                   className="mb-2 font-medium"
                 >
-                  Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
+                  Sarlavha ({lang === "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input
                   value={form.name[lang]}
                   onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
+                  placeholder={`Sarlavha (${lang === "kk" ? "CHI" : lang.toUpperCase()})`}
                   required
+                  error={errors[lang] ? true : false}
                 />
+                {errors[lang] && <p className="text-red-500 text-xs">{errors[lang]}</p>}
               </div>
             ))}
           </div>
@@ -110,7 +129,9 @@ export function AddRegularlyDoc({ onAdded }) {
               onChange={handleUrlChange}
               placeholder="https://example.com"
               required
+              error={errors.url ? true : false}
             />
+            {errors.url && <p className="text-red-500 text-xs">{errors.url}</p>}
           </div>
         </DialogBody>
 

@@ -37,7 +37,7 @@ export default function AdminHomePage() {
           <h2 className="text-4xl font-bold">{data?.professors_count || 0}</h2>
           <p className="text-lg">Professorlar</p>
         </div>
-        <div className="bg-yellow-500 text-white p-6 rounded-lg shadow-lg">
+        <div className="bg-yellow-500 text-black p-6 rounded-lg shadow-lg">
           <h2 className="text-4xl font-bold">{data?.faculties_count || 0}</h2>
           <p className="text-lg">Fakultetlar</p>
         </div>
