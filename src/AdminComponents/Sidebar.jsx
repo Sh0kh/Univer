@@ -54,8 +54,19 @@ const menuItems = [
   {
     name: "Statik Sahifalar",
     subItems: [
-      { name: "Barcha sahifalar", path: "/admin/photo-media" },
-      { name: "Sahifa qo'shish", path: "/admin/video-media" },
+      { name: "Xalqaro aloqalar", path: "/admin/international" },
+      { name: "Biz haqimizda", path: "/admin/aboutus" },
+      { name: "Hamkorlarimiz", path: "/admin/OurPartners" },
+      {
+        name: "Bolimlar",
+        path: "/admin/sections",
+      },
+      { name: "Markazlar", path: "/admin/centers" },
+
+      {
+        name: "Rekvizitlar",
+        path: "/admin/recvizits",
+      },
     ],
     path: "/admin/events",
     icon: <MdFindInPage className="text-lg" />,
@@ -64,7 +75,6 @@ const menuItems = [
     name: "Dinamik Sahifalar",
     subItems: [
       { name: "Barcha sahifalar", path: "/admin/post" },
-      { name: "Sahifa qo'shish", path: "/admin/post/create" },
     ],
     path: "/admin/events",
     icon: <MdFindInPage className="text-lg" />,
@@ -75,85 +85,71 @@ const menuItems = [
       { name: "Foto medialar", path: "/admin/photo-media" },
       { name: "Video medialar", path: "/admin/video-media" },
       { name: "Media yaratish", path: "/admin/create-media" },
+
     ],
     path: "/admin/events",
     icon: <MdPermMedia className="text-lg" />,
   },
   {
-    name: "Murojaatlarni ko‘rib chiqish tartibi",
-    path: "/admin/review",
-    icon: <MdRequestPage className="text-lg" />,
-  },
-  {
-    name: "Xalqaro aloqalar",
-    path: "/admin/international",
-    icon: <TbWorld className="text-lg" />,
-  },
-  {
-    name: "Biz haqimizda",
-    path: "/admin/aboutus",
-    icon: <FaBuilding className="text-lg" />,
-  },
-  {
     name: "Rahbariyat",
-    path: "/admin/management",
-    icon: <RiTeamFill className="text-lg" />,
+    subItems: [
+      { name: "Rahbariyat", path: "/admin/management", },
+      {
+        name: "Bosh ish orinlari",
+        path: "/admin/vacancies",
+      },
+      {
+        name: "Statistika",
+        path: "/admin/statistics",
+      },
+      {
+        name: "Marosimlar Jadvali",
+        path: "/admin/schedule-event",
+      },
+
+    ],
+    path: "/admin/events",
+    icon: <MdPermMedia className="text-lg" />,
   },
-  {
-    name: "Hamkorlarimiz",
-    path: "/admin/OurPartners",
-    icon: <FaHandshake className="text-lg" />,
-  },
+  // {
+  //   name: "Murojaatlarni ko‘rib chiqish tartibi",
+  //   path: "/admin/review",
+  //   icon: <MdRequestPage className="text-lg" />,
+  // },
+  // {
+  //   name: "Xalqaro aloqalar",
+  //   path: "/admin/international",
+  //   icon: <TbWorld className="text-lg" />,
+  // },
+  // {
+  //   name: "Biz haqimizda",
+  //   path: "/admin/aboutus",
+  //   icon: <FaBuilding className="text-lg" />,
+  // },
+  // {
+  //   name: "Hamkorlarimiz",
+  //   path: "/admin/OurPartners",
+  //   icon: <FaHandshake className="text-lg" />,
+  // },
   {
     name: "Interakriv Hizmatlar",
     path: "/admin/Interactives/Services",
     icon: <AiOutlineInteraction className="text-lg" />,
   },
+
   {
-    name: "Marosimlar Jadvali",
-    path: "/admin/schedule-event",
-    icon: <GrSchedule className="text-lg" />,
-  },
-  // {
-  //   name: "Postlar",
-  //   path: "/admin/post",
-  //   icon: <BsFillPostcardFill className="text-lg" />,
-  // },
-  {
-    name: "Ochik ma'lumotlar",
+    name: "Ochiq ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
       { name: "Karrupsiyaga qarshi", path: "/admin/against-corrution" },
       { name: "Regularly Document", path: "/admin/regulatory-doc" },
+      {
+        name: "Murojaatlarni ko‘rib chiqish tartibi",
+        path: "/admin/review",
+      },
     ],
     path: "/admin/events",
     icon: <AiOutlineFileText className="text-lg" />,
-  },
-  
-  {
-    name: "Bosh ish orinlari",
-    path: "/admin/vacancies",
-    icon: <RiTeamFill className="text-lg" />,
-  },
-  {
-    name: "Bolimlar",
-    path: "/admin/sections",
-    icon: <MdBusiness className="text-lg" />,
-  },
-  {
-    name: "Statistika",
-    path: "/admin/statistics",
-    icon: <FaChartPie className="text-lg" />,
-  },
-  {
-    name: "Rekvizitlar",
-    path: "/admin/recvizits",
-    icon: <TbClipboardList className="text-lg" />,
-  },
-  {
-    name: "Markazlar",
-    path: "/admin/centers",
-    icon: <MdBusiness className="text-lg" />,
   },
 ];
 

@@ -151,7 +151,7 @@ function App() {
               <Route path="/barcha-yangiliklar" element={<AllNews />} />
               <Route path="/markazlar-bolimlar/:ID" element={<SectionCenter />} />
               <Route path="/yangilik/:ID" element={<NewDetail />} />
-              <Route path="/post/:ID" element={<UserPost />} />
+              <Route path="/sahifa/:ID" element={<UserPost />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

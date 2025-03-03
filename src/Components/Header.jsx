@@ -313,7 +313,7 @@ export default function Header() {
                                         {i?.details?.map((event, index2) => (
                                             <NavLink
                                                 key={index2}
-                                                to={`/post/${event?.id}`}
+                                                to={`/sahifa/${event?.id}`}
                                                 className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block"
                                             >
                                                 {event?.title[i18n?.language]}
