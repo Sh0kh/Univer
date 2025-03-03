@@ -15,9 +15,9 @@ import { sweetAlert } from "../../utils/sweetalert";
 
 export function CreateInteractivesServices({ onAdded }) {
   const [open, setOpen] = useState(false);
-  const [categoryId, setCategoryId] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
@@ -26,6 +26,17 @@ export function CreateInteractivesServices({ onAdded }) {
   });
 
   const handleOpen = () => setOpen(!open);
+
+  const validateForm = () => {
+    let newErrors = {};
+    if (!form.name.uz) newErrors.uz = "O‘zbek tilida nom kiritish shart";
+    if (!form.name.ru) newErrors.ru = "Rus tilida nom kiritish shart";
+    if (!form.name.en) newErrors.en = "Ingliz tilida nom kiritish shart";
+    if (!form.name.kk) newErrors.kk = "Qozoq tilida nom kiritish shart";
+    if (!imageFile) newErrors.image = "Rasm yuklash shart";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handlePositionChange = (e, lang) => {
     setForm({
@@ -38,20 +49,18 @@ export function CreateInteractivesServices({ onAdded }) {
     const file = e.target.files[0];
     if (!file) return;
     setImageFile(file);
-
-    const formData = new FormData();
-    formData.append("photo", imageFile);
   };
 
   const handleAdd = async () => {
+    if (!validateForm()) return;
     setLoading(true);
+    console.log('Loading file ');
     try {
       const formData = new FormData();
       formData.append("title[uz]", form.name.uz);
       formData.append("title[ru]", form.name.ru);
       formData.append("title[en]", form.name.en);
       formData.append("title[kk]", form.name.kk);
-      formData.append("category_id", categoryId);
       formData.append("photo", imageFile);
 
       await $api.post("/interactives-services", formData, {
@@ -62,11 +71,10 @@ export function CreateInteractivesServices({ onAdded }) {
 
       onAdded();
       setForm({
-        name: "",
+        name: { uz: "", ru: "", en: "", kk: "" },
         url: "",
         image: "",
       });
-      setCategoryId("");
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
     } catch (error) {
@@ -105,17 +113,17 @@ export function CreateInteractivesServices({ onAdded }) {
                   color="blue-gray"
                   className="mb-2 font-medium"
                 >
-                  Nomi ({lang == "kk" ? "CHI" : lang.toUpperCase()})
+                  Nomi ({lang === "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
                 <Input
                   value={form.name[lang]}
                   onChange={(e) => handlePositionChange(e, lang)}
                   required
                 />
+                {errors[lang] && <p className="text-red-500 text-sm">{errors[lang]}</p>}
               </div>
-            ))}{" "}
-            <div className="w-[100%]"></div>
-            <div className="w-[100%]">
+            ))} 
+            <div className="w-full">
               <Typography
                 variant="small"
                 color="blue-gray"
@@ -128,6 +136,7 @@ export function CreateInteractivesServices({ onAdded }) {
                 onChange={handleImageUpload}
                 accept="image/*"
               />
+              {errors.image && <p className="text-red-500 text-sm">{errors.image}</p>}
             </div>
           </div>
         </DialogBody>

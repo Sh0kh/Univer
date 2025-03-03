@@ -21,7 +21,7 @@ export function DeleteCorruption({ rowId, onDeleted }) {
   const handleDeleteCategory = async () => {
     setLoading(true);
     try {
-      await $api.delete(`/fighting-corruptions/${rowId}`);
+      await $api.delete(`/fighting-corruption/${rowId}`);
       onDeleted();
       sweetAlert("Muvaffaqiyatli o'chirildi", "success");
       setOpen(false);

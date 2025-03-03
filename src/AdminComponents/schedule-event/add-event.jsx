@@ -18,6 +18,8 @@ import { sweetAlert } from "../../utils/sweetalert";
 export function AddScheduledEvent({ onAdded }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  
   const [form, setForm] = useState({
     title: { uz: "", ru: "", en: "", kk: "" },
     date: "",
@@ -28,7 +30,30 @@ export function AddScheduledEvent({ onAdded }) {
 
   const handleOpen = () => setOpen(!open);
 
-  // Title o'zgarishini boshqarish
+  const validateForm = () => {
+    let newErrors = {};
+
+    // Title tekshirish
+    ["uz", "ru", "en", "kk"].forEach(lang => {
+      if (!form.title[lang]) {
+        newErrors[lang] = `Sarlavha (${lang.toUpperCase()}) kiritish shart!`;
+      }
+    });
+
+    // Sana va vaqtlarni tekshirish
+    if (!form.date) newErrors.date = "Sana tanlash shart!";
+    if (!form.start_time) newErrors.start_time = "Boshlanish vaqtini tanlang!";
+    if (!form.end_time) newErrors.end_time = "Tugash vaqtini tanlang!";
+
+    // Boshlanish va tugash vaqtini taqqoslash
+    if (form.start_time && form.end_time && form.start_time >= form.end_time) {
+      newErrors.time = "Boshlanish vaqti tugash vaqtidan oldin bo‘lishi kerak!";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleTitleChange = (e, lang) => {
     setForm((prev) => ({
       ...prev,
@@ -36,26 +61,22 @@ export function AddScheduledEvent({ onAdded }) {
     }));
   };
 
-  // Date, start_time, end_time o'zgarishini boshqarish
   const handleChange = (e) => {
     const { name, value } = e.target;
   
     if (name === "date") {
-      const [year, month, day] = value.split("-"); // `2025-02-10` → `["2025", "02", "10"]`
-      const formattedDate = `${day}.${month}.${year}`; // `10.02.2025`
+      const [year, month, day] = value.split("-");
+      const formattedDate = `${day}.${month}.${year}`;
       setForm((prev) => ({ ...prev, [name]: formattedDate }));
     } else if (name === "start_time" || name === "end_time") {
-      const [hours, minutes] = value.split(":"); // `14:30:00` → `["14", "30", "00"]`
-      const formattedTime = `${hours}:${minutes}`; // `14:30`
+      const [hours, minutes] = value.split(":");
+      const formattedTime = `${hours}:${minutes}`;
       setForm((prev) => ({ ...prev, [name]: formattedTime }));
     } else {
       setForm((prev) => ({ ...prev, [name]: value }));
     }
   };
-  
-  
 
-  // Statusni o'zgartirish
   const handleStatusChange = (value) => {
     setForm((prev) => ({
       ...prev,
@@ -64,10 +85,7 @@ export function AddScheduledEvent({ onAdded }) {
   };
 
   const handleAdd = async () => {
-    if (!form.date || !form.start_time || !form.end_time) {
-      sweetAlert("Sanani va vaqtni to‘liq kiriting!", "error");
-      return;
-    }
+    if (!validateForm()) return;
 
     setLoading(true);
     try {
@@ -76,7 +94,6 @@ export function AddScheduledEvent({ onAdded }) {
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
 
-      // clear form
       setForm({
         title: { uz: "", ru: "", en: "", kk: "" },
         date: "",
@@ -84,6 +101,7 @@ export function AddScheduledEvent({ onAdded }) {
         end_time: "",
         status: { uz: "Kutulmoqda", ru: "Kutulmoqda", en: "Kutulmoqda", kk: "Kutulmoqda" },
       });
+      setErrors({});
     } catch (error) {
       console.error("Xatolik:", error);
       sweetAlert("Xatolik yuz berdi!", "error");
@@ -113,52 +131,45 @@ export function AddScheduledEvent({ onAdded }) {
         </DialogHeader>
 
         <DialogBody className="space-y-4 pb-6">
-          {/* Title (ko‘p tilli) */}
           <div className="grid grid-cols-2 gap-4">
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 font-medium"
-                >
+                <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
                   Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
                 </Typography>
-                <Input
-                  value={form.title[lang]}
-                  onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
-                  required
-                />
+                <Input value={form.title[lang]} onChange={(e) => handleTitleChange(e, lang)} required />
+                {errors[lang] && <p className="text-red-500 text-sm">{errors[lang]}</p>}
               </div>
             ))}
           </div>
 
-          {/* Date tanlash */}
           <div>
             <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
               Sana
             </Typography>
-            <Input type="date" name="date" value={form.date} onChange={handleChange} required />
+            <Input type="date" name="date"  onChange={handleChange} required />
+            {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
           </div>
 
-          {/* Start va End Time */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
                 Boshlanish vaqti
               </Typography>
               <Input type="time" name="start_time" value={form.start_time} onChange={handleChange} required />
+              {errors.start_time && <p className="text-red-500 text-sm">{errors.start_time}</p>}
             </div>
             <div>
               <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
                 Tugash vaqti
               </Typography>
               <Input type="time" name="end_time" value={form.end_time} onChange={handleChange} required />
+              {errors.end_time && <p className="text-red-500 text-sm">{errors.end_time}</p>}
             </div>
           </div>
 
-          {/* Status tanlash */}
+          {errors.time && <p className="text-red-500 text-sm">{errors.time}</p>}
+
           <div>
             <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
               Status
@@ -172,8 +183,8 @@ export function AddScheduledEvent({ onAdded }) {
         </DialogBody>
 
         <DialogFooter>
-          <Button onClick={handleAdd} loading={loading} className="bg-blue-500 text-white">
-            Saqlash
+          <Button onClick={handleAdd} disabled={loading} className="bg-blue-500 text-white">
+            {loading ? "Saqlanmoqda..." : "Saqlash"}
           </Button>
         </DialogFooter>
       </Dialog>
