@@ -17,20 +17,40 @@ export default function NewsCreate() {
   const [showInCarousel, setShowInCarousel] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [uzinfo, setUzInfo] = useState({ title: "", description: "", summary: '' });
-  const [ruinfo, setRuInfo] = useState({ title: "", description: "", summary: '' });
-  const [Eninfo, setEnInfo] = useState({ title: "", description: "", summary: '' });
-  const [KKinfo, setKKInfo] = useState({ title: "", description: "", summary: '' });
+  const [uzinfo, setUzInfo] = useState({
+    title: "",
+    description: "",
+    summary: "",
+  });
+  const [ruinfo, setRuInfo] = useState({
+    title: "",
+    description: "",
+    summary: "",
+  });
+  const [Eninfo, setEnInfo] = useState({
+    title: "",
+    description: "",
+    summary: "",
+  });
+  const [KKinfo, setKKInfo] = useState({
+    title: "",
+    description: "",
+    summary: "",
+  });
+  const [filePreview, setFilePreview] = useState(null); // Rasm preview uchun yangi state
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+
       if (file.size > 5 * 1024 * 1024) {
         setFileError("Rasm hajmi 5MB dan katta bo'lmasligi kerak");
         setSelectedFile(null);
+        setFilePreview(null); // Rasm previewni tozalash
       } else {
         setFileError("");
         setSelectedFile(file);
+        setFilePreview(URL.createObjectURL(file)); // Rasm previewni o'rnatish
       }
     }
   };
@@ -79,10 +99,10 @@ export default function NewsCreate() {
       });
 
       sweetAlert("Muvaffaqiyatli qo'shildi", "success");
-      setUzInfo({ title: "", description: "", summary: '' });
-      setRuInfo({ title: "", description: "", summary: '' });
-      setEnInfo({ title: "", description: "", summary: '' });
-      setKKInfo({ title: "", description: "", summary: '' });
+      setUzInfo({ title: "", description: "", summary: "" });
+      setRuInfo({ title: "", description: "", summary: "" });
+      setEnInfo({ title: "", description: "", summary: "" });
+      setKKInfo({ title: "", description: "", summary: "" });
       setShowInCarousel(false);
       setDate("");
       setSelectedFile(null);
@@ -102,8 +122,9 @@ export default function NewsCreate() {
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
               key={lang}
-              className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
-                }`}
+              className={`px-4 py-2 rounded ${
+                activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
+              }`}
               onClick={() => setActiveTab(lang)}
             >
               {lang == "kk" ? "CHI" : lang.toUpperCase()}
@@ -155,10 +176,10 @@ export default function NewsCreate() {
             <div className="flex items-center justify-center bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition">
               {selectedFile
                 ? `${selectedFile.name} (${(
-                  selectedFile.size /
-                  1024 /
-                  1024
-                ).toFixed(2)} MB)`
+                    selectedFile.size /
+                    1024 /
+                    1024
+                  ).toFixed(2)} MB)`
                 : "Rasm yuklash"}
             </div>
           </label>
@@ -171,6 +192,16 @@ export default function NewsCreate() {
           />
           {fileError && <p className="text-red-500 text-sm">{fileError}</p>}
         </div>
+
+        {filePreview && (
+          <div className="mt-4">
+            <img
+              src={filePreview}
+              alt="Tanlangan rasm"
+              className="h-60 object-cover rounded-md border"
+            />
+          </div>
+        )}
 
         <Button
           loading={loading}
