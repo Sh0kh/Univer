@@ -51,7 +51,7 @@ export default function AboutContent() {
                 ) : (
                     < div className="flex items-center justify-center w-full h-[400px]" >
                         <h1 className="text-[25px] opacity-[0.7]">
-                            Malumot yo'q
+                            Ma'lumot yo'q
                         </h1>
                     </div>
                 )}

@@ -53,7 +53,7 @@ const News = () => {
   }, [data]);
 
   return (
-    <section className="news py-10 px-4 max-w-6xl mx-auto">
+    <section className="news py-10 px-3 md:px-0 max-w-6xl mx-auto">
       <div className="relative pb-4 mb-6">
         <h2 className="text-3xl font-bold text-[#1f235b] relative inline-block mb-[20px] bg-white pr-4 z-10">
           • Yangiliklar
@@ -64,7 +64,7 @@ const News = () => {
           to={'/barcha-yangiliklar'}
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <button className="button_new text-gray-700 font-medium hover:underline absolute right-0 top-0">
+          <button className="button_new text-gray-700 font-medium hover:opacity-[0.7] duration-300 absolute right-0 top-0">
             Ko‘proq ko‘rish
           </button>
         </NavLink>
@@ -92,21 +92,22 @@ const News = () => {
                   />
                 </div>
 
-                <div className="p-4 flex flex-col flex-grow">
+                <div className="flex flex-col flex-grow mt-[10px]">
                   <div className="text-gray-500 text-sm flex items-center space-x-3">
                     <img src={calendar} alt="date" />
                     <span>{news?.date}</span>
                     <img src={eye} alt="views" />
                     <span>{news?.view}</span>
                   </div>
-                  <h3 className="font-semibold text-lg text-gray-900 flex-grow line-clamp-2 mt-[17px] mb-[16px]">
+                  <h3 className="font-semibold text-lg text-gray-900 flex-grow line-clamp-2 mt-[17px] mb-[16px] duration-[500] group-hover:text-blue-600">
                     {news.title[i18n.language] || news.title["uz"]}
                   </h3>
+
                   <h3 className="overflow-hidden text-gray-500 text-[16px] font-normal line-clamp-2">
                     {news.description[i18n.language] || news.description["uz"]}
                   </h3>
 
-                  <a href="#" className="text-black mt-[16px] inline-block font-medium hover:underline">
+                  <a href="#" className="text-black group-hover:text-blue-600 duration-500 mt-[16px] inline-block font-medium">
                     Batafsil →
                   </a>
                 </div>
@@ -115,7 +116,7 @@ const News = () => {
           </div>
         ) : (
           <div className="flex items-center justify-center">
-            <h1>Malumot yo'q</h1>
+            <h1>Ma'lumot yo'q</h1>
           </div>
         )
       )}

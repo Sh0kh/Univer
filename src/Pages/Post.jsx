@@ -5,19 +5,20 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
-import { $api } from "../utils";
     
 
 export default function UserPost() {
     const { ID } = useParams()
     const [data, setData] = useState([])
+    const [title, setTitle] = useState([])
     const { i18n } = useTranslation();
     const [loading, setLoading] = useState(true)
 
     const getPost = async () => {
         try {
-            const response = await $api.get(`/category-detail/${ID}`)
+            const response = await axios.get(`/category-detail/${ID}`)
             setData(response?.data?.data?.posts)
+            setTitle(response?.data?.data)
         } catch (error) {
             console.log(error)
         } finally {

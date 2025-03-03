@@ -7,7 +7,7 @@ export default function NewsHero({ data }) {
     const { i18n } = useTranslation();
 
     return (
-        <section className="mt-8 md:mt-12 lg:mt-16">
+        <section className="mt-[32px] ">
             <div className="Container">
                 <h1 className="mb-3 text-2xl md:text-3xl lg:text-4xl font-bold leading-[127%] text-[#181d27]">
                     {data?.title[i18n?.language]}

@@ -771,6 +771,26 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-top: -20px;
 }
 
+.Hero .custom-pagination {
+  position: absolute;
+  bottom: 100px !important;
+  left: 13% !important;
+  z-index: 10;
+  width: 100px !important;
+}
+
+.Hero .swiper-pagination-bullet {
+  background: white !important;
+  opacity: 0.5;
+}
+
+.Hero .swiper-pagination-bullet-active {
+  background: white !important;
+  opacity: 1;
+}
+
+
+
 @media(max-width:1120px) {
   .cabinet_face h1 br {
     display: none;

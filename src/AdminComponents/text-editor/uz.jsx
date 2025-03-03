@@ -1,21 +1,58 @@
 import { Input } from "@material-tailwind/react";
-import FroalaEditor from "react-froala-wysiwyg";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/js/plugins/image.min.js";
+import JoditEditor from "jodit-react";
+import React, { useRef, useState } from "react";
 
 export default function UzEditor({ value, onChange }) {
+    const editor = useRef(null);
+    const [content, setContent] = useState(value?.description || "");
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         onChange((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleFroalaChange = (content) => {
-        onChange((prev) => ({ ...prev, description: content }));
+    const handleJoditChange = (newContent) => {
+        setContent(newContent);
+        onChange((prev) => ({ ...prev, description: newContent }));
+    };
+
+    const config = {
+        readonly: false,
+        height: 400, 
+        buttons: [
+            "bold", "italic", "underline", "ul", "ol",
+            "image", "link", "undo", "redo"
+        ],
+        uploader: {
+            insertImageAsBase64URI: true,
+            imagesExtensions: ["jpg", "png", "jpeg", "gif"],
+            filesVariableName: "files",
+        },
+        placeholder: "...",
+        events: {
+            beforeUpload: (files) => {
+                const file = files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        editor.current.selection.insertImage(e.target.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+                return false; 
+            },
+            afterInsertImage: (img) => {
+                img.style.maxWidth = "100%";
+                img.style.height = "auto";
+            }
+        },
+        style: {
+            fontSize: "16px",
+        }
     };
 
     return (
-        <div>
+        <div className="editor-container">
             <div>
                 <Input
                     label="Sarlavha"
@@ -27,36 +64,18 @@ export default function UzEditor({ value, onChange }) {
             </div>
 
             <div className="mt-[20px]">
-                <FroalaEditor
-                    tag="textarea"
-                    model={value?.description || ""}
-                    onModelChange={handleFroalaChange}
-                    config={{
-                        placeholderText: "....",
-                        toolbarButtons: [
-                            "bold", "italic", "underline", "formatOL", "formatUL", "insertImage"
-                        ],
-                        imageInsertButtons: ["imageUpload"],
-                        imageDefaultWidth: 300,
-                        imageUpload: true,
-                        imageUploadMethod: "base64",
-                        heightMin: 300,
-                        heightMax: 300,
-                        events: {
-                            "image.beforeUpload": function (images) {
-                                if (images.length) {
-                                    const reader = new FileReader();
-                                    reader.onload = (e) => {
-                                        this.image.insert(e.target.result, null, null, this.image.get());
-                                    };
-                                    reader.readAsDataURL(images[0]);
-                                }
-                                return false; // Остановить стандартную загрузку
-                            }
-                        }
-                    }}
+                <JoditEditor
+                    ref={editor}
+                    value={content}
+                    onBlur={handleJoditChange}
+                    config={config}
                 />
             </div>
+            <style jsx>{`
+                .editor-container :global(.jodit-wysiwyg) {
+                    min-height: 300px;
+                }
+            `}</style>
         </div>
     );
 }

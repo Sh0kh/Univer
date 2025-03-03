@@ -57,41 +57,42 @@ export default function Hero() {
             </div>
         );
     }
-
     return (
-        <Swiper
-            modules={[Pagination, Autoplay]}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            className="w-full h-[700px] bg-cover bg-center"
-        >
-            {data?.map((i, index) => (
-                <SwiperSlide key={index} className="w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${i?.image[0]?.url})` }}>
-                    <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
-                        <div className="container mx-auto px-6 md:px-12 lg:px-20">
-                            <div className="max-w-2xl text-white slide-content">
-                                <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-                                    {i?.title[i18n?.language]}
-                                </h1>
-                                <p className="mt-4 text-lg">
-                                    {i?.description[i18n?.language]}
-                                </p>
-
-                                <NavLink
-                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                                    to={`/yangilik/${i?.id}`} >
-                                    <button className="flex items-center justify-between mt-[40px] border-[#d5d7da] rounded-lg px-[18px] py-[12px] w-[124px] h-[48px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05),_inset_0_-2px_0_0_rgba(10,13,18,0.05),_inset_0_0_0_1px_rgba(10,13,18,0.18)] bg-white font-semibold">
-                                        <span className="text-[16px] leading-[150%] text-[#414651]">Batafsil</span>
-                                        <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1.16666 7.50002H12.8333M12.8333 7.50002L6.99999 1.66669M12.8333 7.50002L6.99999 13.3334" stroke="#414651" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
-                                        </svg>
-                                    </button>
-                                </NavLink>
+        <div className="Hero relative w-full h-[700px]">
+            <Swiper
+                modules={[Pagination, Autoplay]}
+                pagination={{ clickable: true, el: ".custom-pagination" }}
+                autoplay={{ delay: 5000, disableOnInteraction: false }}
+                className="w-full h-full bg-cover bg-center"
+            >
+                {data?.map((i, index) => (
+                    <SwiperSlide key={index} className="w-full h-full bg-cover bg-center relative" style={{ backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${i?.image[0]?.url})` }}>
+                        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
+                            <div className="container mx-auto px-6 md:px-12 lg:px-20">
+                                <div className="max-w-2xl text-white slide-content">
+                                    <h1 className="text-3xl md:text-5xl font-bold leading-tight">
+                                        {i?.title[i18n?.language]}
+                                    </h1>
+                                    <p className="mt-4 text-lg">
+                                        {i?.description[i18n?.language]}
+                                    </p>
+                                    <NavLink
+                                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                                        to={`/yangilik/${i?.id}`} >
+                                        <button className="flex items-center justify-between mt-[40px] border-[#d5d7da] rounded-lg px-[18px] py-[12px] w-[124px] h-[48px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05),_inset_0_-2px_0_0_rgba(10,13,18,0.05),_inset_0_0_0_1px_rgba(10,13,18,0.18)] bg-white font-semibold">
+                                            <span className="text-[16px] leading-[150%] text-[#414651]">Batafsil</span>
+                                            <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M1.16666 7.50002H12.8333M12.8333 7.50002L6.99999 1.66669M12.8333 7.50002L6.99999 13.3334" stroke="#414651" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
+                                            </svg>
+                                        </button>
+                                    </NavLink>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </SwiperSlide>
-            ))}
-        </Swiper>
+                    </SwiperSlide>
+                ))}
+            </Swiper>
+            <div className="custom-pagination"></div>
+        </div>
     );
 }
