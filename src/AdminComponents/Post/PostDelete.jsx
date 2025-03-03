@@ -37,9 +37,12 @@ export default function PostDelete({ Id, refresh }) {
 
     return (
         <>
-            <IconButton onClick={() => setOpen(true)} className="bg-red-500 text-white" variant="text">
+            <button
+                className=" w-32 p-2 flex justify-center bg-red-400 shadow rounded-xl cursor-pointer text-white"
+                onClick={() => setOpen(true)}
+                variant="text">
                 <TrashIcon className="h-4 w-4" />
-            </IconButton>
+            </button>
 
             <Dialog open={open} handler={() => setOpen(!open)} size="xs" className="p-4">
                 <DialogHeader className="relative">

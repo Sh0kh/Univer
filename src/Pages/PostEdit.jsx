@@ -18,13 +18,10 @@ export default function PostEdit() {
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
     const [KKinfo, setKKInfo] = useState({ title: "", description: "" });
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedSubCategory, setSelectedSubCategory] = useState("");
-    const [OneCategory, setOneCategory] = useState([]);
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loading2, setLoading2] = useState(true);
+    const [category, setCategory] = useState(null)
     const { ID } = useParams();
 
     const FetchPostID = async () => {
@@ -34,8 +31,7 @@ export default function PostEdit() {
             setRuInfo({ title: response?.data?.data?.title?.ru, description: response?.data?.data?.text?.ru });
             setEnInfo({ title: response?.data?.data?.title?.en, description: response?.data?.data?.text?.en });
             setKKInfo({ title: response?.data?.data?.title?.kk, description: response?.data?.data?.text?.kk });
-            setSelectedCategory(response?.data?.data?.category?.category_id || "");
-            setSelectedSubCategory(response?.data?.data?.category?.id || "");
+            setCategory(response?.data?.data?.category?.id)
         } catch (error) {
             console.error(error);
         } finally {
@@ -43,35 +39,11 @@ export default function PostEdit() {
         }
     };
 
-    const FechCategory = async () => {
-        try {
-            const response = await $api.get("/category");
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-
-    const FechCategoryOne = async (categoryId) => {
-        if (!categoryId) return;
-        try {
-            const response = await $api.get(`/category-show/${categoryId}`);
-            setOneCategory(response.data.data?.details || []);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };  
-
     useEffect(() => {
-        setTimeout(() => {
-            FetchPostID();
-        }, 300)
-        FechCategory();
-        FechCategoryOne()
-    }, []);
+        FetchPostID()
+    }, [])
 
-    console.log(data);
-   
+
 
     const EditAboutUs = async () => {
         setLoading(true);
@@ -88,7 +60,7 @@ export default function PostEdit() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            category_id: selectedSubCategory
+            category_id: category
         };
 
         try {
@@ -122,34 +94,6 @@ export default function PostEdit() {
                 </div>
             </div>
             <div className="bg-white p-5 rounded-lg mt-5">
-                <Select
-                    label="Kategoriya tanlang"
-                    value={selectedCategory || 8}
-                    onChange={(value) => {
-                        setSelectedCategory(value);
-                        setSelectedSubCategory(""); // Subkategoriya tozalanadi
-                    }}
-                >
-                    {data.map((item) => (
-                        <Option key={item.id} value={item.id}>
-                            {item.title[activeTab]}
-                        </Option>
-                    ))}
-                </Select>
-                <div className="mt-3">
-                    <Select
-                        label="Kategoriya detail tanlang"
-                        value={selectedSubCategory}
-                        onChange={(value) => setSelectedSubCategory(value)}
-                        disabled={!selectedCategory}
-                    >
-                        {OneCategory.map((item) => (
-                            <Option key={item.id} value={item.id}>
-                                {item.title[activeTab]}
-                            </Option>
-                        ))}
-                    </Select>
-                </div>
                 <div className="mt-5">
                     {activeTab === "uz" && <UzAboutUsCreate key="uz" value={uzinfo} onChange={setUzInfo} />}
                     {activeTab === "ru" && <RuAboutUsCreate key="ru" value={ruinfo} onChange={setRuInfo} />}

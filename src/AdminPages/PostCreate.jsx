@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import {
     Button,
     Select,
@@ -16,44 +16,17 @@ import { sweetAlert } from "../utils/sweetalert";
 
 
 export default function PostCreate() {
+    const { ID } = useParams()
     const [uzinfo, setUzInfo] = useState({ title: "", description: "" });
     const [ruinfo, setRuInfo] = useState({ title: "", description: "" });
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
     const [KKinfo, setKKInfo] = useState({ title: "", description: "" });
-    const [selectedSubCategory, setSelectedSubCategory] = useState("");
-    const [OneCategory, setOneCategory] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("");
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
 
-    const FechCategory = async () => {
-        try {
-            const response = await $api.get("/category");
-            setData(response.data.data);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
 
 
-    const FechCategoryOne = async () => {
-        try {
-            const response = await $api.get(`/category/${selectedCategory}`);
-            setOneCategory(response.data.data?.details);
-        } catch (error) {
-            console.error("Xatolik yuz berdi:", error);
-        }
-    };
-
-
-
-
-    useEffect(() => {
-        FechCategory();
-        FechCategoryOne();
-    }, [selectedCategory]);
 
 
     const CreatePost = async () => {
@@ -71,7 +44,7 @@ export default function PostCreate() {
                 en: Eninfo.description,
                 kk: KKinfo.description
             },
-            category_id: selectedSubCategory
+            category_id: ID
         };
 
         try {
@@ -81,7 +54,6 @@ export default function PostCreate() {
             setRuInfo({ title: "", description: "" });
             setEnInfo({ title: "", description: "" });
             setKKInfo({ title: "", description: "" });
-            setSelectedCategory(null);
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
         } finally {
@@ -115,24 +87,6 @@ export default function PostCreate() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <div className="mb-[10px]">
-                    <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
-                        {data.map((item) => (
-                            <Option key={item.id} value={item.id}>
-                                {item.title[activeTab]}
-                            </Option>
-                        ))}
-                    </Select>
-                </div>
-                <div className="">
-                    <Select label="Kategoriya detail tanlang" onChange={(value) => setSelectedSubCategory(value)}>
-                        {OneCategory?.map((item) => (
-                            <Option key={item.id} value={item.id}>
-                                {item.title[activeTab]}
-                            </Option>
-                        ))}
-                    </Select>
-                </div>
                 <div className="mt-5">
                     {activeTab === "uz" ? (
                         <UzAboutUsCreate value={uzinfo} onChange={setUzInfo} />

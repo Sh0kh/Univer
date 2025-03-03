@@ -1,13 +1,17 @@
 import { Button, IconButton } from "@material-tailwind/react";
-import { TrashIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { FaPencilAlt } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { $api } from "../utils";
 import Loader from "../lib/loader";
 import PostDelete from "../AdminComponents/Post/PostDelete";
+import CustomDataTable from "../lib/custom-data-table";
+import { FaRightToBracket } from "react-icons/fa6";
 
 export default function Post() {
+
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
   const [activeTab, setActiveTab] = useState("uz");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,21 +31,52 @@ export default function Post() {
     fetchData();
   }, []);
 
+  const columns = [
+    {
+      name: "Tr",
+      // selector: (row, index) => (index + 1),
+      selector: (row) => row.id,
+      width: "170px",
+    },
+    {
+      name: `Sarlavha (${activeTab.toUpperCase()})`,
+      selector: (row) => row.title[activeTab],
+      sortable: true,
+    },
+    {
+      name: "Sahifa",
+      selector: (row) => row.category?.title[activeTab],
+      sortable: true,
+    },
+    {
+      name: `Havola`,
+      selector: (row) => {
+        return (
+          <Link
+            to={`/post/${row.id}`}
+            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+          >
+            <FaRightToBracket className=" text-xl text-center" />
+          </Link>
+        );
+      },
+    },
+  ];
+
   if (loading) {
     return <Loader />;
   }
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Postlar</h2>
+      <h2 className="text-xl font-bold mb-4">Sahifalar</h2>
       <div className="flex justify-between items-center">
         <div className="mb-4 flex space-x-2">
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
               key={lang}
-              className={`px-4 py-2 rounded ${
-                activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
-              }`}
+              className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
+                }`}
               onClick={() => setActiveTab(lang)}
             >
               {lang == "kk" ? "CHI" : lang.toUpperCase()}
@@ -54,34 +89,14 @@ export default function Post() {
           </NavLink>
         </div>
       </div>
-      {data?.length > 0 && data ? (
-        data?.map((i, index) => (
-          <div key={index} className="bg-white p-5 rounded-lg mt-5 shadow">
-            <div className="flex items-center justify-between">
-              <h2>{i?.category?.title[activeTab]}</h2>
-              <div className="flex items-center gap-2">
-                <NavLink to={`/admin/post/edit/${i?.id}`}>
-                  <IconButton className="bg-blue-500 text-white" variant="text">
-                    <FaPencilAlt className="h-4 w-4" />
-                  </IconButton>
-                </NavLink>
-                <PostDelete Id={i?.id} refresh={fetchData} />
-              </div>
-            </div>
-            <div className="px-12">
-              <h1 className="font-bold text-xl">{i?.title[activeTab]}</h1>
-              <div
-                className="mt-2"
-                dangerouslySetInnerHTML={{ __html: i?.text[activeTab] }}
-              />
-            </div>
-          </div>
-        ))
-      ) : (
-        <div className="h-[500px] flex items-center justify-center">
-          <h1 className="opacity-[0.5]">Malumot Yo'q</h1>
-        </div>
-      )}
+      <CustomDataTable
+        data={data}
+        columns={columns}
+        page={page}
+        setPage={setPage}
+        perPage={perPage}
+        setPerPage={setPerPage}
+      />
     </div>
   );
 }

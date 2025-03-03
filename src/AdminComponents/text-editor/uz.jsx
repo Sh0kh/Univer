@@ -1,55 +1,70 @@
 import { Input } from "@material-tailwind/react";
-import JoditEditor from "jodit-react";
-import React, { useRef, useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function UzEditor({ value, onChange }) {
-    const editor = useRef(null);
     const [content, setContent] = useState(value?.description || "");
+    const quillRef = useRef(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         onChange((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleJoditChange = (newContent) => {
+    const handleQuillChange = useCallback((newContent) => {
         setContent(newContent);
         onChange((prev) => ({ ...prev, description: newContent }));
+    }, [onChange]);
+
+    const handleImageUpload = useCallback(() => {
+        const input = document.createElement("input");
+        input.setAttribute("type", "file");
+        input.setAttribute("accept", "image/*");
+        input.click();
+
+        input.onchange = () => {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const quill = quillRef.current.getEditor();
+                    const range = quill.getSelection(true); // Получаем текущее выделение или создаем его
+                    if (range) {
+                        const base64Image = e.target.result;
+                        quill.insertEmbed(range.index, "image", base64Image);
+                        quill.setSelection(range.index + 1); // Перемещаем курсор после изображения
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+    }, []);
+
+    const modules = {
+        toolbar: {
+            container: [
+                [{ header: [1, 2, 3, false] }],
+                ["bold", "italic", "underline"],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["image", "link"],
+            ],
+            handlers: {
+                image: handleImageUpload,
+            },
+        },
     };
 
-    const config = {
-        readonly: false,
-        height: 400, 
-        buttons: [
-            "bold", "italic", "underline", "ul", "ol",
-            "image", "link", "undo", "redo"
-        ],
-        uploader: {
-            insertImageAsBase64URI: true,
-            imagesExtensions: ["jpg", "png", "jpeg", "gif"],
-            filesVariableName: "files",
-        },
-        placeholder: "...",
-        events: {
-            beforeUpload: (files) => {
-                const file = files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        editor.current.selection.insertImage(e.target.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-                return false; 
-            },
-            afterInsertImage: (img) => {
-                img.style.maxWidth = "100%";
-                img.style.height = "auto";
-            }
-        },
-        style: {
-            fontSize: "16px",
-        }
-    };
+    const formats = [
+        "header",
+        "bold",
+        "italic",
+        "underline",
+        "list",
+        "bullet",
+        "image",
+        "link",
+    ];
 
     return (
         <div className="editor-container">
@@ -64,18 +79,32 @@ export default function UzEditor({ value, onChange }) {
             </div>
 
             <div className="mt-[20px]">
-                <JoditEditor
-                    ref={editor}
+                <ReactQuill
+                    ref={quillRef}
                     value={content}
-                    onBlur={handleJoditChange}
-                    config={config}
+                    onChange={handleQuillChange}
+                    modules={modules}
+                    formats={formats}
+                    placeholder="..."
+                    style={{ height: "300px", marginBottom:'50px' }}
                 />
             </div>
             <style jsx>{`
-                .editor-container :global(.jodit-wysiwyg) {
-                    min-height: 300px;
-                }
-            `}</style>
+        .editor-container :global(.ql-editor) {
+          min-height: 300px;
+          font-size: 16px;
+        }
+        .editor-container :global(.ql-container) {
+          border-radius: 0 0 4px 4px;
+        }
+        .editor-container :global(.ql-toolbar) {
+          border-radius: 4px 4px 0 0;
+        }
+        .editor-container :global(.ql-editor img) {
+          max-width: 100%;
+          height: auto;
+        }
+      `}</style>
         </div>
     );
 }

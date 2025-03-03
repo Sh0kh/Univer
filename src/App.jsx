@@ -65,6 +65,7 @@ import PostCreate from "./AdminPages/PostCreate";
 import PostEdit from "./Pages/PostEdit";
 import UserPost from "./Pages/Post";
 import Profile from "./AdminPages/Profile";
+import AllPosts from "./AdminPages/AllPosts";
 
 function App() {
   return (
@@ -96,7 +97,7 @@ function App() {
               <Route path="events" element={<Events />} />
               <Route path="statistics" element={<Statistika />} />
               <Route path="message-user" element={<MessageUser />} />
-              <Route path="profile" element={<Profile/>} />
+              <Route path="profile" element={<Profile />} />
 
 
               <Route path="/admin/news" element={<AdminNews />} />
@@ -124,8 +125,9 @@ function App() {
               <Route path="/admin/centers/create" element={<CreateCenter />} />
 
               <Route path="/admin/post" element={<Post />} />
-              <Route path="/admin/post/create" element={<PostCreate />} />
+              <Route path="/admin/post/create/:ID" element={<PostCreate />} />
               <Route path="/admin/post/edit/:ID" element={<PostEdit />} />
+              <Route path="/admin/post/all/:ID" element={<AllPosts />} />
 
             </Route>
 

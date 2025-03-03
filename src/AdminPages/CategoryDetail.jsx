@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { $api } from "../utils";
 import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { AddCategoryDetail } from "../AdminComponents/category-detail/add-category-detail";
 import { UpdateCategoryDetail } from "../AdminComponents/category-detail/update-category-detail";
 import { DeleteCategoryDetail } from "../AdminComponents/category-detail/delete-category-detail";
+import { FaRightToBracket } from "react-icons/fa6";
+import { MdDelete } from "react-icons/md";
+import PostDelete from "../AdminComponents/Post/PostDelete";
+
 
 export default function CategoryDetail() {
   const { categoryId } = useParams();
@@ -44,10 +48,65 @@ export default function CategoryDetail() {
       sortable: true,
     },
     {
-      name: "Slug",
-      selector: (row) => row.slug,
-      sortable: true,
+      name: `Havola`,
+      selector: (row) => {
+        return (
+          <Link
+            to={`/post/${row.id}`}
+            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+          >
+            <FaRightToBracket className=" text-xl text-center" />
+          </Link>
+        );
+      },
     },
+    {
+      name: `Malumot qo'shish`,
+      selector: (row) => {
+        return (
+          <Link
+            to={`/admin/post/create/${row?.id}`}
+            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+          >
+            <FaRightToBracket className=" text-xl text-center" />
+          </Link>
+        );
+      },
+    },
+    {
+      name: `Malumotni korish`,
+      selector: (row) => {
+        return (
+          <Link
+            to={`/admin/post/all/${row?.id}`}
+            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+          >
+            <FaRightToBracket className=" text-xl text-center" />
+          </Link>
+        );
+      },
+    },
+    // {
+    //   name: `Malumot o'zgartirish`,
+    //   selector: (row) => {
+    //     return (
+    //       <Link
+    //         to={`/admin/post/edit/${row.id}`}
+    //         className=" w-32 p-2 flex justify-center bg-yellow-400 shadow rounded-xl cursor-pointer text-white"
+    //       >
+    //         <FaRightToBracket className=" text-xl text-center" />
+    //       </Link>
+    //     );
+    //   },
+    // },
+    // {
+    //   name: `Malumot o'chirish`,
+    //   selector: (row) => {
+    //     return (
+    //       <PostDelete Id={row?.id} refresh={fetchData} />
+    //     );
+    //   },
+    // },
     {
       name: "Action",
       cell: (row) => (
@@ -64,6 +123,7 @@ export default function CategoryDetail() {
     return <Loader />;
   }
 
+
   return (
     <div>
       <h2 className="text-xl font-bold mb-4">
@@ -74,12 +134,11 @@ export default function CategoryDetail() {
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
               key={lang}
-              className={`px-4 py-2 rounded ${
-                activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
-              }`}
+              className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
+                }`}
               onClick={() => setActiveTab(lang)}
             >
-               {lang == "kk" ? "CHI" : lang.toUpperCase()}
+              {lang == "kk" ? "CHI" : lang.toUpperCase()}
             </button>
           ))}
         </div>
