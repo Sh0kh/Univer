@@ -6,6 +6,7 @@ import { Tooltip } from "@material-tailwind/react";
 import { AddRecvisitsDialog } from "../AdminComponents/recvisits/add-recvisit-dialog";
 import { UpdateRecvisitDialog } from "../AdminComponents/recvisits/update-recvisit-dialog";
 import { DeleteRecvisitDialog } from "../AdminComponents/recvisits/delete-recvisit-dialog";
+import ShowAll from "../AdminComponents/recvisits/show-all";
 
 export default function Recvisits() {
   const [data, setData] = useState([]);
@@ -65,62 +66,15 @@ export default function Recvisits() {
       ),
     },
     {
-      name: "Hisob raqami",
-      selector: (row) => (
-        <Tooltip content={row.account_number} placement="right">
-          <span>{row.account_number}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "Bank",
-      selector: (row) => (
-        <Tooltip content={row.bank} placement="right">
-          <span>{row.bank}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "MFO",
-      selector: (row) => (
-        <Tooltip content={row.mfo} placement="right">
-          <span>{row.mfo}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "Shaxsiy hisob",
-      selector: (row) => (
-        <Tooltip content={row.personal_account} placement="right">
-          <span>{row.personal_account}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "STIR",
-      selector: (row) => (
-        <Tooltip content={row.stir} placement="right">
-          <span>{row.stir}</span>
-        </Tooltip>
-      ),
-    },
-    {
-      name: "OKNOX",
-      selector: (row) => (
-        <Tooltip content={row.oknox} placement="right">
-          <span>{row.oknox}</span>
-        </Tooltip>
-      ),
-    },
-    {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
+            <ShowAll id={row.id} />
             <UpdateRecvisitDialog onUpdated={fetchData} rowData={row} />
             <DeleteRecvisitDialog onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
-      width: "170px",
+      width: "220px",
     },
   ];
 

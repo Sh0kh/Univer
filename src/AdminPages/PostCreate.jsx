@@ -24,11 +24,6 @@ export default function PostCreate() {
     const [activeTab, setActiveTab] = useState("uz");
     const [loading, setLoading] = useState(false)
 
-
-
-
-
-
     const CreatePost = async () => {
         setLoading(true)
         const payload = {
