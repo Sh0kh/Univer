@@ -1,16 +1,16 @@
-import { Button, IconButton } from '@material-tailwind/react';
-import { TrashIcon } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
-import { FaPencilAlt } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
-import { $api } from '../utils';
-import Loader from '../lib/loader';
-import AboutUsDelete from '../AdminComponents/aboutUS/aboutUs-delete';
+import { Button, IconButton } from "@material-tailwind/react";
+import { TrashIcon } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { FaPencilAlt } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
+import { $api } from "../utils";
+import Loader from "../lib/loader";
+import AboutUsDelete from "../AdminComponents/aboutUS/aboutUs-delete";
 
 export default function AdminAboutUs() {
   const [activeTab, setActiveTab] = useState("uz");
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async () => {
     try {
@@ -19,7 +19,7 @@ export default function AdminAboutUs() {
     } catch (error) {
       console.error("Xatolik yuz berdi:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   };
 
@@ -39,7 +39,9 @@ export default function AdminAboutUs() {
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
               key={lang}
-              className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+              className={`px-4 py-2 rounded ${
+                activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
+              }`}
               onClick={() => setActiveTab(lang)}
             >
               {lang == "kk" ? "CHI" : lang.toUpperCase()}
@@ -48,7 +50,9 @@ export default function AdminAboutUs() {
         </div>
         <div>
           <NavLink className="block" to="/admin/aboutUs/create">
-            <Button className="bg-green-500 text-white">Malumot qo'shish</Button>
+            <Button className="bg-green-500 text-white">
+              Malumot qo'shish
+            </Button>
           </NavLink>
         </div>
       </div>
@@ -65,19 +69,21 @@ export default function AdminAboutUs() {
                 <AboutUsDelete Id={i?.id} refresh={fetchData} />
               </div>
             </div>
-            <h1 className="font-bold text-xl">{i?.title[activeTab]}</h1>
-            {/* Рендеринг HTML-контента */}
-            <div className="mt-2" dangerouslySetInnerHTML={{ __html: i?.text[activeTab] }} />
+            <div className="px-12">
+              <h1 className="font-bold text-xl -8">{i?.title[activeTab]}</h1>
+              {/* Рендеринг HTML-контента */}
+              <div
+                className="mt-2"
+                dangerouslySetInnerHTML={{ __html: i?.text[activeTab] }}
+              />
+            </div>
           </div>
         ))
       ) : (
-        <div className='h-[500px] flex items-center justify-center'>
-          <h1 className='opacity-[0.5]'>
-            Malumot Yo'q
-          </h1>
+        <div className="h-[500px] flex items-center justify-center">
+          <h1 className="opacity-[0.5]">Malumot Yo'q</h1>
         </div>
       )}
-
     </div>
   );
 }

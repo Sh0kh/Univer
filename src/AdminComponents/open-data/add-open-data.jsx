@@ -16,6 +16,8 @@ import { sweetAlert } from "../../utils/sweetalert";
 export function AddOpenData({ onAdded }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
     url: "",
@@ -23,7 +25,28 @@ export function AddOpenData({ onAdded }) {
 
   const handleOpen = () => setOpen(!open);
 
-  // Title o'zgarishini boshqarish
+  const validateForm = () => {
+    let newErrors = {};
+
+    // Sarlavha tekshirish
+    ["uz", "ru", "en", "kk"].forEach((lang) => {
+      if (!form.name[lang] || form.name[lang].length < 3) {
+        newErrors[lang] = `Sarlavha (${lang.toUpperCase()}) kamida 3 ta belgi bo‘lishi kerak!`;
+      }
+    });
+
+    // URL tekshirish
+    const urlPattern = /^(https?:\/\/)[\w.-]+(?:\.[\w.-]+)+(?:[\/\w._%+-]*)?$/;
+    if (!form.url) {
+      newErrors.url = "URL kiritish majburiy!";
+    } else if (!urlPattern.test(form.url)) {
+      newErrors.url = "URL noto‘g‘ri formatda kiritilgan!";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleTitleChange = (e, lang) => {
     setForm((prev) => ({
       ...prev,
@@ -31,16 +54,12 @@ export function AddOpenData({ onAdded }) {
     }));
   };
 
-  // URL o'zgarishini boshqarish
   const handleUrlChange = (e) => {
     setForm((prev) => ({ ...prev, url: e.target.value }));
   };
 
   const handleAdd = async () => {
-    if (!form.url) {
-      sweetAlert("URL kiritish majburiy!", "error");
-      return;
-    }
+    if (!validateForm()) return;
 
     setLoading(true);
     try {
@@ -48,6 +67,8 @@ export function AddOpenData({ onAdded }) {
       onAdded();
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
+      setForm({ name: { uz: "", ru: "", en: "", kk: "" }, url: "" });
+      setErrors({});
     } catch (error) {
       console.error("Xatolik:", error);
       sweetAlert("Xatolik yuz berdi!", "error");
@@ -77,49 +98,30 @@ export function AddOpenData({ onAdded }) {
         </DialogHeader>
 
         <DialogBody className="space-y-4 pb-6">
-
-          {/* Title (ko‘p tilli) */}
           <div className="grid grid-cols-2 gap-4">
             {["uz", "ru", "en", "kk"].map((lang) => (
               <div key={lang}>
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 font-medium"
-                >
-                  Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
+                <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
+                  Sarlavha ({lang.toUpperCase()})
                 </Typography>
-                <Input
-                  value={form.name[lang]}
-                  onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
-                  required
-                />
+                <Input value={form.name[lang]} onChange={(e) => handleTitleChange(e, lang)} placeholder={`Sarlavha (${lang.toUpperCase()})`} required />
+                {errors[lang] && <p className="text-red-500 text-sm">{errors[lang]}</p>}
               </div>
             ))}
           </div>
 
-          {/* URL qo'shish */}
           <div>
             <Typography variant="small" color="blue-gray" className="mb-2 font-medium">
               URL
             </Typography>
-            <Input
-              value={form.url}
-              onChange={handleUrlChange}
-              placeholder="https://example.com"
-              required
-            />
+            <Input value={form.url} onChange={handleUrlChange} placeholder="https://example.com" required />
+            {errors.url && <p className="text-red-500 text-sm">{errors.url}</p>}
           </div>
         </DialogBody>
 
         <DialogFooter>
-          <Button
-            onClick={handleAdd}
-            loading={loading}
-            className="bg-blue-500 text-white"
-          >
-            Saqlash
+          <Button onClick={handleAdd} disabled={loading} className="bg-blue-500 text-white">
+            {loading ? "Saqlanmoqda..." : "Saqlash"}
           </Button>
         </DialogFooter>
       </Dialog>

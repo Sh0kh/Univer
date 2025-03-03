@@ -18,7 +18,8 @@ export function DeleteManagement({ rowId, onDeleted }) {
 
   const handleOpen = () => setOpen(!open);
 
-  const handleDeleteCategory = async () => {Q
+  const handleDelete = async () => {
+    console.log('delete');
     setLoading(true);
     try {
       await $api.delete(`/management/${rowId}`);
@@ -68,7 +69,7 @@ export function DeleteManagement({ rowId, onDeleted }) {
             Bekor qilish
           </Button>
           <Button
-            onClick={handleDeleteCategory}
+            onClick={handleDelete}
             loading={loading}
             className="bg-red-500 text-white"
           >

@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   Dialog,
@@ -22,24 +21,66 @@ export function AddCorruption({ onAdded }) {
     url: "",
   });
 
+  const [errors, setErrors] = useState({
+    name: { uz: "", ru: "", en: "", kk: "" },
+    url: "",
+  });
+
   const handleOpen = () => setOpen(!open);
 
   // Title o'zgarishini boshqarish
   const handleTitleChange = (e, lang) => {
+    const value = e.target.value;
     setForm((prev) => ({
       ...prev,
-      name: { ...prev.name, [lang]: e.target.value },
+      name: { ...prev.name, [lang]: value },
+    }));
+
+    // Validatsiya
+    setErrors((prev) => ({
+      ...prev,
+      name: {
+        ...prev.name,
+        [lang]: value.length < 3 ? "Kamida 3 ta belgi bo‘lishi kerak" : "",
+      },
     }));
   };
 
   // URL o'zgarishini boshqarish
   const handleUrlChange = (e) => {
-    setForm((prev) => ({ ...prev, url: e.target.value }));
+    const value = e.target.value;
+    setForm((prev) => ({ ...prev, url: value }));
+
+    // URL validatsiya
+    const urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/;
+    setErrors((prev) => ({
+      ...prev,
+      url: !urlRegex.test(value) ? "To‘g‘ri URL kiriting" : "",
+    }));
   };
 
   const handleAdd = async () => {
-    if (!form.url) {
-      sweetAlert("URL kiritish majburiy!", "error");
+    // Validatsiya
+    let hasError = false;
+    const newErrors = { name: {}, url: "" };
+
+    // Sarlavha validatsiyasi
+    Object.keys(form.name).forEach((lang) => {
+      if (form.name[lang].length < 3) {
+        newErrors.name[lang] = "Kamida 3 ta belgi bo‘lishi kerak";
+        hasError = true;
+      }
+    });
+
+    // URL validatsiyasi
+    const urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/;
+    if (!form.url || !urlRegex.test(form.url)) {
+      newErrors.url = "To‘g‘ri URL kiriting";
+      hasError = true;
+    }
+
+    if (hasError) {
+      setErrors(newErrors);
       return;
     }
 
@@ -49,6 +90,10 @@ export function AddCorruption({ onAdded }) {
       onAdded();
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
+
+      // Formani tozalash
+      setForm({ name: { uz: "", ru: "", en: "", kk: "" }, url: "" });
+      setErrors({ name: { uz: "", ru: "", en: "", kk: "" }, url: "" });
     } catch (error) {
       console.error("Xatolik:", error);
       sweetAlert("Xatolik yuz berdi!", "error");
@@ -65,7 +110,7 @@ export function AddCorruption({ onAdded }) {
       <Dialog open={open} handler={handleOpen} size="lg" className="p-4">
         <DialogHeader className="relative">
           <Typography variant="h4" color="blue-gray">
-           Malumot Qo‘shish
+            Malumot Qo‘shish
           </Typography>
           <IconButton
             size="sm"
@@ -87,14 +132,19 @@ export function AddCorruption({ onAdded }) {
                   color="blue-gray"
                   className="mb-2 font-medium"
                 >
-                  Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
+                  Sarlavha ({lang.toUpperCase()})
                 </Typography>
                 <Input
                   value={form.name[lang]}
                   onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
+                  placeholder={`Sarlavha (${lang.toUpperCase()})`}
                   required
                 />
+                {errors.name[lang] && (
+                  <Typography variant="small" color="red" className="mt-1">
+                    {errors.name[lang]}
+                  </Typography>
+                )}
               </div>
             ))}
           </div>
@@ -110,6 +160,11 @@ export function AddCorruption({ onAdded }) {
               placeholder="https://example.com"
               required
             />
+            {errors.url && (
+              <Typography variant="small" color="red" className="mt-1">
+                {errors.url}
+              </Typography>
+            )}
           </div>
         </DialogBody>
 

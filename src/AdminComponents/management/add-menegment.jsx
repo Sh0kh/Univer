@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Dialog,
   Button,
@@ -8,13 +8,6 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
-  Select,
-  Option,
-  Card,
-  List,
-  ListItem,
-  ListItemPrefix,
-  Radio,
   Checkbox,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -25,6 +18,7 @@ export function AddManagement({ onAdded }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+  const [errors, setErrors] = useState({});
 
   const [form, setForm] = useState({
     name: "",
@@ -32,11 +26,28 @@ export function AddManagement({ onAdded }) {
     reception_days: "",
     phone: "",
     email: "",
-    image: "",
     message_receiver: false,
   });
 
   const handleOpen = () => setOpen(!open);
+
+  const validate = () => {
+    let newErrors = {};
+    if (!form.name) newErrors.name = "Ism majburiy";
+    if (!form.reception_days)
+      newErrors.reception_days = "Qabul kunlari majburiy";
+    if (!form.phone) newErrors.phone = "Telefon raqam majburiy";
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email))
+      newErrors.email = "Email noto‘g‘ri";
+    Object.keys(form.position).forEach((lang) => {
+      if (!form.position[lang])
+        newErrors[
+          `position_${lang}`
+        ] = `Lavozim (${lang.toUpperCase()}) majburiy`;
+    });
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleInputChange = (e, field) => {
     setForm({ ...form, [field]: e.target.value });
@@ -49,49 +60,34 @@ export function AddManagement({ onAdded }) {
     });
   };
 
-  const handleImageUpload = async (e) => {
+  const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (!file) return;
-    setImageFile(file);
-
-    const formData = new FormData();
-    formData.append("photo", imageFile);
+    if (file) setImageFile(file);
   };
 
   const handleAdd = async () => {
+    if (!validate()) return;
     setLoading(true);
     try {
       const formData = new FormData();
       formData.append("name", form.name);
-      formData.append("position[uz]", form.position.uz);
-      formData.append("position[ru]", form.position.ru);
-      formData.append("position[en]", form.position.en);
-      formData.append("position[kk]", form.position.kk);
+      Object.keys(form.position).forEach((lang) => {
+        formData.append(`position[${lang}]`, form.position[lang]);
+      });
       formData.append("reception_days", form.reception_days);
       formData.append("phone", form.phone);
       formData.append("email", form.email);
-      formData.append("photo", imageFile);
+      if (imageFile) formData.append("photo", imageFile);
       formData.append("message_receiver", form.message_receiver);
 
       await $api.post("/management", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        headers: { "Content-Type": "multipart/form-data" },
       });
 
       onAdded();
-      setForm({
-        name: "",
-        position: { uz: "", ru: "", en: "", kk: "" },
-        reception_days: "",
-        phone: "",
-        email: "",
-        image: "",
-      });
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
     } catch (error) {
-      console.error("Xatolik:", error);
       sweetAlert("Xatolik yuz berdi!", "error");
     }
     setLoading(false);
@@ -102,108 +98,81 @@ export function AddManagement({ onAdded }) {
       <Button onClick={handleOpen} className="bg-green-500 text-white">
         Rahbariyat qo‘shish
       </Button>
-
       <Dialog open={open} handler={handleOpen} size="lg" className="p-4">
-        <DialogHeader className="relative">
-          <Typography variant="h4" color="blue-gray">
-            Yangi Rahbariyat Qo‘shish
-          </Typography>
-          <IconButton
-            size="sm"
-            variant="text"
-            className="!absolute right-3.5 top-3.5"
-            onClick={handleOpen}
-          >
-            <XMarkIcon className="h-4 w-4 stroke-2" />
-          </IconButton>
+        <DialogHeader>
+          <div className="flex justify-between w-full">
+            <Typography variant="h4">Yangi Rahbariyat Qo‘shish</Typography>
+            <IconButton variant="text" onClick={handleOpen}>
+              <XMarkIcon className="h-4 w-4" />
+            </IconButton>
+          </div>
         </DialogHeader>
-
-        <DialogBody className="space-y-4 pb-6">
-          <div className="grid grid-cols-2 gap-4">
-            {["uz", "ru", "en", "kk"].map((lang) => (
+        <DialogBody>
+          <div className=" grid grid-cols-2 gap-3">
+            {Object.keys(form.position).map((lang) => (
               <div key={lang}>
-                <Typography
-                  variant="small"
-                  color="blue-gray"
-                  className="mb-2 font-medium"
-                >
-                  Lavozim ({lang == "kk" ? "CHI" : lang.toUpperCase()})
-                </Typography>
                 <Input
+                  label={`Lavozim (${lang.toUpperCase()})`}
                   value={form.position[lang]}
                   onChange={(e) => handlePositionChange(e, lang)}
-                  required
                 />
+                {errors[`position_${lang}`] && (
+                  <Typography color="red">
+                    {errors[`position_${lang}`]}
+                  </Typography>
+                )}
               </div>
             ))}
-            <Input
-              label="F.I.O"
-              value={form.name}
-              onChange={(e) => handleInputChange(e, "name")}
-              required
-            />
-            <Input
-              label="Qabul kunlari"
-              value={form.reception_days}
-              onChange={(e) => handleInputChange(e, "reception_days")}
-              required
-            />
-            <Input
-              label="Telefon"
-              value={form.phone}
-              onChange={(e) => handleInputChange(e, "phone")}
-              required
-            />
-            <Input
-              label="Email"
-              value={form.email}
-              onChange={(e) => handleInputChange(e, "email")}
-              required
-            />
-            <Card className="w-full max-w-[24rem]">
-              <List className="flex-row">
-                <ListItem
-                  className="p-2 cursor-pointer"
-                  onClick={() =>
-                    setForm({
-                      ...form,
-                      message_receiver: !form.message_receiver,
-                    })
-                  }
-                >
-                  <ListItemPrefix className="mr-3">
-                    <Checkbox
-                      type="checkbox"
-                      checked={form.message_receiver}
-                      readOnly
-                    />
-                  </ListItemPrefix>
-                  <Typography
-                    color="blue-gray"
-                    className="font-medium text-blue-gray-400"
-                  >
-                    Murojaatlar qabul qiluvchi
-                  </Typography>
-                </ListItem>
-              </List>
-            </Card>
-            <div>
-              <Typography
-                variant="small"
-                color="blue-gray"
-                className="mb-2 font-medium"
-              >
-                Rasm yuklash
-              </Typography>
+            <di>
               <Input
-                type="file"
-                onChange={handleImageUpload}
-                accept="image/*"
+                label="F.I.O"
+                value={form.name}
+                onChange={(e) => handleInputChange(e, "name")}
               />
+              {errors.name && (
+                <Typography color="red">{errors.name}</Typography>
+              )}
+            </di>
+            <div>
+              <Input
+                label="Qabul kunlari"
+                value={form.reception_days}
+                onChange={(e) => handleInputChange(e, "reception_days")}
+              />
+              {errors.reception_days && (
+                <Typography color="red">{errors.reception_days}</Typography>
+              )}
             </div>
+            <div>
+              <Input
+                label="Telefon"
+                value={form.phone}
+                onChange={(e) => handleInputChange(e, "phone")}
+              />
+              {errors.phone && (
+                <Typography color="red">{errors.phone}</Typography>
+              )}
+            </div>
+            <div>
+              <Input
+                label="Email"
+                value={form.email}
+                onChange={(e) => handleInputChange(e, "email")}
+              />
+              {errors.email && (
+                <Typography color="red">{errors.email}</Typography>
+              )}
+            </div>
+            <Checkbox
+              label="Murojaatlar qabul qiluvchi"
+              checked={form.message_receiver}
+              onChange={() =>
+                setForm({ ...form, message_receiver: !form.message_receiver })
+              }
+            />
+            <Input type="file" onChange={handleImageUpload} accept="image/*" />
           </div>
         </DialogBody>
-
         <DialogFooter>
           <Button
             onClick={handleAdd}

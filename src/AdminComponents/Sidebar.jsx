@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { IoLogoReact } from "react-icons/io5";
 import { FaChartPie } from "react-icons/fa6";
 import { TiMessages } from "react-icons/ti";
+import { MdPermMedia } from "react-icons/md";
+import { MdFindInPage } from "react-icons/md";
 import {
   FaBuilding,
   FaHandshake,
@@ -31,14 +33,14 @@ import { GrSchedule } from "react-icons/gr";
 const menuItems = [
   { name: "Asosiy", path: "/admin", icon: <FaHome className="text-lg" /> },
   {
-    name: "Kategoriyalar",
-    path: "/admin/categories",
-    icon: <TbCategory className="text-lg" />,
+    name: "Murojaatlar",
+    path: "/admin/message-user",
+    icon: <TiMessages className="text-lg" />,
   },
   {
-    name: "Rekvisitlar",
-    path: "/admin/recvizits",
-    icon: <TbClipboardList className="text-lg" />,
+    name: "Menular", // Kategoriya
+    path: "/admin/categories",
+    icon: <TbCategory className="text-lg" />,
   },
   {
     name: "Yangiliklar",
@@ -48,6 +50,34 @@ const menuItems = [
     ],
     path: "/admin/news",
     icon: <TbNews className="text-lg" />,
+  },
+  {
+    name: "Statik Sahifalar",
+    subItems: [
+      { name: "Barcha sahifalar", path: "/admin/photo-media" },
+      { name: "Sahifa qo'shish", path: "/admin/video-media" },
+    ],
+    path: "/admin/events",
+    icon: <MdFindInPage className="text-lg" />,
+  },
+  {
+    name: "Dinamik Sahifalar",
+    subItems: [
+      { name: "Barcha sahifalar", path: "/admin/post" },
+      { name: "Sahifa qo'shish", path: "/admin/post/create" },
+    ],
+    path: "/admin/events",
+    icon: <MdFindInPage className="text-lg" />,
+  },
+  {
+    name: "Media",
+    subItems: [
+      { name: "Foto medialar", path: "/admin/photo-media" },
+      { name: "Video medialar", path: "/admin/video-media" },
+      { name: "Media yaratish", path: "/admin/create-media" },
+    ],
+    path: "/admin/events",
+    icon: <MdPermMedia className="text-lg" />,
   },
   {
     name: "Murojaatlarni ko‘rib chiqish tartibi",
@@ -65,7 +95,7 @@ const menuItems = [
     icon: <FaBuilding className="text-lg" />,
   },
   {
-    name: "Management",
+    name: "Rahbariyat",
     path: "/admin/management",
     icon: <RiTeamFill className="text-lg" />,
   },
@@ -84,11 +114,11 @@ const menuItems = [
     path: "/admin/schedule-event",
     icon: <GrSchedule className="text-lg" />,
   },
-  {
-    name: "Postlar",
-    path: "/admin/post",
-    icon: <BsFillPostcardFill className="text-lg" />,
-  },
+  // {
+  //   name: "Postlar",
+  //   path: "/admin/post",
+  //   icon: <BsFillPostcardFill className="text-lg" />,
+  // },
   {
     name: "Ochik ma'lumotlar",
     subItems: [
@@ -99,34 +129,12 @@ const menuItems = [
     path: "/admin/events",
     icon: <AiOutlineFileText className="text-lg" />,
   },
-  // {
-  //   name: "Universitet statistikasi",
-  //   subItems: [
-  //     { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-  //     { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-  //   ],
-  //   path: "/admin/university-stats",
-  //   icon: <FaUniversity className="text-lg" />,
-  // },
-  // {
-  //   name: "Virtual Xizmatlar",
-  //   subItems: [
-  //     { name: "Barcha Kategoriyalar", path: "/admin/categories/all" },
-  //     { name: "Kategoriya qo‘shish", path: "/admin/categories/add" },
-  //   ],
-  //   path: "/admin/virtual-services",
-  //   icon: <TbServer className="text-lg" />,
-  // },
+  
   {
     name: "Bosh ish orinlari",
     path: "/admin/vacancies",
     icon: <RiTeamFill className="text-lg" />,
   },
-  // {
-  //   name: "Hamkorlarimiz",
-  //   path: "/admin/OurPartners",
-  //   icon: <MdBusiness className="text-lg" />,
-  // },
   {
     name: "Bolimlar",
     path: "/admin/sections",
@@ -138,9 +146,9 @@ const menuItems = [
     icon: <FaChartPie className="text-lg" />,
   },
   {
-    name: "Virtual Murojatlar",
-    path: "/admin/message-user",
-    icon: <TiMessages className="text-lg" />,
+    name: "Rekvizitlar",
+    path: "/admin/recvizits",
+    icon: <TbClipboardList className="text-lg" />,
   },
   {
     name: "Markazlar",
@@ -187,7 +195,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
                   <div className="flex items-center gap-4">
                     {item.icon}
                     {!isCollapsed && (
-                      <span className="text-sm">{item.name}</span>
+                      <span className="text-sm min-w-5">{item.name}</span>
                     )}
                   </div>
                   {!isCollapsed && (
