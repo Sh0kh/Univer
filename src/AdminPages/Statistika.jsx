@@ -55,12 +55,12 @@ export default function Statistika() {
     },
     {
       name: "Yaratilgan vaqti",
-      selector: (row) => row.created_at || "Noma'lum",
+      selector: (row) => new Date(row.created_at).toLocaleString() || "Noma'lum",
       sortable: true,
     },
     {
       name: "Yangilangan vaqti",
-      selector: (row) => row.updated_at || "Noma'lum",
+      selector: (row) => new Date(row.updated_at).toLocaleString() || "Noma'lum",
       sortable: true,
     },
     {
