@@ -53,7 +53,7 @@ export function UpdateOurPartners({ onUpdated, rowData }) {
             console.error("Xatolik:", error);
             sweetAlert("Xatolik yuz berdi!", "error");
         }
-        setLoading(false);
+        setLoading(false);S
     };
 
     return (
