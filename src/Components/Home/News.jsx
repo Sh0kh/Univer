@@ -53,7 +53,7 @@ const News = () => {
   }, [data]);
 
   return (
-    <section className="news py-10 px-3 md:px-0 max-w-6xl mx-auto">
+    <section className="news py-10 px-4 md:px-0 max-w-6xl mx-auto">
       <div className="relative pb-4 mb-6">
         <h2 className="text-3xl font-bold text-[#1f235b] relative inline-block mb-[20px] bg-white pr-4 z-10">
           • Yangiliklar
@@ -82,7 +82,7 @@ const News = () => {
                 ref={(el) => (cardsRef.current[index] = el)}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 to={`/yangilik/${news?.id}`}
-                className="bg-white overflow-hidden flex flex-col group opacity-0"
+                className="bg-white overflow-hidden flex flex-col group "
               >
                 <div className="overflow-hidden">
                   <img

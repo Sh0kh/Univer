@@ -85,17 +85,17 @@ const menuItems = [
     path: "/admin/events",
     icon: <MdFindInPage className="text-lg" />,
   },
-  {
-    name: "Media",
-    subItems: [
-      { name: "Foto medialar", path: "/admin/photo-media" },
-      { name: "Video medialar", path: "/admin/video-media" },
-      { name: "Media yaratish", path: "/admin/create-media" },
+  // {
+  //   name: "Media",
+  //   subItems: [
+  //     { name: "Foto medialar", path: "/admin/photo-media" },
+  //     { name: "Video medialar", path: "/admin/video-media" },
+  //     { name: "Media yaratish", path: "/admin/create-media" },
 
-    ],
-    path: "/admin/events",
-    icon: <MdPermMedia className="text-lg" />,
-  },
+  //   ],
+  //   path: "/admin/events",
+  //   icon: <MdPermMedia className="text-lg" />,
+  // },
   {
     name: "Rahbariyat",
     subItems: [
