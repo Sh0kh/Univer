@@ -11,7 +11,7 @@ export default function CabinetPage() {
     const getuser = async () => {
         try {
             const response = await axios.get(`/management-message-receiver`)
-            setData(response?.data?.data)
+            setData(response?.data?.data || [])
         } catch (error) {
             console.log(error)
         } finally {

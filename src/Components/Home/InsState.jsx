@@ -39,12 +39,17 @@ export default function InstituteStats() {
     });
 
     // Анимация чисел
-    countersRef.current.forEach((el, index) => {
+    countersRef.current.forEach((el) => {
+      if (!el) return; // Проверка на null
+
+      const targetValue = parseInt(el.dataset.value, 10);
+      if (el.innerText !== "0") return; // Если уже есть значение, не перезапускать анимацию
+
       gsap.fromTo(
         el,
         { innerText: 0 },
         {
-          innerText: el.dataset.value,
+          innerText: targetValue,
           duration: 2,
           ease: "power1.out",
           snap: { innerText: 1 },
@@ -92,7 +97,7 @@ export default function InstituteStats() {
                   data-value={item.value || 0}
                   className="cl_qw text-2xl font-bold"
                 >
-                  0
+                  {item.value || 0}
                 </p>
               </div>
             ))}

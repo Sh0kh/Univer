@@ -115,14 +115,14 @@ const menuItems = [
 
     ],
     path: "/admin/events",
-    icon: <IoPeopleSharp  className="text-lg" />,
+    icon: <IoPeopleSharp className="text-lg" />,
   },
   {
     name: "Ochiq ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
-      { name: "Karrupsiyaga qarshi", path: "/admin/against-corrution" },
-      { name: "Regularly Document", path: "/admin/regulatory-doc" },
+      { name: "Korupsiyaga qarshi ", path: "/admin/against-corrution" },
+      { name: "Me'yoriy hujjatlar", path: "/admin/regulatory-doc" },
       {
         name: "Murojaatlarni ko‘rib chiqish tartibi",
         path: "/admin/review",

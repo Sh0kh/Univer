@@ -84,9 +84,6 @@ export default function Post() {
           ))}
         </div>
         <div>
-          <NavLink className="block" to="/admin/post/create">
-            <Button className="bg-green-500 text-white">Post qo'shish</Button>
-          </NavLink>
         </div>
       </div>
       <CustomDataTable

@@ -262,15 +262,15 @@ export default function Header() {
                     <div
                         className="menu_wr flex items-center justify-between w-full gap-[10px] relative"
                     >
-                        <a
+                        <span
                             onMouseEnter={() => setShowModal(true)}
                             onMouseLeave={() => setShowModal(false)}
-                            href="" className="hover:opacity-[0.8] py-[16px] flex items-center gap-[5px] duration-300 uppercase">
+                            href="" className="hover:opacity-[0.8] cursor-pointer py-[16px] flex items-center gap-[5px] duration-300 uppercase">
                             {t('Umumiy_malumot')}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </span>
                         {showModal && (
                             <div
                                 onMouseEnter={() => setShowModal(true)}
@@ -296,12 +296,12 @@ export default function Header() {
                                 onMouseEnter={() => setSubModal(index)}
                                 onMouseLeave={() => setSubModal(null)}
                             >
-                                <a href="#" className="hover:opacity-[0.8] flex items-center gap-[5px] duration-300 uppercase">
+                                <span  className="hover:opacity-[0.8] cursor-pointer flex items-center gap-[5px] duration-300 uppercase">
                                     {i?.title[i18n?.language]}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </a>
+                                </span>
                                 {subModal === index && (
                                     <div
                                         ref={subRef}
