@@ -100,6 +100,9 @@ const menuItems = [
   {
     name: "Rahbariyat",
     subItems: [
+   { name: "Foto medialar", path: "/admin/photo-media" },
+      { name: "Video medialar", path: "/admin/video-media" },
+
       { name: "Rahbariyat", path: "/admin/management", },
       {
         name: "Bo'sh ish o'rinlari",
@@ -114,6 +117,7 @@ const menuItems = [
         path: "/admin/schedule-event",
       },
 
+
     ],
     path: "/admin/events",
     icon: <IoPeopleSharp className="text-lg" />,
@@ -122,12 +126,17 @@ const menuItems = [
     name: "Ochiq ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
+
+      { name: "Korrupsiyaga qarshi", path: "/admin/against-corrution" },
+      { name: "Me'yoriy hujjatlar", path: "/admin/regulatory-doc" },
+
       { name: "Korupsiyaga qarshi ", path: "/admin/against-corrution" },
       { name: "Me'yoriy hujjatlar", path: "/admin/regulatory-doc" },
       {
         name: "Murojaatlarni ko‘rib chiqish tartibi",
         path: "/admin/review",
       },
+
     ],
     path: "/admin/events",
     icon: <AiOutlineFileText className="text-lg" />,
