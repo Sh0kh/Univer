@@ -1,15 +1,17 @@
 import axios from "axios";
 import counter from "../../img/Counter.png";
 import { useEffect, useState, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 export default function InstituteStats() {
   const [data, setData] = useState({});
+  const [counts, setCounts] = useState({
+    students_count: 0,
+    professors_count: 0,
+    faculties_count: 0,
+    education_programs_count: 0,
+  });
   const sectionRef = useRef(null);
-  const countersRef = useRef([]);
+  const observerRef = useRef(null);
 
   const getState = async () => {
     try {
@@ -25,42 +27,39 @@ export default function InstituteStats() {
   }, []);
 
   useEffect(() => {
-    const section = sectionRef.current;
+    if (!data.students_count) return;
 
-    // Параллакс-эффект фона
-    gsap.to(section, {
-      backgroundPositionY: "50%",
-      scrollTrigger: {
-        trigger: section,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+    const animateNumbers = (target, key) => {
+      let start = 0;
+      const end = target;
+      const duration = 2000;
+      const stepTime = 20;
+      const steps = duration / stepTime;
+      const increment = end / steps;
 
-    // Анимация чисел
-    countersRef.current.forEach((el) => {
-      if (!el) return; // Проверка на null
-
-      const targetValue = parseInt(el.dataset.value, 10);
-      if (el.innerText !== "0") return; // Если уже есть значение, не перезапускать анимацию
-
-      gsap.fromTo(
-        el,
-        { innerText: 0 },
-        {
-          innerText: targetValue,
-          duration: 2,
-          ease: "power1.out",
-          snap: { innerText: 1 },
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            once: true,
-          },
+      const counter = setInterval(() => {
+        start += increment;
+        if (start >= end) {
+          start = end;
+          clearInterval(counter);
         }
-      );
-    });
+        setCounts((prev) => ({ ...prev, [key]: Math.round(start) }));
+      }, stepTime);
+    };
+
+    observerRef.current = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        animateNumbers(data.students_count, "students_count");
+        animateNumbers(data.professors_count, "professors_count");
+        animateNumbers(data.faculties_count, "faculties_count");
+        animateNumbers(data.education_programs_count, "education_programs_count");
+        observerRef.current.disconnect();
+      }
+    }, { threshold: 0.5 });
+
+    if (sectionRef.current) {
+      observerRef.current.observe(sectionRef.current);
+    }
   }, [data]);
 
   return (
@@ -85,20 +84,14 @@ export default function InstituteStats() {
 
           <div className="state_wr grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
             {[
-              { label: "Talabalar soni", value: data.students_count },
-              { label: "Professor o‘qituvchilar", value: data.professors_count },
-              { label: "Fakultetlar soni", value: data.faculties_count },
-              { label: "Ta’lim yo‘nalishlari", value: data.education_programs_count },
+              { label: "Talabalar soni", key: "students_count" },
+              { label: "Professor o‘qituvchilar", key: "professors_count" },
+              { label: "Fakultetlar soni", key: "faculties_count" },
+              { label: "Ta’lim yo‘nalishlari", key: "education_programs_count" }
             ].map((item, index) => (
               <div key={index} className="p-6 rounded-lg text-center">
                 <h4 className="text-lg font-semibold mt-2">{item.label}</h4>
-                <p
-                  ref={(el) => (countersRef.current[index] = el)}
-                  data-value={item.value || 0}
-                  className="cl_qw text-2xl font-bold"
-                >
-                  {item.value || 0}
-                </p>
+                <p className="cl_qw text-2xl font-bold">{counts[item.key]}</p>
               </div>
             ))}
           </div>
