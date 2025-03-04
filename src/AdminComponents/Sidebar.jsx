@@ -5,6 +5,7 @@ import { TiMessages } from "react-icons/ti";
 import { MdPermMedia } from "react-icons/md";
 import { MdFindInPage } from "react-icons/md";
 import { IoPeopleSharp } from "react-icons/io5";
+import Logo from '../img/Logowhite.png'
 
 import {
   FaBuilding,
@@ -101,7 +102,7 @@ const menuItems = [
     subItems: [
       { name: "Rahbariyat", path: "/admin/management", },
       {
-        name: "Bosh ish orinlari",
+        name: "Bo'sh ish o'rinlari",
         path: "/admin/vacancies",
       },
       {
@@ -148,17 +149,11 @@ export default function Sidebar({ isCollapsed, setIsCollapsed, handleLogOut }) {
         } p-4 shadow-lg flex flex-col justify-between fixed z-50 `}
     >
       <div>
-        <h2
-          className={`text-xl font-semibold text-center mb-8 ${isCollapsed ? "hidden" : ""
-            }`}
-        >
-          IT LIVE
-        </h2>
+        <img className="w-[100px] mx-auto mb-[20px]" src={Logo} alt="Foto" />
         <div
           className={`text-xl font-semibold text-center flex items-center justify-center mb-8 ${isCollapsed ? "" : "hidden"
             }`}
         >
-          <IoLogoReact className="animate-spin" />
         </div>
         <ul className="space-y-2">
           {menuItems.map((item, index) =>

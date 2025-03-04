@@ -16,6 +16,7 @@ const CustomCalendar = () => {
   const currentYear = selectedDate.getFullYear();
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true)
+  const { t } = useTranslation()
 
 
 
@@ -204,7 +205,7 @@ const CustomCalendar = () => {
     <div className="bg-white p-6 rounded-lg shadow-md overflow-hidden">
       <div className="Container">
         <div className="flex justify-between items-center pb-2 mb-4 border-b-2 border-gray-200 relative">
-          <h2 className="text-xl font-semibold text-[#1f235b]">• Kutilayotgan tadbirlar</h2>
+          <h2 className="text-xl font-semibold text-[#1f235b]">• {t('Kutilayotgantadbirlar')}</h2>
           <div className="absolute bottom-[-2px] left-0 w-20 h-[2px] bg-[#1f235b]"></div>
         </div>
 
@@ -267,7 +268,7 @@ const CustomCalendar = () => {
                 className="bg-white rounded-lg p-2 px-4 text-center border-[2px] cursor-pointer hover:bg-gray-100"
                 onClick={() => setSelectedDate(new Date())}
               >
-                Bugun
+                {t('Bugun')}
               </div>
             </div>
 

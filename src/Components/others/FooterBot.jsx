@@ -1,11 +1,15 @@
+import { useTranslation } from "react-i18next"
 
 export default function FooterBot() {
+
+  const { t } = useTranslation()
+
   return (
     <div className="footerbot  mt-[90px] flex items-start justify-between">
       <div>
-        <h1>TKTIYF © 2025. Barcha huquqlar himoyalangan</h1>
+        <h1>TKTIYF © 2025. {t('Barchahuquqlarhimoyalangan')}</h1>
         <a className="text-white mt-[20px] block hover:opacity-[0.7] duration-300" href="https://itliveacademy.uz/" target="_blank" rel="noopener noreferrer">
-          Sayt IT <span className="text-[red]">LIVE</span> tamonidan ishlab chiqilgan
+          {t('SaytITLIVEtamonidanishlabchiqilgan')}
         </a>
       </div>
       <div className="social_footer flex items-center justify-between gap-[20px]">

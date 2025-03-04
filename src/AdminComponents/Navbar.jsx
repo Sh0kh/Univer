@@ -45,9 +45,8 @@ function ProfileMenu() {
           />
           <ChevronDownIcon
             strokeWidth={2.5}
-            className={`h-3 w-3 transition-transform ${
-              isMenuOpen ? "rotate-180" : ""
-            }`}
+            className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+              }`}
           />
         </Button>
       </MenuHandler>
@@ -101,9 +100,8 @@ export function ComplexNavbar() {
           href="#"
           className="mr-4 ml-2 cursor-pointer py-1.5 font-medium"
         >
-          Admin Dashboard
+          Admin
         </Typography>
-
         <IconButton
           size="sm"
           color="blue-gray"
@@ -113,8 +111,12 @@ export function ComplexNavbar() {
         >
           <Bars2Icon className="h-6 w-6" />
         </IconButton>
-
-        <ProfileMenu />
+        <div className="flex items-center gap-[10px]">
+          <span>
+            +998 97 866 5050
+          </span>
+          <ProfileMenu />
+        </div>
       </div>
     </Navbar>
   );

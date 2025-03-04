@@ -13,6 +13,7 @@ const News = () => {
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const { t } = useTranslation()
 
   const getNews = async () => {
     try {
@@ -34,7 +35,7 @@ const News = () => {
     <section className="news py-10 px-4 md:px-0 max-w-6xl mx-auto">
       <div className="relative pb-4 mb-6">
         <h2 className="text-3xl font-bold text-[#1f235b] relative inline-block mb-[20px] bg-white pr-4 z-10">
-          • Yangiliklar
+          {t('Yangiliklar')}
         </h2>
         <div className="absolute left-0 top-150 w-full border-t border-[#1f235b] -z-10"></div>
         <div className="absolute left-0 top-150 w-1/4 border-t-2 border-[#1f235b] -z-10"></div>
@@ -43,7 +44,7 @@ const News = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <button className="button_new text-gray-700 font-medium hover:opacity-[0.7] duration-300 absolute right-0 top-0">
-            Ko‘proq ko‘rish
+            {t('Koproqkorish')}
           </button>
         </NavLink>
       </div>
@@ -86,7 +87,7 @@ const News = () => {
                   </h3>
 
                   <a href="#" className="text-black group-hover:text-blue-600 duration-500 mt-[16px] inline-block font-medium">
-                    Batafsil →
+                    {t('Batafsil')} →
                   </a>
                 </div>
               </NavLink>

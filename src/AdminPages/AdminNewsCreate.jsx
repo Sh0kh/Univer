@@ -87,7 +87,7 @@ export default function NewsCreate() {
       formData.append("summary[ru]", ruinfo.summary);
       formData.append("summary[kk]", KKinfo.summary);
 
-      formData.append("show_in_carousel", showInCarousel);
+      formData.append("show_in_carousel", showInCarousel === true ? 'true' : 'false');
       formData.append("date", date);
 
       if (selectedFile) {

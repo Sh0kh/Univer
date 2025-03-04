@@ -66,6 +66,7 @@ import PostEdit from "./Pages/PostEdit";
 import UserPost from "./Pages/Post";
 import Profile from "./AdminPages/Profile";
 import AllPosts from "./AdminPages/AllPosts";
+import AdminNewsEdit from "./AdminPages/AdminNewsEdit";
 
 function App() {
   return (
@@ -102,6 +103,8 @@ function App() {
 
               <Route path="/admin/news" element={<AdminNews />} />
               <Route path="/admin/news/create" element={<AdminNewsCreate />} />
+              <Route path="/admin/news/edit/:ID" element={<AdminNewsEdit />} />
+
               <Route path='/admin/aboutUs/create' element={<AboutUsCreate />} />
               <Route path="/admin/aboutUs/edit/:ID" element={<AboutUsEdit />} />
 

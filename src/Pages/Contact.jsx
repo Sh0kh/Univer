@@ -1,11 +1,15 @@
+import { useTranslation } from "react-i18next";
 import ContactHero from "../Components/Contact/ContactHero";
 import MiniHeader from "../Components/MiniHeader";
 
-export default function Conatact(){
-    return(
+export default function Conatact() {
+
+    const { t } = useTranslation()
+
+    return (
         <div>
-            <MiniHeader title="Bog’lanish"  minititle="Bog’lanish"/>
-            <ContactHero/>
+            <MiniHeader title={t('boglanish')} minititle={t('boglanish')} />
+            <ContactHero />
         </div>
     )
 }

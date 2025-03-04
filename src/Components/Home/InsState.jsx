@@ -1,6 +1,7 @@
 import axios from "axios";
-import counter from "../../img/Counter.png";
+import counter from "../../img/FotoSt.png";
 import { useEffect, useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function InstituteStats() {
   const [data, setData] = useState({});
@@ -10,6 +11,7 @@ export default function InstituteStats() {
     faculties_count: 0,
     education_programs_count: 0,
   });
+  const { t } = useTranslation()
   const sectionRef = useRef(null);
   const observerRef = useRef(null);
 
@@ -66,7 +68,7 @@ export default function InstituteStats() {
     <section
       ref={sectionRef}
       style={{
-        backgroundImage: `url(${counter})`,
+        backgroundImage: `linear-gradient(180deg, rgba(68, 76, 231, 0.2) 0%, #00044f 100%), url(${counter})`,
         backgroundAttachment: "fixed",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -76,18 +78,18 @@ export default function InstituteStats() {
       <div className="Container">
         <div className="relative z-10 text-center">
           <h2 className="text-2xl font-bold">
-            Institut faoliyati bo‘yicha raqamli statistika
+            {t('Institutfaoliyatiboyicharaqamlistatistika')}
           </h2>
           <p className="text-gray-300">
-            Bugungi kunga qadar faoliyatimizga oid raqamlar bilan tanishishingiz mumkin
+            {t('Bugungikungaqadarfaoliyatimizgaoidraqamlarbilantanishishingizmumkin')}
           </p>
 
           <div className="state_wr grid grid-cols-2 md:grid-cols-4 gap-6 mt-6">
             {[
-              { label: "Talabalar soni", key: "students_count" },
-              { label: "Professor o‘qituvchilar", key: "professors_count" },
-              { label: "Fakultetlar soni", key: "faculties_count" },
-              { label: "Ta’lim yo‘nalishlari", key: "education_programs_count" }
+              { label: `${t('Talabalarsoni')}`, key: "students_count" },
+              { label: `${t('ProfessorOqituvchilar')}`, key: "professors_count" },
+              { label: `${t('Fakultetlarsoni')}`, key: "faculties_count" },
+              { label: `${t('Talimyonalishlar')}`, key: "education_programs_count" }
             ].map((item, index) => (
               <div key={index} className="p-6 rounded-lg text-center">
                 <h4 className="text-lg font-semibold mt-2">{item.label}</h4>

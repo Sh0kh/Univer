@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom';
 import {
   Button,
+  IconButton,
 
 } from "@material-tailwind/react";
 import DeleteNews from '../AdminComponents/news/delete-news'
 import Loader from "../lib/loader";
 import { $api } from "../utils";
 import CustomDataTable from '../lib/custom-data-table';
+import { FaPencilAlt } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 export default function News() {
   const [activeTab, setActiveTab] = useState("uz");
@@ -74,7 +77,11 @@ export default function News() {
       cell: (row) => (
 
         <div className="flex space-x-2">
-          {/* <UpdateCategory categoryData={row} onCategoryUpdated={fetchData} /> */}
+          <NavLink to={`/admin/news/edit/${row?.id}`}>
+            <IconButton className=" text-black" variant="text">
+              <FaPencilAlt className="h-4 w-4" />
+            </IconButton>
+          </NavLink>
           <DeleteNews Id={row.id} onCategoryDeleted={fetchData} />
         </div>
       ),
