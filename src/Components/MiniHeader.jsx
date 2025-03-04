@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 
 export default function MiniHeader({ title, minititle }) {
+
+    const { t } = useTranslation()
 
 
     return (
@@ -19,7 +22,7 @@ export default function MiniHeader({ title, minititle }) {
                     </li>
                     <li className="flex items-center justify-between gap-[10px]">
                         <NavLink to="/">
-                            <h4 classNa="font-[var(--font-family)] font-semibold text-[14px] leading-[143%] text-[#535862]" >Asosiy</h4>
+                            <h4 classNa="font-[var(--font-family)] font-semibold text-[14px] leading-[143%] text-[#535862]" >{t('Asosiy')}</h4>
                         </NavLink>
                         <svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 9L5 5L1 1" stroke="#D5D7DA" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />

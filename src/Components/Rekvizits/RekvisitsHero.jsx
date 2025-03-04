@@ -7,6 +7,7 @@ export default function RekvisitsHero() {
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const { t } = useTranslation()
 
   const getRekvisits = async () => {
     try {
@@ -28,11 +29,11 @@ export default function RekvisitsHero() {
       <div className="Container">
         {loading ? (
           < div className="flex items-center justify-center w-full h-[400px]" >
-                  <ReactLoading type="spinningBubbles" color='#fffff' height={100} width={100} />
-                </div >
+            <ReactLoading type="spinningBubbles" color='#fffff' height={100} width={100} />
+          </div >
         ) : data.length === 0 ? (
           <div className="text-center text-gray-500 text-lg mt-5">
-          Empty data
+            Empty data
           </div>
         ) : (
           data.map((item, index) => (
@@ -41,12 +42,12 @@ export default function RekvisitsHero() {
                 {item?.title?.[i18n.language] || item?.title?.["uz"]}
               </h1>
               {[
-                { label: "Manzil", value: item?.address },
-                { label: "Telefon", value: item?.phone },
-                { label: "Hisob raqam", value: item?.account_number },
-                { label: "Bank", value: item?.bank },
-                { label: "MFO", value: item?.mfo },
-                { label: "Shaxsiy hisob raqam", value: item?.personal_account },
+                { label: `${t('Manzil')}`, value: item?.address },
+                { label: `${t('Telefon')}`, value: item?.phone },
+                { label: `${t('Hisobraqam')}`, value: item?.account_number },
+                { label: `${t('Bank')}`, value: item?.bank },
+                { label: `${t('MFO')}`, value: item?.mfo },
+                { label: `${t('Shaxsiyhisobraqam')}`, value: item?.personal_account },
                 { label: "OKONX", value: item?.oknox },
                 { label: "STIR", value: item?.stir },
               ].map((field, idx) => (

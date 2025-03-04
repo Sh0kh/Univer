@@ -53,10 +53,10 @@ export default function Post() {
       selector: (row) => {
         return (
           <Link
-            to={`/post/${row.id}`}
-            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+            to={`/sahifa/${row.id}`}
+            className=" w-32 p-2 flex justify-center text-blue-400 shadow rounded-xl cursor-pointer"
           >
-            <FaRightToBracket className=" text-xl text-center" />
+            https://ticty.uz/sahifa/{row?.id}
           </Link>
         );
       },
@@ -84,9 +84,6 @@ export default function Post() {
           ))}
         </div>
         <div>
-          <NavLink className="block" to="/admin/post/create">
-            <Button className="bg-green-500 text-white">Post qo'shish</Button>
-          </NavLink>
         </div>
       </div>
       <CustomDataTable

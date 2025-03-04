@@ -87,7 +87,7 @@ export default function NewsCreate() {
       formData.append("summary[ru]", ruinfo.summary);
       formData.append("summary[kk]", KKinfo.summary);
 
-      formData.append("show_in_carousel", showInCarousel);
+      formData.append("show_in_carousel", showInCarousel === true ? 'true' : 'false');
       formData.append("date", date);
 
       if (selectedFile) {
@@ -106,6 +106,7 @@ export default function NewsCreate() {
       setShowInCarousel(false);
       setDate("");
       setSelectedFile(null);
+      setFilePreview(null)
     } catch (error) {
       sweetAlert(`Xatolik: ${error.message}`, "error");
       console.error("Xatolik yuz berdi:", error);

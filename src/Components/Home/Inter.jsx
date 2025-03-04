@@ -12,6 +12,7 @@ export default function Inter() {
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   const cardsRef = useRef([]);
+  const { t } = useTranslation()
 
   const getInterService = async () => {
     try {
@@ -53,7 +54,7 @@ export default function Inter() {
       <div className="Container">
         <div className="relative pb-4 mb-6">
           <h2 className="text-3xl font-bold text-[#1f235b] relative inline-block mb-[20px] bg-white pr-4 z-10">
-            • Interaktiv xizmatlar
+            • {t('Interaktivxizmatlar')}
           </h2>
           <div className="absolute left-0 top-150 w-full border-t border-[#1f235b] -z-10"></div>
           <div className="absolute left-0 top-150 w-1/4 border-t-2 border-[#1f235b] -z-10"></div>

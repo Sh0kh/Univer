@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import calendar from '../../img/calendar.png';
 import eye from '../../img/eye1.png';
 import axios from "axios";
@@ -6,16 +6,14 @@ import { useTranslation } from "react-i18next";
 import ReactLoading from 'react-loading';
 import img_def from '../../img/default_image.jpg';
 import { NavLink } from "react-router-dom";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const News = () => {
   const { i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const cardsRef = useRef([]);
+  const { t } = useTranslation()
 
   const getNews = async () => {
     try {
@@ -30,33 +28,14 @@ const News = () => {
 
   useEffect(() => {
     getNews();
+    AOS.init({ duration: 600, once: true });
   }, []);
 
-  useEffect(() => {
-    if (data.length > 0) {
-      gsap.fromTo(
-        cardsRef.current,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.2,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: ".news",
-            start: "top 40%",
-          }
-        }
-      );
-    }
-  }, [data]);
-
   return (
-    <section className="news py-10 px-3 md:px-0 max-w-6xl mx-auto">
+    <section className="news py-10 px-4 md:px-0 max-w-6xl mx-auto">
       <div className="relative pb-4 mb-6">
         <h2 className="text-3xl font-bold text-[#1f235b] relative inline-block mb-[20px] bg-white pr-4 z-10">
-          • Yangiliklar
+          {t('Yangiliklar')}
         </h2>
         <div className="absolute left-0 top-150 w-full border-t border-[#1f235b] -z-10"></div>
         <div className="absolute left-0 top-150 w-1/4 border-t-2 border-[#1f235b] -z-10"></div>
@@ -65,7 +44,7 @@ const News = () => {
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
           <button className="button_new text-gray-700 font-medium hover:opacity-[0.7] duration-300 absolute right-0 top-0">
-            Ko‘proq ko‘rish
+            {t('Koproqkorish')}
           </button>
         </NavLink>
       </div>
@@ -76,13 +55,13 @@ const News = () => {
       ) : (
         data?.length > 0 ? (
           <div className="grid md:grid-cols-3 gap-6">
-            {data.map((news, index) => (
+            {data.map((news) => (
               <NavLink
                 key={news.id}
-                ref={(el) => (cardsRef.current[index] = el)}
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 to={`/yangilik/${news?.id}`}
-                className="bg-white overflow-hidden flex flex-col group opacity-0"
+                className="bg-white overflow-hidden flex flex-col group"
+                data-aos="fade-up"
               >
                 <div className="overflow-hidden">
                   <img
@@ -108,7 +87,7 @@ const News = () => {
                   </h3>
 
                   <a href="#" className="text-black group-hover:text-blue-600 duration-500 mt-[16px] inline-block font-medium">
-                    Batafsil →
+                    {t('Batafsil')} →
                   </a>
                 </div>
               </NavLink>

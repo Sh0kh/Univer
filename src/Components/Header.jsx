@@ -23,7 +23,7 @@ export default function Header() {
     const modalRef = useRef(null);
     const modalRef1 = useRef(null);
     const { i18n } = useTranslation();
-
+    const { t } = useTranslation();
 
     const getCategory = async () => {
         try {
@@ -85,6 +85,21 @@ export default function Header() {
         };
     }, []);
 
+    const navLinks = [
+        { to: "/biz-haqimizda", label: t("biz_haqimizda") },
+        { to: "/rahbariyat", label: t("rahbariyat") },
+        { to: "/hamkorlarimiz", label: t("hamkorlarimiz") },
+        { to: "/xalqaro-aloqalar", label: t("xalqaro_aloqalar") },
+        { to: "/hujjatlar", label: t("hujjatlar") },
+        { to: "/murojaatlar", label: t("murojaatlar") },
+        { to: "/ochiq-ma'lumotlar", label: t("ochiq_malumotlar") },
+        { to: "/bo'lim-markazlar", label: t("bolim_markazlar") },
+        { to: "/rekvizitlar", label: t("rekvizitlar") },
+        { to: "/virtual-kabinet", label: t("virtual_kabinet") },
+        { to: "/korrupsiyaga-kurash", label: t("korrupsiya_kurash") },
+        { to: "/bosh-ish-orni", label: t("bosh_ish_orni") }
+    ];
+
 
     useEffect(() => {
         const handleClickOutside3 = (e) => {
@@ -112,7 +127,9 @@ export default function Header() {
                                 <li>Hemis</li>
                             </a>
                             <NavLink to="/ramzlar">
-                                <li>Davlat ramzlari</li>
+                                <li>
+                                    {t("davlat_ramzlari")}
+                                </li>
                             </NavLink>
                         </ul>
                         <div className="flex  items-center space-x-2">
@@ -198,7 +215,9 @@ export default function Header() {
                                 </svg>
                             </div>
                             <div>
-                                <p className="text-xs text-gray-500">Ishonch telefoni:</p>
+                                <p className="text-xs text-gray-500">
+                                    {t("ishonch_telefoni")}
+                                </p>
                                 <h4 className="text-sm font-bold">+998 (95) 511 58 56</h4>
                             </div>
                         </div>
@@ -209,7 +228,9 @@ export default function Header() {
                                 </svg>
                             </div>
                             <div>
-                                <p className="text-xs text-gray-500">Elektron pochta:</p>
+                                <p className="text-xs text-gray-500">
+                                    {t("elektron_pochta")}
+                                </p>
                                 <h4 className="text-sm font-bold">info@tktiyf.uz</h4>
                             </div>
                         </div>
@@ -222,8 +243,12 @@ export default function Header() {
                                 </svg>
                             </div>
                             <div>
-                                <p className="text-xs text-gray-500">Manzil:</p>
-                                <h4 className="text-sm font-bold">Sirdaryo viloyati, Yangiyer shahar, <br /> Tinchlik ko'chasi, 1-uy</h4>
+                                <p className="text-xs text-gray-500">
+                                    {t("manzil")}
+                                </p>
+                                <h4 className="text-sm font-bold w-[280px]">
+                                    {t("manzil2")}
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -237,59 +262,31 @@ export default function Header() {
                     <div
                         className="menu_wr flex items-center justify-between w-full gap-[10px] relative"
                     >
-                        <a
+                        <span
                             onMouseEnter={() => setShowModal(true)}
                             onMouseLeave={() => setShowModal(false)}
-                            href="#" className="hover:opacity-[0.8] py-[16px] flex items-center gap-[5px] duration-300 uppercase">
-                            Umumiy ma'lumot
+                            href="" className="hover:opacity-[0.8] cursor-pointer py-[16px] flex items-center gap-[5px] duration-300 uppercase">
+                            {t('Umumiy_malumot')}
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
-                        </a>
+                        </span>
                         {showModal && (
                             <div
                                 onMouseEnter={() => setShowModal(true)}
                                 onMouseLeave={() => setShowModal(false)}
-
                                 ref={modalRef}
                                 className="absolute top-[55px] w-[315px] bg-[#001D56] left-0 z-50 shadow-lg overflow-y-auto h-[500px]"
                             >
-                                <NavLink to="/biz-haqimizda" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Biz haqimizda
-                                </NavLink>
-                                <NavLink to="/rahbariyat" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Rahbariyat
-                                </NavLink>
-                                <NavLink to="/hamkorlarimiz" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Hamkorlarimiz
-                                </NavLink>
-                                <NavLink to="/xalqaro-aloqalar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Xalqaro aloqalar
-                                </NavLink>
-                                <NavLink to="/hujjatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Me'yoriy hujjatlar
-                                </NavLink>
-                                <NavLink to="/murojaatlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Murojaatlarni ko'rib chiqish tartibi
-                                </NavLink>
-                                <NavLink to="/ochiq-ma'lumotlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Ochiq ma'lumotlar
-                                </NavLink>
-                                <NavLink to="/bo'lim-markazlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Bo'lim va markazlar
-                                </NavLink>
-                                <NavLink to="/rekvizitlar" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Rekvizitlar
-                                </NavLink>
-                                <NavLink to="/virtual-kabinet" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Direktor virtual qabulxonasi
-                                </NavLink>
-                                <NavLink to="/korrupsiyaga-kurash" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Korrupsiyaga qarshi kurashish
-                                </NavLink>
-                                <NavLink to="/bosh-ish-orni" className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block">
-                                    Bo'sh ish o'rinlari
-                                </NavLink>
+                                {navLinks.map(({ to, label }) => (
+                                    <NavLink
+                                        key={to}
+                                        to={to}
+                                        className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block"
+                                    >
+                                        {label}
+                                    </NavLink>
+                                ))}
                             </div>
                         )}
                         {data?.map((i, index) => (
@@ -299,12 +296,12 @@ export default function Header() {
                                 onMouseEnter={() => setSubModal(index)}
                                 onMouseLeave={() => setSubModal(null)}
                             >
-                                <a href="#" className="hover:opacity-[0.8] flex items-center gap-[5px] duration-300 uppercase">
+                                <span  className="hover:opacity-[0.8] cursor-pointer flex items-center gap-[5px] duration-300 uppercase">
                                     {i?.title[i18n?.language]}
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                         <path d="M5 7.5L10 12.5L15 7.5" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
                                     </svg>
-                                </a>
+                                </span>
                                 {subModal === index && (
                                     <div
                                         ref={subRef}
@@ -313,7 +310,7 @@ export default function Header() {
                                         {i?.details?.map((event, index2) => (
                                             <NavLink
                                                 key={index2}
-                                                to={`/post/${event?.id}`}
+                                                to={`/sahifa/${event?.id}`}
                                                 className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block"
                                             >
                                                 {event?.title[i18n?.language]}
@@ -323,7 +320,9 @@ export default function Header() {
                                 )}
                             </div>
                         ))}
-                        <NavLink to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">Bog'lanish</NavLink>
+                        <NavLink to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">
+                            {t('boglanish')}
+                        </NavLink>
                     </div>
 
                 </div>

@@ -53,7 +53,7 @@ export default function AllPosts() {
             selector: (row) => {
                 return (
                     <Link
-                        to={`/post/${ID}`}
+                        to={`/sahifa/${ID}`}
                         className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
                     >
                         <FaRightToBracket className=" text-xl text-center" />

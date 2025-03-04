@@ -52,10 +52,10 @@ export default function CategoryDetail() {
       selector: (row) => {
         return (
           <Link
-            to={`/post/${row.id}`}
-            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+            to={`/sahifa/${row.id}`}
+            className=" w-32 p-2 flex justify-center text-blue-400 shadow rounded-xl cursor-pointer"
           >
-            <FaRightToBracket className=" text-xl text-center" />
+            https://ticty.uz/sahifa/{row?.id}
           </Link>
         );
       },
@@ -79,34 +79,13 @@ export default function CategoryDetail() {
         return (
           <Link
             to={`/admin/post/all/${row?.id}`}
-            className=" w-32 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
+            className=" w-40 p-2 flex justify-center bg-blue-400 shadow rounded-xl cursor-pointer text-white"
           >
             <FaRightToBracket className=" text-xl text-center" />
           </Link>
         );
       },
     },
-    // {
-    //   name: `Malumot o'zgartirish`,
-    //   selector: (row) => {
-    //     return (
-    //       <Link
-    //         to={`/admin/post/edit/${row.id}`}
-    //         className=" w-32 p-2 flex justify-center bg-yellow-400 shadow rounded-xl cursor-pointer text-white"
-    //       >
-    //         <FaRightToBracket className=" text-xl text-center" />
-    //       </Link>
-    //     );
-    //   },
-    // },
-    // {
-    //   name: `Malumot o'chirish`,
-    //   selector: (row) => {
-    //     return (
-    //       <PostDelete Id={row?.id} refresh={fetchData} />
-    //     );
-    //   },
-    // },
     {
       name: "Action",
       cell: (row) => (

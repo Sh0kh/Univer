@@ -10,6 +10,7 @@ export default function CenterHero() {
   const [data2, setData2] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(true);
+  const { t } = useTranslation()
 
   const FetchDataCenter = async () => {
     try {
@@ -49,7 +50,7 @@ export default function CenterHero() {
   return (
     <section className="py-10 px-4 md:px-10 lg:px-20">
       <div className="Container">
-        <h2 className="text-2xl text-[#0a0d12] font-bold mb-6">Bo‘limlar</h2>
+        <h2 className="text-2xl text-[#0a0d12] font-bold mb-6">{t('Bolimlar')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {data?.map((dept, index) => (
             <NavLink key={index} to={`/markazlar-bolimlar/${dept?.id}`}>
@@ -63,7 +64,7 @@ export default function CenterHero() {
             </NavLink>
           ))}
         </div>
-        <h2 className="text-2xl font-bold text-[#0a0d12] mt-6 mb-6">Markazlar</h2>
+        <h2 className="text-2xl font-bold text-[#0a0d12] mt-6 mb-6">{t('Markazlar')}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {data2?.map((dept, index) => (
             <NavLink key={index} to={`/markazlar-bolimlar/${dept?.id}`}>
