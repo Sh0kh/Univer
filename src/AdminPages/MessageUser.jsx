@@ -65,6 +65,15 @@ export default function MessageUser() {
       sortable: false,
     },
     {
+      name: "Fayl",
+      selector: (row) => (
+        <a href={row.file[0]?.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 bg-blue-50 p-2 rounded-2xl underline">
+          Havola
+        </a>
+      ),
+      sortable: false,
+    },
+    {
       name: "Status",
       selector: (row) => (
         <div className="flex items-center space-x-2">

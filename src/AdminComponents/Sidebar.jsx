@@ -74,7 +74,6 @@ const menuItems = [
     subItems: [
       { name: "Foto medialar", path: "/admin/photo-media" },
       { name: "Video medialar", path: "/admin/video-media" },
-      { name: "Media yaratish", path: "/admin/create-media" },
     ],
     path: "/admin/events",
     icon: <MdPermMedia className="text-lg" />,
@@ -123,8 +122,8 @@ const menuItems = [
     name: "Ochik ma'lumotlar",
     subItems: [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
-      { name: "Karrupsiyaga qarshi", path: "/admin/against-corrution" },
-      { name: "Regularly Document", path: "/admin/regulatory-doc" },
+      { name: "Korrupsiyaga qarshi", path: "/admin/against-corrution" },
+      { name: "Me'yoriy hujjatlar", path: "/admin/regulatory-doc" },
     ],
     path: "/admin/events",
     icon: <AiOutlineFileText className="text-lg" />,

@@ -66,6 +66,8 @@ import PostEdit from "./Pages/PostEdit";
 import UserPost from "./Pages/Post";
 import Profile from "./AdminPages/Profile";
 import AllPosts from "./AdminPages/AllPosts";
+import VideoMedia from "./AdminPages/VideoMedia";
+import PhotoMedia from "./AdminPages/PhotoMedia";
 
 function App() {
   return (
@@ -98,6 +100,8 @@ function App() {
               <Route path="statistics" element={<Statistika />} />
               <Route path="message-user" element={<MessageUser />} />
               <Route path="profile" element={<Profile />} />
+              <Route path="photo-media" element={<PhotoMedia />} />
+              <Route path="video-media" element={<VideoMedia />} />
 
 
               <Route path="/admin/news" element={<AdminNews />} />

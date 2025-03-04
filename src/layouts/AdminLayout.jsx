@@ -1,10 +1,28 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Sidebar from "../AdminComponents/Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ComplexNavbar } from "../AdminComponents/Navbar";
+import { $api } from "../utils";
 
 export default function AdminLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const token = localStorage.getItem('token');
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await $api.get(`/auth-user`)
+        if (response.data.status) {
+          // Update user info
+          const { name, phone } = response.data.data;
+          localStorage.setItem('auth-user', JSON.stringify({ name, phone }));
+        }
+      } catch (error) {
+        
+      }
+    };
+    fetchUserInfo()
+  }, [token])
 
   let navigate = useNavigate();
 

@@ -34,7 +34,7 @@ export function AddAdmin({ onAdminAdded }) {
   const validateInputs = () => {
     let newErrors = { name: "", phone: "", login: "", password: "" };
     let isValid = true;
-
+  
     if (!admin.name.trim()) {
       newErrors.name = "Ism kiritish majburiy";
       isValid = false;
@@ -42,22 +42,26 @@ export function AddAdmin({ onAdminAdded }) {
     if (!admin.phone.trim()) {
       newErrors.phone = "Telefon raqam kiritish majburiy";
       isValid = false;
-    } else if (admin.phone.length > 9) {
-      newErrors.phone = "Telefon raqam 9 ta belgidan oshmasligi kerak";
+    } else if (admin.phone.length !== 9 || !/^\d+$/.test(admin.phone)) {
+      newErrors.phone = "Telefon raqam faqat 9 ta raqamdan iborat bo‘lishi kerak";
       isValid = false;
     }
     if (!admin.login.trim()) {
       newErrors.login = "Login kiritish majburiy";
       isValid = false;
     }
-    if (admin.password && admin.password.length < 8) {
+    if (!admin.password.trim()) {
+      newErrors.password = "Parol kiritish majburiy";
+      isValid = false;
+    } else if (admin.password.length < 8) {
       newErrors.password = "Parol kamida 8 ta belgi bo‘lishi kerak";
       isValid = false;
     }
-
+  
     setErrors(newErrors);
     return isValid;
   };
+  
 
   const handleAddAdmin = async () => {
     if (!validateInputs()) return;
@@ -100,7 +104,7 @@ export function AddAdmin({ onAdminAdded }) {
           {[{ key: "name", label: "Ism" },
             { key: "phone", label: "Telefon" },
             { key: "login", label: "Login" },
-            { key: "password", label: "Parol (ixtiyoriy)" },
+            { key: "password", label: "Parol" },
           ].map(({ key, label }) => (
             <div key={key}>
               <Typography variant="small" color="blue-gray" className="mb-2 text-left font-medium">
