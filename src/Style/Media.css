@@ -197,6 +197,11 @@
         flex-direction: column;
     }
 }
+@media(max-width:870px){
+    .VdGallary{
+        grid-template-columns: repeat(1,1fr);
+    }
+}
 
 @media (max-width: 420px) {
     .inter_card {

@@ -12,8 +12,8 @@ export default function FooterMain() {
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 to={'/'}>
                 <div className="mr-[150px]">
-                    <h1 className="text-lg font-bold text-[#ffff]">
-                        Toshkent kimyo-texnologiya instituti <br /> Yangiyer filiali
+                    <h1 className="text-lg font-bold w-[350px] text-[#ffff]">
+                        {t('Logo')}
                     </h1>
                     <img className='w-[100px] mt-[10px]' src={logo} alt="foto" />
                 </div>
