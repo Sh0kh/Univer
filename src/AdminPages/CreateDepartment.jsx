@@ -64,7 +64,8 @@ export default function CreateDepartment() {
             setKKInfo({ title: "", description: "" });
             setSelectedCategory(null);
         } catch (error) {
-            sweetAlert(`Xatolik: ${error.message}`, "error");
+            sweetAlert(`Xatolik: ${error}`, "error");
+            console.log(error)
         } finally {
             setLoading(false)
         }
@@ -96,7 +97,7 @@ export default function CreateDepartment() {
                 </div>
             </div>
             <div className="bg-[white] p-[20px] rounded-[10px] mt-[20px]">
-                <Select label="Kategoriya tanlang" onChange={(value) => setSelectedCategory(value)}>
+                <Select label="Rahbarni tanlang" onChange={(value) => setSelectedCategory(value)}>
                     {data.map((item) => (
                         <Option key={item.id} value={item.id}>
                             {item.name}

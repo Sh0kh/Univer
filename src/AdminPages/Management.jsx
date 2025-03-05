@@ -49,23 +49,34 @@ export default function Management() {
           />
         </div>
       ),
+      width: "90px"
     },
     {
       name: "Ism",
-      selector: (row) => row.name,
-      sortable: true,
+      selector: (row) => (
+        <p className="whitespace-pre-wrap">{ row.name }</p>
+      ),
+      sortable: true, 
+      width: "230px",
     },
     {
       name: `Lavozim (${activeTab.toUpperCase()})`,
-      selector: (row) => row.position[activeTab],
+      selector: (row) => (
+        <p className="whitespace-pre-wrap">{ row.position[activeTab] }</p>
+      ),
+      width: "260px"
     },
     {
       name: "Qabul kunlari",
-      selector: (row) => row.reception_days,
+      selector: (row) => (
+        <p className="whitespace-pre-wrap">{ row.reception_days }</p>
+      ), 
+      width: "150px",
     },
     {
       name: "Telefon",
       selector: (row) => row.phone,
+      width: "120px",
     },
     {
       name: "Email",
@@ -79,7 +90,7 @@ export default function Management() {
           <DeleteManagement onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
-      width: "170px",
+      width: "130px",
     },
   ];
 

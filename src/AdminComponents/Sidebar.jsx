@@ -86,17 +86,6 @@ const menuItems = [
     path: "/admin/events",
     icon: <MdFindInPage className="text-lg" />,
   },
-  // {
-  //   name: "Media",
-  //   subItems: [
-  //     { name: "Foto medialar", path: "/admin/photo-media" },
-  //     { name: "Video medialar", path: "/admin/video-media" },
-  //     { name: "Media yaratish", path: "/admin/create-media" },
-
-  //   ],
-  //   path: "/admin/events",
-  //   icon: <MdPermMedia className="text-lg" />,
-  // },
   {
     name: "Rahbariyat",
     subItems: [
@@ -128,9 +117,6 @@ const menuItems = [
       { name: "Ochiq Malumotlar", path: "/admin/open-data" },
 
       { name: "Korrupsiyaga qarshi", path: "/admin/against-corrution" },
-      { name: "Me'yoriy hujjatlar", path: "/admin/regulatory-doc" },
-
-      { name: "Korupsiyaga qarshi ", path: "/admin/against-corrution" },
       { name: "Me'yoriy hujjatlar", path: "/admin/regulatory-doc" },
       {
         name: "Murojaatlarni ko‘rib chiqish tartibi",

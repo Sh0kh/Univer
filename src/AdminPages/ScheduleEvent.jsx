@@ -31,34 +31,44 @@ export default function ScheduleEvent() {
   const columns = [
     {
       name: "Tr",
-      selector: (row, index) => index + 1,
+      selector: (_, index) => (page - 1) * perPage + index + 1,
       width: "80px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
-      selector: (row) => row.title?.[activeTab] || "Noma'lum",
+      selector: (row) => (
+        <p
+          className="whitespace-pre-wrap"
+        >
+          {row.title?.[activeTab] || "Noma'lum"}
+        </p>
+      ),
       sortable: true,
     },
     {
       name: `Sana`,
       selector: (row) => row.date || "Noma'lum",
       sortable: true,
+      width: "120px",
     },
     {
       name: `Boshlanish vaqti`,
       selector: (row) => row.start_time || "Noma'lum",
       sortable: true,
+      width: "120px",
     },
 
     {
       name: `Tugash vaqti`,
       selector: (row) => row.end_time || "Noma'lum",
       sortable: true,
+      width: "120px",
     },
     {
       name: `Status (${activeTab.toUpperCase()})`,
       selector: (row) => row.status?.[activeTab] || "Noma'lum",
       sortable: true,
+      width: "170px",
     },
     {
       name: "Action",

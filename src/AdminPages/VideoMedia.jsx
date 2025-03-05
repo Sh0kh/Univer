@@ -31,7 +31,7 @@ export default function VideoMedia() {
   const columns = [
     {
       name: "Tr",
-      selector: (row, index) => index + 1,
+      selector: (_, index) => (page - 1) * perPage + index + 1,
       width: "80px",
     },
     {

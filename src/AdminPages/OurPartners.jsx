@@ -41,7 +41,9 @@ export default function OurPartners() {
         },
         {
             name: "Nomi",
-            selector: (row) => row?.name,
+            selector: (row) => ( <Tooltip content={row?.name} placement="right">
+                <span>{ row?.name }</span>
+            </Tooltip>),
             sortable: true,
         },
         {

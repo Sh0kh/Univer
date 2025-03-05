@@ -5,7 +5,6 @@ export default function MiniHeader({ title, minititle }) {
 
     const { t } = useTranslation()
 
-
     return (
         <div className="miniHeader bg-[#fafafa] py-[16px]">
             <div className="Container">

@@ -35,13 +35,15 @@ export default function Categories() {
   const columns = [
     {
       name: "Tr",
-      // selector: (row, index) => (index + 1),
+      selector: (_, index) => (page - 1) * perPage + index + 1,
       selector: (row) => row.id,
-      width: "170px",
+      width: "70px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
-      selector: (row) => row.title[activeTab],
+      selector: (row) => (
+        <p className="whitespace-pre-wrap">{row.title[activeTab]}</p>
+      ),
       sortable: true,
     },
     {
@@ -56,12 +58,13 @@ export default function Categories() {
           </Link>
         );
       },
+      width: "200px"
     },
-    {
-      name: "Slag",
-      selector: (row) => row.slug,
-      sortable: true,
-    },
+    // {
+    //   name: "Slag",
+    //   selector: (row) => row.slug,
+    //   sortable: true,
+    // },
     {
       name: "Action",
       cell: (row) => (
@@ -70,7 +73,7 @@ export default function Categories() {
           <DeleteCategory categoryId={row.id} onCategoryDeleted={fetchData} />
         </div>
       ),
-      width: "170px",
+      width: "130px",
     },
   ];
 
