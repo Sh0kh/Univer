@@ -89,7 +89,7 @@ export default function InstituteStats() {
               { label: `${t('Talabalarsoni')}`, key: "students_count" },
               { label: `${t('ProfessorOqituvchilar')}`, key: "professors_count" },
               { label: `${t('Fakultetlarsoni')}`, key: "faculties_count" },
-              { label: `${t('Talimyonalishlar')}`, key: "education_programs_count" }
+              { label: `${t('Talimyonalishlari')}`, key: "education_programs_count" }
             ].map((item, index) => (
               <div key={index} className="p-6 rounded-lg text-center">
                 <h4 className="text-lg font-semibold mt-2">{item.label}</h4>

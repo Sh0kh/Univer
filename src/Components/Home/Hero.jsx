@@ -13,7 +13,7 @@ import { NavLink } from 'react-router-dom';
 export default function Hero() {
     const [loading, setLoading] = useState(true);
     const [data, setData] = useState([]);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
 
     useEffect(() => {
         gsap.fromTo('.Debtors',
@@ -79,8 +79,8 @@ export default function Hero() {
                                     <NavLink
                                         onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                                         to={`/yangilik/${i?.id}`} >
-                                        <button className="flex items-center justify-between mt-[40px] border-[#d5d7da] rounded-lg px-[18px] py-[12px] w-[124px] h-[48px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05),_inset_0_-2px_0_0_rgba(10,13,18,0.05),_inset_0_0_0_1px_rgba(10,13,18,0.18)] bg-white font-semibold">
-                                            <span className="text-[16px] leading-[150%] text-[#414651]">Batafsil</span>
+                                        <button className="flex items-center gap-[10px] justify-between mt-[40px] border-[#d5d7da] rounded-lg px-[18px] py-[12px]  h-[48px] shadow-[0_1px_2px_0_rgba(16,24,40,0.05),_inset_0_-2px_0_0_rgba(10,13,18,0.05),_inset_0_0_0_1px_rgba(10,13,18,0.18)] bg-white font-semibold">
+                                            <span className="text-[16px] leading-[150%] text-[#414651]">{t('Batafsil')}</span>
                                             <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M1.16666 7.50002H12.8333M12.8333 7.50002L6.99999 1.66669M12.8333 7.50002L6.99999 13.3334" stroke="#414651" strokeWidth="1.66667" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>

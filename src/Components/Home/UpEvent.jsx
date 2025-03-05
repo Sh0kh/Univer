@@ -202,7 +202,7 @@ const CustomCalendar = () => {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md overflow-hidden">
+    <div className="bg-white  rounded-lg shadow-md overflow-hidden">
       <div className="Container">
         <div className="flex justify-between items-center pb-2 mb-4 border-b-2 border-gray-200 relative">
           <h2 className="text-xl font-semibold text-[#1f235b]">• {t('Kutilayotgantadbirlar')}</h2>

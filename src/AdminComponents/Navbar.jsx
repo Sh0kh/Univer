@@ -51,9 +51,8 @@ export function ProfileMenu() {
             />
             <ChevronDownIcon
               strokeWidth={2.5}
-              className={`h-3 w-3 transition-transform ${
-                isMenuOpen ? "rotate-180" : ""
-              }`}
+              className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
+                }`}
             />
           </Button>
         </MenuHandler>
@@ -66,7 +65,9 @@ export function ProfileMenu() {
             </Typography>
           </MenuItem>
 
-          <Link to="profile">
+
+          <Link to="/profile">
+
             <MenuItem className="flex items-center gap-2 rounded">
               <UserCircleIcon className="h-4 w-4" strokeWidth={2} />
               <Typography as="span" variant="small" className="font-normal">

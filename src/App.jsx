@@ -71,6 +71,8 @@ import VideoMedia from "./AdminPages/VideoMedia";
 import PhotoMedia from "./AdminPages/PhotoMedia";
 
 import AdminNewsEdit from "./AdminPages/AdminNewsEdit";
+import FotoGallary from "./Pages/FotoGallary";
+import VideoGallary from "./Pages/VideoGallary";
 
 
 function App() {
@@ -162,6 +164,8 @@ function App() {
               <Route path="/markazlar-bolimlar/:ID" element={<SectionCenter />} />
               <Route path="/yangilik/:ID" element={<NewDetail />} />
               <Route path="/sahifa/:ID" element={<UserPost />} />
+              <Route path="/fotogalereya" element={<FotoGallary />} />
+              <Route path="/Videogalereya" element={<VideoGallary />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
