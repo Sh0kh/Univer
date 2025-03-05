@@ -11,8 +11,8 @@ export default function FooterMain() {
             <NavLink
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 to={'/'}>
-                <div className="mr-[150px]">
-                    <h1 className="text-lg font-bold w-[350px] text-[#ffff]">
+                <div className="mr-[150px] w-full">
+                    <h1 className="text-lg font-bold w-full md:w-[350px] text-[#ffff]">
                         {t('Logo')}
                     </h1>
                     <img className='w-[100px] mt-[10px]' src={logo} alt="foto" />
