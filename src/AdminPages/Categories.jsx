@@ -36,7 +36,6 @@ export default function Categories() {
     {
       name: "Tr",
       selector: (_, index) => (page - 1) * perPage + index + 1,
-      selector: (row) => row.id,
       width: "70px",
     },
     {

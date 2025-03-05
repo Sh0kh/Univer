@@ -49,20 +49,20 @@ export default function ScheduleEvent() {
       name: `Sana`,
       selector: (row) => row.date || "Noma'lum",
       sortable: true,
-      width: "120px",
+      width: "170px",
     },
     {
       name: `Boshlanish vaqti`,
       selector: (row) => row.start_time || "Noma'lum",
       sortable: true,
-      width: "120px",
+      width: "170px",
     },
 
     {
       name: `Tugash vaqti`,
       selector: (row) => row.end_time || "Noma'lum",
       sortable: true,
-      width: "120px",
+      width: "170px",
     },
     {
       name: `Status (${activeTab.toUpperCase()})`,

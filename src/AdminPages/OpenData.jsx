@@ -37,18 +37,47 @@ export default function OpenData() {
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
       selector: (row) => (
-        <p className="whitespace-pre-wrap">{row.name?.[activeTab] || "Noma'lum"}</p>
+        <p className="whitespace-pre-wrap">
+          {row.name?.[activeTab] || "Noma'lum"}
+        </p>
       ),
       sortable: true,
     },
     {
       name: "URL",
-      selector: (row) => (
-        <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-          Havola
-        </a>
-      ),
+      selector: (row) =>
+        row.url ? (
+          <a
+            href={row.url.startsWith("http") ? row.url : `https://${row.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Havola
+          </a>
+        ) : (
+          "Url mavjud emas"
+        ),
       sortable: false,
+      width: "250px",
+    },
+    {
+      name: "File",
+      selector: (row) =>
+        row.file && Array.isArray(row.file) && row.file.length > 0 ? (
+          <a
+            href={row.file[row.file.length - 1].url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Havola
+          </a>
+        ) : (
+          "Fayl mavjud emas"
+        ),
+      sortable: false,
+      width: "250px",
     },
     {
       name: "Action",
@@ -58,7 +87,7 @@ export default function OpenData() {
           <DeleteOpenData onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
-      width: "170px",
+      width: "130px",
     },
   ];
 
@@ -74,7 +103,9 @@ export default function OpenData() {
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
               key={lang}
-              className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"}`}
+              className={`px-4 py-2 rounded ${
+                activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
+              }`}
               onClick={() => setActiveTab(lang)}
             >
               {lang == "kk" ? "CHI" : lang.toUpperCase()}
