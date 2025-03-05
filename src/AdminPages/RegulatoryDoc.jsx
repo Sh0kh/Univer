@@ -31,12 +31,14 @@ export default function RegulatoryDoc() {
   const columns = [
     {
       name: "Tr",
-      selector: (row, index) => index + 1,
+      selector: (_, index) => (page - 1) * perPage + index + 1,
       width: "80px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
-      selector: (row) => row.name?.[activeTab] || "Noma'lum",
+      selector: (row) => (
+        <p className="whitespace-pre-wrap">{row.name?.[activeTab] || "Noma'lum"}</p>
+      ),
       sortable: true,
     },
     {
@@ -47,6 +49,7 @@ export default function RegulatoryDoc() {
         </a>
       ),
       sortable: false,
+      width: "150px",
     },
     {
       name: "Action",

@@ -12,3 +12,11 @@ export const sweetAlert = (message, iconType) => {
     showConfirmButton: false,
   });
 };
+
+export const commonAlert = ( message, iconType ) => {
+  Swal.fire({
+    title: message,
+    icon: iconType,
+    draggable: true
+  });  
+}

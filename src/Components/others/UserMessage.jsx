@@ -2,9 +2,14 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import foto from "../../img/direktor.png";
-import { sweetAlert } from "../../utils/sweetalert";
+import { commonAlert, sweetAlert } from "../../utils/sweetalert";
 
 export default function UserMessage() {
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [fileName, setFileName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const fileInputRef = useRef(null);
   const { i18n } = useTranslation();
   const { t } = useTranslation();
@@ -28,22 +33,55 @@ export default function UserMessage() {
   };
 
   const handleFileChange = (event) => {
-    const file = event.target.files?.[0] || null;
+    const file = event.target.files[0];
+
+    if (file) {
+      // Faylni tekshirish (max 5MB va ruxsat etilgan formatlar)
+      const allowedTypes = [
+        "application/pdf",
+        "application/msword",
+        "application/vnd.ms-excel",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      ];
+      if (!allowedTypes.includes(file.type)) {
+        setError("Faqat .doc, .pdf, .xls fayllarga ruxsat beriladi!");
+        return;
+      }
+      if (file.size > 5 * 1024 * 1024) {
+        setError("Fayl hajmi 5MB dan katta bo‘lmasligi kerak!");
+        return;
+      }
+
+      setError(""); // Oldingi xatoliklarni tozalash
+      setFileName(file.name);
+      setIsLoading(true);
+
+      // Fake yuklash jarayoni (2 soniya)
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2000);
+    }
     setFormData((prev) => ({ ...prev, file }));
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+      ...(name === "city" ? { district: "" } : { city: "" }),
+    }));
   };
 
   const validateForms = () => {
     let newErrors = {};
     if (!formData.region.trim())
       newErrors.region = "Viloyatni tanlash majburiy";
-    if (!formData.district.trim())
-      newErrors.district = "Tumanni tanlash majburiy";
-    if (!formData.city.trim()) newErrors.city = "Shaharni tanlash majburiy";
+    // Agar ikkala maydon ham bo‘sh bo‘lsa, xatolik chiqadi
+    if (!formData.city.trim() && !formData.district.trim()) {
+      newErrors.city = "Shahar yoki tumanni kiritish majburiy";
+      newErrors.district = "Shahar yoki tumanni kiritish majburiy";
+    }
     if (!formData.fullName.trim())
       newErrors.fullName = "Ism va familiya majburiy";
 
@@ -103,11 +141,21 @@ export default function UserMessage() {
         message: "",
         file: null,
       });
-      sweetAlert("Muvaffaqiyatli yuborildi", "success");
+      commonAlert("Muvaffaqiyatli yuborildi", "success");
     } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
-      sweetAlert("Xato yuborildi", "error");
-
+      console.log(error);
+      let errorMessage = {
+        message: error.response?.data?.message || "Xatolik" ,
+        errors: error.response?.data?.errors || "",
+      };
+      console.log(errorMessage);
+      let errorHTML = `
+      <h2>${errorMessage.message}</h2>
+      <ul>
+       ${JSON.stringify(errorMessage.errors)}
+      </ul>
+      `;
+      commonAlert(errorHTML, "error");
     }
   };
 
@@ -143,7 +191,7 @@ export default function UserMessage() {
               placeholder={`${t("Tanlang")}`}
             />
           </div>
-          <p className="text-red-600">{errors.region}</p>
+          {/* <p className="text-red-600">{errors.region}</p> */}
         </div>
         <div className="cabinet_card ">
           <h4
@@ -163,9 +211,11 @@ export default function UserMessage() {
               name="district"
               value={formData.district}
               onChange={handleChange}
+              disabled={district.length > 0} // Agar tuman tanlangan bo‘lsa, disable
+              //   className="mt-1 p-2 w-full border rounded-md disabled:bg-gray-400"
               className={`${
                 errors.district ? "border-red-400 border-2" : ""
-              } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              } active:border-none font-normal disabled:bg-gray-400 text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
               placeholder={`${t("Tanlang")}`}
             />
 
@@ -185,9 +235,9 @@ export default function UserMessage() {
               />
             </svg>
           </div>
-          <p className="text-red-600">{errors.district}</p>
+          {/* <p className="text-red-600">{errors.district}</p> */}
         </div>
-        <div className="cabinet_card ">
+        <div className="cabinet_card  ">
           <h4
             className="font-medium  text-[14px] leading-[143%] mb-[10px]
                     mr-[-10px] text-[#414651]"
@@ -205,9 +255,10 @@ export default function UserMessage() {
               name="city"
               value={formData.city}
               onChange={handleChange}
+              disabled={city.length > 0} // Agar shahar tanlangan bo‘lsa, disable
               className={`${
                 errors.city ? "border-red-400 border-2" : ""
-              } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              } active:border-none font-normal disabled:bg-gray-400 text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
               placeholder={`${t("Tanlang")}`}
             />
 
@@ -227,7 +278,7 @@ export default function UserMessage() {
               />
             </svg>
           </div>
-          <p className="text-red-600">{errors.city}</p>
+          {/* <p className="text-red-600">{errors.city}</p> */}
         </div>
         <div className="cabinet_card ">
           <h4
@@ -269,7 +320,7 @@ export default function UserMessage() {
               />
             </svg>
           </div>
-          <p className="text-red-600">{errors.fullName}</p>
+          {/* <p className="text-red-600">{errors.fullName}</p> */}
         </div>
         <div className="cabinet_card ">
           <h4
@@ -311,7 +362,7 @@ export default function UserMessage() {
               />
             </svg>
           </div>
-          <p className="text-red-600">{errors.phone}</p>
+          {/* <p className="text-red-600">{errors.phone}</p> */}
         </div>
         <div className="cabinet_card ">
           <h4
@@ -353,7 +404,7 @@ export default function UserMessage() {
               />
             </svg>
           </div>
-          <p className="text-red-600">{errors.email}</p>
+          {/* <p className="text-red-600">{errors.email}</p> */}
         </div>
       </div>
       <div className="cabinet_area mt-[40px]">
@@ -398,9 +449,12 @@ export default function UserMessage() {
           placeholder={`${t("Kiriting")}`}
           name="message"
         ></textarea>
-        <p className="text-red-600">{errors.message}</p>
+        {/* <p className="text-red-600">{errors.message}</p> */}
 
-        <div className="cabinet_file mt-[40px]" onClick={handleClick}>
+        <div
+          className={`bg-gray-50 cabinet_file border-2 border-black mt-[40px] p-4 rounded-lg cursor-pointer`}
+          onClick={handleClick}
+        >
           <div>
             <input
               type="file"
@@ -428,12 +482,29 @@ export default function UserMessage() {
               />
             </svg>
           </div>
-          <h1 className="file_h1">
-            <span>{t("Keraklifaylnibuyerga")}</span>
-            {t("bosishorqaliyuklang")} <br />
-            .DOC, .PDF, .XLS (max. 5 MB)
+
+          {isLoading && (
+            <div className="flex items-center justify-center mt-2">
+              <div className="w-5 h-5 border-2 border-gray-300 border-t-2 border-t-blue-500 rounded-full animate-spin"></div>
+              <span className="ml-2 text-blue-500 text-sm">Yuklanmoqda...</span>
+            </div>
+          )}
+
+          {/* Fayl nomi yoki yuklanayotganini ko‘rsatish */}
+          {fileName && (
+            <p className="mt-2 text-center text-green-600 text-sm">
+              {fileName}
+            </p>
+          )}
+
+          <h1 className="file_h1 text-center mt-2">
+            <span>{t("Kerakli faylni bu yerga")} </span>
+            {t("bosish orqali yuklang")} <br />
+            <strong>.DOC, .PDF, .XLS</strong> (max. 5 MB)
           </h1>
-          {errors.file && <p className="text-red-600">{errors.file}</p>}
+
+          {/* Xatolik chiqarish */}
+          {error && <p className="text-red-600 mt-2 text-sm">{error}</p>}
         </div>
         <button onClick={handleSubmit} className="file_sent">
           {t("Yuborish")}

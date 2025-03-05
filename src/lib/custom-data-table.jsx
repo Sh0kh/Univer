@@ -1,18 +1,61 @@
 import React from "react";
-import DataTable from "react-data-table-component";
+import DataTable, { defaultThemes } from "react-data-table-component";
 
-export default function CustomDataTable({ data, columns, page, setPage, perPage, setPerPage }) {
-    // Custom styles for header
-    const customStyles = {
-      head: {
-        style: {
-          background: "blue", // Background color for header
-          color: "black", // Text color for header
-          fontWeight: "700",
-          fontSize: "14px", // Set font size for header
+const ExpandedComponent = ({ data }) => {
+	return <pre>{JSON.stringify(data, null, 2)}</pre>;
+};
+
+export default function CustomDataTable({
+  data,
+  columns,
+  page,
+  setPage,
+  perPage,
+  setPerPage,
+}) {
+  // Custom styles for header
+  const customStyles = {
+    header: {
+      style: {
+        minHeight: '46px',
+      },
+    },
+    headRow: {
+      style: {
+        borderTopStyle: 'solid',
+        borderTopWidth: '1px',
+        borderTopColor: defaultThemes.default.divider.default,
+      },
+    },
+    headCells: {
+      style: {
+        '&:not(:last-of-type)': {
+          borderRightStyle: 'solid',
+          borderRightWidth: '1px',
+          borderRightColor: defaultThemes.default.divider.default,
         },
       },
-    };
+    },
+    cells: {
+      style: {
+        '&:not(:last-of-type)': {
+          borderRightStyle: 'solid',
+          borderRightWidth: '1px',
+          padding: '8px',
+          borderRightColor: defaultThemes.default.divider.default,
+          whiteSpace: 'normal',  // Matn sig‘masa, yangi qatordan chiqadi
+          wordBreak: 'break-word', // Uzoq so‘zlar qatorga sig‘masa, bo‘linadi
+          overflowWrap: 'break-word', // So‘zlar ustun chegarasiga sig‘masa, bo‘linadi
+          // whitespace-pre-wrap
+        },
+        whiteSpace: 'normal',  // Matn sig‘masa, yangi qatordan chiqadi
+        wordBreak: 'break-word', // Uzoq so‘zlar qatorga sig‘masa, bo‘linadi
+        overflowWrap: 'break-word', // So‘zlar ustun chegarasiga sig‘masa, bo‘linadi
+        
+      },
+    },
+  };
+  
 
   const handlePageChange = (page) => {
     setPage(page);
@@ -26,6 +69,7 @@ export default function CustomDataTable({ data, columns, page, setPage, perPage,
   return (
     <div>
       <DataTable
+        theme="solorized"
         columns={columns}
         data={data}
         fixedHeader
@@ -37,6 +81,9 @@ export default function CustomDataTable({ data, columns, page, setPage, perPage,
         onChangeRowsPerPage={handlePerPageChange} // Per page o'zgarishini ushlash
         highlightOnHover // Hover qilinganda satrni belgilash
         customStyles={customStyles} // Maxsus stylelar
+
+
+        // expandableRows expandableRowsComponent={ExpandedComponent}
       />
     </div>
   );

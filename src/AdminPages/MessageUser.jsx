@@ -39,39 +39,53 @@ export default function MessageUser() {
 
   const columns = [
     {
-      name: "ID",
-      selector: (row) => row.id,
+      name: "Tr",
+      selector: (_, index) => (page - 1) * perPage + index + 1,
       sortable: true,
-      width: "80px",
+      width: "30px",
     },
     {
       name: "F.I.O",
-      selector: (row) => row.full_name,
+      selector: (row) => (
+        <p className=" whitespace-pre-wrap">{row.full_name}</p>
+      ),
       sortable: true,
+      width: "220px",
     },
     {
       name: "Telefon",
       selector: (row) => row.phone,
       sortable: true,
+      width: "130px",
     },
     {
       name: "Email",
       selector: (row) => row.email,
       sortable: true,
+      width: "260px",
     },
     {
       name: "Xabar matni",
-      selector: (row) => row.message_text,
+      selector: (row) => (
+        <p className=" whitespace-pre-wrap max-h-[250px] overflow-y-auto">{row.message_text}</p>
+      ),
       sortable: false,
+      width: "330px",
     },
     {
       name: "Fayl",
       selector: (row) => (
-        <a href={row.file[0]?.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 bg-blue-50 p-2 rounded-2xl underline">
+        <a
+          href={row.file[0]?.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 bg-blue-50 p-2 rounded-2xl underline"
+        >
           Havola
         </a>
       ),
       sortable: false,
+      width: "90px",
     },
     {
       name: "Status",
@@ -95,12 +109,13 @@ export default function MessageUser() {
         </div>
       ),
       sortable: true,
+      width: "100px",
     },
     {
       name: "O'chirish",
       selector: (row) => <DeleteMessage onDeleted={fetchData} rowId={row.id} />,
       sortable: true,
-      width: "120px",
+      width: "80px",
     },
   ];
 
