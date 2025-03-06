@@ -5,6 +5,7 @@ import Loader from "../lib/loader";
 import { AddOpenData } from "../AdminComponents/open-data/add-open-data";
 import { UpdateOpenData } from "../AdminComponents/open-data/update-open-data";
 import { DeleteOpenData } from "../AdminComponents/open-data/delete-open-data";
+import { commonAlert } from "../utils/sweetalert";
 
 export default function OpenData() {
   const [loading, setLoading] = useState(true);
@@ -18,7 +19,19 @@ export default function OpenData() {
       const response = await $api.get("/open-data");
       setData(response.data.data); // API dan kelgan data-ni state-ga saqlaymiz
     } catch (error) {
-      console.error("Xatolik yuz berdi:", error);
+      console.log(error);
+      let errorMessage = {
+        message: error.response?.data?.message || "Xatolik",
+        errors: error.response?.data?.errors || "",
+      };
+      console.log(errorMessage);
+      let errorHTML = `
+            <h2>${errorMessage.message}</h2>
+            <ul>
+             ${JSON.stringify(errorMessage.errors)}
+            </ul>
+            `;
+      commonAlert(errorHTML, "error");
     } finally {
       setLoading(false);
     }

@@ -63,8 +63,8 @@ export function AddOpenData({ onAdded }) {
     if (selectedFile) {
       setFile(selectedFile);
       setFileName(selectedFile.name);
+      setForm((prev) => ({ ...prev, file: selectedFile }));
     }
-    setForm((prev) => ({ ...prev, file: file }));
   };
 
   const handleUrlChange = (e) => {
@@ -73,21 +73,54 @@ export function AddOpenData({ onAdded }) {
 
   const handleAdd = async () => {
     if (!validateForm()) return;
-
+  
     setLoading(true);
     try {
-      await $api.post("/open-data", form);
+      const formData = new FormData();
+      
+      // Name obyektini to‘g‘ri formatda qo‘shish
+      Object.keys(form.name).forEach((lang) => {
+        formData.append(`name[${lang}]`, form.name[lang]);
+      });
+  
+      formData.append("url", form.url);
+      if (file) {
+        formData.append("file", file);
+      }
+  
+      await $api.post("/open-data", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+  
       onAdded();
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
       setForm({ name: { uz: "", ru: "", en: "", kk: "" }, url: "" });
+      setFile(null);
+      setFileName("");
       setErrors({});
     } catch (error) {
-      console.error("Xatolik:", error);
-      sweetAlert("Xatolik yuz berdi!", "error");
+      setOpen(false);
+      console.log(error);
+      let errorMessage = {
+        message: error.response?.data?.message || "Xatolik",
+        errors: error.response?.data?.errors || "",
+      };
+      console.log(errorMessage);
+      let errorHTML = `
+                  <h2>${errorMessage.message}</h2>
+                  <ul>
+                   ${JSON.stringify(errorMessage.errors)}
+                  </ul>
+                  `;
+      commonAlert(errorHTML, "error");
     }
     setLoading(false);
   };
+  
+  
 
   return (
     <>
