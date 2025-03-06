@@ -8,8 +8,6 @@ import {
   DialogHeader,
   DialogBody,
   DialogFooter,
-  Select,
-  Option,
 } from "@material-tailwind/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { $api } from "../../utils";
@@ -19,6 +17,10 @@ import { FaPencilAlt } from "react-icons/fa";
 export function UpdateCorruption({ onUpdated, rowData }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState("");
+  const [existingFile, setExistingFile] = useState(null);
+
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
     url: "",
@@ -32,6 +34,11 @@ export function UpdateCorruption({ onUpdated, rowData }) {
         name: rowData.name,
         url: rowData.url,
       });
+
+      // Agar file mavjud bo‘lsa, uni saqlaymiz
+      if (rowData.file && rowData.file.length > 0) {
+        setExistingFile(rowData.file[0].url);
+      }
     }
   }, [rowData]);
 
@@ -48,16 +55,67 @@ export function UpdateCorruption({ onUpdated, rowData }) {
     setForm((prev) => ({ ...prev, url: e.target.value }));
   };
 
+  // Fayl tanlash
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setFileName(selectedFile.name);
+      setExistingFile(null); // Eski faylni o‘chirib tashlaymiz
+    }
+  };
+
   const handleUpdate = async () => {
+    // **Sarlavha barcha tillarda kiritilganligini tekshiramiz**
+    for (const lang of ["uz", "ru", "en", "kk"]) {
+      if (!form.name[lang]) {
+        sweetAlert(
+          `Sarlavha (${lang.toUpperCase()}) kiritish majburiy!`,
+          "error"
+        );
+        return;
+      }
+    }
+
     setLoading(true);
     try {
-      await $api.put(`/fighting-corruptions/${rowData.id}`, form);
+      const formData = new FormData();
+
+      // **Har bir til uchun name alohida qo‘shiladi**
+      formData.append("name[uz]", form.name.uz);
+      formData.append("name[ru]", form.name.ru);
+      formData.append("name[en]", form.name.en);
+      formData.append("name[kk]", form.name.kk);
+
+      if (form.url) {
+        // URL-ni serverga qayta jo‘natamiz
+        formData.append("url", form.url);
+      }
+
+      // **Faylni qo'shish (agar yuklangan bo‘lsa)**
+      if (file) {
+        formData.append("file", file);
+      } else if (existingFile) {
+        // Eski faylni serverga qayta jo‘natamiz
+        formData.append("file", existingFile);
+      }
+
+      console.log(
+        "Yuborilayotgan ma'lumotlar:",
+        Object.fromEntries(formData.entries())
+      );
+
+      await $api.post(`/fighting-corruption-update/${rowData.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       onUpdated();
       sweetAlert("Muvaffaqiyatli yangilandi", "success");
       handleOpen();
     } catch (error) {
       console.error("Xatolik:", error);
-      setOpen(false);
       sweetAlert("Xatolik yuz berdi!", "error");
     }
     setLoading(false);
@@ -72,7 +130,7 @@ export function UpdateCorruption({ onUpdated, rowData }) {
       <Dialog open={open} handler={handleOpen} size="lg" className="p-4">
         <DialogHeader className="relative">
           <Typography variant="h4" color="blue-gray">
-            Malumotni tahrirlash
+            Ma'lumotlarni tahrirlash
           </Typography>
           <IconButton
             size="sm"
@@ -94,12 +152,12 @@ export function UpdateCorruption({ onUpdated, rowData }) {
                   color="blue-gray"
                   className="mb-2 font-medium"
                 >
-                  Sarlavha ({lang == "kk" ? "CHI" : lang.toUpperCase()})
+                  Sarlavha ({lang.toUpperCase()})
                 </Typography>
                 <Input
                   value={form.name[lang]}
                   onChange={(e) => handleTitleChange(e, lang)}
-                  placeholder={`Sarlavha (${lang == "kk" ? "CHI" : lang.toUpperCase()})`}
+                  placeholder={`Sarlavha (${lang.toUpperCase()})`}
                   required
                 />
               </div>
@@ -122,15 +180,47 @@ export function UpdateCorruption({ onUpdated, rowData }) {
               required
             />
           </div>
+
+          {/* Fayl yuklash */}
+          <div>
+            <Typography
+              variant="small"
+              color="blue-gray"
+              className="mb-2 font-medium"
+            >
+              Fayl yuklash
+            </Typography>
+            <Input type="file" onChange={handleFileChange} />
+
+            {fileName && (
+              <p className="text-gray-700 text-sm mt-1">
+                Tanlangan fayl: {fileName}
+              </p>
+            )}
+
+            {existingFile && !file && (
+              <p className="text-gray-700 text-sm mt-1">
+                <p>Fayl mavjud</p>
+                <a
+                  href={existingFile}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  Joriy faylni yuklab olish
+                </a>
+              </p>
+            )}
+          </div>
         </DialogBody>
 
         <DialogFooter>
           <Button
             onClick={handleUpdate}
-            loading={loading}
+            disabled={loading}
             className="bg-blue-500 text-white"
           >
-            Yangilash
+            {loading ? "Yangilanyapti..." : "Yangilash"}
           </Button>
         </DialogFooter>
       </Dialog>

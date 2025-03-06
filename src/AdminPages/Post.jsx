@@ -34,13 +34,12 @@ export default function Post() {
   const columns = [
     {
       name: "Tr",
-      // selector: (row, index) => (index + 1),
-      selector: (row) => row.id,
-      width: "170px",
+      selector: (_, index) => (page - 1) * perPage + index + 1,
+      width: "70px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
-      selector: (row) => row.title[activeTab],
+      selector: (row) => <p className="whitespace-pre-wrap">{ row.title[activeTab] }</p>,
       sortable: true,
     },
     {

@@ -43,13 +43,39 @@ export default function RegulatoryDoc() {
     },
     {
       name: "URL",
-      selector: (row) => (
-        <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-          Havola
-        </a>
-      ),
+      selector: (row) =>
+        row.url ? (
+          <a
+            href={row.url.startsWith("http") ? row.url : `https://${row.url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Havola
+          </a>
+        ) : (
+          "Url mavjud emas"
+        ),
       sortable: false,
-      width: "150px",
+      width: "250px",
+    },
+    {
+      name: "File",
+      selector: (row) =>
+        row.file && Array.isArray(row.file) && row.file.length > 0 ? (
+          <a
+            href={row.file[row.file.length - 1].url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 underline"
+          >
+            Havola
+          </a>
+        ) : (
+          "Fayl mavjud emas"
+        ),
+      sortable: false,
+      width: "250px",
     },
     {
       name: "Action",

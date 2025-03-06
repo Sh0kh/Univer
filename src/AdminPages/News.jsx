@@ -39,7 +39,7 @@ export default function News() {
     {
       name: "Tr",
       selector: (row, index) => (index + 1),
-      // selector: (row) => row.id,
+      // selector: (_, index) => (page - 1) * perPage + index + 1,
       width: "170px",
     },
     {

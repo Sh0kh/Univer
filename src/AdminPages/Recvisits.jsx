@@ -38,43 +38,39 @@ export default function Recvisits() {
           <span>{index + 1}</span>
         </Tooltip>
       ),
-      width: "80px",
+      width: "60px",
     },
     {
       name: `Sarlavha (${activeTab.toUpperCase()})`,
       selector: (row) => (
-        <Tooltip content={row.title[activeTab]} placement="right">
-          <span>{row.title[activeTab]}</span>
-        </Tooltip>
+        <span className="whitespace-pre-wrap">{row.title[activeTab]}</span>
       ),
       sortable: true,
     },
     {
       name: "Manzil",
       selector: (row) => (
-        <Tooltip content={row.address} placement="right">
-          <span>{row.address}</span>
-        </Tooltip>
+        <span className="whitespace-pre-wrap">{row.address}</span>
       ),
     },
     {
       name: "Telefon",
       selector: (row) => (
-        <Tooltip content={row.phone} placement="right">
-          <span>{row.phone}</span>
-        </Tooltip>
+        <span className="whitespace-pre-wrap">{row.phone}</span>
       ),
+      sortable: true,
+      width: "150px",
     },
     {
       name: "Action",
       cell: (row) => (
         <div className="flex space-x-2">
-            <ShowAll id={row.id} />
-            <UpdateRecvisitDialog onUpdated={fetchData} rowData={row} />
-            <DeleteRecvisitDialog onDeleted={fetchData} rowId={row.id} />
+          <ShowAll id={row.id} />
+          <UpdateRecvisitDialog onUpdated={fetchData} rowData={row} />
+          <DeleteRecvisitDialog onDeleted={fetchData} rowId={row.id} />
         </div>
       ),
-      width: "220px",
+      width: "180px",
     },
   ];
 

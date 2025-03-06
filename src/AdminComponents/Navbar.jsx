@@ -66,7 +66,7 @@ export function ProfileMenu() {
           </MenuItem>
 
 
-          <Link to="/profile">
+          <Link to="profile">
 
             <MenuItem className="flex items-center gap-2 rounded">
               <UserCircleIcon className="h-4 w-4" strokeWidth={2} />
