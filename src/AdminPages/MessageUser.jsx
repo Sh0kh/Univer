@@ -46,11 +46,21 @@ export default function MessageUser() {
     },
     {
       name: "F.I.O",
-      selector: (row) => (
-        <p className=" whitespace-pre-wrap">{row.full_name}</p>
-      ),
+      selector: (row) => <p className="whitespace-pre-wrap">{row.full_name}</p>,
       sortable: true,
       width: "220px",
+    },
+    {
+      name: "Shahar",
+      selector: (row) => row.city || "Noma'lum",
+      sortable: true,
+      width: "130px",
+    },
+    {
+      name: "Tuman",
+      selector: (row) => row.district || "Noma'lum",
+      sortable: true,
+      width: "130px",
     },
     {
       name: "Telefon",
@@ -67,25 +77,47 @@ export default function MessageUser() {
     {
       name: "Xabar matni",
       selector: (row) => (
-        <p className=" whitespace-pre-wrap max-h-[250px] overflow-y-auto">{row.message_text}</p>
+        <p className="whitespace-pre-wrap max-h-[250px] overflow-y-auto">
+          {row.message_text}
+        </p>
       ),
       sortable: false,
       width: "330px",
     },
     {
       name: "Fayl",
-      selector: (row) => (
-        <a
-          href={row.file[0]?.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 bg-blue-50 p-2 rounded-2xl underline"
-        >
-          Havola
-        </a>
-      ),
+      selector: (row) =>
+        row.file.length > 0 ? (
+          <a
+            href={row.file[0]?.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 bg-blue-50 p-2 rounded-2xl underline"
+          >
+            Havola
+          </a>
+        ) : (
+          "-"
+        ),
       sortable: false,
       width: "90px",
+    },
+    {
+      name: "Boshqaruv",
+      selector: (row) =>
+        row.managment ? (
+          <div>
+            <p className="font-bold">{row.managment.name}</p>
+            <p>{row.managment.position.uz}</p>
+            <p className="text-sm">{row.managment.reception_days}</p>
+            <p className="text-blue-500">{row.managment.phone}</p>
+            <p className="text-blue-500">{row.managment.email}</p>
+          </div>
+        ) : (
+          "Mavjud emas"
+        ),
+      sortable: false,
+      width: "280px",
     },
     {
       name: "Status",
