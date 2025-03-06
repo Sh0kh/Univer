@@ -32,7 +32,7 @@ export function ProfileMenu() {
   return (
     <section className="flex items-center gap-3">
       <div>
-        <h3>+998{userInfo?.phone}</h3>
+        <h3>+998{userInfo?.phone || "99#######"}</h3>
       </div>
 
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">

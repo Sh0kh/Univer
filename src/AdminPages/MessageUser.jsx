@@ -4,6 +4,7 @@ import CustomDataTable from "../lib/custom-data-table";
 import Loader from "../lib/loader";
 import { FaCheckCircle, FaEnvelopeOpenText, FaEnvelope } from "react-icons/fa";
 import { DeleteMessage } from "../AdminComponents/message-user/delete-message";
+import ShowAll from "../AdminComponents/user-message/showAll";
 
 export default function MessageUser() {
   const [loading, setLoading] = useState(true);
@@ -42,47 +43,31 @@ export default function MessageUser() {
       name: "Tr",
       selector: (_, index) => (page - 1) * perPage + index + 1,
       sortable: true,
-      width: "30px",
+      width: "70px",
     },
     {
       name: "F.I.O",
       selector: (row) => <p className="whitespace-pre-wrap">{row.full_name}</p>,
       sortable: true,
-      width: "220px",
+      width: "250px",
     },
     {
       name: "Shahar",
       selector: (row) => row.city || "Noma'lum",
       sortable: true,
-      width: "130px",
+      width: "180px",
     },
     {
       name: "Tuman",
       selector: (row) => row.district || "Noma'lum",
       sortable: true,
-      width: "130px",
+      width: "180px",
     },
     {
       name: "Telefon",
       selector: (row) => row.phone,
       sortable: true,
-      width: "130px",
-    },
-    {
-      name: "Email",
-      selector: (row) => row.email,
-      sortable: true,
-      width: "260px",
-    },
-    {
-      name: "Xabar matni",
-      selector: (row) => (
-        <p className="whitespace-pre-wrap max-h-[250px] overflow-y-auto">
-          {row.message_text}
-        </p>
-      ),
-      sortable: false,
-      width: "330px",
+      width: "180px",
     },
     {
       name: "Fayl",
@@ -100,24 +85,7 @@ export default function MessageUser() {
           "-"
         ),
       sortable: false,
-      width: "90px",
-    },
-    {
-      name: "Boshqaruv",
-      selector: (row) =>
-        row.managment ? (
-          <div>
-            <p className="font-bold">{row.managment.name}</p>
-            <p>{row.managment.position.uz}</p>
-            <p className="text-sm">{row.managment.reception_days}</p>
-            <p className="text-blue-500">{row.managment.phone}</p>
-            <p className="text-blue-500">{row.managment.email}</p>
-          </div>
-        ) : (
-          "Mavjud emas"
-        ),
-      sortable: false,
-      width: "280px",
+      width: "100px",
     },
     {
       name: "Status",
@@ -141,13 +109,18 @@ export default function MessageUser() {
         </div>
       ),
       sortable: true,
-      width: "100px",
+      width: "140px",
     },
     {
-      name: "O'chirish",
-      selector: (row) => <DeleteMessage onDeleted={fetchData} rowId={row.id} />,
+      name: "Actions",
+      selector: (row) => (
+        <div className="flex">
+          <ShowAll id={row.id} />
+          <DeleteMessage onDeleted={fetchData} rowId={row.id} />
+        </div>
+      ),
       sortable: true,
-      width: "80px",
+      width: "140px",
     },
   ];
 

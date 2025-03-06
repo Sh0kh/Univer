@@ -35,10 +35,6 @@ export function UpdateRegularlyDoc({ onUpdated, rowData }) {
         url: rowData.url,
       });
 
-      // Agar file mavjud bo‘lsa, uni saqlaymiz
-      if (rowData.file && rowData.file.length > 0) {
-        setExistingFile(rowData.file[0].url);
-      }
     }
   }, [rowData]);
 
@@ -61,7 +57,6 @@ export function UpdateRegularlyDoc({ onUpdated, rowData }) {
     if (selectedFile) {
       setFile(selectedFile);
       setFileName(selectedFile.name);
-      setExistingFile(null); // Eski faylni o‘chirib tashlaymiz
     }
   };
 
@@ -88,22 +83,13 @@ export function UpdateRegularlyDoc({ onUpdated, rowData }) {
       formData.append("name[kk]", form.name.kk);
 
       if (form.url) {
-        // URL-ni serverga qayta jo‘natamiz
         formData.append("url", form.url);
       }
 
       // **Faylni qo'shish (agar yuklangan bo‘lsa)**
       if (file) {
         formData.append("file", file);
-      } else if (existingFile) {
-        // Eski faylni serverga qayta jo‘natamiz
-        formData.append("file", existingFile);
-      }
-
-      console.log(
-        "Yuborilayotgan ma'lumotlar:",
-        Object.fromEntries(formData.entries())
-      );
+      } 
 
       await $api.post(`/regulatory-document-update/${rowData.id}`, formData, {
         headers: {
@@ -195,20 +181,6 @@ export function UpdateRegularlyDoc({ onUpdated, rowData }) {
             {fileName && (
               <p className="text-gray-700 text-sm mt-1">
                 Tanlangan fayl: {fileName}
-              </p>
-            )}
-
-            {existingFile && !file && (
-              <p className="text-gray-700 text-sm mt-1">
-                <p>Fayl mavjud</p>
-                <a
-                  href={existingFile}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline"
-                >
-                  Joriy faylni yuklab olish
-                </a>
               </p>
             )}
           </div>
