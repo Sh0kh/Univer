@@ -3,8 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
-
-.aboutContent [style*="font-size: 12px"]:has(a[href*='froala']) {
+body [style*="font-size: 12px"]:has(a[href*='froala']) {
+  display: none !important;
+}
+a.froala-brand {
   display: none !important;
 }
 
