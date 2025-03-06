@@ -120,6 +120,7 @@ export default function UserMessage() {
     data.append("phone", formData.phone);
     data.append("email", formData.email);
     data.append("message_text", formData.message);
+    data.append("message_receiver", true);
     if (formData.file) {
       data.append("file", formData.file);
     }
@@ -145,7 +146,7 @@ export default function UserMessage() {
     } catch (error) {
       console.log(error);
       let errorMessage = {
-        message: error.response?.data?.message || "Xatolik" ,
+        message: error.response?.data?.message || "Xatolik",
         errors: error.response?.data?.errors || "",
       };
       console.log(errorMessage);

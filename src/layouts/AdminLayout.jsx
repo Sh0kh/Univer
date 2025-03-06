@@ -7,6 +7,7 @@ import { $api } from "../utils";
 export default function AdminLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const token = localStorage.getItem('token');
+  let navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -23,8 +24,6 @@ export default function AdminLayout() {
     };
     fetchUserInfo()
   }, [token])
-
-  let navigate = useNavigate();
 
   const handleLogOut = () => {
     localStorage.clear();

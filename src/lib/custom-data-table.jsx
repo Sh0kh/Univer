@@ -83,7 +83,7 @@ export default function CustomDataTable({
         customStyles={customStyles} // Maxsus stylelar
 
 
-        expandableRows expandableRowsComponent={ExpandedComponent}
+        // expandableRows expandableRowsComponent={ExpandedComponent}
       />
     </div>
   );
