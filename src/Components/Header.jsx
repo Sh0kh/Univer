@@ -299,6 +299,8 @@ export default function Header() {
                                                     ? "/Fotogalereya"
                                                     : event?.id === 8
                                                         ? "/Videogalereya"
+                                                    : event?.id === 13
+                                                        ? "/barcha-yangiliklar"
                                                         : `/sahifa/${event?.id}`;
 
                                             return (

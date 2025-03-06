@@ -16,6 +16,8 @@ import { FaPencilAlt } from "react-icons/fa";
 
 export function EditInteractivesServices({ onUpdated, rowData }) {
     const [open, setOpen] = useState(false);
+    
+    const [url, setUrl] = useState('')
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({
         title: { uz: "", ru: "", en: "", kk: "" },
@@ -26,7 +28,9 @@ export function EditInteractivesServices({ onUpdated, rowData }) {
             setForm({
                 title: rowData.title || "",
                 category_id: rowData?.category?.category_id || "",
+                url:url
             });
+            setUrl(rowData?.url)
         }
     }, [rowData]);
 
@@ -84,7 +88,21 @@ export function EditInteractivesServices({ onUpdated, rowData }) {
                                 <Input value={form.title[lang]} onChange={(e) => handlePositionChange(e, lang)} required />
                             </div>
                         ))}
-                       
+
+                    </div>
+                    <div className="w-full">
+                        <Typography
+                            variant="small"
+                            color="blue-gray"
+                            className="mb-2 font-medium"
+                        >
+                            Havola
+                        </Typography>
+                        <Input
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            required
+                        />
                     </div>
                 </DialogBody>
 

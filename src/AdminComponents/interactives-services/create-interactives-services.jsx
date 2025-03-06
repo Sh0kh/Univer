@@ -18,6 +18,8 @@ export function CreateInteractivesServices({ onAdded }) {
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [errors, setErrors] = useState({});
+  const [url, setUrl] = useState('')
+
 
   const [form, setForm] = useState({
     name: { uz: "", ru: "", en: "", kk: "" },
@@ -32,12 +34,13 @@ export function CreateInteractivesServices({ onAdded }) {
     if (!form.name.uz) newErrors.uz = "O‘zbek tilida nom kiritish shart";
     if (!form.name.ru) newErrors.ru = "Rus tilida nom kiritish shart";
     if (!form.name.en) newErrors.en = "Ingliz tilida nom kiritish shart";
-    if (!form.name.kk) newErrors.kk = "Qozoq tilida nom kiritish shart";
+    if (!form.name.kk) newErrors.kk = "Xitoy tilida nom kiritish shart";
+    if (!url) newErrors.url = "Havola kiritish shart";
     if (!imageFile) newErrors.image = "Rasm yuklash shart";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
+  
   const handlePositionChange = (e, lang) => {
     setForm({
       ...form,
@@ -62,6 +65,7 @@ export function CreateInteractivesServices({ onAdded }) {
       formData.append("title[en]", form.name.en);
       formData.append("title[kk]", form.name.kk);
       formData.append("photo", imageFile);
+      formData.append("url", url);
 
       await $api.post("/interactives-services", formData, {
         headers: {
@@ -75,6 +79,7 @@ export function CreateInteractivesServices({ onAdded }) {
         url: "",
         image: "",
       });
+      setUrl('')
       sweetAlert("Muvaffaqiyatli qo‘shildi", "success");
       handleOpen();
     } catch (error) {
@@ -122,7 +127,22 @@ export function CreateInteractivesServices({ onAdded }) {
                 />
                 {errors[lang] && <p className="text-red-500 text-sm">{errors[lang]}</p>}
               </div>
-            ))} 
+            ))}
+            <div className="w-full">
+              <Typography
+                variant="small"
+                color="blue-gray"
+                className="mb-2 font-medium"
+              >
+                Havola
+              </Typography>
+              <Input
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                required
+              />
+              {errors?.url && <p className="text-red-500 text-sm">{errors?.url}</p>}
+            </div>
             <div className="w-full">
               <Typography
                 variant="small"

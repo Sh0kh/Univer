@@ -18,7 +18,6 @@ export default function InternationalCreate() {
     const [Eninfo, setEnInfo] = useState({ title: "", description: "" });
     const [KKinfo, setKKInfo] = useState({ title: "", description: "" });
     const [activeTab, setActiveTab] = useState("uz");
-    const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
 
     const CreateAboutUs = async () => {
@@ -45,6 +44,7 @@ export default function InternationalCreate() {
             setRuInfo({ title: "", description: "" });
             setEnInfo({ title: "", description: "" });
             setKKInfo({ title: "", description: "" });
+            setUrl('')
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
         } finally {

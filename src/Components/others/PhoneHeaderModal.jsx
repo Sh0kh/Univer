@@ -129,6 +129,7 @@ export default function PhoneHeaderModal({ isOpen, onClose, data }) {
                                         const customPath =
                                             link.id === 11 ? "/Fotogalereya" :
                                                 link.id === 8 ? "/Videogalereya" :
+                                                link.id === 13 ? "/barcha-yangiliklar" :
                                                     `/sahifa/${link.id}`;
 
                                         return (

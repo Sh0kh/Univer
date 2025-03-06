@@ -68,16 +68,18 @@ export default function Inter() {
             data?.length > 0 ? (
               <div className="inter_wr grid grid-cols-2 gap-[40px]">
                 {data?.map((item, index) => (
-                  <div
-                    key={item.id}
-                    ref={(el) => (cardsRef.current[index] = el)}
-                    className="inter_card hover:shadow-xl duration-500 w-[auto] opacity-0"
-                  >
-                    <div className="img_c w-[70px]  bg-[#1f235b] py-[14px]">
-                      <img src={item?.image[0]?.url} className=" h-[40px] w-full object-cover" alt="" />
+                  <a href={item?.url} target="_blank" rel="noopener noreferrer">
+                    <div
+                      key={item.id}
+                      ref={(el) => (cardsRef.current[index] = el)}
+                      className="inter_card hover:shadow-xl duration-500 w-[auto] opacity-0"
+                    >
+                      <div className="img_c w-[70px]  bg-[#1f235b] py-[14px]">
+                        <img src={item?.image[0]?.url} className=" h-[40px] w-full object-cover" alt="" />
+                      </div>
+                      <h4>{item?.title[i18n.language] || item?.title['uz']}</h4>
                     </div>
-                    <h4>{item?.title[i18n.language] || item?.title['uz']}</h4>
-                  </div>
+                  </a>
                 ))}
               </div>
             ) : (

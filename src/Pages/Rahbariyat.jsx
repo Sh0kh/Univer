@@ -8,7 +8,7 @@ export default function Rahbariyat() {
 
     return (
         <div>
-            <MiniHeader title={t('Rahbariyat')} minititle={t('Rahbariyat')} />
+            <MiniHeader title={t('rahbariyat')} minititle={t('rahbariyat')} />
             <StaffCards />
         </div>
     )

@@ -40,7 +40,7 @@ export default function DocumentsHero() {
                                 <div>
                                     <span>{item?.name?.[i18n.language] || "Noma’lum ma’lumot"}</span>
                                 </div>
-                                <a href={item?.url} target="_blank" rel="noopener noreferrer">
+                                <a href={item?.file[0]?.url || item?.url} target="_blank" rel="noopener noreferrer">
                                     <div className="text-[#A4A7AE] text-[30px]">
                                         <svg
                                             width="20px"
