@@ -89,7 +89,7 @@ export default function Header() {
         { to: "/biz-haqimizda", label: t("biz_haqimizda") },
         { to: "/rahbariyat", label: t("rahbariyat") },
         { to: "/hamkorlarimiz", label: t("hamkorlarimiz") },
-        { to: "/xalqaro-aloqalar", label: t("xalqaro_aloqalar") },
+        // { to: "/xalqaro-aloqalar", label: t("xalqaro_aloqalar") },
         { to: "/hujjatlar", label: t("hujjatlar") },
         { to: "/murojaatlar", label: t("murojaatlar") },
         { to: "/ochiq-ma'lumotlar", label: t("ochiq_malumotlar") },
@@ -264,6 +264,8 @@ export default function Header() {
                             >
                                 {navLinks.map(({ to, label }) => (
                                     <NavLink
+                                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+
                                         key={to}
                                         to={to}
                                         className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block"
@@ -293,7 +295,7 @@ export default function Header() {
                                     >
                                         {i?.details?.map((event, index2) => {
                                             const customPath =
-                                                event?.id === 7
+                                                event?.id === 11
                                                     ? "/Fotogalereya"
                                                     : event?.id === 8
                                                         ? "/Videogalereya"
@@ -301,6 +303,7 @@ export default function Header() {
 
                                             return (
                                                 <NavLink
+                                                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                                                     key={index2}
                                                     to={customPath}
                                                     className="text-white py-[10px] px-[16px] hover:bg-[#ffffff0f] block"
@@ -314,7 +317,10 @@ export default function Header() {
 
                             </div>
                         ))}
-                        <NavLink to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">
+                        <NavLink
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+
+                            to="/contact" className="hover:opacity-[0.8] duration-300 uppercase">
                             {t('boglanish')}
                         </NavLink>
                     </div>

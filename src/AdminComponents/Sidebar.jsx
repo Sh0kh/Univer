@@ -57,7 +57,7 @@ const menuItems = [
   {
     name: "Statik Sahifalar",
     subItems: [
-      { name: "Xalqaro aloqalar", path: "/admin/international" },
+      // { name: "Xalqaro aloqalar", path: "/admin/international" },
       { name: "Biz haqimizda", path: "/admin/aboutus" },
       { name: "Hamkorlarimiz", path: "/admin/OurPartners" },
       {

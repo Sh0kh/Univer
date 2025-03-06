@@ -17,7 +17,7 @@ export default function SectionCenter() {
     const SectionCenterGetID = async () => {
         try {
             const response = await axios.get(`/department-center-first/${ID}`)
-            setData(response?.data?.data?.managment);
+            setData(response?.data?.data);
             setInfo(response?.data?.data)
         } catch (error) {
             console.log(error)
@@ -30,6 +30,7 @@ export default function SectionCenter() {
         SectionCenterGetID()
     }, [])
 
+    
 
 
     if (loading) {
