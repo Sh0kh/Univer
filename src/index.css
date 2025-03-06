@@ -3,6 +3,11 @@
 @tailwind components;
 @tailwind utilities;
 
+
+.aboutContent [style*="font-size: 12px"]:has(a[href*='froala']) {
+  display: none !important;
+}
+
 * {
 
   font-family: "Inter", sans-serif;
@@ -554,11 +559,12 @@ input[type="number"]::-webkit-inner-spin-button {
   height: 24px;
   background: #eff8ff;
 }
-.VdGallary{
+
+.VdGallary {
   display: grid;
-  grid-template-columns: repeat(2,1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
-    
+
 }
 
 .work_card h4 {

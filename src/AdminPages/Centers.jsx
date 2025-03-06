@@ -45,7 +45,7 @@ export default function Center() {
         },
         {
             name: `Markaz rahbari (${activeTab.toUpperCase()})`,
-            selector: (row) => row.managment?.name,
+            selector: (row) => row?.name,
             sortable: true,
         },
         {

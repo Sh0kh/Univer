@@ -93,10 +93,13 @@ export default function CategoryDetail() {
       cell: (row) => (
         <div className="flex space-x-2">
           <UpdateCategoryDetail categoryData={row} onCategoryUpdated={fetchData} />
-          <DeleteCategoryDetail categoryId={row.id} onCategoryDeleted={fetchData} />
+          {![8, 11].includes(row.id) && (
+            <DeleteCategoryDetail categoryId={row.id} onCategoryDeleted={fetchData} />
+          )}
         </div>
       ),
       width: "170px",
+
     },
   ];
 
