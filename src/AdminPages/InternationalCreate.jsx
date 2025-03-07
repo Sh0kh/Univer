@@ -44,7 +44,6 @@ export default function InternationalCreate() {
             setRuInfo({ title: "", description: "" });
             setEnInfo({ title: "", description: "" });
             setKKInfo({ title: "", description: "" });
-            setUrl('')
         } catch (error) {
             sweetAlert(`Xatolik: ${error.message}`, "error");
         } finally {

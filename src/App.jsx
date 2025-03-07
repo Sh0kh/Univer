@@ -129,11 +129,11 @@ function App() {
               <Route path="/admin/Interactives/Services" element={<InteractivesServices />} />
               <Route path="/admin/vacancies" element={<Job />} />
 
-              <Route path="/admin/sections" element={<Department />} />
+              <Route path="/admin/centers" element={<Department />} />
               <Route path="/admin/sections/create" element={<CreateDepartment />} />
               <Route path="/admin/sections-centers/edit/:ID" element={<DepartmenEdit />} />
 
-              <Route path="/admin/centers" element={<AdminCenter />} />
+              <Route path="/admin/sections" element={<AdminCenter />} />
               <Route path="/admin/centers/create" element={<CreateCenter />} />
 
               <Route path="/admin/post" element={<Post />} />

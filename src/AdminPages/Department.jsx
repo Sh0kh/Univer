@@ -68,7 +68,7 @@ export default function Department() {
 
     return (
         <div>
-            <h2 className="text-xl font-bold mb-4">Bolimlar</h2>
+            <h2 className="text-xl font-bold mb-4">Markaz</h2>
             <div className="flex justify-between items-center mb-4">
                 <div className="flex space-x-2">
                     {["uz", "ru", "en", "kk"].map((lang) => (

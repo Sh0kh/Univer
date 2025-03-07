@@ -1,32 +1,23 @@
-import { Input } from "@material-tailwind/react";
+import { Input, Textarea } from "@material-tailwind/react";
 import React, { useState, useEffect } from "react";
 
-// Используем lazy loading для Froala
-const FroalaEditor = React.lazy(() => {
-    // Импортируем все необходимые модули Froala более надежным способом
+// Используем lazy loading для TinyMCE
+const TinyEditor = React.lazy(() => {
     return Promise.all([
-        import('froala-editor/js/froala_editor.pkgd.min.js'),
-        import('froala-editor/js/plugins/image.min.js'),
-        import('froala-editor/js/plugins/table.min.js'),
-        import('froala-editor/js/plugins/link.min.js'),
-        import('froala-editor/js/plugins/paragraph_format.min.js'),
-        import('froala-editor/js/plugins/align.min.js'),
-        import('froala-editor/js/plugins/lists.min.js'),
-        import('froala-editor/css/froala_editor.pkgd.min.css'),
-        import('froala-editor/css/froala_style.min.css')
-    ]).then(() => import('react-froala-wysiwyg'));
+        import('@tinymce/tinymce-react'),
+    ]).then(([tinymce]) => {
+        return { default: tinymce.Editor };
+    });
 });
 
 export default function RuEditor({ value, onChange }) {
     const [content, setContent] = useState("");
     const [isClientSide, setIsClientSide] = useState(false);
 
-    // Устанавливаем значение при изменении props
     useEffect(() => {
         setContent(value?.description || "");
     }, [value]);
 
-    // Убедимся, что мы на стороне клиента перед рендерингом Froala
     useEffect(() => {
         setIsClientSide(true);
     }, []);
@@ -36,68 +27,71 @@ export default function RuEditor({ value, onChange }) {
         onChange((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleEditorChange = (model) => {
-        setContent(model);
-        onChange((prev) => ({ ...prev, description: model }));
+    const handleEditorChange = (content, editor) => {
+        setContent(content);
+        onChange((prev) => ({ ...prev, description: content }));
     };
 
-    // Конфигурация для Froala Editor
-    const config = {
-        placeholderText: '...',
-        heightMin: 300,
-        attribution: false,
-        toolbarButtons: [
-            ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'],
-            ['paragraphFormat', 'align', 'lineHeight'],
-            ['formatOL', 'formatUL', 'indent', 'outdent'],
-            ['insertImage', 'insertTable', 'insertLink', 'insertHR'],
-            ['undo', 'redo', 'clearFormatting'],
-            ['html'] // Добавляем кнопку просмотра HTML для отладки
+    const imageUploadHandler = (blobInfo, progress) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+                resolve(`data:${blobInfo.blob().type};base64,${btoa(reader.result)}`);
+            };
+            reader.onerror = () => {
+                reject('File read error');
+            };
+            reader.readAsBinaryString(blobInfo.blob());
+        });
+    };
+
+    // Обновленная конфигурация TinyMCE с поддержкой таблиц
+    const tinyConfig = {
+        // ... остальные настройки
+        images_upload_handler: imageUploadHandler,
+        images_upload_base_path: '/uploads',
+        images_reuse_filename: false,
+        images_upload_credentials: true,
+
+        // Добавляем плагин table в список плагинов
+        plugins: [
+            // ... остальные плагины
+            'image', 'imagetools', 'uploadimage',
+            'table' // Добавлен плагин для таблиц
         ],
-        // Настройка загрузки изображений
-        imageUploadToS3: false,
-        imageUpload: true,
-        imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
-        imageDefaultWidth: 0,
-        events: {
-            'image.beforeUpload': function (images) {
-                if (images.length) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        this.image.insert(e.target.result, null, null, this.image.get());
-                    };
-                    reader.readAsDataURL(images[0]);
-                    return false; // Возвращаем false только здесь, чтобы отменить стандартную загрузку
-                }
-            },
-            'initialized': function () {
-                console.log('Froala Editor initialized'); // Для отладки
-            },
-            'focus': function () {
-                console.log('Editor is focused'); // Для отладки событий фокуса
-            },
-            'blur': function () {
-                console.log('Editor lost focus'); // Для отладки событий потери фокуса
-            }
+
+        // Обновляем тулбар, добавляя элементы управления таблицами
+        toolbar: '... | uploadimage image | table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol | ...',
+
+        // Настройки таблиц
+        table_toolbar: 'tableprops tabledelete | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+        table_advtab: true, // Расширенные настройки таблицы
+        table_row_advtab: true, // Расширенные настройки строк
+        table_cell_advtab: true, // Расширенные настройки ячеек
+        table_responsive_width: true, // Адаптивная ширина таблиц
+        table_default_attributes: {
+            border: '1',
+            cellspacing: '0',
+            cellpadding: '5'
         },
-        // Настройка таблиц
-        tableInsertMaxSize: 10,
-        tableStyles: {
-            'table-bordered': 'Bordered Table',
-            'table-striped': 'Striped Table'
-        },
-        // Дополнительные настройки для улучшения отзывчивости
-        zIndex: 9999,
-        iframe: false, // Используем div вместо iframe для лучшей производительности
-        useClasses: false,
-        spellcheck: true,
-        tableResizer: true,
-        tableResizerOffset: 10,
-        tableResizingLimit: 50
+
+        image_title: true,
+        image_caption: true,
+        image_advtab: true,
+        image_uploadtab: true,
+        paste_data_images: true,
+
+        images_upload_handler: (blobInfo, progress, failure) => {
+            return imageUploadHandler(blobInfo, progress)
+                .catch((error) => {
+                    failure('Ошибка загрузки: ' + error);
+                    return Promise.reject(error);
+                });
+        }
     };
 
     return (
-        <div className="editor-container">
+        <div>
             <div>
                 <Input
                     label="Sarlavha"
@@ -107,70 +101,34 @@ export default function RuEditor({ value, onChange }) {
                     required
                 />
             </div>
+            <div className="mt-[20px]">
 
-            <div className="mt-5">
-                {isClientSide && (
-                    <React.Suspense fallback={
-                        <div
-                            style={{
-                                height: "300px",
-                                border: "1px solid #ccc",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                backgroundColor: "#f8f8f8"
-                            }}
-                        >
-                            Загрузка редактора...
-                        </div>
-                    }>
-                        <FroalaEditor
-                            model={content}
-                            onModelChange={handleEditorChange}
-                            config={config}
-                        />
-                    </React.Suspense>
-                )}
+                <div className="mt-[20px] editor-container">
+                    {isClientSide && (
+                        <React.Suspense fallback={
+                            <div
+                                style={{
+                                    height: "500px",
+                                    border: "1px solid #ccc",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "#f8f8f8"
+                                }}
+                            >
+                                Загрузка редактора...
+                            </div>
+                        }>
+                            <TinyEditor
+                                value={content}
+                                onEditorChange={handleEditorChange}
+                                init={tinyConfig}
+                                apiKey="uasuprzk1immui9sxj0xnzt7l74ohv7hz0ldooxfls1rcw0s"
+                            />
+                        </React.Suspense>
+                    )}
+                </div>
             </div>
-            <style jsx>{`
-                .editor-container :global(.fr-box) {
-                    margin-bottom: 50px;
-                    border-radius: 4px;
-                    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-                }
-                .editor-container :global(.fr-wrapper) {
-                    min-height: 300px;
-                    border: 1px solid #ddd;
-                    border-top: none;
-                }
-                .editor-container :global(.fr-toolbar) {
-                    border-radius: 4px 4px 0 0;
-                    border: 1px solid #ddd;
-                    box-shadow: none;
-                }
-                .editor-container :global(.fr-element img) {
-                    max-width: 100%;
-                    height: auto;
-                }
-                .editor-container :global(.fr-view table) {
-                    border-collapse: collapse;
-                    width: 100%;
-                }
-                .editor-container :global(.fr-view table td) {
-                    border: 1px solid #cccccc;
-                    padding: 5px;
-                }
-                .editor-container :global(.fr-toolbar button) {
-                    transition: background 0.2s ease;
-                }
-                .editor-container :global(.fr-toolbar button:hover) {
-                    background: #f0f0f0;
-                }
-                .editor-container :global(.fr-popup) {
-                    border-radius: 4px;
-                    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
-                }
-            `}</style>
         </div>
     );
 }

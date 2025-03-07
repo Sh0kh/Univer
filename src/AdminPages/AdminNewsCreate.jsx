@@ -89,10 +89,14 @@ export default function NewsCreate() {
 
       formData.append("show_in_carousel", showInCarousel === true ? 'true' : 'false');
       formData.append("date", date);
+      console.log([...formData.entries()]);
 
       if (selectedFile) {
         formData.append("photo", selectedFile);
       }
+
+      console.log([...formData.entries()]);
+
 
       await $api.post(`/news`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
@@ -123,9 +127,8 @@ export default function NewsCreate() {
           {["uz", "ru", "en", "kk"].map((lang) => (
             <button
               key={lang}
-              className={`px-4 py-2 rounded ${
-                activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
-              }`}
+              className={`px-4 py-2 rounded ${activeTab === lang ? "bg-blue-500 text-white" : "bg-gray-300"
+                }`}
               onClick={() => setActiveTab(lang)}
             >
               {lang == "kk" ? "CHI" : lang.toUpperCase()}
@@ -177,10 +180,10 @@ export default function NewsCreate() {
             <div className="flex items-center justify-center bg-blue-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-600 transition">
               {selectedFile
                 ? `${selectedFile.name} (${(
-                    selectedFile.size /
-                    1024 /
-                    1024
-                  ).toFixed(2)} MB)`
+                  selectedFile.size /
+                  1024 /
+                  1024
+                ).toFixed(2)} MB)`
                 : "Rasm yuklash"}
             </div>
           </label>

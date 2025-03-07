@@ -1,4 +1,4 @@
-import{c as P1}from"./index-u9Y9Mn5l.js";var L1={exports:{}};/*!
+import{c as P1}from"./index-ZMsgdUzL.js";var L1={exports:{}};/*!
  * froala_editor v4.5.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2025 Froala Labs
