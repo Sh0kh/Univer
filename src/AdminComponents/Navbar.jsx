@@ -19,10 +19,13 @@ import {
 } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { User2Icon } from "lucide-react";
+import useAuthStore from "../../store/authStore";
 
 export function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const userInfo = JSON.parse(localStorage.getItem("auth-user")) || {};
+  const user = useAuthStore((state) => state.user);
+
 
   const handleLogout = () => {
     localStorage.clear();
@@ -32,7 +35,7 @@ export function ProfileMenu() {
   return (
     <section className="flex items-center gap-3">
       <div>
-        <h3>+998{userInfo?.phone || "99#######"}</h3>
+        <h3>+998{user?.phone || "99#######"}</h3>
       </div>
 
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -51,8 +54,9 @@ export function ProfileMenu() {
             />
             <ChevronDownIcon
               strokeWidth={2.5}
-              className={`h-3 w-3 transition-transform ${isMenuOpen ? "rotate-180" : ""
-                }`}
+              className={`h-3 w-3 transition-transform ${
+                isMenuOpen ? "rotate-180" : ""
+              }`}
             />
           </Button>
         </MenuHandler>
@@ -61,13 +65,11 @@ export function ProfileMenu() {
           <MenuItem className="flex items-center gap-2 rounded">
             <User2Icon className="h-4 w-4" strokeWidth={2} />
             <Typography as="span" variant="small" className="font-normal">
-              {userInfo?.name}
+              {user?.name}
             </Typography>
           </MenuItem>
 
-
           <Link to="profile">
-
             <MenuItem className="flex items-center gap-2 rounded">
               <UserCircleIcon className="h-4 w-4" strokeWidth={2} />
               <Typography as="span" variant="small" className="font-normal">

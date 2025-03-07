@@ -29,7 +29,7 @@ export default function Profile() {
 
   const columns = [
     {
-      name: "ID",
+      name: "Tr",
       selector: (_, index) => (page - 1) * perPage + index + 1,
       sortable: true,
     },

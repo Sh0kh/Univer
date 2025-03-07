@@ -66,7 +66,7 @@ export default function VideoMedia() {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Ochiq ma'lumotlar</h2>
+      <h2 className="text-xl font-bold mb-4">Video Media</h2>
       <div className="mb-4 flex justify-between items-center">
         <div className="mb-4 flex space-x-2">
           {["uz", "ru", "en", "kk"].map((lang) => (

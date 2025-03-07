@@ -3,33 +3,33 @@ import Sidebar from "../AdminComponents/Sidebar";
 import { useEffect, useState } from "react";
 import { ComplexNavbar } from "../AdminComponents/Navbar";
 import { $api } from "../utils";
+import useAuthStore from "../../store/authStore";
 
 export default function AdminLayout() {
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   let navigate = useNavigate();
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await $api.get(`/auth-user`)
+        const response = await $api.get(`/auth-user`);
         if (response.data.status) {
-          // Update user info
+          // User ma'lumotlarini zustand'ga saqlash
           const { name, phone } = response.data.data;
-          localStorage.setItem('auth-user', JSON.stringify({ name, phone }));
+          setUser({ name, phone });
         }
-      } catch (error) {
-        
-      }
+      } catch (error) {}
     };
-    fetchUserInfo()
-  }, [token])
+    fetchUserInfo();
+  }, [token]);
 
   const handleLogOut = () => {
     localStorage.clear();
     navigate("/login");
   };
-  
+
   return (
     <div className="flex h-screen overflow-hidden bg-gray-200">
       {/* Sidebar */}
