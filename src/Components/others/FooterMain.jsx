@@ -118,7 +118,7 @@ export default function FooterMain() {
                     </NavLink>
                     <NavLink to="">
                         <li className="flex items-center justify-between font-[var(--font-family)] font-semibold text-[16px] leading-[150%] text-[#a4a7ae]">
-                            info@tktiyf.uz
+                            info@ticty.uz
                         </li>
                     </NavLink>
                     <NavLink to="">

@@ -89,7 +89,7 @@ export default function Header() {
         { to: "/biz-haqimizda", label: t("biz_haqimizda") },
         { to: "/rahbariyat", label: t("rahbariyat") },
         { to: "/hamkorlarimiz", label: t("hamkorlarimiz") },
-        // { to: "/xalqaro-aloqalar", label: t("xalqaro_aloqalar") },
+        { to: "/xalqaro-aloqalar", label: t("xalqaro_aloqalar") },
         { to: "/hujjatlar", label: t("hujjatlar") },
         { to: "/murojaatlar", label: t("murojaatlar") },
         { to: "/ochiq-ma'lumotlar", label: t("ochiq_malumotlar") },
@@ -218,23 +218,26 @@ export default function Header() {
                                 <h4 className="text-sm font-bold">info@ticty.uz</h4>
                             </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-
-                            <div className='res'>
-                                <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 12C10.6569 12 12 10.6569 12 9C12 7.34315 10.6569 6 9 6C7.34315 6 6 7.34315 6 9C6 10.6569 7.34315 12 9 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M9 21C13 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 5 17 9 21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                        <NavLink
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            to={'/contact'}>
+                            <div className="flex items-center space-x-2">
+                                <div className='res'>
+                                    <svg width="18" height="22" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 12C10.6569 12 12 10.6569 12 9C12 7.34315 10.6569 6 9 6C7.34315 6 6 7.34315 6 9C6 10.6569 7.34315 12 9 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M9 21C13 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 5 17 9 21Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p className="text-xs text-gray-500">
+                                        {t("manzil")}
+                                    </p>
+                                    <h4 className="text-sm font-bold w-[280px]">
+                                        {t("manzil2")}
+                                    </h4>
+                                </div>
                             </div>
-                            <div>
-                                <p className="text-xs text-gray-500">
-                                    {t("manzil")}
-                                </p>
-                                <h4 className="text-sm font-bold w-[280px]">
-                                    {t("manzil2")}
-                                </h4>
-                            </div>
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
             </div>
@@ -299,9 +302,9 @@ export default function Header() {
                                                     ? "/Fotogalereya"
                                                     : event?.id === 8
                                                         ? "/Videogalereya"
-                                                    : event?.id === 13
-                                                        ? "/barcha-yangiliklar"
-                                                        : `/sahifa/${event?.id}`;
+                                                        : event?.id === 13
+                                                            ? "/barcha-yangiliklar"
+                                                            : `/sahifa/${event?.id}`;
 
                                             return (
                                                 <NavLink

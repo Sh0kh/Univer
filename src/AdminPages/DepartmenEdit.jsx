@@ -88,7 +88,7 @@ export default function DepartmenEdit() {
         formData.append("status", status);
 
         try {
-            await $api.put("/department-centers", formData, {
+            await $api.post(`/department-center-update/${ID}`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
