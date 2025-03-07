@@ -1,4 +1,4 @@
-import{a as A,c as D}from"./index-ZMsgdUzL.js";import{r as _}from"./froala_editor.min-DU8zlcl6.js";function x(I,C){for(var m=0;m<C.length;m++){const e=C[m];if(typeof e!="string"&&!Array.isArray(e)){for(const t in e)if(t!=="default"&&!(t in I)){const g=Object.getOwnPropertyDescriptor(e,t);g&&Object.defineProperty(I,t,g.get?g:{enumerable:!0,get:()=>e[t]})}}}return Object.freeze(Object.defineProperty(I,Symbol.toStringTag,{value:"Module"}))}var $={exports:{}};/*!
+import{a as A,c as D}from"./index-BoTeIX1N.js";import{r as _}from"./froala_editor.min-lQ8UHnHV.js";function x(I,C){for(var m=0;m<C.length;m++){const e=C[m];if(typeof e!="string"&&!Array.isArray(e)){for(const t in e)if(t!=="default"&&!(t in I)){const g=Object.getOwnPropertyDescriptor(e,t);g&&Object.defineProperty(I,t,g.get?g:{enumerable:!0,get:()=>e[t]})}}}return Object.freeze(Object.defineProperty(I,Symbol.toStringTag,{value:"Module"}))}var $={exports:{}};/*!
  * froala_editor v4.5.0 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
  * Copyright 2014-2025 Froala Labs
