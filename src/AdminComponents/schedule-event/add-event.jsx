@@ -175,7 +175,7 @@ export function AddScheduledEvent({ onAdded }) {
               Status
             </Typography>
             <Select value={form.status.uz} onChange={handleStatusChange} label="Status tanlang">
-              <Option value="Kutulmoqda">Kutulmoqda</Option>
+              <Option value="Kutilmoqda">Kutilmoqda</Option>
               <Option value="Tasdiqlangan">Tasdiqlangan</Option>
               <Option value="Bekor qilingan">Bekor qilingan</Option>
             </Select>

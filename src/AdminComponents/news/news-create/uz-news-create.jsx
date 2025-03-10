@@ -35,7 +35,6 @@ export default function UzNewsCreate({ value, onChange }) {
                     onChange={handleChange}
                     required
                 />
-
                 <div className="mt-[20px]">
                     <RichBox value={value?.summary?.toString() || ""} onChange={handleRichBoxChange} />
                 </div>

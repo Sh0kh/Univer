@@ -192,7 +192,7 @@ export function UpdateScheduledEvent({ onUpdated, rowData }) {
               Status
             </Typography>
             <Select value={form.status.uz} onChange={handleStatusChange} label="Status tanlang">
-              <Option value="Kutulmoqda">Kutulmoqda</Option>
+              <Option value="Kutilmoqda">Kutiloqda</Option>
               <Option value="Tasdiqlangan">Tasdiqlangan</Option>
               <Option value="Bekor qilingan">Bekor qilingan</Option>
             </Select>

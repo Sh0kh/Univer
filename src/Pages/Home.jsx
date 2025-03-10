@@ -11,10 +11,6 @@ import News from "../Components/Home/News";
 
 export default function Home() {
 
-
-
-
-
   return (
     <main className="home ">
       {/* <Header /> */}

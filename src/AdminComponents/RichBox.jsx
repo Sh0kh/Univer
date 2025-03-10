@@ -100,7 +100,6 @@ export default function RichBox({ value, onChange }) {
 
             // Показываем модальное окно загрузки
             setIsLoading(true);
-
             const formData = new FormData();
             formData.append('photo', files[0]);
 

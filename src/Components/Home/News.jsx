@@ -14,7 +14,6 @@ const News = () => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const { t } = useTranslation()
-
   const getNews = async () => {
     try {
       const response = await axios.get(`/news-all`);
@@ -25,7 +24,6 @@ const News = () => {
       setLoading(false);
     }
   };
-
   useEffect(() => {
     getNews();
     AOS.init({ duration: 600, once: true });
