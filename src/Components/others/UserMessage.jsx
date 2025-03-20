@@ -179,9 +179,8 @@ export default function UserMessage() {
             <span className="text-[#444ce7]">*</span>
           </h4>
           <div
-            className={`${
-              errors.region ? "border-red-500" : ""
-            } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
+            className={`${errors.region ? "border-red-500" : ""
+              } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
           >
             <input
               type="text"
@@ -203,9 +202,8 @@ export default function UserMessage() {
             <span className="text-[#444ce7]">*</span>
           </h4>
           <div
-            className={`${
-              errors.district ? "border-red-500" : ""
-            } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
+            className={`${errors.district ? "border-red-500" : ""
+              } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
           >
             <input
               type="text"
@@ -214,10 +212,9 @@ export default function UserMessage() {
               onChange={handleChange}
               disabled={district.length > 0} // Agar tuman tanlangan bo‘lsa, disable
               //   className="mt-1 p-2 w-full border rounded-md disabled:bg-gray-400"
-              className={`${
-                errors.district ? "border-red-400 border-2" : ""
-              } active:border-none font-normal disabled:bg-gray-400 text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
-              placeholder={`${t("Tanlang")}`}
+              className={`${errors.district ? "border-red-400 border-2" : ""
+                } active:border-none font-normal disabled:bg-gray-400 text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              placeholder={`${t("Kiriting")}`}
             />
 
             <svg
@@ -227,6 +224,7 @@ export default function UserMessage() {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
+              
               <path
                 d="M1 1.5L6 6.5L11 1.5"
                 stroke="#717680"
@@ -247,9 +245,8 @@ export default function UserMessage() {
             <span className="text-[#444ce7]">*</span>
           </h4>
           <div
-            className={`${
-              errors.city ? "border-red-500" : ""
-            } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
+            className={`${errors.city ? "border-red-500" : ""
+              } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
           >
             <input
               type="text"
@@ -257,10 +254,9 @@ export default function UserMessage() {
               value={formData.city}
               onChange={handleChange}
               disabled={city.length > 0} // Agar shahar tanlangan bo‘lsa, disable
-              className={`${
-                errors.city ? "border-red-400 border-2" : ""
-              } active:border-none font-normal disabled:bg-gray-400 text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
-              placeholder={`${t("Tanlang")}`}
+              className={`${errors.city ? "border-red-400 border-2" : ""
+                } active:border-none font-normal disabled:bg-gray-400 text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              placeholder={`${t("Kiriting")}`}
             />
 
             <svg
@@ -290,18 +286,16 @@ export default function UserMessage() {
             <span className="text-[#444ce7]">*</span>
           </h4>
           <div
-            className={`${
-              errors.fullName ? "border-red-500" : ""
-            } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
+            className={`${errors.fullName ? "border-red-500" : ""
+              } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
           >
             <input
               type="text"
               name="fullName"
               value={formData.fullName}
               onChange={handleChange}
-              className={`${
-                errors.fullName ? "border-red-400 border-2" : ""
-              } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              className={`${errors.fullName ? "border-red-400 border-2" : ""
+                } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
               placeholder={`${t("Kiriting")}`}
             />
 
@@ -332,18 +326,16 @@ export default function UserMessage() {
             <span className="text-[#444ce7]">*</span>
           </h4>
           <div
-            className={`${
-              errors.phone ? "border-red-500" : ""
-            } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
+            className={`${errors.phone ? "border-red-500" : ""
+              } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
           >
             <input
               type="text"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className={`${
-                errors.phone ? "border-red-400 border-2" : ""
-              } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              className={`${errors.phone ? "border-red-400 border-2" : ""
+                } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
               placeholder="+998"
             />
 
@@ -374,18 +366,16 @@ export default function UserMessage() {
             <span className="text-[#444ce7]">*</span>
           </h4>
           <div
-            className={`${
-              errors.email ? "border-red-500" : ""
-            } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
+            className={`${errors.email ? "border-red-500" : ""
+              } hover:shadow-lg duration-300 flex items-center justify-between  border border-[#f5f5f5] rounded-lg p-[10px_14px] max-w-[410px] w-[100%]shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white `}
           >
             <input
               type="text"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className={`${
-                errors.email ? "border-red-400 border-2" : ""
-              } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
+              className={`${errors.email ? "border-red-400 border-2" : ""
+                } active:border-none font-normal text-[16px] leading-[150%] text-[#717680] border-none w-full max-w-[354px] h-[24px]`}
               placeholder="example@gmail.com"
             />
 
@@ -442,9 +432,8 @@ export default function UserMessage() {
           </svg>
         </div>
         <textarea
-          className={`w-full max-w-[1280px] h-[154px] border ${
-            errors.message ? "border-red-400" : "border-[#f5f5f5]"
-          } rounded-lg p-[12px_14px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white`}
+          className={`w-full max-w-[1280px] h-[154px] border ${errors.message ? "border-red-400" : "border-[#f5f5f5]"
+            } rounded-lg p-[12px_14px] shadow-sm shadow-[rgba(10,13,18,0.05)] bg-white`}
           value={formData.message}
           onChange={handleChange}
           placeholder={`${t("Kiriting")}`}

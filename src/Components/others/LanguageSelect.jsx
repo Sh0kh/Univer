@@ -58,12 +58,11 @@ export default function LanguageSelect() {
 
     useEffect(() => {
         if (i18n.language) {
-            i18n.changeLanguage("uz");
+            i18n.changeLanguage(i18n?.language);
         }
     }, [i18n]);
 
     const changeLanguage = (lang) => {
-        console.log(lang);
         i18n.changeLanguage(lang);
         setIsOpen(false);
     };

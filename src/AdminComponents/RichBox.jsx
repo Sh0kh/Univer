@@ -1,50 +1,12 @@
-import React, { useState } from "react";
-import FroalaEditorComponent from "react-froala-wysiwyg";
+import React, { useState, useRef } from "react";
+import { Editor } from '@tinymce/tinymce-react';
 
-import "froala-editor/js/plugins/align.min.js";
-import "froala-editor/js/plugins/char_counter.min.js";
-import "froala-editor/js/plugins/code_beautifier.min.js";
-import "froala-editor/js/plugins/code_view.min.js";
-import "froala-editor/js/plugins/colors.min.js";
-import "froala-editor/js/plugins/draggable.min.js";
-import "froala-editor/js/plugins/emoticons.min.js";
-import "froala-editor/js/plugins/entities.min.js";
-import "froala-editor/js/plugins/file.min.js";
-import "froala-editor/js/plugins/font_family.min.js";
-import "froala-editor/js/plugins/font_size.min.js";
-import "froala-editor/js/plugins/fullscreen.min.js";
-import "froala-editor/js/plugins/image.min.js";
-import "froala-editor/js/plugins/image_manager.min.js";
-import "froala-editor/js/plugins/inline_class.min.js";
-import "froala-editor/js/plugins/inline_style.min.js";
-import "froala-editor/js/plugins/line_breaker.min.js";
-import "froala-editor/js/plugins/link.min.js";
-import "froala-editor/js/plugins/lists.min.js";
-import "froala-editor/js/plugins/paragraph_format.min.js";
-import "froala-editor/js/plugins/paragraph_style.min.js";
-import "froala-editor/js/plugins/quick_insert.min.js";
-import "froala-editor/js/plugins/quote.min.js";
-import "froala-editor/js/plugins/save.min.js";
-import "froala-editor/js/plugins/special_characters.min.js";
-import "froala-editor/js/plugins/table.min.js";
-import "froala-editor/js/plugins/url.min.js";
-import "froala-editor/js/plugins/video.min.js";
-import "froala-editor/js/plugins/word_paste.min.js";
-
-// Подключаем стили
-import "froala-editor/css/froala_style.min.css";
-import "froala-editor/css/froala_editor.pkgd.min.css";
-import "froala-editor/css/plugins/image.min.css";
-import "froala-editor/css/plugins/table.min.css";
-import "froala-editor/css/plugins/colors.min.css";
-import "froala-editor/css/plugins/code_view.min.css";
-import "froala-editor/css/plugins/video.min.css";
+// Утилита для работы с API
 import { $api } from "../utils";
 
 // Компонент модального окна загрузки
 const LoadingModal = ({ isOpen }) => {
     if (!isOpen) return null;
-
     return (
         <div style={{
             position: 'fixed',
@@ -90,151 +52,108 @@ const LoadingModal = ({ isOpen }) => {
 
 export default function RichBox({ value, onChange }) {
     const [isLoading, setIsLoading] = useState(false);
+    const editorRef = useRef(null);
 
-    const handleImageUpload = (files) => {
+    // Функция для загрузки изображений
+    const handleImageUpload = (blobInfo, progress) => {
         return new Promise((resolve, reject) => {
-            if (!files.length) {
-                reject('No files selected');
-                return;
-            }
+            const file = blobInfo.blob();
 
-            // Показываем модальное окно загрузки
             setIsLoading(true);
             const formData = new FormData();
-            formData.append('photo', files[0]);
+            formData.append('photo', file);
 
             $api.post('upload-photo', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+                headers: { 'Content-Type': 'multipart/form-data' },
+                onUploadProgress: (progressEvent) => {
+                    progress(progressEvent.loaded / progressEvent.total * 100);
                 }
             })
                 .then(response => {
-                    // Скрываем модальное окно загрузки
                     setIsLoading(false);
-
-                    if (response.data) {
-                        resolve(response.data?.data?.photo[0]?.url);
+                    if (response.data?.data?.photo?.[0]?.url) {
+                        resolve(response.data.data.photo[0].url);
                     } else {
-                        reject('Invalid response from server');
+                        reject('Некорректный ответ от сервера');
                     }
                 })
                 .catch(error => {
-                    // Скрываем модальное окно загрузки в случае ошибки
                     setIsLoading(false);
-                    console.error('Error uploading image:', error);
-                    reject(error);
+                    console.error('Ошибка загрузки изображения:', error);
+                    reject('Ошибка загрузки изображения');
                 });
         });
     };
 
     return (
-        <div>
+        <div
+            style={{
+                overflowX: 'auto',
+                whiteSpace: 'nowrap',
+                maxWidth: '100%',
+                border: '1px solid #ddd',
+                borderRadius: '8px'
+            }}
+        >
             {/* Модальное окно загрузки */}
             <LoadingModal isOpen={isLoading} />
 
-            <FroalaEditorComponent
-                tag="textarea"
-                model={value}
-                onModelChange={onChange}
-                config={{
-                    placeholderText: "Начни писать...",
+            {/* TinyMCE Editor */}
+            <Editor
+                apiKey="swbxllpubas9mkbcofu5g23turhtv6yx2bq0ajg10w5d1gol" // Замените на ваш API ключ
+                onInit={(evt, editor) => editorRef.current = editor}
+                initialValue={value || ''}
+                onEditorChange={(newValue) => onChange(newValue)}
+                init={{
+                    directionality: 'ltr',
                     height: 400,
-                    theme: "gray",
-                    toolbarSticky: true,
-                    toolbarButtons: [
-                        "undo", "redo", "|",
-                        "bold", "italic", "underline", "strikeThrough", "|",
-                        "fontFamily", "fontSize", "color", "|",
-                        "formatOL", "formatUL", "align", "|",
-                        "insertTable", "insertImage", "insertVideo", "insertLink", "|",
-                        "quote", "insertFile", "emoticons", "|",
-                        "codeView", "fullscreen"
+                    menubar: false,
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap',
+                        'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                        'insertdatetime', 'media', 'table', 'preview', 'help', 'wordcount',
+                        'emoticons', 'save', 'autosave', 'codesample', 'directionality',
+                        'hr', 'nonbreaking', 'pagebreak', 'quickbars', 'paste', 'code'
                     ],
-                    pluginsEnabled: [
-                        "align", "charCounter", "codeBeautifier", "codeView", "colors",
-                        "draggable", "emoticons", "entities", "file", "fontFamily", "fontSize",
-                        "fullscreen", "image", "imageManager", "inlineClass", "inlineStyle",
-                        "lineBreaker", "link", "lists", "paragraphFormat", "paragraphStyle",
-                        "quickInsert", "quote", "save", "specialCharacters", "table",
-                        "url", "video", "wordPaste"
-                    ],
-                    // Изменяем настройки загрузки изображений
-                    imageUpload: true,
-                    imageUploadMethod: 'POST',
-                    imageUploadParam: 'image',
-                    imageUploadURL: null, // Отключаем встроенную отправку Froala
-                    imageUploadParams: {}, // Дополнительные параметры для запроса
-                    imageAllowedTypes: ["jpeg", "jpg", "png", "gif", "webp"],
-
-                    // Используем события для перехвата загрузки
-                    events: {
-                        'image.beforeUpload': function (images) {
-                            // Останавливаем стандартную загрузку
-                            const editor = this;
-
-                            handleImageUpload(images)
-                                .then(imagePath => {
-                                    // Вставляем изображение по полученному пути
-                                    editor.image.insert(imagePath, null, null, editor.image.get());
-                                })
-                                .catch(error => {
-                                    console.error('Failed to upload image:', error);
-                                    // Показываем сообщение об ошибке
-                                    editor.popups.get('image.insert').find('.fr-error-message').text('Image upload failed');
-                                    editor.popups.get('image.insert').find('.fr-error-message').show();
-                                });
-
-                            // Возвращаем false, чтобы отменить стандартную загрузку
-                            return false;
-                        },
-                        'image.error': function (error, response) {
-                            console.error('Froala Editor image error:', error, response);
-                        }
-                    },
-
-                    imageDefaultWidth: 300,
-                    imagePaste: true,
-                    videoUpload: true,
-                    videoAllowedTypes: ["mp4", "webm", "ogg"],
-                    tableResizer: true,
-                    tableStyles: {
-                        "fr-dashed-borders": "Dashed Borders",
-                        "fr-alternate-rows": "Alternate Rows"
-                    },
-                    paragraphFormat: {
-                        N: "Normal",
-                        H1: "Heading 1",
-                        H2: "Heading 2",
-                        H3: "Heading 3",
-                        H4: "Heading 4",
-                        BLOCKQUOTE: "Quote"
-                    },
-                    fontFamily: {
-                        "Arial,Helvetica,sans-serif": "Arial",
-                        "Georgia,serif": "Georgia",
-                        "Impact,Charcoal,sans-serif": "Impact",
-                        "Tahoma,Geneva,sans-serif": "Tahoma",
-                        "'Times New Roman',Times,serif": "Times New Roman",
-                        "Verdana,Geneva,sans-serif": "Verdana"
-                    },
-                    fontSize: ["8", "10", "12", "14", "16", "18", "20", "24", "30", "36"],
-                    colorsBackground: [
-                        "#000000", "#333333", "#666666", "#999999", "#BBBBBB", "#DDDDDD", "#FFFFFF",
-                        "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"
-                    ],
-                    colorsText: [
-                        "#000000", "#333333", "#666666", "#999999", "#BBBBBB", "#DDDDDD", "#FFFFFF",
-                        "#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"
-                    ],
-                    shortcutsEnabled: ["bold", "italic", "underline", "strikeThrough", "insertTable", "insertLink"],
-                    saveInterval: 5000, // Автосохранение каждые 5 секунд
-                    codeBeautifierOptions: {
-                        end_with_newline: true,
-                        indent_inner_html: true,
-                        indent_size: 2,
-                        indent_char: " ",
-                        wrap_line_length: 0,
-                        extra_liners: []
+                    toolbar: 'undo redo | bold italic underline strikethrough | ' +
+                        'fontfamily fontsize | forecolor backcolor | ' +
+                        'alignleft aligncenter alignright alignjustify | ' +
+                        'bullist numlist outdent indent | ' +
+                        'link image media table emoticons | ' +
+                        'code fullscreen',
+                    placeholder: 'Начните писать...',
+                    content_style: `
+                    body {
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        direction: ltr; /* Устанавливаем направление текста слева направо */
+                        unicode-bidi: normal; /* Отключаем возможные изменения направления */
+                    }
+                `,
+                    branding: false,
+                    promotion: false,
+                    images_upload_handler: handleImageUpload,
+                    images_reuse_filename: true,
+                    paste_data_images: true,
+                    automatic_uploads: true,
+                    image_dimensions: true,
+                    image_advtab: true,
+                    file_picker_types: 'image',
+                    table_responsive_width: true,
+                    autosave_interval: '5s',
+                    autosave_prefix: 'tinymce-autosave-{path}{query}-{id}-',
+                    fontsize_formats: '8pt 10pt 12pt 14pt 16pt 18pt 20pt 24pt 30pt 36pt',
+                    font_family_formats: 'Arial=arial,helvetica,sans-serif;' +
+                        'Georgia=georgia,serif;' +
+                        'Impact=impact,charcoal,sans-serif;' +
+                        'Tahoma=tahoma,geneva,sans-serif;' +
+                        'Times New Roman=times new roman,times,serif;' +
+                        'Verdana=verdana,geneva,sans-serif',
+                    formats: {
+                        alignleft: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table', classes: 'text-left' },
+                        aligncenter: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table', classes: 'text-center' },
+                        alignright: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table', classes: 'text-right' },
+                        alignjustify: { selector: 'p,h1,h2,h3,h4,h5,h6,td,th,div,ul,ol,li,table', classes: 'text-justify' }
                     }
                 }}
             />

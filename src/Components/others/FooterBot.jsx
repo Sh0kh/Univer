@@ -27,7 +27,7 @@ export default function FooterBot() {
             <path d="M24 12.3315C24 5.70412 18.6274 0.331543 12 0.331543C5.37258 0.331543 0 5.70412 0 12.3315C0 18.321 4.3882 23.2855 10.125 24.1858V15.8003H7.07812V12.3315H10.125V9.68779C10.125 6.68029 11.9166 5.01904 14.6576 5.01904C15.9701 5.01904 17.3438 5.25342 17.3438 5.25342V8.20654H15.8306C14.34 8.20654 13.875 9.13162 13.875 10.0815V12.3315H17.2031L16.6711 15.8003H13.875V24.1858C19.6118 23.2855 24 18.321 24 12.3315Z" fill="#717680" />
           </svg>
         </a>
-        <a className="text-[30px] text-[#717680]" href="https://www.facebook.com/tktiyangiyer" target="_blank" rel="noopener noreferrer">
+        <a className="text-[30px] text-[#717680]" href="https://x.com/tkti_yangiyer" target="_blank" rel="noopener noreferrer">
           <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2L487 464H345L233.7 318.6L106.5 464H35.8l164.9-188.5L26.8 48h145.6l100.5 132.9zm-24.8 373.8h39.1L151.1 88h-42z"></path></svg>
         </a>
       </div>
